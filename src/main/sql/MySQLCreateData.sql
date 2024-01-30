@@ -1,0 +1,1 @@
+INSERT INTO Guild (id, maxLvl, kname) VALUES (1, 0, null);

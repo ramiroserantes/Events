@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.daarthy</groupId>
+    <artifactId>Events</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Events</name>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <dataSource.user>EAdm</dataSource.user>
+        <dataSource.password>2U4mbcGUdVRP</dataSource.password>
+        <testDataSource.user>${dataSource.user}</testDataSource.user>
+        <testDataSource.password>${dataSource.password}</testDataSource.password>
+
+        <sqlPlugin.version>1.5</sqlPlugin.version>
+
+        <jdbcDriver.groupId>mysql</jdbcDriver.groupId>
+        <jdbcDriver.artifactId>mysql-connector-java</jdbcDriver.artifactId>
+        <jdbcDriver.version>8.0.33</jdbcDriver.version>
+        <jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
+
+        <dataSource.baseUrl>jdbc:mysql://localhost/events</dataSource.baseUrl>
+        <dataSource.url>${dataSource.baseUrl}?useSSL=false&amp;serverTimezone=Europe/Madrid&amp;allowPublicKeyRetrieval=true</dataSource.url>
+        <testDataSource.url>${dataSource.baseUrl}test?useSSL=false&amp;serverTimezone=Europe/Madrid&amp;allowPublicKeyRetrieval=true</testDataSource.url>
+        <dataSource.createTablesScript>MySQLCreateTables.sql</dataSource.createTablesScript>
+        <dataSource.addDataScript>MySQLCreateData.sql</dataSource.addDataScript>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>mysql</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+
+                <jdbcDriver.groupId>mysql</jdbcDriver.groupId>
+                <jdbcDriver.artifactId>mysql-connector-java</jdbcDriver.artifactId>
+                <jdbcDriver.version>8.0.20</jdbcDriver.version>
+                <jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
+
+                <dataSource.baseUrl>jdbc:mysql://localhost/events</dataSource.baseUrl>
+                <dataSource.url>${dataSource.baseUrl}?useSSL=false&amp;serverTimezone=Europe/Madrid&amp;allowPublicKeyRetrieval=true</dataSource.url>
+                <testDataSource.url>${dataSource.baseUrl}test?useSSL=false&amp;serverTimezone=Europe/Madrid&amp;allowPublicKeyRetrieval=true</testDataSource.url>
+                <dataSource.createTablesScript>MySQLCreateTables.sql</dataSource.createTablesScript>
+
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.20.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.2.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${jdbcDriver.groupId}</groupId>
+            <artifactId>${jdbcDriver.artifactId}</artifactId>
+            <version>${jdbcDriver.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>${sqlPlugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>${jdbcDriver.groupId}</groupId>
+                        <artifactId>${jdbcDriver.artifactId}</artifactId>
+                        <version>${jdbcDriver.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <driver>${jdbcDriver.className}</driver>
+                    <url>${dataSource.url}</url>
+                    <username>${dataSource.user}</username>
+                    <password>${dataSource.password}</password>
+                    <autocommit>true</autocommit>
+                    <onError>continue</onError>
+                    <orderFile>descending</orderFile>
+                    <fileset>
+                        <basedir>${basedir}</basedir>
+                        <includes>
+                            <include>
+                                src/main/sql/${dataSource.addDataScript}
+                            </include>
+                            <include>
+                                src/main/sql/${dataSource.createTablesScript}
+                            </include>
+                        </includes>
+                    </fileset>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-tables-for-testing</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <driver>${jdbcDriver.className}</driver>
+                            <url>${testDataSource.url}</url>
+                            <username>${testDataSource.user}</username>
+                            <password>${testDataSource.password}</password>
+                            <autocommit>true</autocommit>
+                            <onError>continue</onError>
+                            <fileset>
+                                <basedir>${basedir}</basedir>
+                                <includes>
+                                    <include>
+                                        src/main/sql/${dataSource.addDataScript}
+                                    </include>
+                                    <include>
+                                        src/main/sql/${dataSource.createTablesScript}
+                                    </include>
+                                </includes>
+                            </fileset>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>papermc-repo</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+
+</project>

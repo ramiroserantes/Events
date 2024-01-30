@@ -1,0 +1,4 @@
+name: Events
+version: '${project.version}'
+main: com.daarthy.events.Events
+api-version: '1.20'
