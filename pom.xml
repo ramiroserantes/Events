@@ -24,7 +24,7 @@
 
         <jdbcDriver.groupId>mysql</jdbcDriver.groupId>
         <jdbcDriver.artifactId>mysql-connector-java</jdbcDriver.artifactId>
-        <jdbcDriver.version>8.0.33</jdbcDriver.version>
+        <jdbcDriver.version>8.0.28</jdbcDriver.version>
         <jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
 
         <dataSource.baseUrl>jdbc:mysql://localhost/events</dataSource.baseUrl>
@@ -44,7 +44,7 @@
 
                 <jdbcDriver.groupId>mysql</jdbcDriver.groupId>
                 <jdbcDriver.artifactId>mysql-connector-java</jdbcDriver.artifactId>
-                <jdbcDriver.version>8.0.20</jdbcDriver.version>
+                <jdbcDriver.version>8.0.33</jdbcDriver.version>
                 <jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
 
                 <dataSource.baseUrl>jdbc:mysql://localhost/events</dataSource.baseUrl>

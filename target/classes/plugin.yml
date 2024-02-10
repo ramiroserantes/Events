@@ -1,0 +1,4 @@
+name: Events
+version: '1.0-SNAPSHOT'
+main: com.daarthy.events.Events
+api-version: '1.20'
