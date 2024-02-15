@@ -1,6 +1,7 @@
 package com.daarthy.events.persistence.missionDao;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class MissionJdbc extends AbstractMissionDao {
@@ -43,6 +44,7 @@ public class MissionJdbc extends AbstractMissionDao {
 
     }
 
+
     @Override
     public Long createMissionObjective(Long missionId, ObjectiveData objectiveData, Connection connection) {
 
@@ -79,14 +81,15 @@ public class MissionJdbc extends AbstractMissionDao {
     @Override
     public void saveMissionStatus(UUID playerId, Long missionId, MissionStatus status, Connection connection) {
 
-        String queryString = "INSERT INTO MissionAccept (playerId, missionId, status) " +
-                "VALUES (?, ?, ?) " +
+        String queryString = "INSERT INTO MissionAccept (playerId, missionId, status, acceptDate) " +
+                "VALUES (?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE status = VALUES(status)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
             preparedStatement.setString(1, playerId.toString());
             preparedStatement.setLong(2, missionId);
             preparedStatement.setString(3, status.toString());
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

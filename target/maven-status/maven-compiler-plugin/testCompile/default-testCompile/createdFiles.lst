@@ -1,2 +1,4 @@
 com\daarthy\events\persistence\playerDao\PlayerDaoTest.class
+com\daarthy\events\app\modules\missions\ObjectiveTest.class
+com\daarthy\events\app\modules\missions\PlayerSubjectImplTest.class
 com\daarthy\guilds\persistence\SqlConnectionsTest.class

@@ -69,6 +69,29 @@ public abstract class AbstractMissionDao implements MissionDao {
     }
 
 
+    @Override
+    public boolean wasMissionAcceptedByPlayer(Long missionId, UUID playerId, Connection connection) {
+
+        String queryString = "SELECT COUNT(*) FROM MissionAccept WHERE missionId = ? AND playerId = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
+            preparedStatement.setLong(1, missionId);
+            preparedStatement.setString(2, playerId.toString());
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return false;
+    }
+
+
 
     private ObjectiveData mapObjectiveData(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
@@ -177,4 +200,47 @@ public abstract class AbstractMissionDao implements MissionDao {
 
         return new MissionData(id, guildId, title, grade, expiration, maxCompletions);
     }
+
+    @Override
+    public MissionData findMissionById(Long missionId, Connection connection) {
+
+        String queryString = "SELECT m.* " +
+                "FROM Missions m WHERE m.id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
+
+            preparedStatement.setLong(1, missionId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if(resultSet.next()) {
+                    return mapResultSetToMissionData(resultSet);
+                } else { return null;}
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int findAcceptedMissions(UUID playerId, Connection connection) {
+
+        String queryString = "SELECT COUNT(DISTINCT missionId) AS total" +
+                    "FROM MissionAccept " +
+                    "WHERE playerId = ? AND (DATE(acceptDate) = CURDATE() OR status = 'ACCEPTED')";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
+
+            preparedStatement.setString(1, playerId.toString());
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if(resultSet.next()) {
+                    return resultSet.getInt(1);
+                } else {return 0;}
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -55,6 +55,7 @@ CREATE TABLE MissionAccept (
     playerId VARCHAR(36) NOT NULL,
     missionId BIGINT NOT NULL,
     status VARCHAR(15) NOT NULL,
+    acceptDate DATE NOT NULL,
     PRIMARY KEY (playerId, missionId),
     FOREIGN KEY (playerId) REFERENCES Player(playerId),
     FOREIGN KEY (missionId) REFERENCES Missions(id)

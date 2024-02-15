@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class GuildJdbc extends AbstractGuildDao {
@@ -18,7 +19,7 @@ public class GuildJdbc extends AbstractGuildDao {
             int i = 1;
             preparedStatement.setLong(i++, guildId);
             preparedStatement.setString(i++, kName);
-            preparedStatement.setTimestamp(i, Timestamp.valueOf(LocalDateTime.now()));
+            preparedStatement.setTimestamp(i, Timestamp.valueOf(LocalDate.now().atStartOfDay().minusDays(1)));
 
             if(preparedStatement.executeUpdate() == 0 ) {
                 System.out.println("Could not create the guild with id: " + guildId);

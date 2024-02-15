@@ -1,6 +1,7 @@
 package com.daarthy.events.persistence.missionDao;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.locks.Lock;
 
 public class MissionData {
 
@@ -13,6 +14,9 @@ public class MissionData {
 
     // References to current Players on this mission. NULL When retrieved by guild.
     private Integer currentPlayers;
+    private Lock playerIncreaseLock;
+
+    public MissionData() {}
 
     public MissionData(Long missionId, Long guildId, String title, String grade, LocalDateTime expiration, Integer maxCompletions) {
         this.missionId = missionId;
@@ -88,5 +92,26 @@ public class MissionData {
 
     public Integer getCurrentPlayers() {
         return currentPlayers;
+
     }
+
+    public boolean addPlayer(int guildCapacity) {
+        playerIncreaseLock.lock();
+        if(maxCompletions == null) {
+            currentPlayers++;
+            playerIncreaseLock.unlock();
+            return true;
+        }
+
+        if(currentPlayers >= (maxCompletions + guildCapacity)) {
+            playerIncreaseLock.unlock();
+            return false;
+        } else {
+            currentPlayers++;
+            playerIncreaseLock.unlock();
+            return true;
+        }
+
+    }
+
 }

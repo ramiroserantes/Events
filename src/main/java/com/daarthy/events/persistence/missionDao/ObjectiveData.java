@@ -12,6 +12,7 @@ public class ObjectiveData {
     // References to the amount completed by the player can be null if retrieved by guild.
     private Integer amount;
 
+    public ObjectiveData() {}
     // For Guild
     public ObjectiveData(Long objectiveId, Long missionId, int reqAmount, String target, Integer levels,
                          ActionType actionType) {

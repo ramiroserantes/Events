@@ -1,6 +1,7 @@
 package com.daarthy.events.persistence.missionDao;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -8,6 +9,14 @@ import java.util.UUID;
 public interface MissionDao {
 
     Long createMission(MissionData missionData, Connection connection);
+
+    //TEST LATER IF NEEDED
+    MissionData findMissionById(Long missionId, Connection connection);
+
+    //TEST LATER IF NEEDED
+    boolean wasMissionAcceptedByPlayer(Long missionId, UUID playerId, Connection connection);
+
+    int findAcceptedMissions(UUID playerId, Connection connection);
 
     List<MissionData> findGuildMissions(Long guildId, Connection connection);
 
