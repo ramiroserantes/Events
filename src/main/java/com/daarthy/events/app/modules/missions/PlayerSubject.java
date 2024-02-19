@@ -16,4 +16,8 @@ public interface PlayerSubject {
     HashMap<Long, List<ObservableObjective>> getMissionObjectives();
 
     HashMap<ObservableObjective, Integer> getProgress();
+
+    Integer getProgressByObjective(Long objectiveId);
+
+    void deleteMission(Long missionId);
 }

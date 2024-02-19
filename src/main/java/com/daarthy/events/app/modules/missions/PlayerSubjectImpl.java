@@ -7,20 +7,28 @@ public class PlayerSubjectImpl implements PlayerSubject {
     HashMap<Long, List<ObservableObjective>> missionObjectives;
     HashMap<ObservableObjective, Integer> progress;
 
-    public HashMap<Long, List<ObservableObjective>> getMissionObjectives() {
-        return missionObjectives;
-    }
-
-    public HashMap<ObservableObjective, Integer> getProgress() {
-        return progress;
-    }
-
     public PlayerSubjectImpl(HashMap<Long, List<ObservableObjective>> missionObjectives,
                              HashMap<ObservableObjective, Integer> progress) {
         this.missionObjectives = missionObjectives;
         this.progress = progress;
     }
-    
+
+    public void deleteMission(Long missionId) {
+
+        if(missionObjectives.containsKey(missionId)) {
+
+            List<ObservableObjective> obs = missionObjectives.get(missionId);
+
+            obs.forEach(item -> {
+                if(progress.containsKey(item)) {
+                    progress.remove(item);
+                }
+            });
+
+            missionObjectives.remove(missionId);
+        }
+
+    }
     public List<ObservableObjective> addProgress(String target, Integer level) {
 
         List<Map.Entry<Long, ObservableObjective>> objectives = findObjectives(target, level);
@@ -75,6 +83,27 @@ public class PlayerSubjectImpl implements PlayerSubject {
             progress.put(ob, 0);
         }
     }
+
+    public HashMap<Long, List<ObservableObjective>> getMissionObjectives() {
+        return missionObjectives;
+    }
+
+    public HashMap<ObservableObjective, Integer> getProgress() {
+        return progress;
+    }
+
+    public Integer getProgressByObjective(Long objectiveId) {
+
+        for (Map.Entry<ObservableObjective, Integer> entry : progress.entrySet()) {
+            if (entry.getKey().getObjectiveId().equals(objectiveId)) {
+                return entry.getValue();
+            }
+        }
+
+        return null;
+
+    }
+
 
     public Integer getCurrentProgress(ObservableObjective objective) {
         return progress.getOrDefault(objective, null);

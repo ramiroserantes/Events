@@ -1,7 +1,13 @@
 package com.daarthy.events.persistence.missionDao;
 
+import com.daarthy.events.app.modules.missions.Grade;
+
 import java.sql.*;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class MissionJdbc extends AbstractMissionDao {
@@ -22,7 +28,7 @@ public class MissionJdbc extends AbstractMissionDao {
 
             preparedStatement.setString(i++, missionData.getTitle());
             preparedStatement.setString(i++, missionData.getGrade());
-            preparedStatement.setTimestamp(i++, Timestamp.valueOf(missionData.getExpiration()));
+            preparedStatement.setDate(i++, java.sql.Date.valueOf(missionData.getExpiration()));
 
             if(missionData.getMaxCompletions() != null) {
                 preparedStatement.setInt(i, missionData.getMaxCompletions());
@@ -113,5 +119,7 @@ public class MissionJdbc extends AbstractMissionDao {
             throw new RuntimeException(e);
         }
     }
+
+
 
 }

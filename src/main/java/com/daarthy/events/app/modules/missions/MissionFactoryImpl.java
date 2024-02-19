@@ -31,7 +31,7 @@ public class MissionFactoryImpl implements MissionFactory {
 
                     MissionData missionData = new MissionData();
                     missionData.setTitle((String) missionMap.get("title"));
-                    missionData.setExpiration(LocalDate.now().plus(grade.getPriority(), ChronoUnit.DAYS).atStartOfDay());
+                    missionData.setExpiration(LocalDate.from(LocalDate.now().atStartOfDay().plusDays(grade.getPriority())));
                     missionData.setGrade(grade.getGradeString());
                     if(!isDefaultGuild) {
                         missionData.setMaxCompletions(grade.getCompletions());

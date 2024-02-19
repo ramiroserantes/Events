@@ -1,7 +1,8 @@
 package com.daarthy.events.persistence.missionDao;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class MissionData {
 
@@ -9,16 +10,16 @@ public class MissionData {
     private Long guildId;
     private String title;
     private String grade;
-    private LocalDateTime expiration;
+    private LocalDate expiration;
     private Integer maxCompletions;
 
     // References to current Players on this mission. NULL When retrieved by guild.
     private Integer currentPlayers;
-    private Lock playerIncreaseLock;
+    private Lock playerIncreaseLock = new ReentrantLock();
 
     public MissionData() {}
 
-    public MissionData(Long missionId, Long guildId, String title, String grade, LocalDateTime expiration, Integer maxCompletions) {
+    public MissionData(Long missionId, Long guildId, String title, String grade, LocalDate expiration, Integer maxCompletions) {
         this.missionId = missionId;
         this.guildId = guildId;
         this.title = title;
@@ -28,7 +29,7 @@ public class MissionData {
     }
 
     public MissionData(Long missionId, Long guildId, String title, String grade,
-                       LocalDateTime expiration, Integer maxCompletions, Integer currentPlayers) {
+                       LocalDate expiration, Integer maxCompletions, Integer currentPlayers) {
         this.missionId = missionId;
         this.guildId = guildId;
         this.title = title;
@@ -54,9 +55,6 @@ public class MissionData {
         return grade;
     }
 
-    public LocalDateTime getExpiration() {
-        return expiration;
-    }
 
     public void setMissionId(Long missionId) {
         this.missionId = missionId;
@@ -74,7 +72,11 @@ public class MissionData {
         this.grade = grade;
     }
 
-    public void setExpiration(LocalDateTime expiration) {
+    public LocalDate getExpiration() {
+        return expiration;
+    }
+
+    public void setExpiration(LocalDate expiration) {
         this.expiration = expiration;
     }
 

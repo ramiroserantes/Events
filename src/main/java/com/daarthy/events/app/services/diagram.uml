@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="-70.0" y="283.7929745889387">com.daarthy.events.app.services.MissionServiceImpl</node>
+    <node x="-51.0" y="-14.5">com.daarthy.events.app.services.MissionService</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.daarthy.events.app.services.MissionServiceImpl" target="com.daarthy.events.app.services.MissionService" relationship="REALIZATION">
+      <point x="0.0" y="-192.5" />
+      <point x="0.0" y="115.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.9598278335724534" showDependencies="false" x="161.68609865470853" y="357.85351270553065" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

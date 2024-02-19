@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.daarthy.events.persistence.playerDao.PlayerDaoTest" time="0.04" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.daarthy.events.persistence.playerDao.PlayerDaoTest" time="0.033" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="C:\Program Files\AdoptOpenJDK\jdk-17.0.7\bin"/>
-    <property name="sun.java.command" value="C:\Users\ACER\AppData\Local\Temp\surefire13629382080008544670\surefirebooter-20240213163830743_3.jar C:\Users\ACER\AppData\Local\Temp\surefire13629382080008544670 2024-02-13T16-38-30_398-jvmRun1 surefire-20240213163830743_1tmp surefire_0-20240213163830743_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\ACER\AppData\Local\Temp\surefire18247100120075061771\surefirebooter-20240219105125413_3.jar C:\Users\ACER\AppData\Local\Temp\surefire18247100120075061771 2024-02-19T10-51-24_971-jvmRun1 surefire-20240219105125413_1tmp surefire_0-20240219105125413_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\ACER\Desktop\TFM\Events\target\test-classes;C:\Users\ACER\Desktop\TFM\Events\target\classes;C:\Users\ACER\.m2\repository\org\spigotmc\spigot-api\1.20.1-R0.1-SNAPSHOT\spigot-api-1.20.1-R0.1-SNAPSHOT.jar;C:\Users\ACER\.m2\repository\com\google\guava\guava\31.1-jre\guava-31.1-jre.jar;C:\Users\ACER\.m2\repository\com\google\guava\failureaccess\1.0.1\failureaccess-1.0.1.jar;C:\Users\ACER\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\ACER\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\ACER\.m2\repository\org\checkerframework\checker-qual\3.12.0\checker-qual-3.12.0.jar;C:\Users\ACER\.m2\repository\com\google\errorprone\error_prone_annotations\2.11.0\error_prone_annotations-2.11.0.jar;C:\Users\ACER\.m2\repository\com\google\j2objc\j2objc-annotations\1.3\j2objc-annotations-1.3.jar;C:\Users\ACER\.m2\repository\com\google\code\gson\gson\2.10\gson-2.10.jar;C:\Users\ACER\.m2\repository\org\joml\joml\1.10.5\joml-1.10.5.jar;C:\Users\ACER\.m2\repository\net\md-5\bungeecord-chat\1.20-R0.1\bungeecord-chat-1.20-R0.1.jar;C:\Users\ACER\.m2\repository\org\yaml\snakeyaml\2.0\snakeyaml-2.0.jar;C:\Users\ACER\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\ACER\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\ACER\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\ACER\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\ACER\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\ACER\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\ACER\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\ACER\.m2\repository\org\slf4j\slf4j-api\2.0.5\slf4j-api-2.0.5.jar;C:\Users\ACER\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\ACER\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\ACER\AppData\Local\Temp\surefire13629382080008544670\surefirebooter-20240213163830743_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\ACER\AppData\Local\Temp\surefire18247100120075061771\surefirebooter-20240219105125413_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.7+8-LTS-224"/>
@@ -57,7 +57,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testPlayerByRemoveAllAnd" classname="com.daarthy.events.persistence.playerDao.PlayerDaoTest" time="0.022">
+  <testcase name="testPlayerByRemoveAllAnd" classname="com.daarthy.events.persistence.playerDao.PlayerDaoTest" time="0.014">
     <system-out><![CDATA[0
 ]]></system-out>
   </testcase>
@@ -69,13 +69,13 @@
     <system-out><![CDATA[0
 ]]></system-out>
   </testcase>
-  <testcase name="testPlayerByCreate" classname="com.daarthy.events.persistence.playerDao.PlayerDaoTest" time="0.003">
+  <testcase name="testPlayerByCreate" classname="com.daarthy.events.persistence.playerDao.PlayerDaoTest" time="0.002">
     <system-out><![CDATA[0
 ]]></system-out>
   </testcase>
   <testcase name="testPlayerByNoData" classname="com.daarthy.events.persistence.playerDao.PlayerDaoTest" time="0.004">
     <system-out><![CDATA[0
-Data for the user with uuid: fd6066a6-1ad4-4fab-99cb-eec76e3ef5a5, Not Found
+Data for the user with uuid: bf158d60-bbef-46b1-a51e-9fd465b0fe5e, Not Found
 ]]></system-out>
   </testcase>
 </testsuite>

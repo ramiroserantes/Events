@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,7 @@ public class MissionDaoTest {
     private MissionDao missionDao = new MissionJdbc();
 
     private MissionData getMissionData(Long guildId) {
-        return new MissionData(null, guildId, "title", "S", LocalDateTime.now().plusDays(1L),
+        return new MissionData(null, guildId, "title", "S", LocalDate.now().plusDays(1L),
                 10);
     }
 
@@ -73,7 +74,7 @@ public class MissionDaoTest {
         guildDao.createGuild(guildId, "kName", connection);
         MissionData missionData = getMissionData(guildId);
         MissionData missionData1 = getMissionData(guildId);
-        missionData1.setExpiration(LocalDateTime.now().minusDays(1L));
+        missionData1.setExpiration(LocalDate.now().minusDays(1L));
 
         missionDao.createMission(missionData, connection);
         missionDao.createMission(missionData1, connection);

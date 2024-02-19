@@ -1,6 +1,10 @@
 package com.daarthy.events.persistence.missionDao;
 
+import com.daarthy.events.app.modules.missions.Grade;
+
 import java.sql.*;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,11 +22,13 @@ public abstract class AbstractMissionDao implements MissionDao {
         String queryString = "SELECT m.*, COUNT(DISTINCT ma.playerId) AS userCount " +
                 "FROM Missions m " +
                 "LEFT JOIN MissionAccept ma ON m.id = ma.missionId " +
-                "WHERE m.guildId = ? AND NOW() < m.expiration " +
+                "WHERE m.guildId = ? AND ? < m.expiration " +
                 "GROUP BY m.id";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
+
             preparedStatement.setLong(1, guildId);
+            preparedStatement.setDate(2, java.sql.Date.valueOf(LocalDate.now().atStartOfDay().toLocalDate()));
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
@@ -91,6 +97,60 @@ public abstract class AbstractMissionDao implements MissionDao {
         return false;
     }
 
+
+    @Override
+    public List<FailedMission> findFailedMissionsByGuild(Long guildId, Connection connection) {
+        List<FailedMission> failedMissions = new ArrayList<>();
+
+        String queryString = "SELECT m.id AS mission_id, m.grade, COUNT(ma.missionId) AS failure_count " +
+                "FROM Missions m " +
+                "JOIN MissionAccept ma ON m.id = ma.missionId " +
+                "WHERE m.guildId = ? AND m.expiration < ? AND ma.status = 'ACCEPTED' " +
+                "GROUP BY m.id, m.grade";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
+            preparedStatement.setLong(1, guildId);
+            preparedStatement.setTimestamp(2, Timestamp.from(Instant.now()));
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Long missionId = resultSet.getLong("mission_id");
+                    Grade grade = Grade.valueOf(resultSet.getString("grade"));
+                    int failureCount = resultSet.getInt("failure_count");
+
+                    if (failureCount == 0) {
+                        updateMissionStatus(connection, missionId, MissionStatus.FAILED);
+                        failedMissions.add(new FailedMission(missionId, grade, failureCount));
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al buscar misiones fallidas", e);
+        }
+
+        return failedMissions;
+    }
+
+    private void updateMissionStatus(Connection connection, Long missionId, MissionStatus newStatus) {
+
+        String queryString = "UPDATE MissionAccept ma SET ma.status = ? WHERE ma.missionId = ? " +
+                "AND ma.status = 'ACCEPTED'";
+
+        try (PreparedStatement updateStatement = connection.prepareStatement(queryString)) {
+            updateStatement.setString(1, newStatus.toString());
+            updateStatement.setLong(2, missionId);
+            int rowsUpdated = updateStatement.executeUpdate();
+
+            if (rowsUpdated == 0) {
+
+                System.out.println("La actualización de la misión fallida no tuvo éxito para la misión con ID: " + missionId);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el estado de la misión", e);
+        }
+    }
 
 
     private ObjectiveData mapObjectiveData(ResultSet resultSet) throws SQLException {
@@ -192,7 +252,7 @@ public abstract class AbstractMissionDao implements MissionDao {
         Long guildId = resultSet.getLong("guildId");
         String title = resultSet.getString("title");
         String grade = resultSet.getString("grade");
-        LocalDateTime expiration = resultSet.getTimestamp("expiration").toLocalDateTime();
+        LocalDate expiration = resultSet.getTimestamp("expiration").toLocalDateTime().toLocalDate();
         Integer maxCompletions = resultSet.getInt("maxCompletions");
         if(resultSet.wasNull()) {
             maxCompletions = null;
@@ -224,7 +284,7 @@ public abstract class AbstractMissionDao implements MissionDao {
     @Override
     public int findAcceptedMissions(UUID playerId, Connection connection) {
 
-        String queryString = "SELECT COUNT(DISTINCT missionId) AS total" +
+        String queryString = "SELECT COUNT(DISTINCT missionId) AS total " +
                     "FROM MissionAccept " +
                     "WHERE playerId = ? AND (DATE(acceptDate) = CURDATE() OR status = 'ACCEPTED')";
 

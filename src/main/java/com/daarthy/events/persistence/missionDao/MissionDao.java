@@ -1,5 +1,7 @@
 package com.daarthy.events.persistence.missionDao;
 
+import com.daarthy.events.app.modules.missions.Grade;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -36,4 +38,6 @@ public interface MissionDao {
     void saveMissionStatus(UUID playerId, Long missionId, MissionStatus status, Connection connection);
 
     void saveObjectiveProgress(UUID playerId, Long objectiveId, int amount, Connection connection);
+
+    List<FailedMission> findFailedMissionsByGuild(Long guildId, Connection connection);
 }

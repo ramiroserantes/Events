@@ -33,7 +33,7 @@ CREATE TABLE Player (
 CREATE TABLE Missions (
     id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     guildId BIGINT NULL,
-    title VARCHAR(20) NOT NULL,
+    title VARCHAR(50) NOT NULL,
     grade CHAR(1) NOT NULL,
     expiration DATE NULL,
     maxCompletions INT NULL,
