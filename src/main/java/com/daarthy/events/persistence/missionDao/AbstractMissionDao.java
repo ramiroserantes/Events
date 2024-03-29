@@ -1,11 +1,10 @@
 package com.daarthy.events.persistence.missionDao;
 
-import com.daarthy.events.app.modules.missions.Grade;
+import com.daarthy.events.Events;
 
 import java.sql.*;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.UUID;
 
 public abstract class AbstractMissionDao implements MissionDao {
 
-
+    private static final String ERROR = "DB Error";
 
     public List<MissionData> findGuildMissions(Long guildId, Connection connection) {
 
@@ -30,16 +29,16 @@ public abstract class AbstractMissionDao implements MissionDao {
             preparedStatement.setLong(1, guildId);
             preparedStatement.setDate(2, java.sql.Date.valueOf(LocalDate.now().atStartOfDay().toLocalDate()));
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    MissionData missionData = mapResultSetToMissionData(resultSet);
-                    int userCount = resultSet.getInt("userCount");
-                    missionData.setCurrentPlayers(userCount);
-                    missions.add(missionData);
-                }
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                MissionData missionData = mapResultSetToMissionData(resultSet);
+                int userCount = resultSet.getInt("userCount");
+                missionData.setCurrentPlayers(userCount);
+                missions.add(missionData);
             }
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
 
         return missions;
@@ -61,14 +60,14 @@ public abstract class AbstractMissionDao implements MissionDao {
             preparedStatement.setString(i++, playerId.toString());
             preparedStatement.setString(i, MissionStatus.ACCEPTED.getStatusString());
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    MissionData missionData = mapResultSetToMissionData(resultSet);
-                    missions.add(missionData);
-                }
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                MissionData missionData = mapResultSetToMissionData(resultSet);
+                missions.add(missionData);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
 
         return missions;
@@ -84,14 +83,14 @@ public abstract class AbstractMissionDao implements MissionDao {
             preparedStatement.setLong(1, missionId);
             preparedStatement.setString(2, playerId.toString());
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    int count = resultSet.getInt(1);
-                    return count > 0;
-                }
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
             }
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
 
         return false;
@@ -112,21 +111,21 @@ public abstract class AbstractMissionDao implements MissionDao {
             preparedStatement.setLong(1, guildId);
             preparedStatement.setTimestamp(2, Timestamp.from(Instant.now()));
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    Long missionId = resultSet.getLong("mission_id");
-                    Grade grade = Grade.valueOf(resultSet.getString("grade"));
-                    int failureCount = resultSet.getInt("failure_count");
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-                    if (failureCount == 0) {
-                        updateMissionStatus(connection, missionId, MissionStatus.FAILED);
-                        failedMissions.add(new FailedMission(missionId, grade, failureCount));
-                    }
+            while (resultSet.next()) {
+                Long missionId = resultSet.getLong("mission_id");
+                Grade grade = Grade.valueOf(resultSet.getString("grade"));
+                int failureCount = resultSet.getInt("failure_count");
+
+                if (failureCount == 0) {
+                    updateMissionStatus(connection, missionId, MissionStatus.FAILED);
+                    failedMissions.add(new FailedMission(missionId, grade, failureCount));
                 }
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al buscar misiones fallidas", e);
+            Events.logInfo(ERROR);
         }
 
         return failedMissions;
@@ -138,17 +137,14 @@ public abstract class AbstractMissionDao implements MissionDao {
                 "AND ma.status = 'ACCEPTED'";
 
         try (PreparedStatement updateStatement = connection.prepareStatement(queryString)) {
+
             updateStatement.setString(1, newStatus.toString());
             updateStatement.setLong(2, missionId);
-            int rowsUpdated = updateStatement.executeUpdate();
 
-            if (rowsUpdated == 0) {
-
-                System.out.println("La actualización de la misión fallida no tuvo éxito para la misión con ID: " + missionId);
-            }
+            updateStatement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al actualizar el estado de la misión", e);
+            Events.logInfo(ERROR);
         }
     }
 
@@ -173,13 +169,12 @@ public abstract class AbstractMissionDao implements MissionDao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
             preparedStatement.setLong(1, missionId);
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    objectives.add(mapObjectiveData(resultSet));
-                }
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                objectives.add(mapObjectiveData(resultSet));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
 
         return objectives;
@@ -198,15 +193,16 @@ public abstract class AbstractMissionDao implements MissionDao {
             preparedStatement.setLong(1, missionId);
             preparedStatement.setString(2, playerId.toString());
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    ObjectiveData od = mapObjectiveData(resultSet);
-                    od.setAmount(resultSet.getInt("amount"));
-                    objectives.add(od);
-                }
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                ObjectiveData od = mapObjectiveData(resultSet);
+                od.setAmount(resultSet.getInt("amount"));
+                objectives.add(od);
             }
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
 
         return objectives;
@@ -214,6 +210,7 @@ public abstract class AbstractMissionDao implements MissionDao {
 
     @Override
     public HashMap<String, CompletionData> findPlayerCompletionsRate(UUID playerId, Connection connection) {
+
         String queryString = "SELECT m.grade, " +
                 "COUNT(ma.status) AS totalMissions, " +
                 "SUM(CASE WHEN ma.status = 'FINALIZED' THEN 1 ELSE 0 END) AS completedMissions " +
@@ -227,18 +224,19 @@ public abstract class AbstractMissionDao implements MissionDao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
             preparedStatement.setString(1, playerId.toString());
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    String grade = resultSet.getString("grade");
-                    int totalMissions = resultSet.getInt("totalMissions");
-                    int completedMissions = resultSet.getInt("completedMissions");
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-                    CompletionData completionData = new CompletionData(totalMissions, completedMissions);
-                    completionsData.put(grade, completionData);
-                }
+            while (resultSet.next()) {
+                String grade = resultSet.getString("grade");
+                int totalMissions = resultSet.getInt("totalMissions");
+                int completedMissions = resultSet.getInt("completedMissions");
+
+                CompletionData completionData = new CompletionData(totalMissions, completedMissions);
+                completionsData.put(grade, completionData);
             }
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
 
         return completionsData;
@@ -271,13 +269,14 @@ public abstract class AbstractMissionDao implements MissionDao {
 
             preparedStatement.setLong(1, missionId);
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if(resultSet.next()) {
-                    return mapResultSetToMissionData(resultSet);
-                } else { return null;}
-            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                return mapResultSetToMissionData(resultSet);
+            } else { return null;}
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
+            return null;
         }
     }
 
@@ -292,14 +291,14 @@ public abstract class AbstractMissionDao implements MissionDao {
 
             preparedStatement.setString(1, playerId.toString());
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if(resultSet.next()) {
-                    return resultSet.getInt(1);
-                } else {return 0;}
-            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                return resultSet.getInt(1);
+            } else {return 0;}
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
+            return 0;
         }
     }
 

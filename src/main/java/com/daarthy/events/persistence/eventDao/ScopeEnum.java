@@ -2,8 +2,7 @@ package com.daarthy.events.persistence.eventDao;
 
 public enum ScopeEnum {
 
-    ALL("All"),
-    CAVE_WORLD("CaveWorld");
+    ALL("All");
 
     private final String scope;
 

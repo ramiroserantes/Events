@@ -1,17 +1,15 @@
 package com.daarthy.events.persistence.missionDao;
 
-import com.daarthy.events.app.modules.missions.Grade;
+import com.daarthy.events.Events;
+import org.w3c.dom.events.EventTarget;
 
 import java.sql.*;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 public class MissionJdbc extends AbstractMissionDao {
 
+    private static final String ERROR = "DB Error";
     @Override
     public Long createMission(MissionData missionData, Connection connection) {
 
@@ -38,14 +36,16 @@ public class MissionJdbc extends AbstractMissionDao {
 
             preparedStatement.executeUpdate();
 
-            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-                if(generatedKeys.next()) {
-                    return generatedKeys.getLong(1);
-                } else { return null;}
-            }
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+
+            if(generatedKeys.next()) {
+                return generatedKeys.getLong(1);
+            } else { return null;}
+
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
+            return null;
         }
 
     }
@@ -72,14 +72,15 @@ public class MissionJdbc extends AbstractMissionDao {
 
             preparedStatement.executeUpdate();
 
-            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return generatedKeys.getLong(1);
-                } else {return null;}
-            }
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+
+            if (generatedKeys.next()) {
+                return generatedKeys.getLong(1);
+            } else {return null;}
 
         } catch (SQLException e) {
-            throw new RuntimeException();
+            Events.logInfo(ERROR);
+            return null;
         }
 
     }
@@ -99,7 +100,7 @@ public class MissionJdbc extends AbstractMissionDao {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
     }
 
@@ -116,7 +117,7 @@ public class MissionJdbc extends AbstractMissionDao {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
     }
 

@@ -1,5 +1,7 @@
 package com.daarthy.events.persistence.playerDao;
 
+import com.daarthy.events.Events;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -21,7 +23,8 @@ public class PlayerJdbc extends AbstractPlayerDao {
             return new PlayerData(3, 0F, 1L);
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo("DB Error");
+            return null;
         }
 
     }

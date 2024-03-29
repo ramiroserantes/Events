@@ -1,7 +1,12 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.app.modules.GuildCache;
-import com.daarthy.events.app.modules.missions.*;
+import com.daarthy.events.app.modules.guilds.GuildCache;
+import com.daarthy.events.app.modules.missions.factory.MissionFactory;
+import com.daarthy.events.app.modules.missions.factory.MissionFactoryImpl;
+import com.daarthy.events.app.modules.missions.observers.Objective;
+import com.daarthy.events.app.modules.missions.observers.ObservableObjective;
+import com.daarthy.events.app.modules.missions.observers.PlayerSubject;
+import com.daarthy.events.app.modules.missions.observers.PlayerSubjectImpl;
 import com.daarthy.events.persistence.missionDao.*;
 import com.daarthy.events.persistence.playerDao.PlayerData;
 import com.zaxxer.hikari.HikariDataSource;
@@ -65,29 +70,6 @@ public class MissionServiceImpl implements MissionService{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-
-
-    @Override
-    public void removePlayer(UUID playerId) {
-
-        savePlayer(playerId);
-
-        PlayerSubject playerSubject = playerMissions.get(playerId);
-
-        playerSubject.getMissionObjectives().forEach((key, value) ->
-                value.forEach(item -> {
-                    item.updateObserved(-1);
-                    if (!item.isObserved()) {
-                        removeObjectiveFromMissions(key, item);
-                    }
-                })
-        );
-
-        playerMissions.remove(playerId);
-
     }
 
     @Override
@@ -356,6 +338,25 @@ public class MissionServiceImpl implements MissionService{
 
     }
 
+    @Override
+    public void removePlayer(UUID playerId) {
+
+        savePlayer(playerId);
+
+        PlayerSubject playerSubject = playerMissions.get(playerId);
+
+        playerSubject.getMissionObjectives().forEach((key, value) ->
+                value.forEach(item -> {
+                    item.updateObserved(-1);
+                    if (!item.isObserved()) {
+                        removeObjectiveFromMissions(key, item);
+                    }
+                })
+        );
+
+        playerMissions.remove(playerId);
+
+    }
 
     private int getMaxCountForGrade(Grade grade) {
         switch (grade) {

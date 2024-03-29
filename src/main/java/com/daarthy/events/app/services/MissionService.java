@@ -1,7 +1,7 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.app.modules.GuildCache;
-import com.daarthy.events.app.modules.missions.Grade;
+import com.daarthy.events.app.modules.guilds.GuildCache;
+import com.daarthy.events.persistence.missionDao.Grade;
 import com.daarthy.events.persistence.missionDao.CompletionData;
 import com.daarthy.events.persistence.missionDao.FailedMission;
 import com.daarthy.events.persistence.missionDao.MissionData;
@@ -16,12 +16,6 @@ public interface MissionService {
 
     StringBuilder joinMission(UUID playerId, PlayerData playerData, GuildCache guildCache, MissionData missionData);
 
-    void savePlayer(UUID playerId);
-
-    void initPlayer(UUID playerId);
-
-    void removePlayer(UUID playerId);
-
     void fillGuildDashBoard(Long guildId, GuildCache guildCache);
 
     List<FailedMission> updateFailedMissions(Long guildId);
@@ -34,9 +28,10 @@ public interface MissionService {
 
     HashMap<String, CompletionData> getPlayerRates(UUID playerId);
 
-    /*
-    * GetPlayerDashBoard.
-    * GetGuildDashBoard.
-    * FillGuildDashBoard.
-    * */
+    void savePlayer(UUID playerId);
+
+    void initPlayer(UUID playerId);
+
+    void removePlayer(UUID playerId);
+
 }

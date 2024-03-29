@@ -1,7 +1,5 @@
 package com.daarthy.events.persistence.missionDao;
 
-import com.daarthy.events.app.modules.missions.Grade;
-
 public class FailedMission {
 
     private Long missionId;

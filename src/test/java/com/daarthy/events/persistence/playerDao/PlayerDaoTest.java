@@ -1,5 +1,6 @@
 package com.daarthy.events.persistence.playerDao;
 
+import com.daarthy.events.persistence.SqlConnectionsTest;
 import com.daarthy.events.persistence.guildDao.GuildDao;
 import com.daarthy.events.persistence.guildDao.GuildJdbc;
 import org.junit.After;
@@ -14,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class PlayerDaoTest {
 
-    private Connection connection = com.daarthy.guilds.persistence.SqlConnectionsTest.getInstance().getConnection();
+    private Connection connection = SqlConnectionsTest.getInstance().getConnection();
     private PlayerDao playerDao = new PlayerJdbc();
 
     private GuildDao guildDao = new GuildJdbc();

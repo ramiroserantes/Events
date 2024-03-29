@@ -1,5 +1,7 @@
 package com.daarthy.events.app.modules.missions;
 
+import com.daarthy.events.app.modules.missions.observers.Objective;
+import com.daarthy.events.app.modules.missions.observers.ObservableObjective;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

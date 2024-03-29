@@ -1,5 +1,6 @@
 package com.daarthy.events.persistence.missionDao;
 
+import com.daarthy.events.persistence.SqlConnectionsTest;
 import com.daarthy.events.persistence.guildDao.GuildDao;
 import com.daarthy.events.persistence.guildDao.GuildJdbc;
 import com.daarthy.events.persistence.playerDao.PlayerDao;
@@ -11,7 +12,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 public class MissionDaoTest {
 
-    private Connection connection = com.daarthy.guilds.persistence.SqlConnectionsTest.getInstance().getConnection();
+    private Connection connection = SqlConnectionsTest.getInstance().getConnection();
     private PlayerDao playerDao = new PlayerJdbc();
 
     private GuildDao guildDao = new GuildJdbc();

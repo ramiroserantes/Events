@@ -1,7 +1,7 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.app.modules.GuildCache;
-import com.daarthy.events.app.modules.GuildLevel;
+import com.daarthy.events.app.modules.guilds.GuildCache;
+import com.daarthy.events.app.modules.guilds.GuildLevel;
 import com.daarthy.events.persistence.guildDao.GuildDao;
 import com.daarthy.events.persistence.guildDao.GuildData;
 import com.daarthy.events.persistence.playerDao.PlayerDao;

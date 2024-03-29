@@ -1,6 +1,7 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.app.modules.GuildCache;
+import com.daarthy.events.app.modules.guilds.GuildCache;
+import com.daarthy.events.persistence.SqlConnectionsTest;
 import com.daarthy.events.persistence.guildDao.GuildDao;
 import com.daarthy.events.persistence.guildDao.GuildJdbc;
 import com.daarthy.events.persistence.playerDao.PlayerDao;
@@ -16,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class DataServiceTest {
 
-    private HikariDataSource dataSource = com.daarthy.guilds.persistence.SqlConnectionsTest.getInstance().getDataSource();
+    private HikariDataSource dataSource = SqlConnectionsTest.getInstance().getDataSource();
 
     private GuildDao guildDao = new GuildJdbc();
     private PlayerDao playerDao = new PlayerJdbc();

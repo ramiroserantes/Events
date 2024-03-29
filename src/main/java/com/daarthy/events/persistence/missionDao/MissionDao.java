@@ -1,9 +1,6 @@
 package com.daarthy.events.persistence.missionDao;
 
-import com.daarthy.events.app.modules.missions.Grade;
-
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;

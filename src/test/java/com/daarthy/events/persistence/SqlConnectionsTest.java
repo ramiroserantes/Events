@@ -1,4 +1,4 @@
-package com.daarthy.guilds.persistence;
+package com.daarthy.events.persistence;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -44,7 +44,6 @@ public class SqlConnectionsTest {
         return dataSource;
     }
     public synchronized Connection getConnection() throws SQLException {
-        System.out.println(dataSource.getHikariPoolMXBean().getActiveConnections());
         return dataSource.getConnection();
     }
 

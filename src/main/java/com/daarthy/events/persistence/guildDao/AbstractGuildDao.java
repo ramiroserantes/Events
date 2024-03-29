@@ -1,12 +1,14 @@
 package com.daarthy.events.persistence.guildDao;
 
+import com.daarthy.events.Events;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public abstract class AbstractGuildDao implements GuildDao {
 
-
+    private static final String ERROR = "DB Error";
     @Override
     public void saveGuild(GuildData guildData, Connection connection) {
 
@@ -28,12 +30,10 @@ public abstract class AbstractGuildDao implements GuildDao {
 
             preparedStatement.setLong(i, guildData.getGuildId());
 
-            if(preparedStatement.executeUpdate() == 0) {
-                System.out.println("Guild with id: " + guildData.getGuildId() + " could not be saved");
-            }
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
 
     }
@@ -49,12 +49,11 @@ public abstract class AbstractGuildDao implements GuildDao {
 
             preparedStatement.setLong(1, guildId);
 
-            if(preparedStatement.executeUpdate() == 0) {
-                System.out.println("Guild with id: " + guildId + " could not be deleted");
-            }
+            preparedStatement.executeUpdate();
+
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
 
     }
@@ -71,27 +70,28 @@ public abstract class AbstractGuildDao implements GuildDao {
 
             preparedStatement.setString(1, playerId.toString());
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    int i = 1;
-                    Long guildId = resultSet.getLong(i++);
-                    int lvl = resultSet.getInt(i++);
-                    Float experience = resultSet.getFloat(i++);
-                    int maxLvl = resultSet.getInt(i++);
-                    String kName = resultSet.getString(i++);
-                    int ampMissions = resultSet.getInt(i++);
-                    Float ampBasicRewards = resultSet.getFloat(i++);
-                    Float levelUpMod = resultSet.getFloat(i++);
-                    LocalDateTime lastTimeUpdated = resultSet.getTimestamp(i).toLocalDateTime();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int i = 1;
+                Long guildId = resultSet.getLong(i++);
+                int lvl = resultSet.getInt(i++);
+                Float experience = resultSet.getFloat(i++);
+                int maxLvl = resultSet.getInt(i++);
+                String kName = resultSet.getString(i++);
+                int ampMissions = resultSet.getInt(i++);
+                Float ampBasicRewards = resultSet.getFloat(i++);
+                Float levelUpMod = resultSet.getFloat(i++);
+                LocalDateTime lastTimeUpdated = resultSet.getTimestamp(i).toLocalDateTime();
 
-                    return new GuildData(guildId, kName, lvl, experience, maxLvl, ampMissions,
+                return new GuildData(guildId, kName, lvl, experience, maxLvl, ampMissions,
                             ampBasicRewards, levelUpMod, lastTimeUpdated);
-                } else {
-                    return null;
-                }
+            } else {
+                return null;
             }
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
+            return null;
         }
 
 
@@ -104,14 +104,15 @@ public abstract class AbstractGuildDao implements GuildDao {
 
         try(PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return resultSet.getLong(1);
-                } else {return null;}
-            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getLong(1);
+            } else {return null;}
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
+            return null;
         }
     }
 }

@@ -39,14 +39,6 @@ public class DataSourceLocatorImpl {
         this.dataSource = new HikariDataSource(config);
     }
 
-    public void close() {
-        try {
-            dataSource.getConnection().close();
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al cerrar la conexión", e);
-        }
-    }
-
     public HikariDataSource getDataSource() {
         return dataSource;
     }

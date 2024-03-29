@@ -1,10 +1,13 @@
 package com.daarthy.events.persistence.playerDao;
 
+import com.daarthy.events.Events;
+
 import java.sql.*;
 import java.util.UUID;
 
 public abstract class AbstractPlayerDao implements PlayerDao {
 
+    private static final String ERROR = "DB Error";
     @Override
     public PlayerData findPlayerData(UUID playerId, Connection connection) {
 
@@ -15,23 +18,23 @@ public abstract class AbstractPlayerDao implements PlayerDao {
 
             preparedStatement.setString(1, playerId.toString());
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-                if (!resultSet.next()) {
-                    System.out.println("Data for the user with uuid: " + playerId + ", Not Found");
-                    return null;
-                }
-
-                int i = 1;
-                int maxMissions = resultSet.getInt(i++);
-                Float ampBasicRewards = resultSet.getFloat(i++);
-                Long guildId = resultSet.getLong(i);
-
-                return new PlayerData(maxMissions, ampBasicRewards, guildId);
+            if (!resultSet.next()) {
+                return null;
             }
 
+            int i = 1;
+            int maxMissions = resultSet.getInt(i++);
+            Float ampBasicRewards = resultSet.getFloat(i++);
+            Long guildId = resultSet.getLong(i);
+
+            return new PlayerData(maxMissions, ampBasicRewards, guildId);
+
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
+            return null;
         }
     }
 
@@ -49,12 +52,10 @@ public abstract class AbstractPlayerDao implements PlayerDao {
             preparedStatement.setLong(i++, playerData.getGuildId());
             preparedStatement.setString(i, playerId.toString());
 
-            if (preparedStatement.executeUpdate() == 0) {
-                System.out.println("Player with uuid: " + playerId + ", couldnt be saved");
-            }
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
 
     }
@@ -73,7 +74,7 @@ public abstract class AbstractPlayerDao implements PlayerDao {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
     }
 }

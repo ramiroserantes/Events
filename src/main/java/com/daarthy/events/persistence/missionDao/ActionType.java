@@ -1,8 +1,12 @@
 package com.daarthy.events.persistence.missionDao;
 
 public enum ActionType {
-    BREAK("Break"),
+    MINING("Mining"),
+    DIG("Dig"),
+    FARM("Farm"),
+    CUT("Cut"),
     KILL("Kill"),
+    BREAK("Break"),
     PLACE("Place"),
     CRAFT("Craft"),
     MAKE("Make"),

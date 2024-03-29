@@ -1,7 +1,6 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.app.modules.GuildCache;
-import com.daarthy.events.persistence.guildDao.GuildData;
+import com.daarthy.events.app.modules.guilds.GuildCache;
 import com.daarthy.events.persistence.playerDao.PlayerData;
 
 import java.util.UUID;

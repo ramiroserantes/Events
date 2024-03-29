@@ -1,6 +1,10 @@
 package com.daarthy.events.app.modules.missions;
 
 
+import com.daarthy.events.app.modules.missions.observers.Objective;
+import com.daarthy.events.app.modules.missions.observers.ObservableObjective;
+import com.daarthy.events.app.modules.missions.observers.PlayerSubject;
+import com.daarthy.events.app.modules.missions.observers.PlayerSubjectImpl;
 import org.junit.Test;
 
 import java.util.ArrayList;

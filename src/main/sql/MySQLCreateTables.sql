@@ -1,6 +1,5 @@
 DROP TABLE IF EXISTS PlayerMedals;
 DROP TABLE IF EXISTS PlayerContribution;
-DROP TABLE IF EXISTS Task;
 DROP TABLE IF EXISTS GuildMedals;
 DROP TABLE IF EXISTS Events;
 DROP TABLE IF EXISTS ObjectiveProgress;
@@ -73,40 +72,29 @@ CREATE TABLE ObjectiveProgress (
 CREATE TABLE Events (
     id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     worldScope VARCHAR(20) NOT NULL ,
-    nameLink VARCHAR(20) NOT NULL ,
-    descriptionLink VARCHAR(120) NOT NULL
+    name VARCHAR(20) NOT NULL ,
+    startDate DATE NOT NULL,
+    endDate DATE NOT NULL,
+    maxMedals INT NOT NULL DEFAULT 200
 );
 
 CREATE TABLE GuildMedals (
     eventId BIGINT NOT NULL,
     guildId BIGINT NOT NULL,
-    medals INT NULL,
+    medals INT NOT NULL DEFAULT 0,
     PRIMARY KEY (eventId, guildId),
     FOREIGN KEY (eventId) REFERENCES Events(id),
     FOREIGN KEY (guildId) REFERENCES Guild(id)
 );
 
-CREATE TABLE Task (
-    id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    eventId BIGINT NOT NULL,
-    initDate DATE NOT NULL,
-    endDate DATE NOT NULL,
-    target VARCHAR(30) NOT NULL,
-    actionType VARCHAR(10) NOT NULL,
-    level INT NULL,
-    amount INT NULL,
-    reqAmount INT NULL,
-    medals INT NULL,
-    FOREIGN KEY (eventId) REFERENCES Events(id)
-);
-
 CREATE TABLE PlayerContribution (
     playerId VARCHAR(36) NOT NULL,
-    taskId BIGINT NOT NULL,
-    quantity INT NULL,
-    PRIMARY KEY (playerId, taskId),
+    eventId BIGINT NOT NULL,
+    quantity INT NOT NULL DEFAULT 0,
+    medals INT NOT NULL DEFAULT 0,
+    PRIMARY KEY (playerId, eventId),
     FOREIGN KEY (playerId) REFERENCES Player(playerId),
-    FOREIGN KEY (taskId) REFERENCES Task(id)
+    FOREIGN KEY (eventId) REFERENCES Events(id)
 );
 
 
