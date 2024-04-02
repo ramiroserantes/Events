@@ -2,9 +2,9 @@ package com.daarthy.events.app.modules.events;
 
 import com.daarthy.events.app.modules.events.plans.Plan;
 import com.daarthy.events.app.modules.events.plans.PlanFactoryImpl;
-import com.daarthy.events.persistence.eventDao.Contribution;
-import com.daarthy.events.persistence.eventDao.EventData;
-import com.daarthy.events.persistence.missionDao.ActionType;
+import com.daarthy.events.persistence.event_dao.Contribution;
+import com.daarthy.events.persistence.event_dao.EventData;
+import com.daarthy.events.persistence.mission_dao.ActionType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,5 +56,10 @@ public class EventImpl implements Event {
     @Override
     public Map<UUID, Contribution> getPlayers() {
         return players;
+    }
+
+    @Override
+    public EventData getData() {
+        return eventData;
     }
 }

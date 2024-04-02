@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Guild.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Events</a> &gt; <a href="index.source.html" class="el_package">com.daarthy.events.app.modules.guilds</a> &gt; <span class="el_source">Guild.java</span></div><h1>Guild.java</h1><pre class="source lang-java linenums">package com.daarthy.events.app.modules.guilds;
+
+import java.time.LocalDateTime;
+
+public class Guild {
+
+    private final String kName;
+    private final LocalDateTime lastTimeUpdated;
+    private final Level level;
+    private final EventMedals eventMedals;
+    private final GuildModifiers guildModifiers;
+
+<span class="fc" id="L13">    private int watched = 1;</span>
+
+<span class="fc" id="L15">    public Guild(String kName, LocalDateTime lastTimeUpdated, Level level, EventMedals eventMedals, GuildModifiers guildModifiers) {</span>
+<span class="fc" id="L16">        this.kName = kName;</span>
+<span class="fc" id="L17">        this.lastTimeUpdated = lastTimeUpdated;</span>
+<span class="fc" id="L18">        this.level = level;</span>
+<span class="fc" id="L19">        this.eventMedals = eventMedals;</span>
+<span class="fc" id="L20">        this.guildModifiers = guildModifiers;</span>
+<span class="fc" id="L21">    }</span>
+
+    public String getkName() {
+<span class="fc" id="L24">        return kName;</span>
+    }
+
+    public LocalDateTime getLastTimeUpdated() {
+<span class="fc" id="L28">        return lastTimeUpdated;</span>
+    }
+
+    public Level getLevel() {
+<span class="fc" id="L32">        return level;</span>
+    }
+
+    public GuildModifiers getGuildModifiers() {
+<span class="fc" id="L36">        return guildModifiers;</span>
+    }
+
+    public EventMedals getEventMedals() {
+<span class="fc" id="L40">        return eventMedals;</span>
+    }
+
+    public int getMaxMissions() {
+<span class="fc" id="L44">        return 4 + level.getCurrentLevel() + guildModifiers.getAmpMissions();</span>
+    }
+
+    public Float getAmplifiedProbability() {
+<span class="fc" id="L48">        return (float) (level.getCurrentLevel() * 5);</span>
+    }
+
+<span class="fc" id="L51">    public synchronized void modifyWatch(int amount) {this.watched += amount;}</span>
+
+    public boolean isWatched() {
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        return this.watched &gt; 0;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

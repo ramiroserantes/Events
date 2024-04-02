@@ -1,24 +1,24 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.app.modules.guilds.GuildCache;
-import com.daarthy.events.app.modules.guilds.GuildLevel;
-import com.daarthy.events.persistence.guildDao.GuildDao;
-import com.daarthy.events.persistence.guildDao.GuildData;
-import com.daarthy.events.persistence.playerDao.PlayerDao;
-import com.daarthy.events.persistence.playerDao.PlayerData;
+import com.daarthy.events.Events;
+import com.daarthy.events.app.modules.guilds.Guild;
+import com.daarthy.events.persistence.guild_dao.GuildDao;
+import com.daarthy.events.persistence.player_dao.PlayerDao;
+import com.daarthy.events.persistence.player_dao.PlayerData;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
 public class DataServiceImpl implements DataService {
 
     private HashMap<UUID, PlayerData> playersData = new HashMap<>();
-    private HashMap<Long, GuildCache> guildsData = new HashMap<>();
+    private HashMap<Long, Guild> guildsData = new HashMap<>();
+
+    private static final String ERROR = "DB Error";
 
     private final HikariDataSource dataSource;
     private final PlayerDao playerDao;
@@ -32,75 +32,59 @@ public class DataServiceImpl implements DataService {
 
     @Override
     public PlayerData getPlayerData(UUID playerId) {
-
-        if(playersData.containsKey(playerId)) {
-            return playersData.get(playerId);
-        } else {
-            try (Connection connection = dataSource.getConnection()) {
-
-                PlayerData playerData = playerDao.findPlayerData(playerId, connection);
-
-                if(playerData == null) {
-                    playerData = playerDao.createPlayer(playerId, connection);
-                }
-
-                playersData.put(playerId, playerData);
-                return playerData;
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-        }
+        return playersData.getOrDefault(playerId, null);
     }
 
     @Override
-    public Long createGuild(Long guildId, String kName) {
+    public void createGuild(UUID playerId, Long guildId, String kName) {
 
         try (Connection connection = dataSource.getConnection()) {
 
-            return guildDao.createGuild(guildId, kName, connection).getGuildId();
+            PlayerData playerData = playersData.get(playerId);
+            guildsData.get(playerData.getGuildId()).modifyWatch(-1);
+            removeGuild(playerData.getGuildId());
+            playerData.setGuildId(guildId);
+
+            Guild guild = guildDao.createGuild(guildId, kName, connection);
+            guildsData.put(guildId, guild);
+
+            savePlayer(playerId);
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
     }
 
     @Override
-    public GuildCache getGuildByPlayer(UUID playerId, PlayerData playerData) {
+    public Guild getGuild(Long guildId) {
+        return guildsData.getOrDefault(guildId, null);
+    }
 
-        if(guildsData.containsKey(playerData.getGuildId())) {
-            return guildsData.get(playerData.getGuildId());
-        } else {
-            try (Connection connection = dataSource.getConnection()) {
+    @Override
+    public Guild findDBGuild(Long guildId) {
 
-                GuildData guildData = guildDao.findGuildByPlayer(playerId, connection);
+        Guild guild = guildsData.getOrDefault(guildId, null);
 
-                if(guildData != null) {
-                    guildsData.put(guildData.getGuildId(), new GuildCache(guildData.getkName(), guildData.getAmpMissions(),
-                            guildData.getAmpBasicRewards(), guildData.getLastTimeUpdated(), new GuildLevel(
-                            guildData.getExperience(), guildData.getLvl(), guildData.getMaxLvL(),
-                            guildData.getLevelUpMod()), guildData.getLevelUpMod()));
+        if(guild == null) {
 
-                    return guildsData.get(guildData.getGuildId());
-                } else {return null;}
+            try(Connection connection = dataSource.getConnection()) {
+
+                guild = guildDao.findGuildById(guildId, connection);
 
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                Events.logInfo("Error on guild retrieve findDBGuild");
             }
-
         }
+        return guild;
     }
 
     @Override
     public void savePlayer(UUID playerId) {
 
         try (Connection connection = dataSource.getConnection()) {
-
             playerDao.savePlayer(playerId, playersData.get(playerId), connection);
-
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
     }
 
@@ -109,34 +93,36 @@ public class DataServiceImpl implements DataService {
 
         try (Connection connection = dataSource.getConnection()) {
 
-            GuildCache guildCache = guildsData.get(guildId);
-            guildDao.saveGuild(new GuildData(guildId, guildCache.getkName(), guildCache.getGuildLevel().getCurrentLevel(),
-                    guildCache.getGuildLevel().getCurrentExp(), guildCache.getGuildLevel().getMaxLevel(),
-                    guildCache.getAmpMissions(), guildCache.getAmpBasicRewards(), guildCache.getLevelUpMod(),
-                    guildCache.getLastTimeUpdated()), connection);
+            Guild guild = guildsData.get(guildId);
+
+            guildDao.saveGuild(guildId, guild, connection);
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
         }
     }
 
     @Override
-    public void removePlayerFromCache(UUID playerId) {
+    public void removePlayer(UUID playerId) {
         savePlayer(playerId);
+        guildsData.get(playersData.get(playerId).getGuildId()).modifyWatch(-1);
         playersData.remove(playerId);
     }
 
     @Override
-    public void removeGuildFromCache(Long guildId) {
-        saveGuild(guildId);
-        guildsData.remove(guildId);
+    public void removeGuild(Long guildId) {
+
+        Guild guild = guildsData.get(guildId);
+        if(!guild.isWatched()) {
+            saveGuild(guildId);
+            guildsData.remove(guildId);
+        }
     }
 
     @Override
     public void deleteGuild(Long guildId) {
 
         guildsData.remove(guildId);
-
         try (Connection connection = dataSource.getConnection()){
 
             removePlayersFromCacheGuild(guildId);
@@ -144,20 +130,51 @@ public class DataServiceImpl implements DataService {
             guildDao.deleteGuild(guildId, connection);
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Events.logInfo(ERROR);
+        }
+    }
+
+    @Override
+    public void initPlayer(UUID playerId) {
+        try (Connection connection = dataSource.getConnection()) {
+
+            PlayerData playerData = playerDao.findPlayerData(playerId, connection);
+            if (playerData == null) {
+                playerData = playerDao.createPlayer(playerId, connection);
+            }
+            playersData.put(playerId, playerData);
+
+            Long guildId = playerData.getGuildId();
+
+            Guild guild = guildsData.getOrDefault(guildId, null);
+            if(guild == null) {
+                guildsData.put(guildId, guildDao.findGuildByPlayer(playerId, connection));
+            } else {
+                guild.modifyWatch(+1);
+            }
+
+        } catch (SQLException e) {
+            Events.logInfo(ERROR);
         }
     }
 
     private void removePlayersFromCacheGuild(Long guildId) {
-        Iterator<Map.Entry<UUID, PlayerData>> iterator = playersData.entrySet().iterator();
 
-        while (iterator.hasNext()) {
-            Map.Entry<UUID, PlayerData> entry = iterator.next();
+        for (Map.Entry<UUID, PlayerData> entry : playersData.entrySet()) {
             PlayerData playerData = entry.getValue();
 
-            if (playerData.getGuildId() != null && playerData.getGuildId().equals(guildId)) {
-                playerData.setGuildId(1L);
+            if (playerData.getGuildId().equals(guildId)) {
+                playerData.setGuildId(Events.getBasicGuildId());
+                if(!guildsData.containsKey(Events.getBasicGuildId())) {
+                    try (Connection connection = dataSource.getConnection()) {
+                        guildsData.put(Events.getBasicGuildId(), guildDao.findGuildById(Events.getBasicGuildId(),
+                                connection));
+                    } catch (SQLException e) {
+                        Events.logInfo("Error on retrieve of Basic Guild");
+                    }
+                }
             }
+
         }
     }
 

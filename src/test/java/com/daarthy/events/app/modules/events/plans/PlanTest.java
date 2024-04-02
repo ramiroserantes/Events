@@ -1,6 +1,6 @@
 package com.daarthy.events.app.modules.events.plans;
 
-import com.daarthy.events.persistence.missionDao.ActionType;
+import com.daarthy.events.persistence.mission_dao.ActionType;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

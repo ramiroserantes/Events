@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractGuildDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Events</a> &gt; <a href="index.source.html" class="el_package">com.daarthy.events.persistence.guild_dao</a> &gt; <span class="el_source">AbstractGuildDao.java</span></div><h1>AbstractGuildDao.java</h1><pre class="source lang-java linenums">package com.daarthy.events.persistence.guild_dao;
+
+import com.daarthy.events.Events;
+import com.daarthy.events.app.modules.guilds.EventMedals;
+import com.daarthy.events.app.modules.guilds.Guild;
+import com.daarthy.events.app.modules.guilds.GuildModifiers;
+import com.daarthy.events.app.modules.guilds.Level;
+
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+<span class="fc" id="L13">public abstract class AbstractGuildDao implements GuildDao {</span>
+
+    private static final String ERROR = &quot;DB Error&quot;;
+    @Override
+    public void saveGuild(Long guildId, Guild guild, Connection connection) {
+
+<span class="fc" id="L19">        String queryString = &quot;UPDATE Guild g SET g.kName = ?, g.lvl = ?, g.experience = ?,&quot; +</span>
+                &quot;g.maxLvl = ?, g.ampMissions = ?, g.ampBasicRewards = ?, g.levelUpMod = ? ,&quot; +
+                &quot;g.lastTimeUpdated = ? &quot; +
+                &quot;WHERE g.id = ?&quot;;
+
+<span class="fc" id="L24">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
+
+<span class="fc" id="L26">            int i = 1;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">            if(guild.getkName() != null) {</span>
+<span class="fc" id="L28">                preparedStatement.setString(i++, guild.getkName());</span>
+            } else {
+<span class="fc" id="L30">                preparedStatement.setNull(i++, Types.VARCHAR);</span>
+            }
+<span class="fc" id="L32">            preparedStatement.setInt(i++, guild.getLevel().getCurrentLevel());</span>
+<span class="fc" id="L33">            preparedStatement.setFloat(i++, guild.getLevel().getCurrentExp());</span>
+<span class="fc" id="L34">            preparedStatement.setInt(i++, guild.getLevel().getMaxLevel());</span>
+<span class="fc" id="L35">            preparedStatement.setInt(i++, guild.getGuildModifiers().getAmpMissions());</span>
+<span class="fc" id="L36">            preparedStatement.setFloat(i++, guild.getGuildModifiers().getAmpBasicRewards());</span>
+<span class="fc" id="L37">            preparedStatement.setFloat(i++, guild.getLevel().getLevelUpMod());</span>
+<span class="fc" id="L38">            preparedStatement.setDate(i++, Date.valueOf(guild.getLastTimeUpdated().toLocalDate()));</span>
+
+<span class="fc" id="L40">            preparedStatement.setLong(i, guildId);</span>
+
+<span class="fc" id="L42">            preparedStatement.executeUpdate();</span>
+
+<span class="nc" id="L44">        } catch (SQLException e) {</span>
+<span class="nc" id="L45">            Events.logInfo(ERROR);</span>
+<span class="fc" id="L46">        }</span>
+
+<span class="fc" id="L48">    }</span>
+
+    @Override
+    public void deleteGuild(Long guildId, Connection connection) {
+
+
+<span class="fc" id="L54">        String queryString = &quot;DELETE FROM Guild g WHERE g.id = ?&quot;;</span>
+
+<span class="fc" id="L56">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
+
+
+<span class="fc" id="L59">            preparedStatement.setLong(1, guildId);</span>
+
+<span class="fc" id="L61">            preparedStatement.executeUpdate();</span>
+
+
+<span class="nc" id="L64">        } catch (SQLException e) {</span>
+<span class="nc" id="L65">            Events.logInfo(ERROR);</span>
+<span class="fc" id="L66">        }</span>
+
+<span class="fc" id="L68">    }</span>
+
+    @Override
+    public Guild findGuildByPlayer(UUID playerId, Connection connection) {
+
+<span class="fc" id="L73">        String queryString = &quot;SELECT g.lvl, g.experience, g.maxLvl, g.kName, g.ampMissions, &quot; +</span>
+                &quot;g.ampBasicRewards, g.levelUpMod, g.lastTimeUpdated &quot; +
+                &quot;FROM Guild g JOIN Player p ON p.guildId = g.id &quot; +
+                &quot;WHERE p.playerId = ?&quot;;
+
+<span class="fc" id="L78">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
+
+<span class="fc" id="L80">            preparedStatement.setString(1, playerId.toString());</span>
+
+<span class="fc" id="L82">            ResultSet resultSet = preparedStatement.executeQuery();</span>
+
+<span class="fc" id="L84">            return getGuild(resultSet);</span>
+
+<span class="nc" id="L86">        } catch (SQLException e) {</span>
+<span class="nc" id="L87">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L88">            return null;</span>
+        }
+
+
+    }
+
+    @Override
+    public Guild findGuildById(Long guildId, Connection connection) {
+
+<span class="fc" id="L97">        String queryString = &quot;SELECT g.lvl, g.experience, g.maxLvl, g.kName, g.ampMissions, g.ampBasicRewards,&quot; +</span>
+                &quot; g.levelUpMod, g.lastTimeUpdated &quot; +
+                &quot;FROM Guild g WHERE g.id = ?&quot;;
+
+<span class="fc" id="L101">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
+
+<span class="fc" id="L103">            preparedStatement.setLong(1, guildId);</span>
+
+<span class="fc" id="L105">            ResultSet resultSet = preparedStatement.executeQuery();</span>
+
+<span class="fc" id="L107">            return getGuild(resultSet);</span>
+
+<span class="nc" id="L109">        } catch (SQLException e) {</span>
+<span class="nc" id="L110">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L111">            return null;</span>
+        }
+
+    }
+
+    private Guild getGuild(ResultSet resultSet) throws SQLException {
+
+        int i;
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">        if (resultSet.next()) {</span>
+<span class="fc" id="L120">            i = 1;</span>
+<span class="fc" id="L121">            int lvl = resultSet.getInt(i++);</span>
+<span class="fc" id="L122">            Float experience = resultSet.getFloat(i++);</span>
+<span class="fc" id="L123">            int maxLvl = resultSet.getInt(i++);</span>
+<span class="fc" id="L124">            String kName = resultSet.getString(i++);</span>
+<span class="fc" id="L125">            int ampMissions = resultSet.getInt(i++);</span>
+<span class="fc" id="L126">            Float ampBasicRewards = resultSet.getFloat(i++);</span>
+<span class="fc" id="L127">            Float levelUpMod = resultSet.getFloat(i++);</span>
+<span class="fc" id="L128">            LocalDateTime lastTimeUpdated = resultSet.getTimestamp(i).toLocalDateTime();</span>
+
+<span class="fc" id="L130">            return new Guild(kName, lastTimeUpdated, new Level(experience, lvl, maxLvl, levelUpMod),</span>
+                    new EventMedals(), new GuildModifiers(ampMissions, ampBasicRewards));
+        } else {
+<span class="nc" id="L133">            return null;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.daarthy.events.app.modules.events.plans.PlanTest" time="0.889" tests="18" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.daarthy.events.app.modules.events.plans.PlanTest" time="8.807" tests="18" errors="0" skipped="0" failures="0">
   <properties>
+    <property name="sonar.projectName" value="&apos;Events&apos;"/>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sonar.host.url" value="http://localhost:9000"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.class.path" value="C:\Users\ACER\Desktop\TFM\Events\target\test-classes;C:\Users\ACER\Desktop\TFM\Events\target\classes;C:\Users\ACER\.m2\repository\org\spigotmc\spigot-api\1.20.1-R0.1-SNAPSHOT\spigot-api-1.20.1-R0.1-SNAPSHOT.jar;C:\Users\ACER\.m2\repository\com\google\guava\guava\31.1-jre\guava-31.1-jre.jar;C:\Users\ACER\.m2\repository\com\google\guava\failureaccess\1.0.1\failureaccess-1.0.1.jar;C:\Users\ACER\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\ACER\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\ACER\.m2\repository\org\checkerframework\checker-qual\3.12.0\checker-qual-3.12.0.jar;C:\Users\ACER\.m2\repository\com\google\errorprone\error_prone_annotations\2.11.0\error_prone_annotations-2.11.0.jar;C:\Users\ACER\.m2\repository\com\google\j2objc\j2objc-annotations\1.3\j2objc-annotations-1.3.jar;C:\Users\ACER\.m2\repository\com\google\code\gson\gson\2.10\gson-2.10.jar;C:\Users\ACER\.m2\repository\org\joml\joml\1.10.5\joml-1.10.5.jar;C:\Users\ACER\.m2\repository\net\md-5\bungeecord-chat\1.20-R0.1\bungeecord-chat-1.20-R0.1.jar;C:\Users\ACER\.m2\repository\org\yaml\snakeyaml\2.0\snakeyaml-2.0.jar;C:\Users\ACER\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\ACER\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\ACER\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\ACER\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\ACER\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\ACER\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\ACER\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\ACER\.m2\repository\org\slf4j\slf4j-api\2.0.5\slf4j-api-2.0.5.jar;C:\Users\ACER\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\ACER\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
@@ -15,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="C:\Program Files\AdoptOpenJDK\jdk-17.0.7\bin"/>
-    <property name="sun.java.command" value="C:\Users\ACER\AppData\Local\Temp\surefire4895620485969153200\surefirebooter-20240329111012741_3.jar C:\Users\ACER\AppData\Local\Temp\surefire4895620485969153200 2024-03-29T11-10-12_186-jvmRun1 surefire-20240329111012741_1tmp surefire_0-20240329111012741_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\ACER\AppData\Local\Temp\surefire8212261902972729921\surefirebooter-20240402135509346_3.jar C:\Users\ACER\AppData\Local\Temp\surefire8212261902972729921 2024-04-02T13-55-08_795-jvmRun1 surefire-20240402135509346_1tmp surefire_0-20240402135509346_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\ACER\Desktop\TFM\Events\target\test-classes;C:\Users\ACER\Desktop\TFM\Events\target\classes;C:\Users\ACER\.m2\repository\org\spigotmc\spigot-api\1.20.1-R0.1-SNAPSHOT\spigot-api-1.20.1-R0.1-SNAPSHOT.jar;C:\Users\ACER\.m2\repository\com\google\guava\guava\31.1-jre\guava-31.1-jre.jar;C:\Users\ACER\.m2\repository\com\google\guava\failureaccess\1.0.1\failureaccess-1.0.1.jar;C:\Users\ACER\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\ACER\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\ACER\.m2\repository\org\checkerframework\checker-qual\3.12.0\checker-qual-3.12.0.jar;C:\Users\ACER\.m2\repository\com\google\errorprone\error_prone_annotations\2.11.0\error_prone_annotations-2.11.0.jar;C:\Users\ACER\.m2\repository\com\google\j2objc\j2objc-annotations\1.3\j2objc-annotations-1.3.jar;C:\Users\ACER\.m2\repository\com\google\code\gson\gson\2.10\gson-2.10.jar;C:\Users\ACER\.m2\repository\org\joml\joml\1.10.5\joml-1.10.5.jar;C:\Users\ACER\.m2\repository\net\md-5\bungeecord-chat\1.20-R0.1\bungeecord-chat-1.20-R0.1.jar;C:\Users\ACER\.m2\repository\org\yaml\snakeyaml\2.0\snakeyaml-2.0.jar;C:\Users\ACER\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\ACER\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\ACER\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\ACER\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\ACER\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\ACER\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\ACER\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\ACER\.m2\repository\org\slf4j\slf4j-api\2.0.5\slf4j-api-2.0.5.jar;C:\Users\ACER\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\ACER\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +32,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\ACER\AppData\Local\Temp\surefire4895620485969153200\surefirebooter-20240329111012741_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\ACER\AppData\Local\Temp\surefire8212261902972729921\surefirebooter-20240402135509346_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.7+8-LTS-224"/>
@@ -43,12 +45,14 @@
     <property name="localRepository" value="C:\Users\ACER\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\ACER\AppData\Local\Temp\"/>
+    <property name="sonar.token" value="sqp_8afef684c92cd29721443b46656fd650c1d35928"/>
     <property name="java.version" value="17.0.7"/>
     <property name="user.dir" value="C:\Users\ACER\Desktop\TFM\Events"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="native.encoding" value="Cp1252"/>
+    <property name="sonar.projectKey" value="Events"/>
     <property name="java.library.path" value="C:\Program Files\AdoptOpenJDK\jdk-17.0.7\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\AdoptOpenJDK\jdk-17.0.7;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Pulse Secure\VC142.CRT\X64\;C:\Program Files (x86)\Pulse Secure\VC142.CRT\X86\;C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Microsoft SQL Server\110\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PrivateAssemblies\;C:\Program Files (x86)\Microsoft SQL Server\110\DTS\Binn\;C:\Program Files\dotnet\;C:\Program Files\apache-maven-3.9.0\bin;C:\Program Files\WorldPainter;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Program Files\nodejs\;C:\apache-jena-4.7.0\bat;C:\Program Files\JetBrains\CLion 2023.2.2\bin;;C:\Users\ACER\AppData\Roaming\npm;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="java.vendor" value="Oracle Corporation"/>
@@ -60,75 +64,75 @@
   <testcase name="testPlanByMiningLimitProbability" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>
   <testcase name="testPlanByGatheringBeyondLimitProbability" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>
   <testcase name="testPlanByMiningMatch" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>
-  <testcase name="testPlanByMiningStudy" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0.596">
+  <testcase name="testPlanByMiningStudy" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="6.163">
     <system-out><![CDATA[----------------------MiningEvent-------------------------------
 -------------------------------------------------------------------
 |  Current Success  |  Samples  |  Avg. Samples |  Total Samples |
 -------------------------------------------------------------------
-|         1         |       2  |          2,00 |              2  |
-|         2         |     707  |        354,50 |            709  |
-|         3         |     393  |        367,33 |           1102  |
-|         4         |     217  |        329,75 |           1319  |
-|        88         |     195  |        505,10 |          44449  |
-|        89         |    2521  |        527,75 |          46970  |
-|        90         |    3729  |        563,32 |          50699  |
-|        91         |   49028  |       1095,90 |          99727  |
-|        92         |   20276  |       1304,38 |         120003  |
-|       198         |   20205  |      21817,22 |        4319809  |
-|       199         |   32260  |      21869,69 |        4352069  |
-|       200         |   71216  |      22116,43 |        4423285  |
-|       201         |   18904  |      22100,44 |        4442189  |
-|       202         |   13697  |      22058,84 |        4455886  |
+|         1         |      66  |         66,00 |             66  |
+|         2         |     148  |        107,00 |            214  |
+|         3         |      85  |         99,67 |            299  |
+|         4         |     220  |        129,75 |            519  |
+|        88         |    1510  |        686,56 |          60417  |
+|        89         |    7474  |        762,82 |          67891  |
+|        90         |    7791  |        840,91 |          75682  |
+|        91         |   34088  |       1206,26 |         109770  |
+|        92         |   57338  |       1816,39 |         167108  |
+|       198         |    6766  |      18960,83 |        3754245  |
+|       199         |   24596  |      18989,15 |        3778841  |
+|       200         |    1054  |      18899,48 |        3779895  |
+|       201         |   15778  |      18883,95 |        3795673  |
+|       202         |  115068  |      19360,10 |        3910741  |
 ]]></system-out>
   </testcase>
   <testcase name="testPlanByMiningBeyondLimitProbability" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>
-  <testcase name="testPlanByGatheringBasicProbability" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>
+  <testcase name="testPlanByGatheringBasicProbability" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0.001"/>
   <testcase name="testPlanByMiningBasicProbability" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>
-  <testcase name="testPlanByGatheringMatch" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>
-  <testcase name="testPlanByGatheringStudy" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0.201">
+  <testcase name="testPlanByGatheringMatch" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0.001"/>
+  <testcase name="testPlanByGatheringStudy" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="2.357">
     <system-out><![CDATA[----------------------GatheringEvent-------------------------------
 -------------------------------------------------------------------
 |  Current Success  |  Samples  |  Avg. Samples |  Total Samples |
 -------------------------------------------------------------------
-|         1         |      52  |         52,00 |             52  |
-|         2         |     190  |        121,00 |            242  |
-|         3         |      65  |        102,33 |            307  |
-|         4         |     115  |        105,50 |            422  |
-|        88         |    7702  |        601,11 |          52898  |
-|        89         |      61  |        595,04 |          52959  |
-|        90         |    4239  |        635,53 |          57198  |
-|        91         |   10923  |        748,58 |          68121  |
-|        92         |     456  |        745,40 |          68577  |
-|       198         |   10859  |       6468,49 |        1280762  |
-|       199         |   13015  |       6501,39 |        1293777  |
-|       200         |    8438  |       6511,08 |        1302215  |
-|       201         |    5638  |       6506,73 |        1307853  |
-|       202         |    4680  |       6497,69 |        1312533  |
+|         1         |     405  |        405,00 |            405  |
+|         2         |      35  |        220,00 |            440  |
+|         3         |      38  |        159,33 |            478  |
+|         4         |     317  |        198,75 |            795  |
+|        88         |    6050  |        702,93 |          61858  |
+|        89         |     410  |        699,64 |          62268  |
+|        90         |   26559  |        986,97 |          88827  |
+|        91         |   19693  |       1192,53 |         108520  |
+|        92         |    1730  |       1198,37 |         110250  |
+|       198         |    3990  |       7077,25 |        1401296  |
+|       199         |    7922  |       7081,50 |        1409218  |
+|       200         |   64461  |       7368,40 |        1473679  |
+|       201         |     784  |       7335,64 |        1474463  |
+|       202         |   57885  |       7585,88 |        1532348  |
 ]]></system-out>
   </testcase>
   <testcase name="testPlanByGatheringBeforeLimitProbability" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>
   <testcase name="testPlanByHuntingBeyondLimitProbability" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>
   <testcase name="testPlanByHuntingLimitProbability" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>
-  <testcase name="testPlanByHuntingMatch" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>
-  <testcase name="testPlanByHuntingStudy" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0.089">
+  <testcase name="testPlanByHuntingMatch" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0.001"/>
+  <testcase name="testPlanByHuntingStudy" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0.267">
     <system-out><![CDATA[----------------------HuntingEvent-------------------------------
 -------------------------------------------------------------------
 |  Current Success  |  Samples  |  Avg. Samples |  Total Samples |
 -------------------------------------------------------------------
-|         1         |     391  |        391,00 |            391  |
-|         2         |     288  |        339,50 |            679  |
-|         3         |      71  |        250,00 |            750  |
-|         4         |     107  |        214,25 |            857  |
-|        88         |    1090  |        340,94 |          30003  |
-|        89         |     421  |        341,84 |          30424  |
-|        90         |      95  |        339,10 |          30519  |
-|        91         |      74  |        336,19 |          30593  |
-|        92         |     925  |        342,59 |          31518  |
-|       198         |     789  |        652,86 |         129267  |
-|       199         |     113  |        650,15 |         129380  |
-|       200         |    1184  |        652,82 |         130564  |
-|       201         |    1069  |        654,89 |         131633  |
-|       202         |    1908  |        661,09 |         133541  |
+|         1         |      62  |         62,00 |             62  |
+|         2         |     304  |        183,00 |            366  |
+|         3         |     128  |        164,67 |            494  |
+|         4         |      56  |        137,50 |            550  |
+|        88         |     142  |        439,32 |          38660  |
+|        89         |     643  |        441,61 |          39303  |
+|        90         |     561  |        442,93 |          39864  |
+|        91         |     610  |        444,77 |          40474  |
+|        92         |    1983  |        461,49 |          42457  |
+|       198         |     486  |        681,24 |         134886  |
+|       199         |    1198  |        683,84 |         136084  |
+|       200         |    2473  |        692,79 |         138557  |
+|       201         |     413  |        691,39 |         138970  |
+|       202         |     291  |        689,41 |         139261  |
 ]]></system-out>
   </testcase>
   <testcase name="testPlanByMiningBeforeLimitProbability" classname="com.daarthy.events.app.modules.events.plans.PlanTest" time="0"/>

@@ -44,18 +44,12 @@ public class DataSourceLocatorImpl {
     }
 
     public Connection getConnection() throws SQLException {
-        System.out.println(dataSource.getHikariPoolMXBean().getActiveConnections());
         return dataSource.getConnection();
     }
 
     private void loadDatabaseProperties() throws IOException {
         properties = new Properties();
         InputStream input = getClass().getClassLoader().getResourceAsStream("database.properties");
-
-        if (input == null) {
-            System.out.println("Sorry, unable to find database.properties");
-            return;
-        }
 
         properties.load(input);
     }

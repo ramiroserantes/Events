@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Events</a> &gt; <a href="index.source.html" class="el_package">com.daarthy.events.app.services</a> &gt; <span class="el_source">DataServiceImpl.java</span></div><h1>DataServiceImpl.java</h1><pre class="source lang-java linenums">package com.daarthy.events.app.services;
+
+import com.daarthy.events.Events;
+import com.daarthy.events.app.modules.guilds.Guild;
+import com.daarthy.events.persistence.guild_dao.GuildDao;
+import com.daarthy.events.persistence.player_dao.PlayerDao;
+import com.daarthy.events.persistence.player_dao.PlayerData;
+import com.zaxxer.hikari.HikariDataSource;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+public class DataServiceImpl implements DataService {
+
+<span class="fc" id="L18">    private HashMap&lt;UUID, PlayerData&gt; playersData = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L19">    private HashMap&lt;Long, Guild&gt; guildsData = new HashMap&lt;&gt;();</span>
+
+    private static final String ERROR = &quot;DB Error&quot;;
+
+    private final HikariDataSource dataSource;
+    private final PlayerDao playerDao;
+    private final GuildDao guildDao;
+
+<span class="fc" id="L27">    public DataServiceImpl(HikariDataSource dataSource, PlayerDao playerDao, GuildDao guildDao) {</span>
+<span class="fc" id="L28">        this.dataSource = dataSource;</span>
+<span class="fc" id="L29">        this.playerDao = playerDao;</span>
+<span class="fc" id="L30">        this.guildDao = guildDao;</span>
+<span class="fc" id="L31">    }</span>
+
+    @Override
+    public PlayerData getPlayerData(UUID playerId) {
+<span class="fc" id="L35">        return playersData.getOrDefault(playerId, null);</span>
+    }
+
+    @Override
+    public void createGuild(UUID playerId, Long guildId, String kName) {
+
+<span class="fc" id="L41">        try (Connection connection = dataSource.getConnection()) {</span>
+
+<span class="fc" id="L43">            PlayerData playerData = playersData.get(playerId);</span>
+<span class="fc" id="L44">            guildsData.get(playerData.getGuildId()).modifyWatch(-1);</span>
+<span class="fc" id="L45">            removeGuild(playerData.getGuildId());</span>
+<span class="fc" id="L46">            playerData.setGuildId(guildId);</span>
+
+<span class="fc" id="L48">            Guild guild = guildDao.createGuild(guildId, kName, connection);</span>
+<span class="fc" id="L49">            guildsData.put(guildId, guild);</span>
+
+<span class="fc" id="L51">            savePlayer(playerId);</span>
+
+<span class="nc" id="L53">        } catch (SQLException e) {</span>
+<span class="nc" id="L54">            Events.logInfo(ERROR);</span>
+<span class="fc" id="L55">        }</span>
+<span class="fc" id="L56">    }</span>
+
+    @Override
+    public Guild getGuild(Long guildId) {
+<span class="fc" id="L60">        return guildsData.getOrDefault(guildId, null);</span>
+    }
+
+    @Override
+    public Guild findDBGuild(Long guildId) {
+
+<span class="fc" id="L66">        Guild guild = guildsData.getOrDefault(guildId, null);</span>
+
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if(guild == null) {</span>
+
+<span class="fc" id="L70">            try(Connection connection = dataSource.getConnection()) {</span>
+
+<span class="fc" id="L72">                guild = guildDao.findGuildById(guildId, connection);</span>
+
+<span class="nc" id="L74">            } catch (SQLException e) {</span>
+<span class="nc" id="L75">                Events.logInfo(&quot;Error on guild retrieve findDBGuild&quot;);</span>
+<span class="fc" id="L76">            }</span>
+        }
+<span class="fc" id="L78">        return guild;</span>
+    }
+
+    @Override
+    public void savePlayer(UUID playerId) {
+
+<span class="fc" id="L84">        try (Connection connection = dataSource.getConnection()) {</span>
+<span class="fc" id="L85">            playerDao.savePlayer(playerId, playersData.get(playerId), connection);</span>
+<span class="nc" id="L86">        } catch (SQLException e) {</span>
+<span class="nc" id="L87">            Events.logInfo(ERROR);</span>
+<span class="fc" id="L88">        }</span>
+<span class="fc" id="L89">    }</span>
+
+    @Override
+    public void saveGuild(Long guildId) {
+
+<span class="fc" id="L94">        try (Connection connection = dataSource.getConnection()) {</span>
+
+<span class="fc" id="L96">            Guild guild = guildsData.get(guildId);</span>
+
+<span class="fc" id="L98">            guildDao.saveGuild(guildId, guild, connection);</span>
+
+<span class="nc" id="L100">        } catch (SQLException e) {</span>
+<span class="nc" id="L101">            Events.logInfo(ERROR);</span>
+<span class="fc" id="L102">        }</span>
+<span class="fc" id="L103">    }</span>
+
+    @Override
+    public void removePlayer(UUID playerId) {
+<span class="fc" id="L107">        savePlayer(playerId);</span>
+<span class="fc" id="L108">        guildsData.get(playersData.get(playerId).getGuildId()).modifyWatch(-1);</span>
+<span class="fc" id="L109">        playersData.remove(playerId);</span>
+<span class="fc" id="L110">    }</span>
+
+    @Override
+    public void removeGuild(Long guildId) {
+
+<span class="fc" id="L115">        Guild guild = guildsData.get(guildId);</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        if(!guild.isWatched()) {</span>
+<span class="fc" id="L117">            saveGuild(guildId);</span>
+<span class="fc" id="L118">            guildsData.remove(guildId);</span>
+        }
+<span class="fc" id="L120">    }</span>
+
+    @Override
+    public void deleteGuild(Long guildId) {
+
+<span class="fc" id="L125">        guildsData.remove(guildId);</span>
+<span class="fc" id="L126">        try (Connection connection = dataSource.getConnection()){</span>
+
+<span class="fc" id="L128">            removePlayersFromCacheGuild(guildId);</span>
+<span class="fc" id="L129">            playerDao.removeAllPlayersFromGuild(guildId, connection);</span>
+<span class="fc" id="L130">            guildDao.deleteGuild(guildId, connection);</span>
+
+<span class="nc" id="L132">        } catch (SQLException e) {</span>
+<span class="nc" id="L133">            Events.logInfo(ERROR);</span>
+<span class="fc" id="L134">        }</span>
+<span class="fc" id="L135">    }</span>
+
+    @Override
+    public void initPlayer(UUID playerId) {
+<span class="fc" id="L139">        try (Connection connection = dataSource.getConnection()) {</span>
+
+<span class="fc" id="L141">            PlayerData playerData = playerDao.findPlayerData(playerId, connection);</span>
+<span class="fc bfc" id="L142" title="All 2 branches covered.">            if (playerData == null) {</span>
+<span class="fc" id="L143">                playerData = playerDao.createPlayer(playerId, connection);</span>
+            }
+<span class="fc" id="L145">            playersData.put(playerId, playerData);</span>
+
+<span class="fc" id="L147">            Long guildId = playerData.getGuildId();</span>
+
+<span class="fc" id="L149">            Guild guild = guildsData.getOrDefault(guildId, null);</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">            if(guild == null) {</span>
+<span class="fc" id="L151">                guildsData.put(guildId, guildDao.findGuildByPlayer(playerId, connection));</span>
+            } else {
+<span class="fc" id="L153">                guild.modifyWatch(+1);</span>
+            }
+
+<span class="nc" id="L156">        } catch (SQLException e) {</span>
+<span class="nc" id="L157">            Events.logInfo(ERROR);</span>
+<span class="fc" id="L158">        }</span>
+<span class="fc" id="L159">    }</span>
+
+    private void removePlayersFromCacheGuild(Long guildId) {
+
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        for (Map.Entry&lt;UUID, PlayerData&gt; entry : playersData.entrySet()) {</span>
+<span class="fc" id="L164">            PlayerData playerData = entry.getValue();</span>
+
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">            if (playerData.getGuildId().equals(guildId)) {</span>
+<span class="fc" id="L167">                playerData.setGuildId(Events.getBasicGuildId());</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">                if(!guildsData.containsKey(Events.getBasicGuildId())) {</span>
+<span class="fc" id="L169">                    try (Connection connection = dataSource.getConnection()) {</span>
+<span class="fc" id="L170">                        guildsData.put(Events.getBasicGuildId(), guildDao.findGuildById(Events.getBasicGuildId(),</span>
+                                connection));
+<span class="nc" id="L172">                    } catch (SQLException e) {</span>
+<span class="nc" id="L173">                        Events.logInfo(&quot;Error on retrieve of Basic Guild&quot;);</span>
+<span class="fc" id="L174">                    }</span>
+                }
+            }
+
+<span class="fc" id="L178">        }</span>
+<span class="fc" id="L179">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

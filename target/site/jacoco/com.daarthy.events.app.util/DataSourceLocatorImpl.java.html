@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataSourceLocatorImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Events</a> &gt; <a href="index.source.html" class="el_package">com.daarthy.events.app.util</a> &gt; <span class="el_source">DataSourceLocatorImpl.java</span></div><h1>DataSourceLocatorImpl.java</h1><pre class="source lang-java linenums">package com.daarthy.events.app.util;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class DataSourceLocatorImpl {
+
+    private static DataSourceLocatorImpl instance;
+    private HikariDataSource dataSource;
+    private Properties properties;
+
+<span class="nc" id="L18">    public DataSourceLocatorImpl() throws IOException {</span>
+<span class="nc" id="L19">        loadDatabaseProperties();</span>
+<span class="nc" id="L20">        initializeDataSource();</span>
+<span class="nc" id="L21">    }</span>
+
+    public static synchronized DataSourceLocatorImpl getInstance() throws IOException {
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if (instance == null) {</span>
+<span class="nc" id="L25">            instance = new DataSourceLocatorImpl();</span>
+        }
+<span class="nc" id="L27">        return instance;</span>
+    }
+
+    private void initializeDataSource() {
+<span class="nc" id="L31">        HikariConfig config = new HikariConfig();</span>
+<span class="nc" id="L32">        config.setJdbcUrl(properties.getProperty(&quot;database.url&quot;));</span>
+<span class="nc" id="L33">        config.setUsername(properties.getProperty(&quot;database.username&quot;));</span>
+<span class="nc" id="L34">        config.setPassword(properties.getProperty(&quot;database.password&quot;));</span>
+<span class="nc" id="L35">        config.addDataSourceProperty(&quot;serverTimezone&quot;, &quot;UTC&quot;);</span>
+
+<span class="nc" id="L37">        config.setMaximumPoolSize(20);</span>
+
+<span class="nc" id="L39">        this.dataSource = new HikariDataSource(config);</span>
+<span class="nc" id="L40">    }</span>
+
+    public HikariDataSource getDataSource() {
+<span class="nc" id="L43">        return dataSource;</span>
+    }
+
+    public Connection getConnection() throws SQLException {
+<span class="nc" id="L47">        return dataSource.getConnection();</span>
+    }
+
+    private void loadDatabaseProperties() throws IOException {
+<span class="nc" id="L51">        properties = new Properties();</span>
+<span class="nc" id="L52">        InputStream input = getClass().getClassLoader().getResourceAsStream(&quot;database.properties&quot;);</span>
+
+<span class="nc" id="L54">        properties.load(input);</span>
+<span class="nc" id="L55">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

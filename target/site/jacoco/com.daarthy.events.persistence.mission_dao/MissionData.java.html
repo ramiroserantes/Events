@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MissionData.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Events</a> &gt; <a href="index.source.html" class="el_package">com.daarthy.events.persistence.mission_dao</a> &gt; <span class="el_source">MissionData.java</span></div><h1>MissionData.java</h1><pre class="source lang-java linenums">package com.daarthy.events.persistence.mission_dao;
+
+import java.time.LocalDate;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class MissionData {
+
+    private Long missionId;
+    private Long guildId;
+    private String title;
+    private Grade grade;
+    private LocalDate expiration;
+    private Integer maxCompletions;
+
+    // References to current Players on this mission. NULL When retrieved by guild.
+    private Integer currentPlayers;
+<span class="pc" id="L18">    private Lock playerIncreaseLock = new ReentrantLock();</span>
+
+<span class="fc" id="L20">    public MissionData() {}</span>
+
+<span class="fc" id="L22">    public MissionData(Long missionId, Long guildId, String title, String grade, LocalDate expiration, Integer maxCompletions) {</span>
+<span class="fc" id="L23">        this.missionId = missionId;</span>
+<span class="fc" id="L24">        this.guildId = guildId;</span>
+<span class="fc" id="L25">        this.title = title;</span>
+<span class="fc" id="L26">        this.grade = Grade.valueOf(grade);</span>
+<span class="fc" id="L27">        this.expiration = expiration;</span>
+<span class="fc" id="L28">        this.maxCompletions = maxCompletions;</span>
+<span class="fc" id="L29">    }</span>
+
+    public MissionData(Long missionId, Long guildId, String title, String grade,
+<span class="nc" id="L32">                       LocalDate expiration, Integer maxCompletions, Integer currentPlayers) {</span>
+<span class="nc" id="L33">        this.missionId = missionId;</span>
+<span class="nc" id="L34">        this.guildId = guildId;</span>
+<span class="nc" id="L35">        this.title = title;</span>
+<span class="nc" id="L36">        this.grade = Grade.valueOf(grade);</span>
+<span class="nc" id="L37">        this.expiration = expiration;</span>
+<span class="nc" id="L38">        this.maxCompletions = maxCompletions;</span>
+<span class="nc" id="L39">        this.currentPlayers = currentPlayers;</span>
+<span class="nc" id="L40">    }</span>
+
+    public Long getMissionId() {
+<span class="fc" id="L43">        return missionId;</span>
+    }
+
+    public Long getGuildId() {
+<span class="fc" id="L47">        return guildId;</span>
+    }
+
+    public String getTitle() {
+<span class="fc" id="L51">        return title;</span>
+    }
+
+    public Grade getGrade() {
+<span class="fc" id="L55">        return grade;</span>
+    }
+
+    public void setMissionId(Long missionId) {
+<span class="nc" id="L59">        this.missionId = missionId;</span>
+<span class="nc" id="L60">    }</span>
+
+    public void setGuildId(Long guildId) {
+<span class="fc" id="L63">        this.guildId = guildId;</span>
+<span class="fc" id="L64">    }</span>
+
+    public void setTitle(String title) {
+<span class="fc" id="L67">        this.title = title;</span>
+<span class="fc" id="L68">    }</span>
+
+    public void setGrade(String grade) {
+<span class="fc" id="L71">        this.grade = Grade.valueOf(grade);</span>
+<span class="fc" id="L72">    }</span>
+
+    public LocalDate getExpiration() {
+<span class="fc" id="L75">        return expiration;</span>
+    }
+
+    public void setExpiration(LocalDate expiration) {
+<span class="fc" id="L79">        this.expiration = expiration;</span>
+<span class="fc" id="L80">    }</span>
+
+    public void setMaxCompletions(Integer maxCompletions) {
+<span class="fc" id="L83">        this.maxCompletions = maxCompletions;</span>
+<span class="fc" id="L84">    }</span>
+
+    public void setCurrentPlayers(Integer currentPlayers) {
+<span class="fc" id="L87">        this.currentPlayers = currentPlayers;</span>
+<span class="fc" id="L88">    }</span>
+
+    public Integer getMaxCompletions() {
+<span class="fc" id="L91">        return maxCompletions;</span>
+    }
+
+    public Integer getCurrentPlayers() {
+<span class="fc" id="L95">        return currentPlayers;</span>
+
+    }
+
+    public boolean addPlayer(int guildCapacity) {
+<span class="fc" id="L100">        playerIncreaseLock.lock();</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if(maxCompletions == null) {</span>
+<span class="nc" id="L102">            currentPlayers++;</span>
+<span class="nc" id="L103">            playerIncreaseLock.unlock();</span>
+<span class="nc" id="L104">            return true;</span>
+        }
+
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        if(currentPlayers &gt;= (maxCompletions + guildCapacity)) {</span>
+<span class="fc" id="L108">            playerIncreaseLock.unlock();</span>
+<span class="fc" id="L109">            return false;</span>
+        } else {
+<span class="fc" id="L111">            currentPlayers++;</span>
+<span class="fc" id="L112">            playerIncreaseLock.unlock();</span>
+<span class="fc" id="L113">            return true;</span>
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

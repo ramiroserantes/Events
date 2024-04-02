@@ -1,12 +1,12 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.app.modules.guilds.GuildCache;
-import com.daarthy.events.persistence.SqlConnectionsTest;
-import com.daarthy.events.persistence.guildDao.GuildDao;
-import com.daarthy.events.persistence.guildDao.GuildJdbc;
-import com.daarthy.events.persistence.playerDao.PlayerDao;
-import com.daarthy.events.persistence.playerDao.PlayerData;
-import com.daarthy.events.persistence.playerDao.PlayerJdbc;
+import com.daarthy.events.app.modules.guilds.Guild;
+import com.daarthy.events.persistence.SqlConnections;
+import com.daarthy.events.persistence.guild_dao.GuildDao;
+import com.daarthy.events.persistence.guild_dao.GuildJdbc;
+import com.daarthy.events.persistence.player_dao.PlayerDao;
+import com.daarthy.events.persistence.player_dao.PlayerData;
+import com.daarthy.events.persistence.player_dao.PlayerJdbc;
 import com.zaxxer.hikari.HikariDataSource;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class DataServiceTest {
 
-    private HikariDataSource dataSource = SqlConnectionsTest.getInstance().getDataSource();
+    private HikariDataSource dataSource = SqlConnections.getInstance().getDataSource();
 
     private GuildDao guildDao = new GuildJdbc();
     private PlayerDao playerDao = new PlayerJdbc();
@@ -26,17 +26,17 @@ public class DataServiceTest {
     public DataServiceTest() throws IOException {
     }
 
-
     @Test
     public void testDataServiceByPlayer() {
 
         UUID playerId = UUID.randomUUID();
 
-        PlayerData playerData = dataService.getPlayerData(playerId);
+        dataService.initPlayer(playerId);
 
-        assertEquals(playerData.getGuildId(), 1, 0.0);
-        assertEquals(playerData.getAmpBasicRewards(), 0, 0.0);
-        assertEquals(playerData.getMaxMissions(), 3, 0);
+        PlayerData playerData = dataService.getPlayerData(playerId);
+        assertEquals(1, playerData.getGuildId(), 0.0);
+        assertEquals(0,playerData.getAmpBasicRewards(), 0.0);
+        assertEquals(3,playerData.getMaxMissions(), 0);
 
     }
 
@@ -44,13 +44,13 @@ public class DataServiceTest {
     public void testDataServiceByGuild() {
 
         UUID playerId = UUID.randomUUID();
-        PlayerData playerData = dataService.getPlayerData(playerId);
+        dataService.initPlayer(playerId);
 
-        GuildCache guildCache = dataService.getGuildByPlayer(playerId, playerData);
+        Guild guild = dataService.getGuild(1L);
 
-        assertEquals(guildCache.getGuildLevel().getMaxLevel(), 0);
-        assertEquals(guildCache.getGuildLevel().getCurrentExp(), 0, 0.0);
-        assertEquals(guildCache.getLevelUpMod(), 0, 0.0);
+        assertEquals(0, guild.getLevel().getMaxLevel());
+        assertEquals(0, guild.getLevel().getCurrentExp(), 0.0);
+        assertEquals(0, guild.getLevel().getLevelUpMod(), 0.0);
 
     }
 
@@ -58,37 +58,122 @@ public class DataServiceTest {
     public void testDataServiceBySaveAndRemovePlayer() {
 
         UUID playerId = UUID.randomUUID();
+        dataService.initPlayer(playerId);
 
         PlayerData playerData = dataService.getPlayerData(playerId);
         playerData.setMaxMissions(10);
         dataService.savePlayer(playerId);
-        dataService.removePlayerFromCache(playerId);
+        dataService.removePlayer(playerId);
 
+        dataService.initPlayer(playerId);
         PlayerData finalPlayerData = dataService.getPlayerData(playerId);
-        assertEquals(finalPlayerData.getMaxMissions(), 10, 0);
+        assertEquals(10, finalPlayerData.getMaxMissions(), 0);
 
+    }
+
+    @Test
+    public void testDataServiceBySaveAndRemoveGuild() {
+
+        UUID playerId = UUID.randomUUID();
+        UUID playerId2 = UUID.randomUUID();
+        dataService.initPlayer(playerId);
+        dataService.initPlayer(playerId2);
+
+        dataService.removePlayer(playerId);
+        dataService.removeGuild(1L);
+
+        assertNotNull(dataService.getGuild(1L));
+    }
+
+    @Test
+    public void testDataServiceBySaveAndRemoveGuildAfter() {
+
+        UUID playerId = UUID.randomUUID();
+        UUID playerId2 = UUID.randomUUID();
+        dataService.initPlayer(playerId);
+        dataService.initPlayer(playerId2);
+
+        dataService.removePlayer(playerId);
+        dataService.removePlayer(playerId2);
+        dataService.removeGuild(1L);
+
+        assertNull(dataService.getGuild(1L));
+    }
+
+    @Test
+    public void testDataServiceByCreateAndDeleteGuild2() {
+
+        UUID playerId = UUID.randomUUID();
+        dataService.initPlayer(playerId);
+
+        String kName = "Kname";
+        Long guildId = 2L;
+
+        dataService.createGuild(playerId, guildId, kName);
+
+        dataService.deleteGuild(2L);
+
+        assertNotNull(dataService.getGuild(1L));
     }
 
     @Test
     public void testDataServiceByCreateAndDeleteGuild() {
 
         UUID playerId = UUID.randomUUID();
+        dataService.initPlayer(playerId);
+
         PlayerData playerData = dataService.getPlayerData(playerId);
         String kName = "Kname";
         Long guildId = 2L;
 
-        dataService.createGuild(guildId, kName);
-        playerData.setGuildId(2L);
-        dataService.savePlayer(playerId);
+        dataService.createGuild(playerId, guildId, kName);
 
-        GuildCache guildCache = dataService.getGuildByPlayer(playerId, playerData);
+        Guild guild = dataService.getGuild(2L);
 
-        assertEquals(guildCache.getGuildLevel().getMaxLevel(), 6);
-        assertEquals(guildCache.getkName(), kName);
-        assertEquals(guildCache.getLevelUpMod(), 0,0.0);
+        assertEquals(6, guild.getLevel().getMaxLevel());
+        assertEquals(kName, guild.getkName());
+        assertEquals(0, guild.getLevel().getLevelUpMod(),0.0);
 
         dataService.deleteGuild(2L);
 
-        assertEquals(playerData.getGuildId(), 1L, 0.0);
+        assertEquals(1L, playerData.getGuildId(), 0.0);
+    }
+
+    @Test
+    public void testDateServiceGetGuildDBCache() {
+        UUID playerId = UUID.randomUUID();
+        dataService.initPlayer(playerId);
+
+        String kName = "Kname";
+        Long guildId = 2L;
+
+        dataService.createGuild(playerId, guildId, kName);
+
+        assertNotNull(dataService.findDBGuild(guildId));
+
+        dataService.deleteGuild(2L);
+    }
+    @Test
+    public void testDateServiceGetGuildDBNoCache() {
+        UUID playerId = UUID.randomUUID();
+        dataService.initPlayer(playerId);
+
+        String kName = "Kname";
+        Long guildId = 2L;
+
+        dataService.createGuild(playerId, guildId, kName);
+
+        dataService.removePlayer(playerId);
+        dataService.removeGuild(guildId);
+
+        assertNotNull(dataService.findDBGuild(guildId));
+
+        dataService.deleteGuild(2L);
+    }
+
+    @Test
+    public void testDateServiceGetGuildDBNull() {
+
+        assertNull(dataService.getGuild(293L));
     }
 }

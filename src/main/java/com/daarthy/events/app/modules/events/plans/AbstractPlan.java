@@ -1,30 +1,30 @@
 package com.daarthy.events.app.modules.events.plans;
 
-import com.daarthy.events.persistence.missionDao.ActionType;
+import com.daarthy.events.persistence.mission_dao.ActionType;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public abstract class AbstractPlan implements Plan {
 
     private List<ActionType> activities = new ArrayList<>();
+    private SecureRandom random = new SecureRandom();
 
-    public AbstractPlan() {
+    protected AbstractPlan() {
         setUpActivities(activities);
     }
 
+    @Override
     public boolean applyPlan(int earnedAmount) {
-        Random random = new Random();
         double value = random.nextDouble();
         value = Math.round(value * 1e8) / 1e8;
         return value < getTemplatedProbability(earnedAmount);
     }
-
+    @Override
     public double getProbability(int earnedAmount) {
         return getTemplatedProbability(earnedAmount) * 100;
     }
-
 
     @Override
     public boolean matchActivity(ActionType actionType) {

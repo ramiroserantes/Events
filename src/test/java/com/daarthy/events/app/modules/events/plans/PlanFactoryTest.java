@@ -7,20 +7,13 @@ import static org.junit.Assert.*;
 public class PlanFactoryTest {
 
     @Test
-    public void testPlanFactoryByHunting() {
+    public void testPlanFactory() {
         Plan plan = new PlanFactoryImpl().createEventPlan("HuntingEvent");
         assertNotNull(plan);
-    }
-
-    @Test
-    public void testPlanFactoryByMining() {
-        Plan plan = new PlanFactoryImpl().createEventPlan("MiningEvent");
+        plan = new PlanFactoryImpl().createEventPlan("MiningEvent");
+        assertNotNull(plan);
+        plan = new PlanFactoryImpl().createEventPlan("GatheringEvent");
         assertNotNull(plan);
     }
 
-    @Test
-    public void testPlanFactoryByGathering() {
-        Plan plan = new PlanFactoryImpl().createEventPlan("GatheringEvent");
-        assertNotNull(plan);
-    }
 }

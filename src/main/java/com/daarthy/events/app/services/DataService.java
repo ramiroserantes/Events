@@ -1,7 +1,7 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.app.modules.guilds.GuildCache;
-import com.daarthy.events.persistence.playerDao.PlayerData;
+import com.daarthy.events.app.modules.guilds.Guild;
+import com.daarthy.events.persistence.player_dao.PlayerData;
 
 import java.util.UUID;
 
@@ -9,18 +9,30 @@ public interface DataService {
 
     PlayerData getPlayerData(UUID playerId);
 
-    Long createGuild(Long guildId, String kName);
+    Guild getGuild(Long guildId);
 
-    GuildCache getGuildByPlayer(UUID playerId, PlayerData playerData);
+    Guild findDBGuild(Long guildId);
+
+    void createGuild(UUID playerId, Long guildId, String kName);
+
+    void deleteGuild(Long guildId);
+
+    /**
+     *
+     * Cache Ops
+     *
+     * **/
+
+    void initPlayer(UUID playerId);
 
     void savePlayer(UUID playerId);
 
     void saveGuild(Long guildId);
 
-    void removePlayerFromCache(UUID playerId);
+    void removePlayer(UUID playerId);
 
-    void removeGuildFromCache(Long guildId);
+    void removeGuild(Long guildId);
 
-    void deleteGuild(Long guildId);
+
 
 }
