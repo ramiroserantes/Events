@@ -28,17 +28,6 @@ public class MissionData {
         this.maxCompletions = maxCompletions;
     }
 
-    public MissionData(Long missionId, Long guildId, String title, String grade,
-                       LocalDate expiration, Integer maxCompletions, Integer currentPlayers) {
-        this.missionId = missionId;
-        this.guildId = guildId;
-        this.title = title;
-        this.grade = Grade.valueOf(grade);
-        this.expiration = expiration;
-        this.maxCompletions = maxCompletions;
-        this.currentPlayers = currentPlayers;
-    }
-
     public Long getMissionId() {
         return missionId;
     }
@@ -53,10 +42,6 @@ public class MissionData {
 
     public Grade getGrade() {
         return grade;
-    }
-
-    public void setMissionId(Long missionId) {
-        this.missionId = missionId;
     }
 
     public void setGuildId(Long guildId) {

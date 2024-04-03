@@ -42,62 +42,67 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
 
 <span class="fc" id="L43">            MissionData missionData = missionDao.findMissionById(missionId, connection);</span>
 
-<span class="pc bpc" id="L45" title="1 of 2 branches missed.">            if (missionDao.wasMissionAcceptedByPlayer(missionData.getMissionId(), playerId, connection)) {</span>
-<span class="nc" id="L46">                return result.append(&quot;&gt;&gt; You have already accepted this mission.&quot;);</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            if(missionData.getExpiration().isBefore(LocalDate.now())) {</span>
+<span class="fc" id="L46">                return result.append(&quot;&gt;&gt; This mission is expired.&quot;);</span>
             }
 
-<span class="fc bfc" id="L49" title="All 2 branches covered.">            if (missionDao.findAcceptedMissions(playerId, connection) &gt;= playerData.getMaxMissions()) {</span>
-<span class="fc" id="L50">                return result.append(&quot;&gt;&gt; Max missions reached today.&quot;);</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">            if (missionDao.wasMissionAcceptedByPlayer(missionData.getMissionId(), playerId, connection)) {</span>
+<span class="nc" id="L50">                return result.append(&quot;&gt;&gt; You have already accepted this mission.&quot;);</span>
             }
 
-<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (!missionData.addPlayer(guild.getGuildModifiers().getAmpMissions())) {</span>
-<span class="fc" id="L54">                return result.append(&quot;&gt;&gt; Max Mission capacity reached&quot;);</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (missionDao.findAcceptedMissions(playerId, connection) &gt;= playerData.getMaxMissions()) {</span>
+<span class="fc" id="L54">                return result.append(&quot;&gt;&gt; Max missions reached today.&quot;);</span>
             }
 
-<span class="fc" id="L57">            missionDao.saveMissionStatus(playerId, missionData.getMissionId(), MissionStatus.ACCEPTED, connection);</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            if (!missionData.addPlayer(guild.getGuildModifiers().getAmpMissions())) {</span>
+<span class="fc" id="L58">                return result.append(&quot;&gt;&gt; Max Mission capacity reached&quot;);</span>
+            }
 
-<span class="fc" id="L59">            List&lt;ObjectiveData&gt; missionObjs = missionDao.findMissionObjectivesByGuild(missionId, connection);</span>
 
-<span class="fc bfc" id="L61" title="All 2 branches covered.">            for(ObjectiveData obj : missionObjs) {</span>
+<span class="fc" id="L62">            missionDao.saveMissionStatus(playerId, missionData.getMissionId(), MissionStatus.ACCEPTED, connection);</span>
 
-<span class="fc" id="L63">                Objective objective = objectives.getOrDefault(obj.getObjectiveId(), null);</span>
+<span class="fc" id="L64">            List&lt;ObjectiveData&gt; missionObjs = missionDao.findMissionObjectivesByGuild(missionId, connection);</span>
 
-<span class="fc bfc" id="L65" title="All 2 branches covered.">                if(objective == null) {</span>
-<span class="fc" id="L66">                    objective = new Objective(missionId, missionData.getExpiration(), missionData.getGrade(), obj.getTarget(), obj.getLevels()</span>
-<span class="fc" id="L67">                            , obj.getReqAmount());</span>
-<span class="fc" id="L68">                    objectives.put(obj.getObjectiveId(), objective);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            for(ObjectiveData obj : missionObjs) {</span>
+
+<span class="fc" id="L68">                Objective objective = objectives.getOrDefault(obj.getObjectiveId(), null);</span>
+
+<span class="fc bfc" id="L70" title="All 2 branches covered.">                if(objective == null) {</span>
+<span class="fc" id="L71">                    objective = new Objective(missionId, missionData.getExpiration(), missionData.getGrade(), obj.getTarget(), obj.getLevels()</span>
+<span class="fc" id="L72">                            , obj.getReqAmount());</span>
+<span class="fc" id="L73">                    objectives.put(obj.getObjectiveId(), objective);</span>
                 } else {
-<span class="fc" id="L70">                    objective.updateObserved(+1);</span>
+<span class="fc" id="L75">                    objective.updateObserved(+1);</span>
                 }
-<span class="fc" id="L72">                missionDao.saveObjectiveProgress(playerId, obj.getObjectiveId(), 0, connection);</span>
-<span class="fc" id="L73">                playersObjs.get(playerId).putObjective(obj.getObjectiveId(), objective, 0);</span>
-<span class="fc" id="L74">            }</span>
+<span class="fc" id="L77">                missionDao.saveObjectiveProgress(playerId, obj.getObjectiveId(), 0, connection);</span>
+<span class="fc" id="L78">                playersObjs.get(playerId).putObjective(obj.getObjectiveId(), objective, 0);</span>
+<span class="fc" id="L79">            }</span>
 
-<span class="fc" id="L76">            return result.append(&quot;Mission Accepted&quot;);</span>
+<span class="fc" id="L81">            return result.append(&quot;Mission Accepted&quot;);</span>
 
-<span class="pc bpc" id="L78" title="4 of 6 branches missed.">        } catch (SQLException e) {</span>
-<span class="nc" id="L79">            Events.logInfo(&quot;Error in mission acceptance DB&quot;);</span>
-<span class="nc" id="L80">            return null;</span>
+<span class="pc bpc" id="L83" title="5 of 8 branches missed.">        } catch (SQLException e) {</span>
+<span class="nc" id="L84">            Events.logInfo(&quot;Error in mission acceptance DB&quot;);</span>
+<span class="nc" id="L85">            return null;</span>
         }
     }
 
     private Map&lt;Grade, Integer&gt; getNumberMissionsPerGrade(List&lt;MissionData&gt; missionDataList) {
 
-<span class="fc" id="L86">        Map&lt;Grade, Long&gt; missionCountByGrade = missionDataList.stream()</span>
-<span class="fc" id="L87">                .collect(Collectors.groupingBy(MissionData::getGrade, Collectors.counting()));</span>
+<span class="fc" id="L91">        Map&lt;Grade, Long&gt; missionCountByGrade = missionDataList.stream()</span>
+<span class="fc" id="L92">                .collect(Collectors.groupingBy(MissionData::getGrade, Collectors.counting()));</span>
 
-<span class="fc" id="L89">        Map&lt;Grade, Integer&gt; result = new EnumMap&lt;&gt;(Grade.class);</span>
-<span class="fc" id="L90">        missionCountByGrade.forEach((grade, count) -&gt; result.put(grade, count.intValue()));</span>
+<span class="fc" id="L94">        Map&lt;Grade, Integer&gt; result = new EnumMap&lt;&gt;(Grade.class);</span>
+<span class="fc" id="L95">        missionCountByGrade.forEach((grade, count) -&gt; result.put(grade, count.intValue()));</span>
 
-<span class="fc" id="L92">        return result;</span>
+<span class="fc" id="L97">        return result;</span>
     }
 
     private int getMaxCountForGrade(Grade grade) {
-<span class="fc bfc" id="L96" title="All 4 branches covered.">        switch (grade) {</span>
-<span class="fc" id="L97">            case S: return 1;</span>
-<span class="fc" id="L98">            case A: return 2;</span>
-<span class="fc" id="L99">            case B: return 3;</span>
-<span class="fc" id="L100">            default: return Integer.MAX_VALUE;</span>
+<span class="fc bfc" id="L101" title="All 4 branches covered.">        switch (grade) {</span>
+<span class="fc" id="L102">            case S: return 1;</span>
+<span class="fc" id="L103">            case A: return 2;</span>
+<span class="fc" id="L104">            case B: return 3;</span>
+<span class="fc" id="L105">            default: return Integer.MAX_VALUE;</span>
         }
     }
 
@@ -105,110 +110,110 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
 
         List&lt;ObjectiveData&gt; objectiveDataList;
 
-<span class="fc bfc" id="L108" title="All 2 branches covered.">        for (Map.Entry&lt;MissionData, List&lt;ObjectiveData&gt;&gt; entry : mission.entrySet()) {</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        for (Map.Entry&lt;MissionData, List&lt;ObjectiveData&gt;&gt; entry : mission.entrySet()) {</span>
 
-<span class="fc" id="L110">            MissionData missionData = entry.getKey();</span>
-<span class="fc" id="L111">            objectiveDataList = entry.getValue();</span>
-<span class="fc" id="L112">            missionData.setGuildId(guildId);</span>
+<span class="fc" id="L115">            MissionData missionData = entry.getKey();</span>
+<span class="fc" id="L116">            objectiveDataList = entry.getValue();</span>
+<span class="fc" id="L117">            missionData.setGuildId(guildId);</span>
 
-<span class="fc" id="L114">            Long missionId = missionDao.createMission(missionData, connection);</span>
+<span class="fc" id="L119">            Long missionId = missionDao.createMission(missionData, connection);</span>
 
-<span class="fc" id="L116">            objectiveDataList.forEach(item -&gt; missionDao.createMissionObjective(missionId, item, connection));</span>
-<span class="fc" id="L117">        }</span>
+<span class="fc" id="L121">            objectiveDataList.forEach(item -&gt; missionDao.createMissionObjective(missionId, item, connection));</span>
+<span class="fc" id="L122">        }</span>
 
-<span class="fc" id="L119">    }</span>
+<span class="fc" id="L124">    }</span>
 
     private void guildFactory(Map&lt;Grade, Integer&gt; grades, int slots, Connection connection,
                               boolean isDefaultGuild, Long guildId, Guild guild) {
 
-<span class="fc" id="L124">        MissionFactory missionFactory = new MissionFactoryImpl();</span>
+<span class="fc" id="L129">        MissionFactory missionFactory = new MissionFactoryImpl();</span>
 
-<span class="fc bfc" id="L126" title="All 2 branches covered.">        for (Grade grade : Grade.values()) {</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        for (Grade grade : Grade.values()) {</span>
 
-<span class="fc" id="L128">            int gradeCount = grades.getOrDefault(grade, 0);</span>
-<span class="fc" id="L129">            int maxCount = getMaxCountForGrade(grade);</span>
+<span class="fc" id="L133">            int gradeCount = grades.getOrDefault(grade, 0);</span>
+<span class="fc" id="L134">            int maxCount = getMaxCountForGrade(grade);</span>
 
-<span class="pc bpc" id="L131" title="1 of 6 branches missed.">            while (gradeCount &lt; slots &amp;&amp; gradeCount &lt; maxCount &amp;&amp; slots &gt; 0) {</span>
-<span class="fc bfc" id="L132" title="All 2 branches covered.">                if (random.nextDouble() &lt; (grade.getProbability() + guild.getAmplifiedProbability()) / 100.0) {</span>
-<span class="fc" id="L133">                    createMission(connection, missionFactory.getMission(grade, isDefaultGuild), guildId);</span>
-<span class="fc" id="L134">                    slots--;</span>
-<span class="fc" id="L135">                    gradeCount--;</span>
+<span class="pc bpc" id="L136" title="1 of 6 branches missed.">            while (gradeCount &lt; slots &amp;&amp; gradeCount &lt; maxCount &amp;&amp; slots &gt; 0) {</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">                if (random.nextDouble() &lt; (grade.getProbability() + guild.getAmplifiedProbability()) / 100.0) {</span>
+<span class="fc" id="L138">                    createMission(connection, missionFactory.getMission(grade, isDefaultGuild), guildId);</span>
+<span class="fc" id="L139">                    slots--;</span>
+<span class="fc" id="L140">                    gradeCount--;</span>
                 }
-<span class="fc" id="L137">                gradeCount++;</span>
+<span class="fc" id="L142">                gradeCount++;</span>
             }
         }
-<span class="fc" id="L140">    }</span>
+<span class="fc" id="L145">    }</span>
     @Override
     public void fillGuildDashBoard(Long guildId, Guild guild) {
 
-<span class="pc bpc" id="L144" title="1 of 2 branches missed.">        if (guild.getLastTimeUpdated().isBefore(LocalDate.now().atStartOfDay())) {</span>
-<span class="fc" id="L145">            try (Connection connection = dataSource.getConnection()) {</span>
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">        if (guild.getLastTimeUpdated().isBefore(LocalDate.now().atStartOfDay())) {</span>
+<span class="fc" id="L150">            try (Connection connection = dataSource.getConnection()) {</span>
 
-<span class="fc" id="L147">                List&lt;MissionData&gt; missionDataList = missionDao.findGuildMissions(guildId, connection);</span>
-<span class="fc" id="L148">                Map&lt;Grade, Integer&gt; grades = getNumberMissionsPerGrade(missionDataList);</span>
-<span class="fc" id="L149">                int slots = guild.getMaxMissions() - missionDataList.size();</span>
-<span class="fc" id="L150">                boolean isDefaultGuild = Objects.equals(guildId, Events.getBasicGuildId());</span>
+<span class="fc" id="L152">                List&lt;MissionData&gt; missionDataList = missionDao.findGuildMissions(guildId, connection);</span>
+<span class="fc" id="L153">                Map&lt;Grade, Integer&gt; grades = getNumberMissionsPerGrade(missionDataList);</span>
+<span class="fc" id="L154">                int slots = guild.getMaxMissions() - missionDataList.size();</span>
+<span class="fc" id="L155">                boolean isDefaultGuild = Objects.equals(guildId, Events.getBasicGuildId());</span>
 
-<span class="fc bfc" id="L152" title="All 2 branches covered.">                if (slots &gt; 0) {</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">                if (slots &gt; 0) {</span>
 
-<span class="fc" id="L154">                    guildFactory(grades, slots, connection, isDefaultGuild, guildId, guild);</span>
+<span class="fc" id="L159">                    guildFactory(grades, slots, connection, isDefaultGuild, guildId, guild);</span>
 
                 }
-<span class="nc" id="L157">            } catch (SQLException e) {</span>
-<span class="nc" id="L158">                Events.logInfo(&quot;Error on creation of mission.&quot;);</span>
-<span class="fc" id="L159">            }</span>
+<span class="nc" id="L162">            } catch (SQLException e) {</span>
+<span class="nc" id="L163">                Events.logInfo(&quot;Error on creation of mission.&quot;);</span>
+<span class="fc" id="L164">            }</span>
         }
-<span class="fc" id="L161">    }</span>
+<span class="fc" id="L166">    }</span>
 
     @Override
     public List&lt;Grade&gt; addProgress(UUID playerId, String target, Integer level) {
 
-<span class="fc" id="L166">        List&lt;Grade&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L171">        List&lt;Grade&gt; result = new ArrayList&lt;&gt;();</span>
 
-<span class="fc" id="L168">        try (Connection connection = dataSource.getConnection()) {</span>
+<span class="fc" id="L173">        try (Connection connection = dataSource.getConnection()) {</span>
 
-<span class="fc" id="L170">            Map&lt;Long, Grade&gt; grades = playersObjs.get(playerId).addProgress(target, level);</span>
+<span class="fc" id="L175">            Map&lt;Long, Grade&gt; grades = playersObjs.get(playerId).addProgress(target, level);</span>
 
-<span class="fc" id="L172">            grades.forEach((key, value) -&gt; {</span>
-<span class="fc" id="L173">                missionDao.saveMissionStatus(playerId, key, MissionStatus.FINALIZED, connection);</span>
-<span class="fc" id="L174">                result.add(value);</span>
-<span class="fc" id="L175">            });</span>
+<span class="fc" id="L177">            grades.forEach((key, value) -&gt; {</span>
+<span class="fc" id="L178">                missionDao.saveMissionStatus(playerId, key, MissionStatus.FINALIZED, connection);</span>
+<span class="fc" id="L179">                result.add(value);</span>
+<span class="fc" id="L180">            });</span>
 
-<span class="nc" id="L177">        } catch (SQLException e) {</span>
-<span class="nc" id="L178">            Events.logInfo(&quot;Error on add Progress&quot;);</span>
-<span class="fc" id="L179">        }</span>
+<span class="nc" id="L182">        } catch (SQLException e) {</span>
+<span class="nc" id="L183">            Events.logInfo(&quot;Error on add Progress&quot;);</span>
+<span class="fc" id="L184">        }</span>
 
-<span class="fc" id="L181">        return result;</span>
+<span class="fc" id="L186">        return result;</span>
     }
 
     @Override
     public Map&lt;MissionData, List&lt;ObjectiveData&gt;&gt; findPlayerDashBoard(UUID playerId) {
 
-<span class="fc" id="L187">        Map&lt;MissionData, List&lt;ObjectiveData&gt;&gt; objec = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L188">        Map&lt;Long, Integer&gt; playerProgress = playersObjs.get(playerId).getProgress();</span>
+<span class="fc" id="L192">        Map&lt;MissionData, List&lt;ObjectiveData&gt;&gt; objec = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L193">        Map&lt;Long, Integer&gt; playerProgress = playersObjs.get(playerId).getProgress();</span>
 
-<span class="fc" id="L190">        try (Connection connection = dataSource.getConnection()) {</span>
+<span class="fc" id="L195">        try (Connection connection = dataSource.getConnection()) {</span>
 
-<span class="fc" id="L192">            List&lt;MissionData&gt; missionDataList = missionDao.findPlayerMissions(playerId, connection);</span>
+<span class="fc" id="L197">            List&lt;MissionData&gt; missionDataList = missionDao.findPlayerMissions(playerId, connection);</span>
 
-<span class="fc bfc" id="L194" title="All 2 branches covered.">            for(MissionData item : missionDataList) {</span>
-<span class="fc" id="L195">                List&lt;ObjectiveData&gt; objectiveDataList = missionDao.findMissionObjectivesByPlayer(playerId,</span>
-<span class="fc" id="L196">                            item.getMissionId(), connection);</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">            for(MissionData item : missionDataList) {</span>
+<span class="fc" id="L200">                List&lt;ObjectiveData&gt; objectiveDataList = missionDao.findMissionObjectivesByPlayer(playerId,</span>
+<span class="fc" id="L201">                            item.getMissionId(), connection);</span>
 
-<span class="fc bfc" id="L198" title="All 2 branches covered.">                for (ObjectiveData ob : objectiveDataList) {</span>
-<span class="fc" id="L199">                    Integer progressAmount = playerProgress.get(ob.getObjectiveId());</span>
-<span class="pc bpc" id="L200" title="1 of 2 branches missed.">                    if (progressAmount != null) {</span>
-<span class="fc" id="L201">                        ob.setAmount(progressAmount);</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">                for (ObjectiveData ob : objectiveDataList) {</span>
+<span class="fc" id="L204">                    Integer progressAmount = playerProgress.get(ob.getObjectiveId());</span>
+<span class="pc bpc" id="L205" title="1 of 2 branches missed.">                    if (progressAmount != null) {</span>
+<span class="fc" id="L206">                        ob.setAmount(progressAmount);</span>
                     }
-<span class="fc" id="L203">                }</span>
-<span class="fc" id="L204">                objec.put(item, objectiveDataList);</span>
-<span class="fc" id="L205">            }</span>
+<span class="fc" id="L208">                }</span>
+<span class="fc" id="L209">                objec.put(item, objectiveDataList);</span>
+<span class="fc" id="L210">            }</span>
 
-<span class="nc" id="L207">        } catch (SQLException e) {</span>
-<span class="nc" id="L208">            Events.logInfo(&quot;Error on Player Dashboard.&quot;);</span>
-<span class="fc" id="L209">        }</span>
+<span class="nc" id="L212">        } catch (SQLException e) {</span>
+<span class="nc" id="L213">            Events.logInfo(&quot;Error on Player Dashboard.&quot;);</span>
+<span class="fc" id="L214">        }</span>
 
-<span class="fc" id="L211">        return objec;</span>
+<span class="fc" id="L216">        return objec;</span>
     }
 
 
@@ -216,132 +221,136 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
     @Override
     public void savePlayer(UUID playerId) {
 
-<span class="fc" id="L219">        Map&lt;Long, Integer&gt; data = playersObjs.get(playerId).getProgress();</span>
+<span class="fc" id="L224">        Map&lt;Long, Integer&gt; data = playersObjs.get(playerId).getProgress();</span>
 
-<span class="fc" id="L221">        try (Connection connection = dataSource.getConnection()) {</span>
-<span class="fc" id="L222">            data.forEach((key, value) -&gt; missionDao.saveObjectiveProgress(</span>
-<span class="fc" id="L223">                    playerId, key, value, connection));</span>
-<span class="nc" id="L224">        } catch (SQLException e) {</span>
-<span class="nc" id="L225">            Events.logInfo(&quot;Error on SavePlayer&quot;);</span>
-<span class="fc" id="L226">        }</span>
-<span class="fc" id="L227">    }</span>
+<span class="fc" id="L226">        try (Connection connection = dataSource.getConnection()) {</span>
+<span class="fc" id="L227">            data.forEach((key, value) -&gt; missionDao.saveObjectiveProgress(</span>
+<span class="fc" id="L228">                    playerId, key, value, connection));</span>
+<span class="nc" id="L229">        } catch (SQLException e) {</span>
+<span class="nc" id="L230">            Events.logInfo(&quot;Error on SavePlayer&quot;);</span>
+<span class="fc" id="L231">        }</span>
+<span class="fc" id="L232">    }</span>
 
     @Override
     public Penalty initPlayer(UUID playerId) {
 
-<span class="fc" id="L232">        Penalty failed = new Penalty();</span>
-<span class="fc" id="L233">        PlayerMissions playerMissions = new PlayerMissions();</span>
+<span class="fc" id="L237">        Penalty failed = new Penalty();</span>
+<span class="fc" id="L238">        PlayerMissions playerMissions = new PlayerMissions();</span>
 
-<span class="fc" id="L235">        try (Connection connection = dataSource.getConnection()) {</span>
+<span class="fc" id="L240">        try (Connection connection = dataSource.getConnection()) {</span>
 
-<span class="fc" id="L237">            List&lt;MissionData&gt; missionDataList = missionDao.findPlayerMissions(playerId, connection);</span>
-<span class="fc" id="L238">            List&lt;MissionData&gt; expiredMissions = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L242">            List&lt;MissionData&gt; missionDataList = missionDao.findPlayerMissions(playerId, connection);</span>
+<span class="fc" id="L243">            List&lt;MissionData&gt; expiredMissions = new ArrayList&lt;&gt;();</span>
 
-<span class="pc bpc" id="L240" title="1 of 2 branches missed.">            for (MissionData m : missionDataList) {</span>
-<span class="nc bnc" id="L241" title="All 2 branches missed.">                if (m.getExpiration().isBefore(LocalDate.now())) {</span>
-<span class="nc" id="L242">                    missionDao.saveMissionStatus(playerId, m.getMissionId(), MissionStatus.FAILED, connection);</span>
-<span class="nc" id="L243">                    failed.addPenalty(m.getGuildId(), m.getGrade());</span>
-<span class="nc" id="L244">                    expiredMissions.add(m);</span>
+<span class="fc bfc" id="L245" title="All 2 branches covered.">            for (MissionData m : missionDataList) {</span>
+<span class="pc bpc" id="L246" title="1 of 2 branches missed.">                if (m.getExpiration().isBefore(LocalDate.now())) {</span>
+<span class="fc" id="L247">                    missionDao.saveMissionStatus(playerId, m.getMissionId(), MissionStatus.FAILED, connection);</span>
+<span class="fc" id="L248">                    failed.addPenalty(m.getGuildId(), m.getGrade());</span>
+<span class="fc" id="L249">                    expiredMissions.add(m);</span>
                 }
-<span class="nc" id="L246">            }</span>
+<span class="fc" id="L251">            }</span>
 
-<span class="fc" id="L248">            missionDataList.removeAll(expiredMissions);</span>
+<span class="fc" id="L253">            missionDataList.removeAll(expiredMissions);</span>
 
             List&lt;ObjectiveData&gt; objectiveDataList;
 
-<span class="pc bpc" id="L252" title="1 of 2 branches missed.">            for (MissionData ms : missionDataList) {</span>
+<span class="pc bpc" id="L257" title="1 of 2 branches missed.">            for (MissionData ms : missionDataList) {</span>
 
-<span class="nc" id="L254">                objectiveDataList = missionDao.findMissionCurrentObjectivesByPlayer(playerId, ms.getMissionId(), connection);</span>
+<span class="nc" id="L259">                objectiveDataList = missionDao.findMissionCurrentObjectivesByPlayer(playerId, ms.getMissionId(), connection);</span>
 
-<span class="nc bnc" id="L256" title="All 2 branches missed.">                for (ObjectiveData objectiveData : objectiveDataList) {</span>
+<span class="nc bnc" id="L261" title="All 2 branches missed.">                for (ObjectiveData objectiveData : objectiveDataList) {</span>
 
-<span class="nc" id="L258">                    Objective ob = objectives.getOrDefault(objectiveData.getObjectiveId(), null);</span>
+<span class="nc" id="L263">                    Objective ob = objectives.getOrDefault(objectiveData.getObjectiveId(), null);</span>
 
-<span class="nc bnc" id="L260" title="All 2 branches missed.">                    if (ob != null) {</span>
-<span class="nc" id="L261">                        ob.updateObserved(+1);</span>
+<span class="nc bnc" id="L265" title="All 2 branches missed.">                    if (ob != null) {</span>
+<span class="nc" id="L266">                        ob.updateObserved(+1);</span>
                     } else {
-<span class="nc" id="L263">                        ob = new Objective(ms.getMissionId(), ms.getExpiration(),</span>
-<span class="nc" id="L264">                                ms.getGrade(), objectiveData.getTarget(), objectiveData.getLevels(),</span>
-<span class="nc" id="L265">                                objectiveData.getReqAmount());</span>
+<span class="nc" id="L268">                        ob = new Objective(ms.getMissionId(), ms.getExpiration(),</span>
+<span class="nc" id="L269">                                ms.getGrade(), objectiveData.getTarget(), objectiveData.getLevels(),</span>
+<span class="nc" id="L270">                                objectiveData.getReqAmount());</span>
                     }
 
-<span class="nc" id="L268">                    objectives.put(objectiveData.getObjectiveId(), ob);</span>
-<span class="nc" id="L269">                    playerMissions.putObjective(objectiveData.getObjectiveId(), ob, objectiveData.getAmount());</span>
+<span class="nc" id="L273">                    objectives.put(objectiveData.getObjectiveId(), ob);</span>
+<span class="nc" id="L274">                    playerMissions.putObjective(objectiveData.getObjectiveId(), ob, objectiveData.getAmount());</span>
 
-<span class="nc" id="L271">                }</span>
-<span class="nc" id="L272">            }</span>
+<span class="nc" id="L276">                }</span>
+<span class="nc" id="L277">            }</span>
 
-<span class="fc" id="L274">            playersObjs.put(playerId, playerMissions);</span>
+<span class="fc" id="L279">            playersObjs.put(playerId, playerMissions);</span>
 
-<span class="nc" id="L276">        } catch (SQLException e) {</span>
-<span class="nc" id="L277">            Events.logInfo(&quot;Error on player init&quot;);</span>
-<span class="fc" id="L278">        }</span>
-<span class="fc" id="L279">        return failed;</span>
+<span class="nc" id="L281">        } catch (SQLException e) {</span>
+<span class="nc" id="L282">            Events.logInfo(&quot;Error on player init&quot;);</span>
+<span class="fc" id="L283">        }</span>
+<span class="fc" id="L284">        return failed;</span>
     }
 
 
     @Override
     public void removePlayer(UUID playerId) {
-<span class="fc" id="L285">        savePlayer(playerId);</span>
-<span class="fc" id="L286">        playersObjs.get(playerId).getObjectives().forEach((key, value) -&gt; value.updateObserved(-1));</span>
-<span class="fc" id="L287">        playersObjs.remove(playerId);</span>
-<span class="fc" id="L288">    }</span>
+<span class="fc" id="L290">        savePlayer(playerId);</span>
+<span class="fc" id="L291">        playersObjs.get(playerId).getObjectives().forEach((key, value) -&gt; value.updateObserved(-1));</span>
+<span class="fc" id="L292">        playersObjs.remove(playerId);</span>
+<span class="fc" id="L293">    }</span>
 
     @Override
     public void removeNonWatchedObjectives() {
 
-<span class="fc" id="L293">        Iterator&lt;Map.Entry&lt;Long, Objective&gt;&gt; iterator = objectives.entrySet().iterator();</span>
-<span class="fc bfc" id="L294" title="All 2 branches covered.">        while (iterator.hasNext()) {</span>
-<span class="fc" id="L295">            Map.Entry&lt;Long, Objective&gt; entry = iterator.next();</span>
-<span class="fc" id="L296">            Objective objective = entry.getValue();</span>
-<span class="pc bpc" id="L297" title="1 of 2 branches missed.">            if (!objective.isObserved()) {</span>
-<span class="fc" id="L298">                iterator.remove();</span>
+<span class="fc" id="L298">        Iterator&lt;Map.Entry&lt;Long, Objective&gt;&gt; iterator = objectives.entrySet().iterator();</span>
+<span class="fc bfc" id="L299" title="All 2 branches covered.">        while (iterator.hasNext()) {</span>
+<span class="fc" id="L300">            Map.Entry&lt;Long, Objective&gt; entry = iterator.next();</span>
+<span class="fc" id="L301">            Objective objective = entry.getValue();</span>
+<span class="pc bpc" id="L302" title="1 of 2 branches missed.">            if (!objective.isObserved()) {</span>
+<span class="fc" id="L303">                iterator.remove();</span>
             }
-<span class="fc" id="L300">        }</span>
-<span class="fc" id="L301">    }</span>
+<span class="fc" id="L305">        }</span>
+<span class="fc" id="L306">    }</span>
 
     @Override
     public Penalty removeFailedMissions(UUID playerId) {
 
-<span class="nc" id="L306">        Penalty penalty = new Penalty();</span>
+<span class="fc" id="L311">        Penalty penalty = new Penalty();</span>
 
-<span class="nc" id="L308">        List&lt;Long&gt; toRemoveObjectives = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L309">        List&lt;Long&gt; toRemoveMissions = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L313">        List&lt;Long&gt; toRemoveObjectives = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L314">        List&lt;Long&gt; toRemoveMissions = new ArrayList&lt;&gt;();</span>
 
-<span class="nc" id="L311">        PlayerMissions playerMissions = playersObjs.get(playerId);</span>
+<span class="fc" id="L316">        PlayerMissions playerMissions = playersObjs.get(playerId);</span>
 
-<span class="nc" id="L313">        playerMissions.getObjectives().forEach((key, value) -&gt; {</span>
+<span class="fc" id="L318">        playerMissions.getObjectives().forEach((key, value) -&gt; {</span>
 
-<span class="nc bnc" id="L315" title="All 2 branches missed.">            if(value.getExpirationDate().isBefore(LocalDate.now()) ||</span>
-<span class="nc bnc" id="L316" title="All 2 branches missed.">                    value.getExpirationDate().isEqual(LocalDate.now())) {</span>
-<span class="nc" id="L317">                toRemoveMissions.add(value.getMissionId());</span>
-<span class="nc" id="L318">                toRemoveObjectives.add(key);</span>
+<span class="pc bpc" id="L320" title="1 of 2 branches missed.">            if(value.getExpirationDate().isBefore(LocalDate.now()) ||</span>
+<span class="nc bnc" id="L321" title="All 2 branches missed.">                    value.getExpirationDate().isEqual(LocalDate.now())) {</span>
+<span class="pc bpc" id="L322" title="1 of 2 branches missed.">                if(!toRemoveMissions.contains(value.getMissionId())) {</span>
+<span class="fc" id="L323">                    toRemoveMissions.add(value.getMissionId());</span>
+                }
+<span class="fc" id="L325">                toRemoveObjectives.add(key);</span>
             }
-<span class="nc" id="L320">        });</span>
+<span class="fc" id="L327">        });</span>
 
-<span class="nc" id="L322">        toRemoveObjectives.forEach(playerMissions::removeObjective);</span>
+<span class="fc" id="L329">        toRemoveObjectives.forEach(playerMissions::removeObjective);</span>
 
-<span class="nc" id="L324">        try (Connection connection = dataSource.getConnection()) {</span>
+<span class="fc" id="L331">        try (Connection connection = dataSource.getConnection()) {</span>
 
-<span class="nc" id="L326">            toRemoveMissions.forEach(item -&gt; {</span>
-<span class="nc" id="L327">                MissionData missionData = missionDao.findMissionById(item, connection);</span>
-<span class="nc" id="L328">                penalty.addPenalty(missionData.getGuildId(), missionData.getGrade());</span>
-<span class="nc" id="L329">            });</span>
-
-<span class="nc" id="L331">        } catch (SQLException e) {</span>
-<span class="nc" id="L332">            Events.logInfo(&quot;Error on Midnight update&quot;);</span>
-<span class="nc" id="L333">        }</span>
+<span class="fc bfc" id="L333" title="All 2 branches covered.">            for(Long missionId : toRemoveMissions) {</span>
+<span class="fc" id="L334">                MissionData missionData = missionDao.findMissionById(missionId, connection);</span>
+<span class="fc" id="L335">                missionDao.saveMissionStatus(playerId, missionData.getMissionId(), MissionStatus.FAILED, connection);</span>
+<span class="fc" id="L336">                penalty.addPenalty(missionData.getGuildId(), missionData.getGrade());</span>
+<span class="fc" id="L337">            }</span>
 
 
-<span class="nc" id="L336">        return penalty;</span>
+<span class="nc" id="L340">        } catch (SQLException e) {</span>
+<span class="nc" id="L341">            Events.logInfo(&quot;Error on Midnight update&quot;);</span>
+<span class="fc" id="L342">        }</span>
+
+
+<span class="fc" id="L345">        return penalty;</span>
     }
 
     public Map&lt;Long, Objective&gt; getObjectives() {
-<span class="fc" id="L340">        return objectives;</span>
+<span class="fc" id="L349">        return objectives;</span>
     }
 
     public Map&lt;UUID, PlayerMissions&gt; getPlayersObjs() {
-<span class="fc" id="L344">        return playersObjs;</span>
+<span class="fc" id="L353">        return playersObjs;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

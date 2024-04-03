@@ -32,24 +32,25 @@ import java.util.UUID;
 <span class="fc" id="L32">    }</span>
 
     @Override
-    public void savePlayerContribution(Connection connection, UUID playerId, Long eventId, Contribution contribution) {
+    public void savePlayerContribution(Connection connection, UUID playerId, Long eventId, Contribution contribution,
+                                       int limitMedals) {
 
-<span class="fc" id="L37">        String queryString = &quot;INSERT INTO PlayerContribution (playerId, eventId, quantity, medals) VALUES (?, ?, ?, ?) &quot; +</span>
+<span class="fc" id="L38">        String queryString = &quot;INSERT INTO PlayerContribution (playerId, eventId, quantity, medals) VALUES (?, ?, ?, ?) &quot; +</span>
                 &quot;ON DUPLICATE KEY UPDATE quantity = ?, medals = ?&quot;;
 
-<span class="fc" id="L40">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
-<span class="fc" id="L41">            int i = 1;</span>
-<span class="fc" id="L42">            preparedStatement.setString(i++, playerId.toString());</span>
-<span class="fc" id="L43">            preparedStatement.setLong(i++, eventId);</span>
-<span class="fc" id="L44">            preparedStatement.setInt(i++, contribution.getItems());</span>
-<span class="fc" id="L45">            preparedStatement.setInt(i++, contribution.getMedals());</span>
-<span class="fc" id="L46">            preparedStatement.setInt(i++, contribution.getItems());</span>
-<span class="fc" id="L47">            preparedStatement.setInt(i, contribution.getMedals());</span>
+<span class="fc" id="L41">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
+<span class="fc" id="L42">            int i = 1;</span>
+<span class="fc" id="L43">            preparedStatement.setString(i++, playerId.toString());</span>
+<span class="fc" id="L44">            preparedStatement.setLong(i++, eventId);</span>
+<span class="fc" id="L45">            preparedStatement.setInt(i++, contribution.getItems());</span>
+<span class="fc" id="L46">            preparedStatement.setInt(i++, contribution.getMedals());</span>
+<span class="fc" id="L47">            preparedStatement.setInt(i++, contribution.getItems());</span>
+<span class="fc" id="L48">            preparedStatement.setInt(i, contribution.getMedalsToSave(limitMedals));</span>
 
-<span class="fc" id="L49">            preparedStatement.executeUpdate();</span>
-<span class="nc" id="L50">        } catch (SQLException e) {</span>
-<span class="nc" id="L51">            Events.logInfo(ERROR);</span>
-<span class="fc" id="L52">        }</span>
-<span class="fc" id="L53">    }</span>
+<span class="fc" id="L50">            preparedStatement.executeUpdate();</span>
+<span class="nc" id="L51">        } catch (SQLException e) {</span>
+<span class="nc" id="L52">            Events.logInfo(ERROR);</span>
+<span class="fc" id="L53">        }</span>
+<span class="fc" id="L54">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

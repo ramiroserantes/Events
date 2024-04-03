@@ -11,28 +11,28 @@ public class EventMedalsTest {
 
     private Guild getGuild() {
         return new Guild("kName", LocalDateTime.now(), new Level(0F,0,0,0F),
-                new EventMedals(), new GuildModifiers(0, 0F));
+                new GuildModifiers(0, 0F));
     }
 
     @Test
-    public void testGuildByAddMedals() {
+    public void testAddMedals() {
 
-        Guild guild = getGuild();
+        EventMedals eventMedals = new EventMedals();
 
         for(int i = 0; i < 100; i++) {
-            guild.getEventMedals().addMedals(1L);
+            eventMedals.addMedals(1L);
         }
 
-        assertEquals(100, guild.getEventMedals().getEventMedals(1L), 0.0);
+        assertEquals(100, eventMedals.getEventMedals(1L), 0.0);
 
     }
 
     @Test
     public void testGuildByRemoveMedalsNull() {
 
-        Guild guild = getGuild();
+        EventMedals eventMedals = new EventMedals();
 
-        assertFalse(guild.getEventMedals().removeMedals(1L, 900));
+        assertFalse(eventMedals.removeMedals(1L, 900));
 
     }
 
@@ -42,28 +42,27 @@ public class EventMedalsTest {
         Guild guild = getGuild();
         guild.getGuildModifiers().setAmpMissions(90);
 
+        EventMedals eventMedals = new EventMedals();
+
         for(int i = 0; i < 100; i++) {
-            guild.getEventMedals().addMedals(1L);
+            eventMedals.addMedals(1L);
         }
 
-
-        assertTrue(guild.getEventMedals().removeMedals(1L, 50));
+        assertTrue(eventMedals.removeMedals(1L, 50));
         assertEquals(90, guild.getGuildModifiers().getAmpMissions());
 
     }
 
     @Test
-    public void testGuildByMap() {
+    public void testEventMedalsByMap() {
 
-        Guild guild = getGuild();
-
+        EventMedals eventMedals = new EventMedals();
 
         for(int i = 0; i < 100; i++) {
-            guild.getEventMedals().addMedals(1L);
+            eventMedals.addMedals(1L);
         }
 
-
-        assertEquals(1, guild.getEventMedals().getMedals().size());
+        assertEquals(1, eventMedals.getMedals().size());
 
     }
 }

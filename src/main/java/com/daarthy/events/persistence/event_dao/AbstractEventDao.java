@@ -20,7 +20,7 @@ public abstract class AbstractEventDao implements EventDao{
 
         String queryString = "SELECT e.id, e.worldScope, e.name, e.startDate, e.endDate, e.maxMedals " +
                 "FROM Events e " +
-                "WHERE e.worldScope = ? AND e.startDate <= NOW() AND e.endDate >= NOW() ";
+                "WHERE e.worldScope = ? AND e.startDate <= CURDATE() AND e.endDate >= CURDATE() ";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 
@@ -28,8 +28,9 @@ public abstract class AbstractEventDao implements EventDao{
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            int i = 1;
+            int i;
             while (resultSet.next()) {
+                i = 1;
                 Long id = resultSet.getLong(i++);
                 ScopeEnum foundScope = ScopeEnum.valueOf(resultSet.getString(i++));
                 String name = resultSet.getString(i++);

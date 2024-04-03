@@ -42,6 +42,10 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
 
             MissionData missionData = missionDao.findMissionById(missionId, connection);
 
+            if(missionData.getExpiration().isBefore(LocalDate.now())) {
+                return result.append(">> This mission is expired.");
+            }
+
             if (missionDao.wasMissionAcceptedByPlayer(missionData.getMissionId(), playerId, connection)) {
                 return result.append(">> You have already accepted this mission.");
             }
@@ -53,6 +57,7 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
             if (!missionData.addPlayer(guild.getGuildModifiers().getAmpMissions())) {
                 return result.append(">> Max Mission capacity reached");
             }
+
 
             missionDao.saveMissionStatus(playerId, missionData.getMissionId(), MissionStatus.ACCEPTED, connection);
 
@@ -314,7 +319,9 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
 
             if(value.getExpirationDate().isBefore(LocalDate.now()) ||
                     value.getExpirationDate().isEqual(LocalDate.now())) {
-                toRemoveMissions.add(value.getMissionId());
+                if(!toRemoveMissions.contains(value.getMissionId())) {
+                    toRemoveMissions.add(value.getMissionId());
+                }
                 toRemoveObjectives.add(key);
             }
         });
@@ -323,10 +330,12 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
 
         try (Connection connection = dataSource.getConnection()) {
 
-            toRemoveMissions.forEach(item -> {
-                MissionData missionData = missionDao.findMissionById(item, connection);
+            for(Long missionId : toRemoveMissions) {
+                MissionData missionData = missionDao.findMissionById(missionId, connection);
+                missionDao.saveMissionStatus(playerId, missionData.getMissionId(), MissionStatus.FAILED, connection);
                 penalty.addPenalty(missionData.getGuildId(), missionData.getGrade());
-            });
+            }
+
 
         } catch (SQLException e) {
             Events.logInfo("Error on Midnight update");

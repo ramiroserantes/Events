@@ -16,8 +16,10 @@ public class Contribution {
         this.items += 1;
     }
 
-    public void increaseMedals() {
-        this.medals += 1;
+    public void increaseMedals(int limit) {
+        if(this.medals < limit + 1) {
+            this.medals += 1;
+        }
     }
 
     public int getItems() {
@@ -26,6 +28,10 @@ public class Contribution {
 
     public int getMedals() {
         return medals;
+    }
+
+    public int getMedalsToSave(int limit) {
+        return Math.min(medals, limit);
     }
 
 }

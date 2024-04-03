@@ -19,9 +19,8 @@ public class MissionJdbc extends AbstractMissionDao {
                 Statement.RETURN_GENERATED_KEYS)) {
 
             int i = 1;
-            if(missionData.getGuildId() != null) {
-                preparedStatement.setLong(i++, missionData.getGuildId());
-            } else {preparedStatement.setLong(i++, Types.BIGINT);}
+
+            preparedStatement.setLong(i++, missionData.getGuildId());
 
             preparedStatement.setString(i++, missionData.getTitle());
             preparedStatement.setString(i++, missionData.getGrade().name());

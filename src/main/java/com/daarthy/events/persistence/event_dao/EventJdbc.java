@@ -32,7 +32,8 @@ public class EventJdbc extends AbstractEventDao {
     }
 
     @Override
-    public void savePlayerContribution(Connection connection, UUID playerId, Long eventId, Contribution contribution) {
+    public void savePlayerContribution(Connection connection, UUID playerId, Long eventId, Contribution contribution,
+                                       int limitMedals) {
 
         String queryString = "INSERT INTO PlayerContribution (playerId, eventId, quantity, medals) VALUES (?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE quantity = ?, medals = ?";
@@ -44,7 +45,7 @@ public class EventJdbc extends AbstractEventDao {
             preparedStatement.setInt(i++, contribution.getItems());
             preparedStatement.setInt(i++, contribution.getMedals());
             preparedStatement.setInt(i++, contribution.getItems());
-            preparedStatement.setInt(i, contribution.getMedals());
+            preparedStatement.setInt(i, contribution.getMedalsToSave(limitMedals));
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

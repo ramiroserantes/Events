@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GuildJdbc.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Events</a> &gt; <a href="index.source.html" class="el_package">com.daarthy.events.persistence.guild_dao</a> &gt; <span class="el_source">GuildJdbc.java</span></div><h1>GuildJdbc.java</h1><pre class="source lang-java linenums">package com.daarthy.events.persistence.guild_dao;
 
 import com.daarthy.events.Events;
-import com.daarthy.events.app.modules.guilds.EventMedals;
 import com.daarthy.events.app.modules.guilds.Guild;
 import com.daarthy.events.app.modules.guilds.GuildModifiers;
 import com.daarthy.events.app.modules.guilds.Level;
@@ -9,29 +8,29 @@ import com.daarthy.events.app.modules.guilds.Level;
 import java.sql.*;
 import java.time.LocalDate;
 
-<span class="fc" id="L12">public class GuildJdbc extends AbstractGuildDao {</span>
+<span class="fc" id="L11">public class GuildJdbc extends AbstractGuildDao {</span>
 
     @Override
     public Guild createGuild(Long guildId, String kName, Connection connection) {
 
-<span class="fc" id="L17">        String queryString = &quot;INSERT INTO Guild (id, kName, lastTimeUpdated) VALUES (?, ?, ?)&quot;;</span>
+<span class="fc" id="L16">        String queryString = &quot;INSERT INTO Guild (id, kName, lastTimeUpdated) VALUES (?, ?, ?)&quot;;</span>
 
-<span class="fc" id="L19">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
+<span class="fc" id="L18">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
 
-<span class="fc" id="L21">            int i = 1;</span>
-<span class="fc" id="L22">            preparedStatement.setLong(i++, guildId);</span>
-<span class="fc" id="L23">            preparedStatement.setString(i++, kName);</span>
-<span class="fc" id="L24">            preparedStatement.setDate(i, Date.valueOf(LocalDate.now()</span>
-<span class="fc" id="L25">                    .atStartOfDay().minusDays(1L).toLocalDate()));</span>
+<span class="fc" id="L20">            int i = 1;</span>
+<span class="fc" id="L21">            preparedStatement.setLong(i++, guildId);</span>
+<span class="fc" id="L22">            preparedStatement.setString(i++, kName);</span>
+<span class="fc" id="L23">            preparedStatement.setDate(i, Date.valueOf(LocalDate.now()</span>
+<span class="fc" id="L24">                    .atStartOfDay().minusDays(1L).toLocalDate()));</span>
 
-<span class="fc" id="L27">            preparedStatement.executeUpdate();</span>
+<span class="fc" id="L26">            preparedStatement.executeUpdate();</span>
 
-<span class="fc" id="L29">            return new Guild(kName, LocalDate.now().atStartOfDay().minusDays(1L), new Level(0F, 0, 6, 0F),</span>
-<span class="fc" id="L30">                    new EventMedals(), new GuildModifiers(0, 0F));</span>
+<span class="fc" id="L28">            return new Guild(kName, LocalDate.now().atStartOfDay().minusDays(1L), new Level(0F, 0, 6, 0F),</span>
+<span class="fc" id="L29">                     new GuildModifiers(0, 0F));</span>
 
-<span class="nc" id="L32">        } catch (SQLException e) {</span>
-<span class="nc" id="L33">            Events.logInfo(&quot;Error on DB&quot;);</span>
-<span class="nc" id="L34">            return null;</span>
+<span class="nc" id="L31">        } catch (SQLException e) {</span>
+<span class="nc" id="L32">            Events.logInfo(&quot;Error on DB&quot;);</span>
+<span class="nc" id="L33">            return null;</span>
         }
 
     }

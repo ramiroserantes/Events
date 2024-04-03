@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.daarthy.events.app.modules.missions.PlayerMissionsTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s - in com.daarthy.events.app.modules.missions.PlayerMissionsTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s - in com.daarthy.events.app.modules.missions.PlayerMissionsTest

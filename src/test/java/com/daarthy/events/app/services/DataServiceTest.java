@@ -2,6 +2,8 @@ package com.daarthy.events.app.services;
 
 import com.daarthy.events.app.modules.guilds.Guild;
 import com.daarthy.events.persistence.SqlConnections;
+import com.daarthy.events.persistence.event_dao.EventDao;
+import com.daarthy.events.persistence.event_dao.EventJdbc;
 import com.daarthy.events.persistence.guild_dao.GuildDao;
 import com.daarthy.events.persistence.guild_dao.GuildJdbc;
 import com.daarthy.events.persistence.player_dao.PlayerDao;
@@ -170,6 +172,7 @@ public class DataServiceTest {
 
         dataService.deleteGuild(2L);
     }
+
 
     @Test
     public void testDateServiceGetGuildDBNull() {

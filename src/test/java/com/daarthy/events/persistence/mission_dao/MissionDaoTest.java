@@ -283,4 +283,15 @@ public class MissionDaoTest {
         }
 
     }
+
+    @Test
+    public void testMissionDataByNullMax() {
+
+        MissionData missionData = new MissionData();
+        missionData.setCurrentPlayers(0);
+
+        assertTrue(missionData.addPlayer(2));
+
+    }
+
 }

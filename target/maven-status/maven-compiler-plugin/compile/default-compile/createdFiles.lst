@@ -5,7 +5,11 @@ com\daarthy\events\app\modules\guilds\Level.class
 com\daarthy\events\app\modules\guilds\GuildModifiers.class
 com\daarthy\events\app\modules\events\plans\GatheringEventPlan.class
 com\daarthy\events\persistence\guild_dao\AbstractGuildDao.class
+com\daarthy\events\app\util\EventMessageReader.class
+com\daarthy\events\app\util\InternalSchedulerImpl.class
 com\daarthy\events\persistence\player_dao\PlayerData.class
+com\daarthy\events\app\util\InternalScheduler.class
+com\daarthy\events\api\AppContainer.class
 com\daarthy\events\persistence\mission_dao\Grade.class
 com\daarthy\events\persistence\event_dao\ScopeEnum.class
 com\daarthy\events\app\modules\events\plans\MiningEventPlan.class
@@ -16,7 +20,9 @@ com\daarthy\events\app\modules\events\plans\Plan.class
 com\daarthy\events\app\modules\guilds\Guild.class
 com\daarthy\events\app\modules\events\plans\PlanFactory.class
 com\daarthy\events\app\services\MissionInfoServiceImpl.class
+com\daarthy\events\api\ApiGatewayImpl.class
 com\daarthy\events\app\services\DataService.class
+com\daarthy\events\api\ApiGateway.class
 com\daarthy\events\app\services\EventServiceImpl.class
 com\daarthy\events\persistence\event_dao\Contribution.class
 com\daarthy\events\app\modules\events\plans\PlanFactoryImpl.class

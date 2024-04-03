@@ -7,9 +7,11 @@ com\daarthy\events\app\services\DataServiceTest.class
 com\daarthy\events\app\services\MissionInfoServiceImplTest.class
 com\daarthy\events\persistence\event_dao\EventDaoTest.class
 com\daarthy\events\app\services\MissionFunctionalServiceTest.class
+com\daarthy\events\api\ApiGatewayTest.class
 com\daarthy\events\app\modules\events\plans\PlanFactoryTest.class
 com\daarthy\events\app\modules\events\plans\PlanTest.class
 com\daarthy\events\persistence\player_dao\PlayerDaoTest.class
+com\daarthy\events\app\services\EventServiceTest.class
 com\daarthy\events\app\modules\missions\MissionFactoryTest.class
 com\daarthy\events\app\modules\events\EventTest.class
 com\daarthy\events\app\modules\missions\PlayerMissionsTest.class

@@ -34,7 +34,7 @@ public class EventImpl implements Event {
             Contribution contribution = players.get(playerId);
             if(plan.applyPlan(contribution.getItems())) {
                 contribution.increaseItems();
-                contribution.increaseMedals();
+                contribution.increaseMedals(eventData.getMaxMedals());
                 return contribution;
             }
         }
@@ -48,9 +48,12 @@ public class EventImpl implements Event {
 
     @Override
     public Contribution removePlayer(UUID playerId) {
-        Contribution contribution = players.get(playerId);
-        players.remove(playerId);
-        return contribution;
+        Contribution contribution = players.getOrDefault(playerId, null);
+        if(contribution != null) {
+            players.remove(playerId);
+            return contribution;
+        }
+        return null;
     }
 
     @Override

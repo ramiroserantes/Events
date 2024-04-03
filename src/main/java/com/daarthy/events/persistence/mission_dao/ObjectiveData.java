@@ -24,18 +24,6 @@ public class ObjectiveData {
         this.actionType = actionType;
     }
 
-    // For Player
-    public ObjectiveData(Long objectiveId, Long missionId, int reqAmount, String target, Integer levels,
-                         ActionType actionType, Integer amount) {
-        this.objectiveId = objectiveId;
-        this.missionId = missionId;
-        this.reqAmount = reqAmount;
-        this.target = target;
-        this.levels = levels;
-        this.amount = amount;
-        this.actionType = actionType;
-    }
-
     public Long getObjectiveId() {
         return objectiveId;
     }
@@ -58,10 +46,6 @@ public class ObjectiveData {
 
     public Integer getAmount() {
         return amount;
-    }
-
-    public void setObjectiveId(Long objectiveId) {
-        this.objectiveId = objectiveId;
     }
 
     public void setMissionId(Long missionId) {

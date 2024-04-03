@@ -16,16 +16,22 @@ public class Contribution {
 <span class="fc" id="L16">        this.items += 1;</span>
 <span class="fc" id="L17">    }</span>
 
-    public void increaseMedals() {
-<span class="fc" id="L20">        this.medals += 1;</span>
-<span class="fc" id="L21">    }</span>
+    public void increaseMedals(int limit) {
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if(this.medals &lt; limit + 1) {</span>
+<span class="fc" id="L21">            this.medals += 1;</span>
+        }
+<span class="fc" id="L23">    }</span>
 
     public int getItems() {
-<span class="fc" id="L24">        return items;</span>
+<span class="fc" id="L26">        return items;</span>
     }
 
     public int getMedals() {
-<span class="fc" id="L28">        return medals;</span>
+<span class="fc" id="L30">        return medals;</span>
+    }
+
+    public int getMedalsToSave(int limit) {
+<span class="fc" id="L34">        return Math.min(medals, limit);</span>
     }
 
 }

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ApiGatewayImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Events</a> &gt; <a href="index.source.html" class="el_package">com.daarthy.events.api</a> &gt; <span class="el_source">ApiGatewayImpl.java</span></div><h1>ApiGatewayImpl.java</h1><pre class="source lang-java linenums">package com.daarthy.events.api;
+
+import com.daarthy.events.Events;
+import com.daarthy.events.app.modules.events.EventToken;
+import com.daarthy.events.app.modules.guilds.Guild;
+import com.daarthy.events.persistence.mission_dao.ActionType;
+import com.daarthy.events.persistence.mission_dao.CompletionData;
+import com.daarthy.events.persistence.mission_dao.MissionData;
+import com.daarthy.events.persistence.mission_dao.ObjectiveData;
+import com.daarthy.events.persistence.player_dao.PlayerData;
+import com.zaxxer.hikari.HikariDataSource;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+
+public class ApiGatewayImpl implements ApiGateway{
+
+    private final AppContainer container;
+
+<span class="fc" id="L22">    public ApiGatewayImpl(HikariDataSource dataSource) {</span>
+<span class="fc" id="L23">        this.container = new AppContainer(dataSource);</span>
+<span class="fc" id="L24">    }</span>
+
+    @Override
+    public void logInRequest(UUID playerId) {
+
+<span class="fc" id="L29">        container.getDataService().initPlayer(playerId);</span>
+<span class="fc" id="L30">        PlayerData playerData = container.getDataService().getPlayerData(playerId);</span>
+<span class="fc" id="L31">        Guild guild = container.getDataService().getGuild(playerData.getGuildId());</span>
+
+<span class="fc" id="L33">        container.getMissionFunctionalService().fillGuildDashBoard(playerData.getGuildId(), guild);</span>
+<span class="fc" id="L34">        container.getMissionFunctionalService().initPlayer(playerId);</span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if(!Objects.equals(playerData.getGuildId(), Events.getBasicGuildId())) {</span>
+<span class="nc" id="L36">            container.getEventService().initPlayer(playerId, playerData.getGuildId());</span>
+        }
+<span class="fc" id="L38">    }</span>
+
+    @Override
+    public void logOutRequest(UUID playerId) {
+
+<span class="fc" id="L43">        PlayerData playerData = container.getDataService().getPlayerData(playerId);</span>
+<span class="fc" id="L44">        container.getDataService().removePlayer(playerId);</span>
+<span class="fc" id="L45">        container.getDataService().removeGuild(playerData.getGuildId());</span>
+
+<span class="fc" id="L47">        container.getMissionFunctionalService().removePlayer(playerId);</span>
+<span class="fc" id="L48">        Guild guild = container.getDataService().getGuild(playerData.getGuildId());</span>
+
+<span class="pc bpc" id="L50" title="2 of 4 branches missed.">        if(guild == null &amp;&amp; !Objects.equals(playerData.getGuildId(), Events.getBasicGuildId())) {</span>
+<span class="nc" id="L51">            container.getEventService().removeGuild(playerData.getGuildId());</span>
+<span class="nc" id="L52">            container.getEventService().removePlayer(playerId);</span>
+        }
+<span class="fc" id="L54">    }</span>
+
+    @Override
+    public PlayerData getPlayerDataRequest(UUID playerId) {
+<span class="fc" id="L58">        return container.getDataService().getPlayerData(playerId);</span>
+    }
+
+    @Override
+    public Guild getGuildDataRequest(UUID playerId) {
+<span class="fc" id="L63">        return container.getDataService().getGuild(container</span>
+<span class="fc" id="L64">                .getDataService().getPlayerData(playerId).getGuildId());</span>
+    }
+
+    @Override
+    public void deleteGuildRequest(Long guildId) {
+<span class="fc" id="L69">        container.getEventService().removeGuild(guildId);</span>
+<span class="fc" id="L70">        container.getDataService().deleteGuild(guildId);</span>
+<span class="fc" id="L71">    }</span>
+
+    @Override
+    public void createGuildRequest(UUID playerId, Long guildId, String kName) {
+<span class="fc" id="L75">        container.getDataService().createGuild(playerId, guildId, kName);</span>
+<span class="fc" id="L76">        Guild guild = container.getDataService().getGuild(guildId);</span>
+<span class="fc" id="L77">        container.getMissionFunctionalService().fillGuildDashBoard(guildId, guild);</span>
+<span class="fc" id="L78">        container.getEventService().removePlayer(playerId);</span>
+<span class="fc" id="L79">        container.getEventService().initPlayer(playerId, guildId);</span>
+<span class="fc" id="L80">    }</span>
+
+    @Override
+    public void savePlayerRequest(UUID playerId) {
+<span class="fc" id="L84">        container.getDataService().savePlayer(playerId);</span>
+<span class="fc" id="L85">    }</span>
+
+    @Override
+    public List&lt;EventToken&gt; eventActivityRequest(UUID playerId, ActionType actionType) {
+
+<span class="fc" id="L90">        PlayerData playerData = container.getDataService().getPlayerData(playerId);</span>
+<span class="fc" id="L91">        return container.getEventService().registerAction(playerId, playerData.getGuildId(), actionType);</span>
+    }
+
+    @Override
+    public List&lt;StringBuilder&gt; getActiveEventsRequest() {
+<span class="fc" id="L96">        return container.getEventService().getActiveEvents();</span>
+    }
+
+    @Override
+    public StringBuilder getEventInfoRequest(UUID playerId, String eventName) {
+
+<span class="fc" id="L102">        PlayerData playerData = container.getDataService().getPlayerData(playerId);</span>
+
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        if(Objects.equals(playerData.getGuildId(), Events.getBasicGuildId())) {</span>
+<span class="fc" id="L105">            return new StringBuilder(&quot;You cant participate in this event when you are in the Server guild.&quot;);</span>
+        }
+
+<span class="fc" id="L108">        return container.getEventService().getEventInfo(playerId, eventName);</span>
+    }
+
+    @Override
+    public int getGuildMedalsOnEventRequest(UUID playerId, Long eventId) {
+
+<span class="fc" id="L114">        PlayerData playerData = container.getDataService().getPlayerData(playerId);</span>
+
+<span class="fc" id="L116">        return container.getEventService().getGuildMedals(playerData.getGuildId()).getEventMedals(eventId);</span>
+    }
+
+    @Override
+    public StringBuilder joinMissionRequest(UUID playerId, Long missionId) {
+
+<span class="fc" id="L122">        PlayerData playerData = container.getDataService().getPlayerData(playerId);</span>
+<span class="fc" id="L123">        Guild guild = container.getDataService().getGuild(playerData.getGuildId());</span>
+
+<span class="fc" id="L125">        return container.getMissionFunctionalService().joinMission(playerId, playerData, guild, missionId);</span>
+    }
+
+    @Override
+    public Map&lt;MissionData, List&lt;ObjectiveData&gt;&gt; getPlayerDashBoardRequest(UUID playerId) {
+<span class="fc" id="L130">        return container.getMissionFunctionalService().findPlayerDashBoard(playerId);</span>
+    }
+
+    @Override
+    public Map&lt;MissionData, List&lt;ObjectiveData&gt;&gt; getGuildDashBoardRequest(UUID playerId) {
+<span class="fc" id="L135">        PlayerData playerData = container.getDataService().getPlayerData(playerId);</span>
+<span class="fc" id="L136">        return container.getMissionInfoService().findGuildDashBoard(playerData.getGuildId());</span>
+    }
+
+    @Override
+    public Map&lt;String,CompletionData&gt; getPlayerRatesRequest(UUID playerId) {
+<span class="fc" id="L141">        return container.getMissionInfoService().getPlayerRates(playerId);</span>
+    }
+
+    @Override
+    public AppContainer getContainer() {
+<span class="fc" id="L146">        return container;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

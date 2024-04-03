@@ -7,16 +7,14 @@ public class Guild {
     private final String kName;
     private final LocalDateTime lastTimeUpdated;
     private final Level level;
-    private final EventMedals eventMedals;
     private final GuildModifiers guildModifiers;
 
     private int watched = 1;
 
-    public Guild(String kName, LocalDateTime lastTimeUpdated, Level level, EventMedals eventMedals, GuildModifiers guildModifiers) {
+    public Guild(String kName, LocalDateTime lastTimeUpdated, Level level, GuildModifiers guildModifiers) {
         this.kName = kName;
         this.lastTimeUpdated = lastTimeUpdated;
         this.level = level;
-        this.eventMedals = eventMedals;
         this.guildModifiers = guildModifiers;
     }
 
@@ -34,10 +32,6 @@ public class Guild {
 
     public GuildModifiers getGuildModifiers() {
         return guildModifiers;
-    }
-
-    public EventMedals getEventMedals() {
-        return eventMedals;
     }
 
     public int getMaxMissions() {

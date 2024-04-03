@@ -25,4 +25,9 @@ public abstract class AbstractBasicEvents extends AbstractPlan{
     public double getLimit() {
         return limit * 100;
     }
+
+    @Override
+    public double getCoefficient() {
+        return coefficient ;
+    }
 }

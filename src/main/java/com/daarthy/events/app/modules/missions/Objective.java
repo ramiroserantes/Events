@@ -8,7 +8,7 @@ public class Objective {
 
     private final Long missionId;
 
-    private final LocalDate expirationDate;
+    private LocalDate expirationDate;
 
     private final Grade grade;
     private final String target;
@@ -46,8 +46,13 @@ public class Objective {
         return grade;
     }
 
+
     public LocalDate getExpirationDate() {
         return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     public synchronized void updateObserved(int amount) {

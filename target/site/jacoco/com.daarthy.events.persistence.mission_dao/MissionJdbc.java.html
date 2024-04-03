@@ -19,65 +19,64 @@ import java.util.UUID;
                 Statement.RETURN_GENERATED_KEYS)) {
 
 <span class="fc" id="L21">            int i = 1;</span>
-<span class="pc bpc" id="L22" title="1 of 2 branches missed.">            if(missionData.getGuildId() != null) {</span>
-<span class="fc" id="L23">                preparedStatement.setLong(i++, missionData.getGuildId());</span>
-<span class="nc" id="L24">            } else {preparedStatement.setLong(i++, Types.BIGINT);}</span>
 
-<span class="fc" id="L26">            preparedStatement.setString(i++, missionData.getTitle());</span>
-<span class="fc" id="L27">            preparedStatement.setString(i++, missionData.getGrade().name());</span>
-<span class="fc" id="L28">            preparedStatement.setDate(i++, java.sql.Date.valueOf(missionData.getExpiration()));</span>
+<span class="fc" id="L23">            preparedStatement.setLong(i++, missionData.getGuildId());</span>
 
-<span class="pc bpc" id="L30" title="1 of 2 branches missed.">            if(missionData.getMaxCompletions() != null) {</span>
-<span class="fc" id="L31">                preparedStatement.setInt(i, missionData.getMaxCompletions());</span>
+<span class="fc" id="L25">            preparedStatement.setString(i++, missionData.getTitle());</span>
+<span class="fc" id="L26">            preparedStatement.setString(i++, missionData.getGrade().name());</span>
+<span class="fc" id="L27">            preparedStatement.setDate(i++, java.sql.Date.valueOf(missionData.getExpiration()));</span>
+
+<span class="fc bfc" id="L29" title="All 2 branches covered.">            if(missionData.getMaxCompletions() != null) {</span>
+<span class="fc" id="L30">                preparedStatement.setInt(i, missionData.getMaxCompletions());</span>
             } else {
-<span class="nc" id="L33">                preparedStatement.setInt(i, Types.INTEGER);</span>
+<span class="fc" id="L32">                preparedStatement.setInt(i, Types.INTEGER);</span>
             }
 
-<span class="fc" id="L36">            return execute(preparedStatement);</span>
+<span class="fc" id="L35">            return execute(preparedStatement);</span>
 
-<span class="nc" id="L38">        } catch (SQLException e) {</span>
-<span class="nc" id="L39">            Events.logInfo(ERROR);</span>
-<span class="nc" id="L40">            return null;</span>
+<span class="nc" id="L37">        } catch (SQLException e) {</span>
+<span class="nc" id="L38">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L39">            return null;</span>
         }
 
     }
 
     private Long execute(PreparedStatement preparedStatement) throws SQLException {
 
-<span class="fc" id="L47">        preparedStatement.executeUpdate();</span>
+<span class="fc" id="L46">        preparedStatement.executeUpdate();</span>
 
-<span class="fc" id="L49">        ResultSet generatedKeys = preparedStatement.getGeneratedKeys();</span>
+<span class="fc" id="L48">        ResultSet generatedKeys = preparedStatement.getGeneratedKeys();</span>
 
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if(generatedKeys.next()) {</span>
-<span class="fc" id="L52">            return generatedKeys.getLong(1);</span>
-<span class="nc" id="L53">        } else { return null;}</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">        if(generatedKeys.next()) {</span>
+<span class="fc" id="L51">            return generatedKeys.getLong(1);</span>
+<span class="nc" id="L52">        } else { return null;}</span>
 
     }
 
     @Override
     public Long createMissionObjective(Long missionId, ObjectiveData objectiveData, Connection connection) {
 
-<span class="fc" id="L60">        String queryString = &quot;INSERT INTO Objective(missionId, actionType, reqAmount, &quot; +</span>
+<span class="fc" id="L59">        String queryString = &quot;INSERT INTO Objective(missionId, actionType, reqAmount, &quot; +</span>
                 &quot; target, levels) VALUES (?, ?, ?, ?, ?)&quot;;
 
-<span class="fc" id="L63">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS)) {</span>
+<span class="fc" id="L62">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS)) {</span>
 
-<span class="fc" id="L65">            int i = 1;</span>
-<span class="fc" id="L66">            preparedStatement.setLong(i++, missionId);</span>
-<span class="fc" id="L67">            preparedStatement.setString(i++, objectiveData.getActionType().getActionTypeString());</span>
-<span class="fc" id="L68">            preparedStatement.setInt(i++, objectiveData.getReqAmount());</span>
-<span class="fc" id="L69">            preparedStatement.setString(i++, objectiveData.getTarget());</span>
-<span class="fc bfc" id="L70" title="All 2 branches covered.">            if(objectiveData.getLevels() != null) {</span>
-<span class="fc" id="L71">                preparedStatement.setInt(i, objectiveData.getLevels());</span>
+<span class="fc" id="L64">            int i = 1;</span>
+<span class="fc" id="L65">            preparedStatement.setLong(i++, missionId);</span>
+<span class="fc" id="L66">            preparedStatement.setString(i++, objectiveData.getActionType().getActionTypeString());</span>
+<span class="fc" id="L67">            preparedStatement.setInt(i++, objectiveData.getReqAmount());</span>
+<span class="fc" id="L68">            preparedStatement.setString(i++, objectiveData.getTarget());</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            if(objectiveData.getLevels() != null) {</span>
+<span class="fc" id="L70">                preparedStatement.setInt(i, objectiveData.getLevels());</span>
             } else {
-<span class="fc" id="L73">                preparedStatement.setNull(i, Types.INTEGER);</span>
+<span class="fc" id="L72">                preparedStatement.setNull(i, Types.INTEGER);</span>
             }
 
-<span class="fc" id="L76">            return execute(preparedStatement);</span>
+<span class="fc" id="L75">            return execute(preparedStatement);</span>
 
-<span class="nc" id="L78">        } catch (SQLException e) {</span>
-<span class="nc" id="L79">            Events.logInfo(ERROR);</span>
-<span class="nc" id="L80">            return null;</span>
+<span class="nc" id="L77">        } catch (SQLException e) {</span>
+<span class="nc" id="L78">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L79">            return null;</span>
         }
 
     }
@@ -85,38 +84,38 @@ import java.util.UUID;
     @Override
     public void saveMissionStatus(UUID playerId, Long missionId, MissionStatus status, Connection connection) {
 
-<span class="fc" id="L88">        String queryString = &quot;INSERT INTO MissionAccept (playerId, missionId, status, acceptDate) &quot; +</span>
+<span class="fc" id="L87">        String queryString = &quot;INSERT INTO MissionAccept (playerId, missionId, status, acceptDate) &quot; +</span>
                 &quot;VALUES (?, ?, ?, ?) &quot; +
                 &quot;ON DUPLICATE KEY UPDATE status = VALUES(status)&quot;;
 
-<span class="fc" id="L92">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
-<span class="fc" id="L93">            preparedStatement.setString(1, playerId.toString());</span>
-<span class="fc" id="L94">            preparedStatement.setLong(2, missionId);</span>
-<span class="fc" id="L95">            preparedStatement.setString(3, status.toString());</span>
-<span class="fc" id="L96">            preparedStatement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));</span>
+<span class="fc" id="L91">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
+<span class="fc" id="L92">            preparedStatement.setString(1, playerId.toString());</span>
+<span class="fc" id="L93">            preparedStatement.setLong(2, missionId);</span>
+<span class="fc" id="L94">            preparedStatement.setString(3, status.toString());</span>
+<span class="fc" id="L95">            preparedStatement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));</span>
 
-<span class="fc" id="L98">            preparedStatement.executeUpdate();</span>
-<span class="nc" id="L99">        } catch (SQLException e) {</span>
-<span class="nc" id="L100">            Events.logInfo(ERROR);</span>
-<span class="fc" id="L101">        }</span>
-<span class="fc" id="L102">    }</span>
+<span class="fc" id="L97">            preparedStatement.executeUpdate();</span>
+<span class="nc" id="L98">        } catch (SQLException e) {</span>
+<span class="nc" id="L99">            Events.logInfo(ERROR);</span>
+<span class="fc" id="L100">        }</span>
+<span class="fc" id="L101">    }</span>
 
     @Override
     public void saveObjectiveProgress(UUID playerId, Long objectiveId, int amount, Connection connection) {
-<span class="fc" id="L106">        String queryString = &quot;INSERT INTO ObjectiveProgress (playerId, objectiveId, amount) &quot; +</span>
+<span class="fc" id="L105">        String queryString = &quot;INSERT INTO ObjectiveProgress (playerId, objectiveId, amount) &quot; +</span>
                 &quot;VALUES (?, ?, ?) &quot; +
                 &quot;ON DUPLICATE KEY UPDATE amount = VALUES(amount)&quot;;
 
-<span class="fc" id="L110">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
-<span class="fc" id="L111">            preparedStatement.setString(1, playerId.toString());</span>
-<span class="fc" id="L112">            preparedStatement.setLong(2, objectiveId);</span>
-<span class="fc" id="L113">            preparedStatement.setInt(3, amount);</span>
+<span class="fc" id="L109">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
+<span class="fc" id="L110">            preparedStatement.setString(1, playerId.toString());</span>
+<span class="fc" id="L111">            preparedStatement.setLong(2, objectiveId);</span>
+<span class="fc" id="L112">            preparedStatement.setInt(3, amount);</span>
 
-<span class="fc" id="L115">            preparedStatement.executeUpdate();</span>
-<span class="nc" id="L116">        } catch (SQLException e) {</span>
-<span class="nc" id="L117">            Events.logInfo(ERROR);</span>
-<span class="fc" id="L118">        }</span>
-<span class="fc" id="L119">    }</span>
+<span class="fc" id="L114">            preparedStatement.executeUpdate();</span>
+<span class="nc" id="L115">        } catch (SQLException e) {</span>
+<span class="nc" id="L116">            Events.logInfo(ERROR);</span>
+<span class="fc" id="L117">        }</span>
+<span class="fc" id="L118">    }</span>
 
 
 

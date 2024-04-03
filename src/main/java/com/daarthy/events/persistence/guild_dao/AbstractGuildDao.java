@@ -1,7 +1,6 @@
 package com.daarthy.events.persistence.guild_dao;
 
 import com.daarthy.events.Events;
-import com.daarthy.events.app.modules.guilds.EventMedals;
 import com.daarthy.events.app.modules.guilds.Guild;
 import com.daarthy.events.app.modules.guilds.GuildModifiers;
 import com.daarthy.events.app.modules.guilds.Level;
@@ -52,12 +51,22 @@ public abstract class AbstractGuildDao implements GuildDao {
 
 
         String queryString = "DELETE FROM Guild g WHERE g.id = ?";
+        String secondQuery = "DELETE FROM GuildMedals m WHERE m.guildId = ?";
+
+        try (PreparedStatement secondStatement = connection.prepareStatement(secondQuery);) {
+            secondStatement.setLong(1, guildId);
+
+            secondStatement.executeUpdate();
+        } catch (SQLException e) {
+            Events.logInfo(ERROR);
+        }
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 
 
-            preparedStatement.setLong(1, guildId);
 
+
+            preparedStatement.setLong(1, guildId);
             preparedStatement.executeUpdate();
 
 
@@ -127,8 +136,8 @@ public abstract class AbstractGuildDao implements GuildDao {
             Float levelUpMod = resultSet.getFloat(i++);
             LocalDateTime lastTimeUpdated = resultSet.getTimestamp(i).toLocalDateTime();
 
-            return new Guild(kName, lastTimeUpdated, new Level(experience, lvl, maxLvl, levelUpMod),
-                    new EventMedals(), new GuildModifiers(ampMissions, ampBasicRewards));
+            return new Guild(kName, lastTimeUpdated, new Level(experience, lvl, maxLvl, levelUpMod)
+                    , new GuildModifiers(ampMissions, ampBasicRewards));
         } else {
             return null;
         }

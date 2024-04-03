@@ -1,7 +1,6 @@
 package com.daarthy.events.persistence.guild_dao;
 
 import com.daarthy.events.Events;
-import com.daarthy.events.app.modules.guilds.EventMedals;
 import com.daarthy.events.app.modules.guilds.Guild;
 import com.daarthy.events.app.modules.guilds.GuildModifiers;
 import com.daarthy.events.app.modules.guilds.Level;
@@ -27,7 +26,7 @@ public class GuildJdbc extends AbstractGuildDao {
             preparedStatement.executeUpdate();
 
             return new Guild(kName, LocalDate.now().atStartOfDay().minusDays(1L), new Level(0F, 0, 6, 0F),
-                    new EventMedals(), new GuildModifiers(0, 0F));
+                     new GuildModifiers(0, 0F));
 
         } catch (SQLException e) {
             Events.logInfo("Error on DB");

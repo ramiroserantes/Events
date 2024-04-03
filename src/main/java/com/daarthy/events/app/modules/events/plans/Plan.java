@@ -10,6 +10,8 @@ public interface Plan {
 
     double getLimit();
 
+    double getCoefficient();
+
     boolean matchActivity(ActionType actionType);
 
 }

@@ -7,51 +7,45 @@ public class Guild {
     private final String kName;
     private final LocalDateTime lastTimeUpdated;
     private final Level level;
-    private final EventMedals eventMedals;
     private final GuildModifiers guildModifiers;
 
-<span class="fc" id="L13">    private int watched = 1;</span>
+<span class="fc" id="L12">    private int watched = 1;</span>
 
-<span class="fc" id="L15">    public Guild(String kName, LocalDateTime lastTimeUpdated, Level level, EventMedals eventMedals, GuildModifiers guildModifiers) {</span>
-<span class="fc" id="L16">        this.kName = kName;</span>
-<span class="fc" id="L17">        this.lastTimeUpdated = lastTimeUpdated;</span>
-<span class="fc" id="L18">        this.level = level;</span>
-<span class="fc" id="L19">        this.eventMedals = eventMedals;</span>
-<span class="fc" id="L20">        this.guildModifiers = guildModifiers;</span>
-<span class="fc" id="L21">    }</span>
+<span class="fc" id="L14">    public Guild(String kName, LocalDateTime lastTimeUpdated, Level level, GuildModifiers guildModifiers) {</span>
+<span class="fc" id="L15">        this.kName = kName;</span>
+<span class="fc" id="L16">        this.lastTimeUpdated = lastTimeUpdated;</span>
+<span class="fc" id="L17">        this.level = level;</span>
+<span class="fc" id="L18">        this.guildModifiers = guildModifiers;</span>
+<span class="fc" id="L19">    }</span>
 
     public String getkName() {
-<span class="fc" id="L24">        return kName;</span>
+<span class="fc" id="L22">        return kName;</span>
     }
 
     public LocalDateTime getLastTimeUpdated() {
-<span class="fc" id="L28">        return lastTimeUpdated;</span>
+<span class="fc" id="L26">        return lastTimeUpdated;</span>
     }
 
     public Level getLevel() {
-<span class="fc" id="L32">        return level;</span>
+<span class="fc" id="L30">        return level;</span>
     }
 
     public GuildModifiers getGuildModifiers() {
-<span class="fc" id="L36">        return guildModifiers;</span>
-    }
-
-    public EventMedals getEventMedals() {
-<span class="fc" id="L40">        return eventMedals;</span>
+<span class="fc" id="L34">        return guildModifiers;</span>
     }
 
     public int getMaxMissions() {
-<span class="fc" id="L44">        return 4 + level.getCurrentLevel() + guildModifiers.getAmpMissions();</span>
+<span class="fc" id="L38">        return 4 + level.getCurrentLevel() + guildModifiers.getAmpMissions();</span>
     }
 
     public Float getAmplifiedProbability() {
-<span class="fc" id="L48">        return (float) (level.getCurrentLevel() * 5);</span>
+<span class="fc" id="L42">        return (float) (level.getCurrentLevel() * 5);</span>
     }
 
-<span class="fc" id="L51">    public synchronized void modifyWatch(int amount) {this.watched += amount;}</span>
+<span class="fc" id="L45">    public synchronized void modifyWatch(int amount) {this.watched += amount;}</span>
 
     public boolean isWatched() {
-<span class="fc bfc" id="L54" title="All 2 branches covered.">        return this.watched &gt; 0;</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        return this.watched &gt; 0;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

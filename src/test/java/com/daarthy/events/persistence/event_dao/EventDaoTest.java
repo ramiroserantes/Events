@@ -24,24 +24,6 @@ public class EventDaoTest {
     private PlayerDao playerDao = new PlayerJdbc();
     private static final Long DEFAULT_ID = 1L;
 
-    private void setUpValidEvent(Connection connection) {
-        String query = "INSERT INTO Events (worldScope, name, startDate, endDate) VALUES (?, ?, ?, ?)";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
-
-            int i = 1;
-            preparedStatement.setString(i++, ScopeEnum.ALL.name());
-            preparedStatement.setString(i++,"HuntingEvent");
-            preparedStatement.setDate(i++, Date.valueOf(LocalDate.now().minusDays(1)));
-            preparedStatement.setDate(i, Date.valueOf(LocalDate.now().plusDays(1)));
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void setUpInvalidEventStart(Connection connection) {
         String query = "INSERT INTO Events (worldScope, name, startDate, endDate) VALUES (?, ?, ?, ?)";
 
@@ -86,17 +68,14 @@ public class EventDaoTest {
 
         String queryDeletePlayerContribution = "DELETE FROM PlayerContribution";
         String queryDeleteMedals = "DELETE FROM GuildMedals";
-        String queryUpdate = "DELETE FROM Events";
 
         try (Connection connection = dataSource.getConnection()) {
 
-            PreparedStatement preparedStatement1 = connection.prepareStatement(queryUpdate);
             PreparedStatement preparedStatement2 = connection.prepareStatement(queryDeletePlayerContribution);
             PreparedStatement preparedStatement3 = connection.prepareStatement(queryDeleteMedals);
 
             preparedStatement3.executeUpdate();
             preparedStatement2.executeUpdate();
-            preparedStatement1.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -104,13 +83,13 @@ public class EventDaoTest {
 
     }
     @Test
-    public void testEventDaoByFindEmpty() {
+    public void testEventDaoByFindEmptyButDefault() {
 
         try (Connection connection = dataSource.getConnection()) {
 
             List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
 
-            assertTrue(eventDataList.isEmpty());
+            assertFalse(eventDataList.isEmpty());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -125,7 +104,7 @@ public class EventDaoTest {
             setUpInvalidEventStart(connection);
             List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
 
-            assertTrue(eventDataList.isEmpty());
+            assertEquals(3, eventDataList.size());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -140,7 +119,7 @@ public class EventDaoTest {
             setUpInvalidEventEnd(connection);
             List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
 
-            assertTrue(eventDataList.isEmpty());
+            assertFalse(eventDataList.isEmpty());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -152,11 +131,9 @@ public class EventDaoTest {
 
         try (Connection connection = dataSource.getConnection()) {
 
-            setUpValidEvent(connection);
             List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
 
-            assertEquals(1, eventDataList.size());
-            assertEquals("HuntingEvent", eventDataList.get(0).getName());
+            assertEquals(3, eventDataList.size());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -168,7 +145,6 @@ public class EventDaoTest {
 
         try (Connection connection = dataSource.getConnection()) {
 
-            setUpValidEvent(connection);
             List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
             Long eventId = eventDataList.get(0).getEventId();
 
@@ -186,7 +162,6 @@ public class EventDaoTest {
 
         try (Connection connection = dataSource.getConnection()) {
 
-            setUpValidEvent(connection);
             List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
             Long eventId = eventDataList.get(0).getEventId();
 
@@ -209,7 +184,6 @@ public class EventDaoTest {
             UUID playerID = UUID.randomUUID();
             playerDao.createPlayer(playerID, connection);
 
-            setUpValidEvent(connection);
             List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
             Long eventId = eventDataList.get(0).getEventId();
 
@@ -230,13 +204,12 @@ public class EventDaoTest {
             UUID playerID = UUID.randomUUID();
             playerDao.createPlayer(playerID, connection);
 
-            setUpValidEvent(connection);
             List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
-            Long eventId = eventDataList.get(0).getEventId();
+            EventData event = eventDataList.get(0);
 
-            eventDao.savePlayerContribution(connection, playerID, eventId, new Contribution(9, 9));
+            eventDao.savePlayerContribution(connection, playerID, event.getEventId(), new Contribution(9, 9), event.getMaxMedals());
 
-            Contribution contribution = eventDao.findPlayerContribution(connection, eventId, playerID);
+            Contribution contribution = eventDao.findPlayerContribution(connection, event.getEventId(), playerID);
 
             assertEquals(9, contribution.getItems());
             assertEquals(9, contribution.getMedals());

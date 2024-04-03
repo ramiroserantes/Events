@@ -17,6 +17,7 @@ public class Penalty {
 
         if(grades == null) {
             grades = new ArrayList<>();
+            penalties.put(guildId, grades);
         }
 
         grades.add(grade);

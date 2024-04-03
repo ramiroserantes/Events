@@ -38,6 +38,4 @@ public interface MissionFunctionalService {
     void removeNonWatchedObjectives();
 
 
-
-
 }

@@ -34,7 +34,7 @@ CREATE TABLE Missions (
     guildId BIGINT NULL,
     title VARCHAR(50) NOT NULL,
     grade CHAR(1) NOT NULL,
-    expiration DATE NULL,
+    expiration DATE NOT NULL,
     maxCompletions INT NULL,
     FOREIGN KEY (guildId) REFERENCES Guild(id) ON DELETE SET NULL
 );

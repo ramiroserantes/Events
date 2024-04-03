@@ -16,16 +16,21 @@ C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\services\E
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\services\MissionFunctionalService.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\persistence\event_dao\EventJdbc.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\persistence\event_dao\AbstractEventDao.java
+C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\api\AppContainer.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\persistence\event_dao\EventData.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\persistence\player_dao\PlayerData.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\util\DataSourceLocatorImpl.java
+C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\util\InternalScheduler.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\persistence\guild_dao\GuildDao.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\modules\events\plans\PlanFactory.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\modules\guilds\EventMedals.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\services\MissionFunctionalServiceImpl.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\services\EventService.java
+C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\util\InternalSchedulerImpl.java
+C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\util\EventMessageReader.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\persistence\player_dao\AbstractPlayerDao.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\modules\events\plans\MiningEventPlan.java
+C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\api\ApiGateway.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\modules\events\Event.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\persistence\mission_dao\Grade.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\modules\guilds\GuildModifiers.java
@@ -49,4 +54,5 @@ C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\services\D
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\services\MissionInfoService.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\persistence\mission_dao\CompletionData.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\modules\events\plans\AbstractPlan.java
+C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\api\ApiGatewayImpl.java
 C:\Users\ACER\Desktop\TFM\Events\src\main\java\com\daarthy\events\app\modules\guilds\Penalty.java

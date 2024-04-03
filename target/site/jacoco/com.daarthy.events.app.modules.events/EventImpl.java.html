@@ -34,7 +34,7 @@ public class EventImpl implements Event {
 <span class="fc" id="L34">            Contribution contribution = players.get(playerId);</span>
 <span class="fc bfc" id="L35" title="All 2 branches covered.">            if(plan.applyPlan(contribution.getItems())) {</span>
 <span class="fc" id="L36">                contribution.increaseItems();</span>
-<span class="fc" id="L37">                contribution.increaseMedals();</span>
+<span class="fc" id="L37">                contribution.increaseMedals(eventData.getMaxMedals());</span>
 <span class="fc" id="L38">                return contribution;</span>
             }
         }
@@ -48,19 +48,22 @@ public class EventImpl implements Event {
 
     @Override
     public Contribution removePlayer(UUID playerId) {
-<span class="fc" id="L51">        Contribution contribution = players.get(playerId);</span>
-<span class="fc" id="L52">        players.remove(playerId);</span>
-<span class="fc" id="L53">        return contribution;</span>
+<span class="fc" id="L51">        Contribution contribution = players.getOrDefault(playerId, null);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if(contribution != null) {</span>
+<span class="fc" id="L53">            players.remove(playerId);</span>
+<span class="fc" id="L54">            return contribution;</span>
+        }
+<span class="fc" id="L56">        return null;</span>
     }
 
     @Override
     public Map&lt;UUID, Contribution&gt; getPlayers() {
-<span class="fc" id="L58">        return players;</span>
+<span class="fc" id="L61">        return players;</span>
     }
 
     @Override
     public EventData getData() {
-<span class="fc" id="L63">        return eventData;</span>
+<span class="fc" id="L66">        return eventData;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

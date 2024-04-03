@@ -34,7 +34,7 @@ import java.util.*;
 <span class="fc" id="L34">                    missionData.setTitle((String) missionMap.get(&quot;title&quot;));</span>
 <span class="fc" id="L35">                    missionData.setExpiration(LocalDate.from(LocalDate.now().atStartOfDay().plusDays(grade.getPriority())));</span>
 <span class="fc" id="L36">                    missionData.setGrade(grade.getGradeString());</span>
-<span class="pc bpc" id="L37" title="1 of 2 branches missed.">                    if (!isDefaultGuild) {</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">                    if (!isDefaultGuild) {</span>
 <span class="fc" id="L38">                        missionData.setMaxCompletions(grade.getCompletions());</span>
                     }
 

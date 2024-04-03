@@ -14,6 +14,6 @@ public interface EventDao {
 
     Contribution findPlayerContribution(Connection connection, Long eventId, UUID playerId);
 
-    void savePlayerContribution(Connection connection, UUID playerId, Long eventId, Contribution contribution);
+    void savePlayerContribution(Connection connection, UUID playerId, Long eventId, Contribution contribution, int limitMedals);
 
 }

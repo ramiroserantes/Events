@@ -8,7 +8,7 @@ public class Objective {
 
     private final Long missionId;
 
-    private final LocalDate expirationDate;
+    private LocalDate expirationDate;
 
     private final Grade grade;
     private final String target;
@@ -46,22 +46,27 @@ public class Objective {
 <span class="fc" id="L46">        return grade;</span>
     }
 
+
     public LocalDate getExpirationDate() {
-<span class="nc" id="L50">        return expirationDate;</span>
+<span class="fc" id="L51">        return expirationDate;</span>
     }
 
+    public void setExpirationDate(LocalDate expirationDate) {
+<span class="fc" id="L55">        this.expirationDate = expirationDate;</span>
+<span class="fc" id="L56">    }</span>
+
     public synchronized void updateObserved(int amount) {
-<span class="fc" id="L54">        this.observers += amount;</span>
-<span class="fc" id="L55">    }</span>
+<span class="fc" id="L59">        this.observers += amount;</span>
+<span class="fc" id="L60">    }</span>
 
     public boolean isObserved() {
-<span class="fc bfc" id="L58" title="All 2 branches covered.">        return observers &gt; 0;</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        return observers &gt; 0;</span>
     }
 
     public boolean match(String target, Integer level) {
 
-<span class="fc bfc" id="L63" title="All 6 branches covered.">        return target.equalsIgnoreCase(this.target) &amp;&amp; (this.level == null ||</span>
-<span class="pc bpc" id="L64" title="1 of 2 branches missed.">                (level != null &amp;&amp; level &gt;= this.level));</span>
+<span class="fc bfc" id="L68" title="All 6 branches covered.">        return target.equalsIgnoreCase(this.target) &amp;&amp; (this.level == null ||</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">                (level != null &amp;&amp; level &gt;= this.level));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

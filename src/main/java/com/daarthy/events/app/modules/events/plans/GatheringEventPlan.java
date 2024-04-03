@@ -14,4 +14,5 @@ public class GatheringEventPlan extends AbstractBasicEvents {
         activities.add(ActionType.FARM);
         activities.add(ActionType.CUT);
     }
+
 }

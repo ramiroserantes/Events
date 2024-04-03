@@ -13,18 +13,19 @@ import java.util.Map;
 
     public void addPenalty(Long guildId, Grade grade) {
 
-<span class="nc" id="L16">        List&lt;Grade&gt; grades = penalties.getOrDefault(guildId, null);</span>
+<span class="fc" id="L16">        List&lt;Grade&gt; grades = penalties.getOrDefault(guildId, null);</span>
 
-<span class="nc bnc" id="L18" title="All 2 branches missed.">        if(grades == null) {</span>
-<span class="nc" id="L19">            grades = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">        if(grades == null) {</span>
+<span class="fc" id="L19">            grades = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L20">            penalties.put(guildId, grades);</span>
         }
 
-<span class="nc" id="L22">        grades.add(grade);</span>
+<span class="fc" id="L23">        grades.add(grade);</span>
 
-<span class="nc" id="L24">    }</span>
+<span class="fc" id="L25">    }</span>
 
     public Map&lt;Long, List&lt;Grade&gt;&gt; getPenalties() {
-<span class="fc" id="L27">        return penalties;</span>
+<span class="fc" id="L28">        return penalties;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
