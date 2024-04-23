@@ -51,19 +51,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<StringBuilder> getActiveEvents() {
+    public List<Event> getActiveEvents() {
 
-        List<StringBuilder> eventsInfo = new ArrayList<>();
-
-        StringBuilder info;
-        for(Event event : events) {
-           info = new StringBuilder();
-           info.append(">> ").append(event.getData().getName()).append(" -. Remaining Duration:  ");
-           info.append(event.getData().getRemainingTime());
-           eventsInfo.add(info);
-        }
-
-        return eventsInfo;
+        return events;
     }
 
     @Override
@@ -90,7 +80,7 @@ public class EventServiceImpl implements EventService {
         }
 
         if(result.toString().isEmpty()) {
-            result.append("This event is not Available.");
+            result.append(">> This event is not Available.");
         }
 
         return result;
@@ -126,8 +116,8 @@ public class EventServiceImpl implements EventService {
             List<EventData> eventsData = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
 
             for (EventData eventData : eventsData) {
-                if (events.stream().noneMatch(e -> e.getData().equals(eventData))) {
-                    events.add(new EventImpl(eventData));
+                if (events.stream().noneMatch(e -> e.getData().getName().equalsIgnoreCase(eventData.getName()))) {
+                        events.add(new EventImpl(eventData));
                 }
             }
 

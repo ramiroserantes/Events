@@ -29,7 +29,7 @@ public class MissionJdbc extends AbstractMissionDao {
             if(missionData.getMaxCompletions() != null) {
                 preparedStatement.setInt(i, missionData.getMaxCompletions());
             } else {
-                preparedStatement.setInt(i, Types.INTEGER);
+                preparedStatement.setNull(i, Types.INTEGER);
             }
 
             return execute(preparedStatement);

@@ -1,5 +1,6 @@
 package com.daarthy.events.api;
 
+import com.daarthy.events.app.modules.events.Event;
 import com.daarthy.events.app.modules.events.EventToken;
 import com.daarthy.events.app.modules.guilds.Guild;
 import com.daarthy.events.persistence.mission_dao.*;
@@ -24,6 +25,8 @@ public interface ApiGateway {
 
     Guild getGuildDataRequest(UUID playerId);
 
+    int getMaxJobLevelRequest(UUID playerId);
+
     void deleteGuildRequest(Long guildId);
 
     void createGuildRequest(UUID playerId, Long guildId, String kName);
@@ -38,7 +41,7 @@ public interface ApiGateway {
 
     List<EventToken> eventActivityRequest(UUID playerId, ActionType actionType);
 
-    List<StringBuilder> getActiveEventsRequest();
+    List<Event> getActiveEventsRequest();
 
     StringBuilder getEventInfoRequest(UUID playerId, String eventName);
 
@@ -52,8 +55,7 @@ public interface ApiGateway {
      *
      */
 
-
-    // t: List<Grade> missionActivityRequest(UUID playerId, String target, Integer level);
+    List<Grade> missionActivityRequest(UUID playerId, String target, Integer level);
 
     StringBuilder joinMissionRequest(UUID playerId, Long missionId);
 

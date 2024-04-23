@@ -15,32 +15,32 @@ public class DataSourceLocatorImpl {
     private HikariDataSource dataSource;
     private Properties properties;
 
-<span class="nc" id="L18">    public DataSourceLocatorImpl() throws IOException {</span>
-<span class="nc" id="L19">        loadDatabaseProperties();</span>
-<span class="nc" id="L20">        initializeDataSource();</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L18">    public DataSourceLocatorImpl() throws IOException {</span>
+<span class="fc" id="L19">        loadDatabaseProperties();</span>
+<span class="fc" id="L20">        initializeDataSource();</span>
+<span class="fc" id="L21">    }</span>
 
     public static synchronized DataSourceLocatorImpl getInstance() throws IOException {
-<span class="nc bnc" id="L24" title="All 2 branches missed.">        if (instance == null) {</span>
-<span class="nc" id="L25">            instance = new DataSourceLocatorImpl();</span>
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (instance == null) {</span>
+<span class="fc" id="L25">            instance = new DataSourceLocatorImpl();</span>
         }
-<span class="nc" id="L27">        return instance;</span>
+<span class="fc" id="L27">        return instance;</span>
     }
 
     private void initializeDataSource() {
-<span class="nc" id="L31">        HikariConfig config = new HikariConfig();</span>
-<span class="nc" id="L32">        config.setJdbcUrl(properties.getProperty(&quot;database.url&quot;));</span>
-<span class="nc" id="L33">        config.setUsername(properties.getProperty(&quot;database.username&quot;));</span>
-<span class="nc" id="L34">        config.setPassword(properties.getProperty(&quot;database.password&quot;));</span>
-<span class="nc" id="L35">        config.addDataSourceProperty(&quot;serverTimezone&quot;, &quot;UTC&quot;);</span>
+<span class="fc" id="L31">        HikariConfig config = new HikariConfig();</span>
+<span class="fc" id="L32">        config.setJdbcUrl(properties.getProperty(&quot;database.url&quot;));</span>
+<span class="fc" id="L33">        config.setUsername(properties.getProperty(&quot;database.username&quot;));</span>
+<span class="fc" id="L34">        config.setPassword(properties.getProperty(&quot;database.password&quot;));</span>
+<span class="fc" id="L35">        config.addDataSourceProperty(&quot;serverTimezone&quot;, &quot;UTC&quot;);</span>
 
-<span class="nc" id="L37">        config.setMaximumPoolSize(20);</span>
+<span class="fc" id="L37">        config.setMaximumPoolSize(20);</span>
 
-<span class="nc" id="L39">        this.dataSource = new HikariDataSource(config);</span>
-<span class="nc" id="L40">    }</span>
+<span class="fc" id="L39">        this.dataSource = new HikariDataSource(config);</span>
+<span class="fc" id="L40">    }</span>
 
     public HikariDataSource getDataSource() {
-<span class="nc" id="L43">        return dataSource;</span>
+<span class="fc" id="L43">        return dataSource;</span>
     }
 
     public Connection getConnection() throws SQLException {
@@ -48,10 +48,10 @@ public class DataSourceLocatorImpl {
     }
 
     private void loadDatabaseProperties() throws IOException {
-<span class="nc" id="L51">        properties = new Properties();</span>
-<span class="nc" id="L52">        InputStream input = getClass().getClassLoader().getResourceAsStream(&quot;database.properties&quot;);</span>
+<span class="fc" id="L51">        properties = new Properties();</span>
+<span class="fc" id="L52">        InputStream input = getClass().getClassLoader().getResourceAsStream(&quot;database.properties&quot;);</span>
 
-<span class="nc" id="L54">        properties.load(input);</span>
-<span class="nc" id="L55">    }</span>
+<span class="fc" id="L54">        properties.load(input);</span>
+<span class="fc" id="L55">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

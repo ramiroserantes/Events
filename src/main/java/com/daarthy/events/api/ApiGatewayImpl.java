@@ -1,12 +1,10 @@
 package com.daarthy.events.api;
 
 import com.daarthy.events.Events;
+import com.daarthy.events.app.modules.events.Event;
 import com.daarthy.events.app.modules.events.EventToken;
 import com.daarthy.events.app.modules.guilds.Guild;
-import com.daarthy.events.persistence.mission_dao.ActionType;
-import com.daarthy.events.persistence.mission_dao.CompletionData;
-import com.daarthy.events.persistence.mission_dao.MissionData;
-import com.daarthy.events.persistence.mission_dao.ObjectiveData;
+import com.daarthy.events.persistence.mission_dao.*;
 import com.daarthy.events.persistence.player_dao.PlayerData;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -32,6 +30,7 @@ public class ApiGatewayImpl implements ApiGateway{
 
         container.getMissionFunctionalService().fillGuildDashBoard(playerData.getGuildId(), guild);
         container.getMissionFunctionalService().initPlayer(playerId);
+        container.getEventService().setUpEvents();
         if(!Objects.equals(playerData.getGuildId(), Events.getBasicGuildId())) {
             container.getEventService().initPlayer(playerId, playerData.getGuildId());
         }
@@ -65,6 +64,11 @@ public class ApiGatewayImpl implements ApiGateway{
     }
 
     @Override
+    public int getMaxJobLevelRequest(UUID playerId) {
+        return container.getDataService().getJobMaxLevel(playerId);
+    }
+
+    @Override
     public void deleteGuildRequest(Long guildId) {
         container.getEventService().removeGuild(guildId);
         container.getDataService().deleteGuild(guildId);
@@ -88,11 +92,16 @@ public class ApiGatewayImpl implements ApiGateway{
     public List<EventToken> eventActivityRequest(UUID playerId, ActionType actionType) {
 
         PlayerData playerData = container.getDataService().getPlayerData(playerId);
+
+        if(playerData.getGuildId().equals(Events.getBasicGuildId())) {
+            return null;
+        }
+
         return container.getEventService().registerAction(playerId, playerData.getGuildId(), actionType);
     }
 
     @Override
-    public List<StringBuilder> getActiveEventsRequest() {
+    public List<Event> getActiveEventsRequest() {
         return container.getEventService().getActiveEvents();
     }
 
@@ -102,7 +111,7 @@ public class ApiGatewayImpl implements ApiGateway{
         PlayerData playerData = container.getDataService().getPlayerData(playerId);
 
         if(Objects.equals(playerData.getGuildId(), Events.getBasicGuildId())) {
-            return new StringBuilder("You cant participate in this event when you are in the Server guild.");
+            return new StringBuilder(">> You cant participate in this event when you are in the Server guild.");
         }
 
         return container.getEventService().getEventInfo(playerId, eventName);
@@ -114,6 +123,12 @@ public class ApiGatewayImpl implements ApiGateway{
         PlayerData playerData = container.getDataService().getPlayerData(playerId);
 
         return container.getEventService().getGuildMedals(playerData.getGuildId()).getEventMedals(eventId);
+    }
+
+    @Override
+    public List<Grade> missionActivityRequest(UUID playerId, String target, Integer level) {
+
+        return container.getMissionFunctionalService().addProgress(playerId, target, level);
     }
 
     @Override

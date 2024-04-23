@@ -210,8 +210,8 @@ import java.util.UUID;
 <span class="fc" id="L210">        String grade = resultSet.getString(&quot;grade&quot;);</span>
 <span class="fc" id="L211">        LocalDate expiration = resultSet.getTimestamp(&quot;expiration&quot;).toLocalDateTime().toLocalDate();</span>
 <span class="fc" id="L212">        Integer maxCompletions = resultSet.getInt(&quot;maxCompletions&quot;);</span>
-<span class="pc bpc" id="L213" title="1 of 2 branches missed.">        if(resultSet.wasNull()) {</span>
-<span class="nc" id="L214">            maxCompletions = null;</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">        if(resultSet.wasNull()) {</span>
+<span class="fc" id="L214">            maxCompletions = null;</span>
         }
 
 <span class="fc" id="L217">        return new MissionData(id, guildId, title, grade, expiration, maxCompletions);</span>

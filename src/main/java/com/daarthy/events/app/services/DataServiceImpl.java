@@ -79,6 +79,21 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
+    public int getJobMaxLevel(UUID playerId) {
+
+        try (Connection connection = dataSource.getConnection()) {
+
+            return guildDao.findGuildByPlayer(playerId, connection)
+                    .getLevel().getMaxJobLevel();
+
+        } catch (SQLException e) {
+            Events.logInfo("Error in DataService - getJobMaxLevel.");
+        }
+
+        return 15;
+    }
+
+    @Override
     public void savePlayer(UUID playerId) {
 
         try (Connection connection = dataSource.getConnection()) {

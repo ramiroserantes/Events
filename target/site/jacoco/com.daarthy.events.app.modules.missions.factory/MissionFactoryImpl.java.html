@@ -34,39 +34,40 @@ import java.util.*;
 <span class="fc" id="L34">                    missionData.setTitle((String) missionMap.get(&quot;title&quot;));</span>
 <span class="fc" id="L35">                    missionData.setExpiration(LocalDate.from(LocalDate.now().atStartOfDay().plusDays(grade.getPriority())));</span>
 <span class="fc" id="L36">                    missionData.setGrade(grade.getGradeString());</span>
-<span class="fc bfc" id="L37" title="All 2 branches covered.">                    if (!isDefaultGuild) {</span>
-<span class="fc" id="L38">                        missionData.setMaxCompletions(grade.getCompletions());</span>
+
+<span class="fc bfc" id="L38" title="All 2 branches covered.">                    if (!isDefaultGuild) {</span>
+<span class="fc" id="L39">                        missionData.setMaxCompletions(grade.getCompletions());</span>
                     }
 
-<span class="fc" id="L41">                    List&lt;ObjectiveData&gt; objectives = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L42">                    List&lt;Map&lt;String, Object&gt;&gt; objectivesList = (List&lt;Map&lt;String, Object&gt;&gt;) missionMap.get(&quot;objectives&quot;);</span>
+<span class="fc" id="L42">                    List&lt;ObjectiveData&gt; objectives = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L43">                    List&lt;Map&lt;String, Object&gt;&gt; objectivesList = (List&lt;Map&lt;String, Object&gt;&gt;) missionMap.get(&quot;objectives&quot;);</span>
 
-<span class="fc bfc" id="L44" title="All 2 branches covered.">                    for (Map&lt;String, Object&gt; objectiveMap : objectivesList) {</span>
-<span class="fc" id="L45">                        ObjectiveData objectiveData = new ObjectiveData();</span>
-<span class="fc" id="L46">                        objectiveData.setTarget((String) objectiveMap.get(&quot;target&quot;));</span>
-<span class="fc" id="L47">                        objectiveData.setActionType(ActionType.valueOf((String) objectiveMap.get(&quot;actionType&quot;)));</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">                    for (Map&lt;String, Object&gt; objectiveMap : objectivesList) {</span>
+<span class="fc" id="L46">                        ObjectiveData objectiveData = new ObjectiveData();</span>
+<span class="fc" id="L47">                        objectiveData.setTarget((String) objectiveMap.get(&quot;target&quot;));</span>
+<span class="fc" id="L48">                        objectiveData.setActionType(ActionType.valueOf((String) objectiveMap.get(&quot;actionType&quot;)));</span>
 
-<span class="fc" id="L49">                        int reqAmount = (int) objectiveMap.get(&quot;reqAmount&quot;);</span>
-<span class="fc" id="L50">                        double deviation = random.nextDouble() * 0.2 - 0.1; // Deviation between -10% and 10%</span>
-<span class="fc" id="L51">                        objectiveData.setReqAmount((int) Math.round(reqAmount + reqAmount * deviation));</span>
+<span class="fc" id="L50">                        int reqAmount = (int) objectiveMap.get(&quot;reqAmount&quot;);</span>
+<span class="fc" id="L51">                        double deviation = random.nextDouble() * 0.2 - 0.1; // Deviation between -10% and 10%</span>
+<span class="fc" id="L52">                        objectiveData.setReqAmount((int) Math.round(reqAmount + reqAmount * deviation));</span>
 
-<span class="fc bfc" id="L53" title="All 2 branches covered.">                        if (objectiveMap.containsKey(&quot;levels&quot;)) {</span>
-<span class="fc" id="L54">                            objectiveData.setLevels((int) objectiveMap.get(&quot;levels&quot;));</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">                        if (objectiveMap.containsKey(&quot;levels&quot;)) {</span>
+<span class="fc" id="L55">                            objectiveData.setLevels((int) objectiveMap.get(&quot;levels&quot;));</span>
                         }
 
-<span class="fc" id="L57">                        objectives.add(objectiveData);</span>
-<span class="fc" id="L58">                    }</span>
+<span class="fc" id="L58">                        objectives.add(objectiveData);</span>
+<span class="fc" id="L59">                    }</span>
 
-<span class="fc" id="L60">                    mission.put(missionData, objectives);</span>
+<span class="fc" id="L61">                    mission.put(missionData, objectives);</span>
                 }
-<span class="fc" id="L62">            } else {</span>
-<span class="nc" id="L63">                Events.logInfo(&quot;There aren't any mission for the declared Grade.&quot;);</span>
+<span class="fc" id="L63">            } else {</span>
+<span class="nc" id="L64">                Events.logInfo(&quot;There aren't any mission for the declared Grade.&quot;);</span>
             }
-<span class="nc" id="L65">        } catch (Exception e) {</span>
-<span class="nc" id="L66">            Events.logInfo(&quot;Source file not Found&quot;);</span>
-<span class="fc" id="L67">        }</span>
+<span class="nc" id="L66">        } catch (Exception e) {</span>
+<span class="nc" id="L67">            Events.logInfo(&quot;Source file not Found&quot;);</span>
+<span class="fc" id="L68">        }</span>
 
-<span class="fc" id="L69">        return mission;</span>
+<span class="fc" id="L70">        return mission;</span>
     }
 
 }

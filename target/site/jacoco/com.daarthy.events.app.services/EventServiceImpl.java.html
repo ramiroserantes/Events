@@ -51,166 +51,156 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List&lt;StringBuilder&gt; getActiveEvents() {
+    public List&lt;Event&gt; getActiveEvents() {
 
-<span class="fc" id="L56">        List&lt;StringBuilder&gt; eventsInfo = new ArrayList&lt;&gt;();</span>
-
-        StringBuilder info;
-<span class="fc bfc" id="L59" title="All 2 branches covered.">        for(Event event : events) {</span>
-<span class="fc" id="L60">           info = new StringBuilder();</span>
-<span class="fc" id="L61">           info.append(&quot;&gt;&gt; &quot;).append(event.getData().getName()).append(&quot; -. Remaining Duration:  &quot;);</span>
-<span class="fc" id="L62">           info.append(event.getData().getRemainingTime());</span>
-<span class="fc" id="L63">           eventsInfo.add(info);</span>
-<span class="fc" id="L64">        }</span>
-
-<span class="fc" id="L66">        return eventsInfo;</span>
+<span class="fc" id="L56">        return events;</span>
     }
 
     @Override
     public void saveAllGuilds() {
 
-<span class="fc" id="L72">        guildMedals.forEach((guildId, data) -&gt; saveGuild(guildId));</span>
+<span class="fc" id="L62">        guildMedals.forEach((guildId, data) -&gt; saveGuild(guildId));</span>
 
-<span class="fc" id="L74">    }</span>
+<span class="fc" id="L64">    }</span>
 
     @Override
     public StringBuilder getEventInfo(UUID playerId, String eventName) {
 
-<span class="fc" id="L79">        DecimalFormat decimalFormat = new DecimalFormat(&quot;#.######&quot;);</span>
-<span class="fc" id="L80">        StringBuilder result = new StringBuilder();</span>
-<span class="fc bfc" id="L81" title="All 2 branches covered.">        for(Event e : events) {</span>
-<span class="fc bfc" id="L82" title="All 2 branches covered.">            if(e.getData().getName().equalsIgnoreCase(eventName)) {</span>
-<span class="fc" id="L83">                Contribution contribution = e.getPlayers().get(playerId);</span>
-<span class="fc" id="L84">                result.append(EventMessageReader.getMessage(e.getData().getName(),</span>
-<span class="fc" id="L85">                        decimalFormat.format(e.getPlan().getCoefficient()),</span>
-<span class="fc" id="L86">                        decimalFormat.format(contribution.getItems()),</span>
-<span class="fc" id="L87">                        decimalFormat.format(e.getPlan().getProbability(contribution.getItems())),</span>
-<span class="fc" id="L88">                        decimalFormat.format(e.getPlan().getLimit())));</span>
+<span class="fc" id="L69">        DecimalFormat decimalFormat = new DecimalFormat(&quot;#.######&quot;);</span>
+<span class="fc" id="L70">        StringBuilder result = new StringBuilder();</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        for(Event e : events) {</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">            if(e.getData().getName().equalsIgnoreCase(eventName)) {</span>
+<span class="fc" id="L73">                Contribution contribution = e.getPlayers().get(playerId);</span>
+<span class="fc" id="L74">                result.append(EventMessageReader.getMessage(e.getData().getName(),</span>
+<span class="fc" id="L75">                        decimalFormat.format(e.getPlan().getCoefficient()),</span>
+<span class="fc" id="L76">                        decimalFormat.format(contribution.getItems()),</span>
+<span class="fc" id="L77">                        decimalFormat.format(e.getPlan().getProbability(contribution.getItems())),</span>
+<span class="fc" id="L78">                        decimalFormat.format(e.getPlan().getLimit())));</span>
             }
-<span class="fc" id="L90">        }</span>
+<span class="fc" id="L80">        }</span>
 
-<span class="fc bfc" id="L92" title="All 2 branches covered.">        if(result.toString().isEmpty()) {</span>
-<span class="fc" id="L93">            result.append(&quot;This event is not Available.&quot;);</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if(result.toString().isEmpty()) {</span>
+<span class="fc" id="L83">            result.append(&quot;&gt;&gt; This event is not Available.&quot;);</span>
         }
 
-<span class="fc" id="L96">        return result;</span>
+<span class="fc" id="L86">        return result;</span>
     }
 
     @Override
     public List&lt;EventData&gt; removeInactiveEvents() {
 
-<span class="fc" id="L102">        List&lt;EventData&gt; eventsRemoved = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L92">        List&lt;EventData&gt; eventsRemoved = new ArrayList&lt;&gt;();</span>
 
-<span class="fc" id="L104">        Iterator&lt;Event&gt; iterator = events.iterator();</span>
-<span class="fc bfc" id="L105" title="All 2 branches covered.">        while (iterator.hasNext()) {</span>
-<span class="fc" id="L106">            Event event = iterator.next();</span>
-<span class="pc bpc" id="L107" title="1 of 2 branches missed.">            if (event.getData().getEndDate().isBefore(LocalDate.now().atStartOfDay().toLocalDate())) {</span>
-<span class="nc" id="L108">                iterator.remove();</span>
-<span class="nc" id="L109">                eventsRemoved.add(event.getData());</span>
+<span class="fc" id="L94">        Iterator&lt;Event&gt; iterator = events.iterator();</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        while (iterator.hasNext()) {</span>
+<span class="fc" id="L96">            Event event = iterator.next();</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">            if (event.getData().getEndDate().isBefore(LocalDate.now().atStartOfDay().toLocalDate())) {</span>
+<span class="nc" id="L98">                iterator.remove();</span>
+<span class="nc" id="L99">                eventsRemoved.add(event.getData());</span>
             }
-<span class="fc" id="L111">        }</span>
+<span class="fc" id="L101">        }</span>
 
-<span class="fc" id="L113">        return eventsRemoved;</span>
+<span class="fc" id="L103">        return eventsRemoved;</span>
     }
 
     @Override
     public EventMedals getGuildMedals(Long guildId) {
-<span class="fc" id="L118">        return guildMedals.getOrDefault(guildId, null);</span>
+<span class="fc" id="L108">        return guildMedals.getOrDefault(guildId, null);</span>
     }
 
     @Override
     public void setUpEvents() {
 
-<span class="fc" id="L124">        try (Connection connection = dataSource.getConnection()) {</span>
+<span class="fc" id="L114">        try (Connection connection = dataSource.getConnection()) {</span>
 
-<span class="fc" id="L126">            List&lt;EventData&gt; eventsData = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);</span>
+<span class="fc" id="L116">            List&lt;EventData&gt; eventsData = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);</span>
 
-<span class="fc bfc" id="L128" title="All 2 branches covered.">            for (EventData eventData : eventsData) {</span>
-<span class="pc bpc" id="L129" title="1 of 2 branches missed.">                if (events.stream().noneMatch(e -&gt; e.getData().equals(eventData))) {</span>
-<span class="fc" id="L130">                    events.add(new EventImpl(eventData));</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">            for (EventData eventData : eventsData) {</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">                if (events.stream().noneMatch(e -&gt; e.getData().getName().equalsIgnoreCase(eventData.getName()))) {</span>
+<span class="fc" id="L120">                        events.add(new EventImpl(eventData));</span>
                 }
-<span class="fc" id="L132">            }</span>
+<span class="fc" id="L122">            }</span>
 
-<span class="nc" id="L134">        } catch (SQLException e) {</span>
-<span class="nc" id="L135">            Events.logInfo(&quot;setUpEvents error&quot;);</span>
-<span class="fc" id="L136">        }</span>
-<span class="fc" id="L137">    }</span>
+<span class="nc" id="L124">        } catch (SQLException e) {</span>
+<span class="nc" id="L125">            Events.logInfo(&quot;setUpEvents error&quot;);</span>
+<span class="fc" id="L126">        }</span>
+<span class="fc" id="L127">    }</span>
 
 
     @Override
     public void initPlayer(UUID playerId, Long guildId) {
 
-<span class="fc" id="L143">        try (Connection connection = dataSource.getConnection()) {</span>
+<span class="fc" id="L133">        try (Connection connection = dataSource.getConnection()) {</span>
 
-<span class="fc bfc" id="L145" title="All 2 branches covered.">            for(Event e : events) {</span>
-<span class="fc" id="L146">                Contribution contribution = eventDao.findPlayerContribution(connection, e.getData().getEventId(), playerId);</span>
-<span class="fc bfc" id="L147" title="All 2 branches covered.">                if(contribution != null) {</span>
-<span class="fc" id="L148">                    e.addPlayer(playerId, contribution);</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">            for(Event e : events) {</span>
+<span class="fc" id="L136">                Contribution contribution = eventDao.findPlayerContribution(connection, e.getData().getEventId(), playerId);</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">                if(contribution != null) {</span>
+<span class="fc" id="L138">                    e.addPlayer(playerId, contribution);</span>
                 } else {
-<span class="fc" id="L150">                    e.addPlayer(playerId, new Contribution());</span>
+<span class="fc" id="L140">                    e.addPlayer(playerId, new Contribution());</span>
                 }
-<span class="fc" id="L152">            }</span>
+<span class="fc" id="L142">            }</span>
 
-<span class="fc" id="L154">            EventMedals eventMedals = guildMedals.getOrDefault(guildId, null);</span>
+<span class="fc" id="L144">            EventMedals eventMedals = guildMedals.getOrDefault(guildId, null);</span>
 
-<span class="pc bpc" id="L156" title="1 of 2 branches missed.">            if(eventMedals == null) {</span>
-<span class="fc" id="L157">                EventMedals medals = new EventMedals();</span>
-<span class="fc bfc" id="L158" title="All 2 branches covered.">                for(Event e : events) {</span>
-<span class="fc" id="L159">                    medals.getMedals().put(e.getData().getEventId(), eventDao.findGuildMedals(</span>
-<span class="fc" id="L160">                            connection, guildId, e.getData().getEventId()));</span>
-<span class="fc" id="L161">                }</span>
-<span class="fc" id="L162">                guildMedals.put(guildId, medals);</span>
+<span class="pc bpc" id="L146" title="1 of 2 branches missed.">            if(eventMedals == null) {</span>
+<span class="fc" id="L147">                EventMedals medals = new EventMedals();</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">                for(Event e : events) {</span>
+<span class="fc" id="L149">                    medals.getMedals().put(e.getData().getEventId(), eventDao.findGuildMedals(</span>
+<span class="fc" id="L150">                            connection, guildId, e.getData().getEventId()));</span>
+<span class="fc" id="L151">                }</span>
+<span class="fc" id="L152">                guildMedals.put(guildId, medals);</span>
             }
 
 
-<span class="nc" id="L166">        } catch (SQLException e) {</span>
-<span class="nc" id="L167">            Events.logInfo(&quot;Error on Event init player&quot;);</span>
-<span class="fc" id="L168">        }</span>
-<span class="fc" id="L169">    }</span>
+<span class="nc" id="L156">        } catch (SQLException e) {</span>
+<span class="nc" id="L157">            Events.logInfo(&quot;Error on Event init player&quot;);</span>
+<span class="fc" id="L158">        }</span>
+<span class="fc" id="L159">    }</span>
 
     @Override
     public void removeGuild(Long guildId) {
 
-<span class="fc" id="L174">        saveGuild(guildId);</span>
-<span class="fc" id="L175">        guildMedals.remove(guildId);</span>
-<span class="fc" id="L176">    }</span>
+<span class="fc" id="L164">        saveGuild(guildId);</span>
+<span class="fc" id="L165">        guildMedals.remove(guildId);</span>
+<span class="fc" id="L166">    }</span>
 
     @Override
     public void saveGuild(Long guildId) {
 
-<span class="fc" id="L181">        try (Connection connection = dataSource.getConnection()) {</span>
-<span class="fc" id="L182">            guildMedals.get(guildId).getMedals().forEach((eventId, medals) -&gt;</span>
-<span class="fc" id="L183">                    eventDao.saveGuildMedals(connection, guildId, eventId, medals)</span>
+<span class="fc" id="L171">        try (Connection connection = dataSource.getConnection()) {</span>
+<span class="fc" id="L172">            guildMedals.get(guildId).getMedals().forEach((eventId, medals) -&gt;</span>
+<span class="fc" id="L173">                    eventDao.saveGuildMedals(connection, guildId, eventId, medals)</span>
             );
-<span class="nc" id="L185">        } catch (SQLException e) {</span>
-<span class="nc" id="L186">            Events.logInfo(&quot;Error on saveGuild&quot;);</span>
-<span class="fc" id="L187">        }</span>
-<span class="fc" id="L188">    }</span>
+<span class="nc" id="L175">        } catch (SQLException e) {</span>
+<span class="nc" id="L176">            Events.logInfo(&quot;Error on saveGuild&quot;);</span>
+<span class="fc" id="L177">        }</span>
+<span class="fc" id="L178">    }</span>
 
     @Override
     public void savePlayer(UUID playerId) {
 
-<span class="fc" id="L193">        try (Connection connection = dataSource.getConnection()) {</span>
+<span class="fc" id="L183">        try (Connection connection = dataSource.getConnection()) {</span>
 
-<span class="fc" id="L195">            events.forEach(e -&gt; {</span>
-<span class="fc bfc" id="L196" title="All 2 branches covered.">                if(e.getPlayers().containsKey(playerId)) {</span>
-<span class="fc" id="L197">                    eventDao.savePlayerContribution(connection, playerId, e.getData().getEventId(),</span>
-<span class="fc" id="L198">                            e.getPlayers().get(playerId), e.getData().getMaxMedals());</span>
+<span class="fc" id="L185">            events.forEach(e -&gt; {</span>
+<span class="fc bfc" id="L186" title="All 2 branches covered.">                if(e.getPlayers().containsKey(playerId)) {</span>
+<span class="fc" id="L187">                    eventDao.savePlayerContribution(connection, playerId, e.getData().getEventId(),</span>
+<span class="fc" id="L188">                            e.getPlayers().get(playerId), e.getData().getMaxMedals());</span>
                 }
-<span class="fc" id="L200">            });</span>
+<span class="fc" id="L190">            });</span>
 
-<span class="nc" id="L202">        } catch (SQLException e) {</span>
-<span class="nc" id="L203">            Events.logInfo(&quot;Error on savePlayer&quot;);</span>
-<span class="fc" id="L204">        }</span>
+<span class="nc" id="L192">        } catch (SQLException e) {</span>
+<span class="nc" id="L193">            Events.logInfo(&quot;Error on savePlayer&quot;);</span>
+<span class="fc" id="L194">        }</span>
 
-<span class="fc" id="L206">    }</span>
+<span class="fc" id="L196">    }</span>
 
 
     @Override
     public void removePlayer(UUID playerId) {
-<span class="fc" id="L211">        savePlayer(playerId);</span>
-<span class="fc" id="L212">        events.forEach(e -&gt; e.removePlayer(playerId));</span>
-<span class="fc" id="L213">    }</span>
+<span class="fc" id="L201">        savePlayer(playerId);</span>
+<span class="fc" id="L202">        events.forEach(e -&gt; e.removePlayer(playerId));</span>
+<span class="fc" id="L203">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

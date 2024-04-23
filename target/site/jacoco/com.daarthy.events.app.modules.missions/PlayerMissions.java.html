@@ -45,7 +45,7 @@ import java.util.*;
 
 <span class="fc bfc" id="L46" title="All 2 branches covered.">        for (Map.Entry&lt;Long, Grade&gt; entry : foundObjectives.entrySet()) {</span>
 <span class="fc" id="L47">            Long missionId = entry.getKey();</span>
-<span class="pc bpc" id="L48" title="1 of 2 branches missed.">            if (objectives.values().stream().noneMatch(obj -&gt; obj.getMissionId().equals(missionId))) {</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">            if (objectives.values().stream().noneMatch(obj -&gt; obj.getMissionId().equals(missionId))) {</span>
 <span class="fc" id="L49">                completed.put(missionId, entry.getValue());</span>
             }
 <span class="fc" id="L51">        }</span>

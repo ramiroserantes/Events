@@ -29,7 +29,7 @@ import java.util.UUID;
 <span class="fc bfc" id="L29" title="All 2 branches covered.">            if(missionData.getMaxCompletions() != null) {</span>
 <span class="fc" id="L30">                preparedStatement.setInt(i, missionData.getMaxCompletions());</span>
             } else {
-<span class="fc" id="L32">                preparedStatement.setInt(i, Types.INTEGER);</span>
+<span class="fc" id="L32">                preparedStatement.setNull(i, Types.INTEGER);</span>
             }
 
 <span class="fc" id="L35">            return execute(preparedStatement);</span>

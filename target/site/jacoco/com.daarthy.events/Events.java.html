@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Events.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Events</a> &gt; <a href="index.source.html" class="el_package">com.daarthy.events</a> &gt; <span class="el_source">Events.java</span></div><h1>Events.java</h1><pre class="source lang-java linenums">package com.daarthy.events;
 
+import com.daarthy.events.api.ApiGateway;
+import com.daarthy.events.api.ApiGatewayImpl;
+import com.daarthy.events.app.util.DataSourceLocatorImpl;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.util.logging.Logger;
-<span class="nc" id="L6">public final class Events extends JavaPlugin {</span>
+<span class="nc" id="L10">public final class Events extends JavaPlugin {</span>
 
     private static final Logger logger;
-<span class="fc" id="L9">    private static final Long BASIC_GUILD = 1L;</span>
+    private static ApiGateway api;
+<span class="fc" id="L14">    private static final Long BASIC_GUILD = 1L;</span>
 
     static {
-<span class="fc" id="L12">        logger = Logger.getLogger(Events.class.getName());</span>
-<span class="fc" id="L13">    }</span>
+        try {
+<span class="fc" id="L18">             api = new ApiGatewayImpl(DataSourceLocatorImpl.getInstance().getDataSource());</span>
+<span class="nc" id="L19">        } catch (IOException e) {</span>
+<span class="nc" id="L20">            logInfo(&quot;Not a valid state&quot;);</span>
+<span class="fc" id="L21">        }</span>
+<span class="fc" id="L22">        logger = Logger.getLogger(Events.class.getName());</span>
+<span class="fc" id="L23">    }</span>
     @Override
-<span class="nc" id="L15">    public void onEnable() {}</span>
+<span class="nc" id="L25">    public void onEnable() {}</span>
 
     @Override
-<span class="nc" id="L18">    public void onDisable() {}</span>
+<span class="nc" id="L28">    public void onDisable() {}</span>
 
-<span class="nc" id="L20">    public static void logInfo(String msg) {logger.info(msg);}</span>
+<span class="nc" id="L30">    public static void logInfo(String msg) {logger.info(msg);}</span>
 
-<span class="fc" id="L22">    public static Long getBasicGuildId() {return BASIC_GUILD;}</span>
+<span class="fc" id="L32">    public static Long getBasicGuildId() {return BASIC_GUILD;}</span>
+
+<span class="nc" id="L34">    public static ApiGateway getApi() {return api;}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -83,4 +83,8 @@ public class Level {
     public void setMaxLevel(int maxLevel) {
         this.maxLevel = maxLevel;
     }
+
+    public int getMaxJobLevel() {
+        return 15 + currentLevel * 8;
+    }
 }

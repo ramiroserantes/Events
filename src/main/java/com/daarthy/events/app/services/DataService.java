@@ -13,6 +13,8 @@ public interface DataService {
 
     Guild findDBGuild(Long guildId);
 
+    int getJobMaxLevel(UUID playerId);
+
     void createGuild(UUID playerId, Long guildId, String kName);
 
     void deleteGuild(Long guildId);

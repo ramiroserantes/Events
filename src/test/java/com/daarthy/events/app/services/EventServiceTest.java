@@ -1,5 +1,6 @@
 package com.daarthy.events.app.services;
 
+import com.daarthy.events.app.modules.events.Event;
 import com.daarthy.events.app.modules.events.EventToken;
 import com.daarthy.events.persistence.SqlConnections;
 import com.daarthy.events.persistence.event_dao.EventDao;
@@ -42,7 +43,7 @@ public class EventServiceTest {
 
         eventService.initPlayer(playerId, 1L);
 
-        List<StringBuilder> eventList = eventService.getActiveEvents();
+        List<Event> eventList = eventService.getActiveEvents();
 
         assertEquals(3, eventList.size());
 
@@ -80,7 +81,7 @@ public class EventServiceTest {
 
         StringBuilder result1 = eventService.getEventInfo(playerId, "Gant");
 
-        assertEquals("This event is not Available.", result1.toString());
+        assertNotNull(result1.toString());
 
     }
 

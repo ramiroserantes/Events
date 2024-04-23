@@ -319,7 +319,7 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
 
 <span class="pc bpc" id="L320" title="1 of 2 branches missed.">            if(value.getExpirationDate().isBefore(LocalDate.now()) ||</span>
 <span class="nc bnc" id="L321" title="All 2 branches missed.">                    value.getExpirationDate().isEqual(LocalDate.now())) {</span>
-<span class="pc bpc" id="L322" title="1 of 2 branches missed.">                if(!toRemoveMissions.contains(value.getMissionId())) {</span>
+<span class="fc bfc" id="L322" title="All 2 branches covered.">                if(!toRemoveMissions.contains(value.getMissionId())) {</span>
 <span class="fc" id="L323">                    toRemoveMissions.add(value.getMissionId());</span>
                 }
 <span class="fc" id="L325">                toRemoveObjectives.add(key);</span>

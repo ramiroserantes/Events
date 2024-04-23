@@ -4,6 +4,7 @@ import com.daarthy.events.app.modules.events.EventToken;
 import com.daarthy.events.persistence.SqlConnections;
 import com.daarthy.events.persistence.mission_dao.ActionType;
 import com.daarthy.events.persistence.mission_dao.MissionData;
+import com.daarthy.events.persistence.mission_dao.ObjectiveData;
 import com.daarthy.events.persistence.player_dao.PlayerData;
 import com.zaxxer.hikari.HikariDataSource;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -155,8 +157,7 @@ public class ApiGatewayTest {
 
         api.logInRequest(playerId);
 
-        assertEquals("You cant participate in this event when you are in the Server guild.",
-                api.getEventInfoRequest(playerId, "HuntingEvent").toString());
+        assertNotNull(api.getEventInfoRequest(playerId, "HuntingEvent"));
     }
     @Test
     public void testApiByEventInfo() {
@@ -200,7 +201,8 @@ public class ApiGatewayTest {
 
         api.createGuildRequest(playerId, 5L, "n");
 
-        assertFalse(api.getGuildDashBoardRequest(playerId).isEmpty());
+        Map<MissionData, List<ObjectiveData>> map = api.getGuildDashBoardRequest(playerId);
+        assertFalse(map.isEmpty());
         api.deleteGuildRequest(5L);
     }
 

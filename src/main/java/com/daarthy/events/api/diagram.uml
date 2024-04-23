@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="650.9122957004703" y="622.639544515094">com.daarthy.events.api.AppContainer</node>
+    <node x="-96.23666341020112" y="-3.1107377474378097">com.daarthy.events.api.ApiGateway</node>
+    <node x="572.3523380464349" y="342.7961897708034">com.daarthy.events.app.util.InternalScheduler</node>
+    <node x="-93.4594574799521" y="475.29267882866543">com.daarthy.events.api.ApiGatewayImpl</node>
+    <node x="559.9461576512017" y="215.88373250341618">com.daarthy.events.app.util.InternalSchedulerImpl</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.daarthy.events.api.ApiGatewayImpl" target="com.daarthy.events.api.ApiGateway" relationship="REALIZATION">
+      <point x="-17.468046256968762" y="-186.84200618292562" />
+      <point x="121.57249626307913" y="361.3079222720478" />
+      <point x="-11.850780535987326" y="172.4186600194856" />
+    </edge>
+    <edge source="com.daarthy.events.api.ApiGatewayImpl" target="com.daarthy.events.api.AppContainer" relationship="CREATE">
+      <point x="-0.0" y="-203.5" />
+      <point x="139.0405425200479" y="694.139544515094" />
+      <point x="804.005720811836" y="694.139544515094" />
+      <point x="-18.90657488863428" y="71.5" />
+    </edge>
+    <edge source="com.daarthy.events.api.ApiGatewayImpl" target="com.daarthy.events.api.AppContainer" relationship="TO_ONE">
+      <point x="229.61715553675316" y="-5.0781795760495925" />
+      <point x="368.65769805680105" y="651.7067693699365" />
+      <point x="822.9122957004703" y="651.7067693699365" />
+      <point x="-0.0" y="71.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.7042105263157895" showDependencies="true" x="477.99999999999994" y="460.0" />
+  <SelectedNodes>
+    <node>com.daarthy.events.app.util.InternalSchedulerImpl</node>
+    <node>com.daarthy.events.app.util.InternalScheduler</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

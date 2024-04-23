@@ -1,5 +1,6 @@
 package com.daarthy.events.app.services;
 
+import com.daarthy.events.app.modules.events.Event;
 import com.daarthy.events.app.modules.events.EventToken;
 import com.daarthy.events.app.modules.guilds.EventMedals;
 import com.daarthy.events.persistence.event_dao.EventData;
@@ -12,7 +13,7 @@ public interface EventService {
     // Default guild should not enter this service.
     List<EventToken> registerAction(UUID playerId, Long guildId, ActionType actionType);
 
-    List<StringBuilder> getActiveEvents();
+    List<Event> getActiveEvents();
 
     //this requires a configFile.
     StringBuilder getEventInfo(UUID playerId, String eventName);
