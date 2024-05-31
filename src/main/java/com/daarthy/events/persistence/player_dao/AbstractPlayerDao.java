@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public abstract class AbstractPlayerDao implements PlayerDao {
 
-    private static final String ERROR = "DB Error";
+    private static final String ERROR = "DB Error on AbstractPlayerDao ";
     @Override
     public PlayerData findPlayerData(UUID playerId, Connection connection) {
 
@@ -33,13 +33,13 @@ public abstract class AbstractPlayerDao implements PlayerDao {
 
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "findPlayerData");
             return null;
         }
     }
 
     @Override
-    public void savePlayer(UUID playerId, PlayerData playerData, Connection connection) throws SQLException {
+    public void savePlayer(UUID playerId, PlayerData playerData, Connection connection) {
 
         String queryString = "UPDATE Player p SET p.maxMissions = ?, p.ampBasicRewards = ?, p.guildId = ? " +
                 "WHERE p.playerId = ?";
@@ -55,14 +55,14 @@ public abstract class AbstractPlayerDao implements PlayerDao {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "savePlayer");
         }
 
     }
 
 
     @Override
-    public void removeAllPlayersFromGuild(Long guildId, Connection connection) throws SQLException {
+    public void removeAllPlayersFromGuild(Long guildId, Connection connection) {
 
         String queryString = "UPDATE Player p SET p.guildId = 1 " +
                 "WHERE p.guildId = ?";
@@ -74,7 +74,7 @@ public abstract class AbstractPlayerDao implements PlayerDao {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "removeAllPlayersFromGuild");
         }
     }
 }

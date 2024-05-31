@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class MissionJdbc extends AbstractMissionDao {
 
-    private static final String ERROR = "DB Error";
+    private static final String ERROR = "DB Error on MissionJdbc ";
     @Override
     public Long createMission(MissionData missionData, Connection connection) {
 
@@ -35,7 +35,7 @@ public class MissionJdbc extends AbstractMissionDao {
             return execute(preparedStatement);
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "createMission");
             return null;
         }
 
@@ -75,7 +75,7 @@ public class MissionJdbc extends AbstractMissionDao {
             return execute(preparedStatement);
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "createMissionObjective");
             return null;
         }
 
@@ -96,7 +96,7 @@ public class MissionJdbc extends AbstractMissionDao {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "saveMissionStatus");
         }
     }
 
@@ -113,7 +113,7 @@ public class MissionJdbc extends AbstractMissionDao {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "saveObjectiveProgress");
         }
     }
 

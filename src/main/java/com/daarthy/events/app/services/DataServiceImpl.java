@@ -18,7 +18,7 @@ public class DataServiceImpl implements DataService {
     private HashMap<UUID, PlayerData> playersData = new HashMap<>();
     private HashMap<Long, Guild> guildsData = new HashMap<>();
 
-    private static final String ERROR = "DB Error";
+    private static final String ERROR = "DB Error on DataService ";
 
     private final HikariDataSource dataSource;
     private final PlayerDao playerDao;
@@ -51,7 +51,7 @@ public class DataServiceImpl implements DataService {
             savePlayer(playerId);
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "createGuild");
         }
     }
 
@@ -87,7 +87,7 @@ public class DataServiceImpl implements DataService {
                     .getLevel().getMaxJobLevel();
 
         } catch (SQLException e) {
-            Events.logInfo("Error in DataService - getJobMaxLevel.");
+            Events.logInfo(ERROR + "getJobMaxLevel");
         }
 
         return 15;
@@ -99,7 +99,7 @@ public class DataServiceImpl implements DataService {
         try (Connection connection = dataSource.getConnection()) {
             playerDao.savePlayer(playerId, playersData.get(playerId), connection);
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "savePlayer");
         }
     }
 
@@ -113,7 +113,7 @@ public class DataServiceImpl implements DataService {
             guildDao.saveGuild(guildId, guild, connection);
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "saveGuild");
         }
     }
 
@@ -145,7 +145,7 @@ public class DataServiceImpl implements DataService {
             guildDao.deleteGuild(guildId, connection);
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "deleteGuild");
         }
     }
 
@@ -169,7 +169,7 @@ public class DataServiceImpl implements DataService {
             }
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "initPlayer");
         }
     }
 

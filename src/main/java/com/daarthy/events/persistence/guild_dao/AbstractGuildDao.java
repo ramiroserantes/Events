@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public abstract class AbstractGuildDao implements GuildDao {
 
-    private static final String ERROR = "DB Error";
+    private static final String ERROR = "DB Error on AbstractGuildDao ";
     @Override
     public void saveGuild(Long guildId, Guild guild, Connection connection) {
 
@@ -41,7 +41,7 @@ public abstract class AbstractGuildDao implements GuildDao {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "saveGuild");
         }
 
     }
@@ -51,27 +51,14 @@ public abstract class AbstractGuildDao implements GuildDao {
 
 
         String queryString = "DELETE FROM Guild g WHERE g.id = ?";
-        String secondQuery = "DELETE FROM GuildMedals m WHERE m.guildId = ?";
-
-        try (PreparedStatement secondStatement = connection.prepareStatement(secondQuery);) {
-            secondStatement.setLong(1, guildId);
-
-            secondStatement.executeUpdate();
-        } catch (SQLException e) {
-            Events.logInfo(ERROR);
-        }
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
-
-
-
 
             preparedStatement.setLong(1, guildId);
             preparedStatement.executeUpdate();
 
-
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "deleteGuild");
         }
 
     }
@@ -93,7 +80,7 @@ public abstract class AbstractGuildDao implements GuildDao {
             return getGuild(resultSet);
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "findGuildByPlayer");
             return null;
         }
 
@@ -116,7 +103,7 @@ public abstract class AbstractGuildDao implements GuildDao {
             return getGuild(resultSet);
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "findGuildById");
             return null;
         }
 

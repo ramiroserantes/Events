@@ -11,7 +11,7 @@ import java.util.*;
 
 public abstract class AbstractEventDao implements EventDao{
 
-    private static final String ERROR = "DB Error";
+    private static final String ERROR = "DB Error on EventDao ";
 
     @Override
     public List<EventData> findCurrentEvents(Connection connection, ScopeEnum scopeEnum) {
@@ -36,12 +36,12 @@ public abstract class AbstractEventDao implements EventDao{
                 String name = resultSet.getString(i++);
                 LocalDate startDate = resultSet.getDate(i++).toLocalDate();
                 LocalDate endDate = resultSet.getDate(i++).toLocalDate();
-                int maxMedals = resultSet.getInt(i++);
+                int maxMedals = resultSet.getInt(i);
                 currentEvents.add(new EventData(id, foundScope, name, startDate, endDate, maxMedals));
             }
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "findCurrentEvents");
         }
 
         return currentEvents;
@@ -66,7 +66,7 @@ public abstract class AbstractEventDao implements EventDao{
             }
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "findGuildMedals");
         }
 
         return medals;
@@ -92,7 +92,7 @@ public abstract class AbstractEventDao implements EventDao{
             }
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "findPlayerContribution");
         }
 
         return null;

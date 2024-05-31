@@ -10,7 +10,7 @@ import java.util.UUID;
 public class PlayerJdbc extends AbstractPlayerDao {
 
     @Override
-    public PlayerData createPlayer(UUID playerId, Connection connection) throws SQLException {
+    public PlayerData createPlayer(UUID playerId, Connection connection) {
 
         String queryString = "INSERT INTO Player (playerId, guildId) VALUES (?, 1)";
 
@@ -23,7 +23,7 @@ public class PlayerJdbc extends AbstractPlayerDao {
             return new PlayerData(3, 0F, 1L);
 
         } catch (SQLException e) {
-            Events.logInfo("DB Error");
+            Events.logInfo("DB Error on CreatePlayer");
             return null;
         }
 

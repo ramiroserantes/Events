@@ -29,7 +29,7 @@ public class GuildJdbc extends AbstractGuildDao {
                      new GuildModifiers(0, 0F));
 
         } catch (SQLException e) {
-            Events.logInfo("Error on DB");
+            Events.logInfo("Error on DB - CreateGuild");
             return null;
         }
 

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class EventJdbc extends AbstractEventDao {
 
-    private static final String ERROR = "DB Error";
+    private static final String ERROR = "DB Error on EventJdbc";
 
     @Override
     public void saveGuildMedals(Connection connection, Long guildId, Long eventId, int amount) {
@@ -27,7 +27,7 @@ public class EventJdbc extends AbstractEventDao {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "saveGuildMedals");
         }
     }
 
@@ -49,7 +49,7 @@ public class EventJdbc extends AbstractEventDao {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            Events.logInfo(ERROR);
+            Events.logInfo(ERROR + "savePlayerContribution");
         }
     }
 }

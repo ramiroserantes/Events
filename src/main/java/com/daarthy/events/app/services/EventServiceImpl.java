@@ -52,7 +52,6 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getActiveEvents() {
-
         return events;
     }
 

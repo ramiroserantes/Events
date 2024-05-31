@@ -9,7 +9,6 @@ public interface MissionDao {
 
     Long createMission(MissionData missionData, Connection connection);
 
-    //TEST LATER IF NEEDED
     MissionData findMissionById(Long missionId, Connection connection);
 
     boolean wasMissionAcceptedByPlayer(Long missionId, UUID playerId, Connection connection);
@@ -18,13 +17,10 @@ public interface MissionDao {
 
     List<MissionData> findGuildMissions(Long guildId, Connection connection);
 
-    //Create Player ACCEPT
     List<MissionData> findPlayerMissions(UUID playerId, Connection connection);
 
-    //CREATE PLAYER
     Long createMissionObjective(Long missionId, ObjectiveData objectiveData, Connection connection);
 
-    //ByGuild AND BYPlayer
     List<ObjectiveData> findMissionObjectivesByGuild(Long missionId, Connection connection);
 
     List<ObjectiveData> findMissionObjectivesByPlayer(UUID playerId, Long missionId, Connection connection);
