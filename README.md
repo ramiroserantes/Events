@@ -9,8 +9,8 @@
 **3. Añadir Nuevas Misiones**
    - Para ampliar el proyecto con nuevas misiones, simplemente es necesario agregarlas al archivo de configuración en formato YAML (.yml).
 
-**4. Logs**
-   - Se usa la cadena de texto "DB Error" en caso de que suceda porque el logger indica la clase y línea de código donde sucede en tiempo de ejecución. Se planea cambiar estas cadenas para añadir más información del error.
+**4. Caché**
+   - La implementación del guardado automático de isntancias en caché no es necesario en esta versión Alpha 1.0. Sin embargo, si se desea implementar solo es necesario llamar a los métodos de guardado cada x tiempo proporcionado por los servicios con estado. Las operaciones de guardado en BD no se exponen en el ApiGateway, a no ser que sea un guardado crítico.
 
 **5. Test**
    - Se testea comenzando en la capa de Daos con JDBC, luego los módulos, luego los servicios y finalmente el Apigateway, que debido a ser un sistema embebido, actúa como proxy de peticiones.
