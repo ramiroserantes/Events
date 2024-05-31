@@ -18,3 +18,6 @@
 # Arquitectura desarrollada.
 
 ![archFinal](https://github.com/ramiroserantes/Events/assets/74147489/8486ecb4-8d77-4236-936f-96079c6aaac1)
+
+**CL**: Common Library de clases y datos compartidos entre microservicios.
+**Factory**: Son necesarias para añadir funcionalidad escribiendo en ficheros .yml (yaml).
