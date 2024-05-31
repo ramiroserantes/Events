@@ -45,7 +45,6 @@ public interface ApiGateway {
 
     StringBuilder getEventInfoRequest(UUID playerId, String eventName);
 
-    // this wont work because of params eventId.
     int getGuildMedalsOnEventRequest(UUID playerId, Long eventId);
 
 
