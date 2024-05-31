@@ -14,3 +14,7 @@
 
 **5. Test**
    - Se testea comenzando en la capa de Daos con JDBC, luego los módulos, luego los servicios y finalmente el Apigateway, que debido a ser un sistema embebido, actúa como proxy de peticiones.
+
+# Arquitectura desarrollada.
+
+![archFinal](https://github.com/ramiroserantes/Events/assets/74147489/8486ecb4-8d77-4236-936f-96079c6aaac1)
