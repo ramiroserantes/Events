@@ -1,5 +1,6 @@
 # Anotaciones
-
+**resources/database.properties**
+   - Se ponen ejemplos de como debería ponerse un usuario la dirección donde suele ejecutarse mysql, y una constraseña aleatoria, son datos de ejemplo.
 **1. Manejo de Excepciones**
    -  No son útiles las excepciones para manejar condiciones que pueden ocurrir durante la ejecución del código, debido a que se debe informar al jugador sobre cualquier problema a través de un mensaje de texto utilizando los métodos proporcionados por la API de Bukkit (es obligatorio que sean Strings).
 
