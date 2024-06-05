@@ -18,7 +18,7 @@ public class DataServiceImpl implements DataService {
 <span class="fc" id="L18">    private HashMap&lt;UUID, PlayerData&gt; playersData = new HashMap&lt;&gt;();</span>
 <span class="fc" id="L19">    private HashMap&lt;Long, Guild&gt; guildsData = new HashMap&lt;&gt;();</span>
 
-    private static final String ERROR = &quot;DB Error&quot;;
+    private static final String ERROR = &quot;DB Error on DataService &quot;;
 
     private final HikariDataSource dataSource;
     private final PlayerDao playerDao;
@@ -51,7 +51,7 @@ public class DataServiceImpl implements DataService {
 <span class="fc" id="L51">            savePlayer(playerId);</span>
 
 <span class="nc" id="L53">        } catch (SQLException e) {</span>
-<span class="nc" id="L54">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L54">            Events.logInfo(ERROR + &quot;createGuild&quot;);</span>
 <span class="fc" id="L55">        }</span>
 <span class="fc" id="L56">    }</span>
 
@@ -87,7 +87,7 @@ public class DataServiceImpl implements DataService {
 <span class="nc" id="L87">                    .getLevel().getMaxJobLevel();</span>
 
 <span class="nc" id="L89">        } catch (SQLException e) {</span>
-<span class="nc" id="L90">            Events.logInfo(&quot;Error in DataService - getJobMaxLevel.&quot;);</span>
+<span class="nc" id="L90">            Events.logInfo(ERROR + &quot;getJobMaxLevel&quot;);</span>
         }
 
 <span class="nc" id="L93">        return 15;</span>
@@ -99,7 +99,7 @@ public class DataServiceImpl implements DataService {
 <span class="fc" id="L99">        try (Connection connection = dataSource.getConnection()) {</span>
 <span class="fc" id="L100">            playerDao.savePlayer(playerId, playersData.get(playerId), connection);</span>
 <span class="nc" id="L101">        } catch (SQLException e) {</span>
-<span class="nc" id="L102">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L102">            Events.logInfo(ERROR + &quot;savePlayer&quot;);</span>
 <span class="fc" id="L103">        }</span>
 <span class="fc" id="L104">    }</span>
 
@@ -113,7 +113,7 @@ public class DataServiceImpl implements DataService {
 <span class="fc" id="L113">            guildDao.saveGuild(guildId, guild, connection);</span>
 
 <span class="nc" id="L115">        } catch (SQLException e) {</span>
-<span class="nc" id="L116">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L116">            Events.logInfo(ERROR + &quot;saveGuild&quot;);</span>
 <span class="fc" id="L117">        }</span>
 <span class="fc" id="L118">    }</span>
 
@@ -145,7 +145,7 @@ public class DataServiceImpl implements DataService {
 <span class="fc" id="L145">            guildDao.deleteGuild(guildId, connection);</span>
 
 <span class="nc" id="L147">        } catch (SQLException e) {</span>
-<span class="nc" id="L148">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L148">            Events.logInfo(ERROR + &quot;deleteGuild&quot;);</span>
 <span class="fc" id="L149">        }</span>
 <span class="fc" id="L150">    }</span>
 
@@ -169,7 +169,7 @@ public class DataServiceImpl implements DataService {
             }
 
 <span class="nc" id="L171">        } catch (SQLException e) {</span>
-<span class="nc" id="L172">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L172">            Events.logInfo(ERROR + &quot;initPlayer&quot;);</span>
 <span class="fc" id="L173">        }</span>
 <span class="fc" id="L174">    }</span>
 

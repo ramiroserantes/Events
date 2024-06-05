@@ -11,7 +11,7 @@ import java.util.*;
 
 <span class="fc" id="L12">public abstract class AbstractEventDao implements EventDao{</span>
 
-    private static final String ERROR = &quot;DB Error&quot;;
+    private static final String ERROR = &quot;DB Error on EventDao &quot;;
 
     @Override
     public List&lt;EventData&gt; findCurrentEvents(Connection connection, ScopeEnum scopeEnum) {
@@ -36,12 +36,12 @@ import java.util.*;
 <span class="fc" id="L36">                String name = resultSet.getString(i++);</span>
 <span class="fc" id="L37">                LocalDate startDate = resultSet.getDate(i++).toLocalDate();</span>
 <span class="fc" id="L38">                LocalDate endDate = resultSet.getDate(i++).toLocalDate();</span>
-<span class="fc" id="L39">                int maxMedals = resultSet.getInt(i++);</span>
+<span class="fc" id="L39">                int maxMedals = resultSet.getInt(i);</span>
 <span class="fc" id="L40">                currentEvents.add(new EventData(id, foundScope, name, startDate, endDate, maxMedals));</span>
 <span class="fc" id="L41">            }</span>
 
 <span class="nc" id="L43">        } catch (SQLException e) {</span>
-<span class="nc" id="L44">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L44">            Events.logInfo(ERROR + &quot;findCurrentEvents&quot;);</span>
 <span class="fc" id="L45">        }</span>
 
 <span class="fc" id="L47">        return currentEvents;</span>
@@ -66,7 +66,7 @@ import java.util.*;
             }
 
 <span class="nc" id="L68">        } catch (SQLException e) {</span>
-<span class="nc" id="L69">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L69">            Events.logInfo(ERROR + &quot;findGuildMedals&quot;);</span>
 <span class="fc" id="L70">        }</span>
 
 <span class="fc" id="L72">        return medals;</span>
@@ -92,7 +92,7 @@ import java.util.*;
             }
 
 <span class="pc bpc" id="L94" title="1 of 2 branches missed.">        } catch (SQLException e) {</span>
-<span class="nc" id="L95">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L95">            Events.logInfo(ERROR + &quot;findPlayerContribution&quot;);</span>
 <span class="fc" id="L96">        }</span>
 
 <span class="fc" id="L98">        return null;</span>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="com.daarthy.events.persistence.event_dao.EventDaoTest" time="0.044" errors="0" skipped="0">
+<testsuite tests="8" failures="0" name="com.daarthy.events.persistence.event_dao.EventDaoTest" time="0.052" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2022.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -37,7 +37,7 @@
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="10.0"/>
     <property name="user.home" value="C:\Users\ACER"/>
-    <property name="user.timezone" value="Europe/Madrid"/>
+    <property name="user.timezone" value="Asia/Tehran"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="17"/>
     <property name="user.name" value="ACER"/>
@@ -60,12 +60,12 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFind" time="0.006"/>
-  <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFindEmptyButDefault" time="0.003"/>
+  <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFind" time="0.007"/>
+  <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFindEmptyButDefault" time="0.004"/>
   <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFindNullContributions" time="0.005"/>
-  <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFindEmptyByInvalidStart" time="0.008"/>
-  <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFindMedalsAvailableAndSave" time="0.006"/>
-  <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFindContributions" time="0.009"/>
+  <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFindEmptyByInvalidStart" time="0.006"/>
+  <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFindMedalsAvailableAndSave" time="0.011"/>
+  <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFindContributions" time="0.012"/>
   <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFindEmptyByInvalidEnd" time="0.004"/>
   <testcase classname="com.daarthy.events.persistence.event_dao.EventDaoTest" name="testEventDaoByFindMedalsNoAvailable" time="0.003"/>
 </testsuite>

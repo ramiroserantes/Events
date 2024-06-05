@@ -28,9 +28,9 @@ import java.time.LocalDate;
 <span class="fc" id="L28">            return new Guild(kName, LocalDate.now().atStartOfDay().minusDays(1L), new Level(0F, 0, 6, 0F),</span>
 <span class="fc" id="L29">                     new GuildModifiers(0, 0F));</span>
 
-<span class="nc" id="L31">        } catch (SQLException e) {</span>
-<span class="nc" id="L32">            Events.logInfo(&quot;Error on DB&quot;);</span>
-<span class="nc" id="L33">            return null;</span>
+<span class="fc" id="L31">        } catch (SQLException e) {</span>
+<span class="fc" id="L32">            Events.logInfo(&quot;Error on DB - CreateGuild&quot;);</span>
+<span class="fc" id="L33">            return null;</span>
         }
 
     }

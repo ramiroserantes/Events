@@ -10,7 +10,7 @@ import java.util.UUID;
 <span class="fc" id="L10">public class PlayerJdbc extends AbstractPlayerDao {</span>
 
     @Override
-    public PlayerData createPlayer(UUID playerId, Connection connection) throws SQLException {
+    public PlayerData createPlayer(UUID playerId, Connection connection) {
 
 <span class="fc" id="L15">        String queryString = &quot;INSERT INTO Player (playerId, guildId) VALUES (?, 1)&quot;;</span>
 
@@ -23,7 +23,7 @@ import java.util.UUID;
 <span class="fc" id="L23">            return new PlayerData(3, 0F, 1L);</span>
 
 <span class="nc" id="L25">        } catch (SQLException e) {</span>
-<span class="nc" id="L26">            Events.logInfo(&quot;DB Error&quot;);</span>
+<span class="nc" id="L26">            Events.logInfo(&quot;DB Error on CreatePlayer&quot;);</span>
 <span class="nc" id="L27">            return null;</span>
         }
 

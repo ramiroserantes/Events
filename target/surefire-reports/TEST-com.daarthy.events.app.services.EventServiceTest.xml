@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="7" failures="0" name="com.daarthy.events.app.services.EventServiceTest" time="0.421" errors="0" skipped="0">
+<testsuite tests="7" failures="0" name="com.daarthy.events.app.services.EventServiceTest" time="0.736" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2022.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -37,7 +37,7 @@
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="10.0"/>
     <property name="user.home" value="C:\Users\ACER"/>
-    <property name="user.timezone" value="Europe/Madrid"/>
+    <property name="user.timezone" value="Asia/Tehran"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="17"/>
     <property name="user.name" value="ACER"/>
@@ -60,11 +60,11 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByRemoveEvents" time="0.019"/>
-  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByNoInfo" time="0.023"/>
-  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByAddProgressAndSave" time="0.048"/>
-  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByInfo" time="0.025"/>
-  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByActiveEvents" time="0.015"/>
-  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByAddProgressByLimitMedals" time="0.274"/>
-  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByAddProgress" time="0.017"/>
+  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByRemoveEvents" time="0.018"/>
+  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByNoInfo" time="0.019"/>
+  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByAddProgressAndSave" time="0.064"/>
+  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByInfo" time="0.042"/>
+  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByActiveEvents" time="0.036"/>
+  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByAddProgressByLimitMedals" time="0.533"/>
+  <testcase classname="com.daarthy.events.app.services.EventServiceTest" name="testEventServiceByAddProgress" time="0.024"/>
 </testsuite>

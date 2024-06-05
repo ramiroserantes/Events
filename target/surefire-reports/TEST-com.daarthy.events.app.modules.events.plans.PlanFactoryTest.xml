@@ -37,7 +37,7 @@
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="10.0"/>
     <property name="user.home" value="C:\Users\ACER"/>
-    <property name="user.timezone" value="Europe/Madrid"/>
+    <property name="user.timezone" value="Asia/Tehran"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="17"/>
     <property name="user.name" value="ACER"/>

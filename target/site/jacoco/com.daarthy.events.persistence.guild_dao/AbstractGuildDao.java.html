@@ -11,7 +11,7 @@ import java.util.UUID;
 
 <span class="fc" id="L12">public abstract class AbstractGuildDao implements GuildDao {</span>
 
-    private static final String ERROR = &quot;DB Error&quot;;
+    private static final String ERROR = &quot;DB Error on AbstractGuildDao &quot;;
     @Override
     public void saveGuild(Long guildId, Guild guild, Connection connection) {
 
@@ -41,7 +41,7 @@ import java.util.UUID;
 <span class="fc" id="L41">            preparedStatement.executeUpdate();</span>
 
 <span class="nc" id="L43">        } catch (SQLException e) {</span>
-<span class="nc" id="L44">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L44">            Events.logInfo(ERROR + &quot;saveGuild&quot;);</span>
 <span class="fc" id="L45">        }</span>
 
 <span class="fc" id="L47">    }</span>
@@ -63,38 +63,35 @@ import java.util.UUID;
 
 <span class="fc" id="L64">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
 
+<span class="fc" id="L66">            preparedStatement.setLong(1, guildId);</span>
+<span class="fc" id="L67">            preparedStatement.executeUpdate();</span>
 
 
+<span class="nc" id="L70">        } catch (SQLException e) {</span>
+<span class="nc" id="L71">            Events.logInfo(ERROR);</span>
+<span class="fc" id="L72">        }</span>
 
-<span class="fc" id="L69">            preparedStatement.setLong(1, guildId);</span>
-<span class="fc" id="L70">            preparedStatement.executeUpdate();</span>
-
-
-<span class="nc" id="L73">        } catch (SQLException e) {</span>
-<span class="nc" id="L74">            Events.logInfo(ERROR);</span>
-<span class="fc" id="L75">        }</span>
-
-<span class="fc" id="L77">    }</span>
+<span class="fc" id="L74">    }</span>
 
     @Override
     public Guild findGuildByPlayer(UUID playerId, Connection connection) {
 
-<span class="fc" id="L82">        String queryString = &quot;SELECT g.lvl, g.experience, g.maxLvl, g.kName, g.ampMissions, &quot; +</span>
+<span class="fc" id="L79">        String queryString = &quot;SELECT g.lvl, g.experience, g.maxLvl, g.kName, g.ampMissions, &quot; +</span>
                 &quot;g.ampBasicRewards, g.levelUpMod, g.lastTimeUpdated &quot; +
                 &quot;FROM Guild g JOIN Player p ON p.guildId = g.id &quot; +
                 &quot;WHERE p.playerId = ?&quot;;
 
-<span class="fc" id="L87">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
+<span class="fc" id="L84">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
 
-<span class="fc" id="L89">            preparedStatement.setString(1, playerId.toString());</span>
+<span class="fc" id="L86">            preparedStatement.setString(1, playerId.toString());</span>
 
-<span class="fc" id="L91">            ResultSet resultSet = preparedStatement.executeQuery();</span>
+<span class="fc" id="L88">            ResultSet resultSet = preparedStatement.executeQuery();</span>
 
-<span class="fc" id="L93">            return getGuild(resultSet);</span>
+<span class="fc" id="L90">            return getGuild(resultSet);</span>
 
-<span class="nc" id="L95">        } catch (SQLException e) {</span>
-<span class="nc" id="L96">            Events.logInfo(ERROR);</span>
-<span class="nc" id="L97">            return null;</span>
+<span class="nc" id="L92">        } catch (SQLException e) {</span>
+<span class="nc" id="L93">            Events.logInfo(ERROR + &quot;findGuildByPlayer&quot;);</span>
+<span class="nc" id="L94">            return null;</span>
         }
 
 
@@ -103,21 +100,21 @@ import java.util.UUID;
     @Override
     public Guild findGuildById(Long guildId, Connection connection) {
 
-<span class="fc" id="L106">        String queryString = &quot;SELECT g.lvl, g.experience, g.maxLvl, g.kName, g.ampMissions, g.ampBasicRewards,&quot; +</span>
+<span class="fc" id="L103">        String queryString = &quot;SELECT g.lvl, g.experience, g.maxLvl, g.kName, g.ampMissions, g.ampBasicRewards,&quot; +</span>
                 &quot; g.levelUpMod, g.lastTimeUpdated &quot; +
                 &quot;FROM Guild g WHERE g.id = ?&quot;;
 
-<span class="fc" id="L110">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
+<span class="fc" id="L107">        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {</span>
 
-<span class="fc" id="L112">            preparedStatement.setLong(1, guildId);</span>
+<span class="fc" id="L109">            preparedStatement.setLong(1, guildId);</span>
 
-<span class="fc" id="L114">            ResultSet resultSet = preparedStatement.executeQuery();</span>
+<span class="fc" id="L111">            ResultSet resultSet = preparedStatement.executeQuery();</span>
 
-<span class="fc" id="L116">            return getGuild(resultSet);</span>
+<span class="fc" id="L113">            return getGuild(resultSet);</span>
 
-<span class="nc" id="L118">        } catch (SQLException e) {</span>
-<span class="nc" id="L119">            Events.logInfo(ERROR);</span>
-<span class="nc" id="L120">            return null;</span>
+<span class="nc" id="L115">        } catch (SQLException e) {</span>
+<span class="nc" id="L116">            Events.logInfo(ERROR + &quot;findGuildById&quot;);</span>
+<span class="nc" id="L117">            return null;</span>
         }
 
     }
@@ -125,21 +122,21 @@ import java.util.UUID;
     private Guild getGuild(ResultSet resultSet) throws SQLException {
 
         int i;
-<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        if (resultSet.next()) {</span>
-<span class="fc" id="L129">            i = 1;</span>
-<span class="fc" id="L130">            int lvl = resultSet.getInt(i++);</span>
-<span class="fc" id="L131">            Float experience = resultSet.getFloat(i++);</span>
-<span class="fc" id="L132">            int maxLvl = resultSet.getInt(i++);</span>
-<span class="fc" id="L133">            String kName = resultSet.getString(i++);</span>
-<span class="fc" id="L134">            int ampMissions = resultSet.getInt(i++);</span>
-<span class="fc" id="L135">            Float ampBasicRewards = resultSet.getFloat(i++);</span>
-<span class="fc" id="L136">            Float levelUpMod = resultSet.getFloat(i++);</span>
-<span class="fc" id="L137">            LocalDateTime lastTimeUpdated = resultSet.getTimestamp(i).toLocalDateTime();</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if (resultSet.next()) {</span>
+<span class="fc" id="L126">            i = 1;</span>
+<span class="fc" id="L127">            int lvl = resultSet.getInt(i++);</span>
+<span class="fc" id="L128">            Float experience = resultSet.getFloat(i++);</span>
+<span class="fc" id="L129">            int maxLvl = resultSet.getInt(i++);</span>
+<span class="fc" id="L130">            String kName = resultSet.getString(i++);</span>
+<span class="fc" id="L131">            int ampMissions = resultSet.getInt(i++);</span>
+<span class="fc" id="L132">            Float ampBasicRewards = resultSet.getFloat(i++);</span>
+<span class="fc" id="L133">            Float levelUpMod = resultSet.getFloat(i++);</span>
+<span class="fc" id="L134">            LocalDateTime lastTimeUpdated = resultSet.getTimestamp(i).toLocalDateTime();</span>
 
-<span class="fc" id="L139">            return new Guild(kName, lastTimeUpdated, new Level(experience, lvl, maxLvl, levelUpMod)</span>
+<span class="fc" id="L136">            return new Guild(kName, lastTimeUpdated, new Level(experience, lvl, maxLvl, levelUpMod)</span>
                     , new GuildModifiers(ampMissions, ampBasicRewards));
         } else {
-<span class="nc" id="L142">            return null;</span>
+<span class="nc" id="L139">            return null;</span>
         }
     }
 

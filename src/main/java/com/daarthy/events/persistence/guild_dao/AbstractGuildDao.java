@@ -51,14 +51,24 @@ public abstract class AbstractGuildDao implements GuildDao {
 
 
         String queryString = "DELETE FROM Guild g WHERE g.id = ?";
+        String secondQuery = "DELETE FROM GuildMedals m WHERE m.guildId = ?";
+
+        try (PreparedStatement secondStatement = connection.prepareStatement(secondQuery);) {
+            secondStatement.setLong(1, guildId);
+
+            secondStatement.executeUpdate();
+        } catch (SQLException e) {
+            Events.logInfo(ERROR);
+        }
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 
             preparedStatement.setLong(1, guildId);
             preparedStatement.executeUpdate();
 
+
         } catch (SQLException e) {
-            Events.logInfo(ERROR + "deleteGuild");
+            Events.logInfo(ERROR);
         }
 
     }

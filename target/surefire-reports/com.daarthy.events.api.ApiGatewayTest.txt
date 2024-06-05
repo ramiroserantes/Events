@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.daarthy.events.api.ApiGatewayTest
 -------------------------------------------------------------------------------
-Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.041 sec
+Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.711 sec

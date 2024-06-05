@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="18" failures="0" name="com.daarthy.events.app.modules.events.plans.PlanTest" time="17.117" errors="0" skipped="0">
+<testsuite tests="18" failures="0" name="com.daarthy.events.app.modules.events.plans.PlanTest" time="10.922" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2022.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -37,7 +37,7 @@
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="10.0"/>
     <property name="user.home" value="C:\Users\ACER"/>
-    <property name="user.timezone" value="Europe/Madrid"/>
+    <property name="user.timezone" value="Asia/Tehran"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="17"/>
     <property name="user.name" value="ACER"/>
@@ -64,18 +64,18 @@
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningLimitProbability" time="0"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringBeyondLimitProbability" time="0"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningMatch" time="0"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningStudy" time="14.492"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningBeyondLimitProbability" time="0"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningStudy" time="6.652"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningBeyondLimitProbability" time="0.001"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringBasicProbability" time="0"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningBasicProbability" time="0"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringMatch" time="0"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringStudy" time="2.272"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningBasicProbability" time="0.001"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringMatch" time="0.002"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringStudy" time="3.846"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringBeforeLimitProbability" time="0"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingBeyondLimitProbability" time="0"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingLimitProbability" time="0"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingMatch" time="0"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingStudy" time="0.352"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingStudy" time="0.417"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningBeforeLimitProbability" time="0.001"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingBeforeLimitProbability" time="0"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingBasicProbability" time="0"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingBeforeLimitProbability" time="0.001"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingBasicProbability" time="0.001"/>
 </testsuite>

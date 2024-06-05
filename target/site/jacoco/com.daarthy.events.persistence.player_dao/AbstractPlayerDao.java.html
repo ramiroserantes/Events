@@ -7,7 +7,7 @@ import java.util.UUID;
 
 <span class="fc" id="L8">public abstract class AbstractPlayerDao implements PlayerDao {</span>
 
-    private static final String ERROR = &quot;DB Error&quot;;
+    private static final String ERROR = &quot;DB Error on AbstractPlayerDao &quot;;
     @Override
     public PlayerData findPlayerData(UUID playerId, Connection connection) {
 
@@ -33,13 +33,13 @@ import java.util.UUID;
 
 
 <span class="pc bpc" id="L35" title="1 of 2 branches missed.">        } catch (SQLException e) {</span>
-<span class="nc" id="L36">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L36">            Events.logInfo(ERROR + &quot;findPlayerData&quot;);</span>
 <span class="nc" id="L37">            return null;</span>
         }
     }
 
     @Override
-    public void savePlayer(UUID playerId, PlayerData playerData, Connection connection) throws SQLException {
+    public void savePlayer(UUID playerId, PlayerData playerData, Connection connection) {
 
 <span class="fc" id="L44">        String queryString = &quot;UPDATE Player p SET p.maxMissions = ?, p.ampBasicRewards = ?, p.guildId = ? &quot; +</span>
                 &quot;WHERE p.playerId = ?&quot;;
@@ -55,14 +55,14 @@ import java.util.UUID;
 <span class="fc" id="L55">            preparedStatement.executeUpdate();</span>
 
 <span class="nc" id="L57">        } catch (SQLException e) {</span>
-<span class="nc" id="L58">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L58">            Events.logInfo(ERROR + &quot;savePlayer&quot;);</span>
 <span class="fc" id="L59">        }</span>
 
 <span class="fc" id="L61">    }</span>
 
 
     @Override
-    public void removeAllPlayersFromGuild(Long guildId, Connection connection) throws SQLException {
+    public void removeAllPlayersFromGuild(Long guildId, Connection connection) {
 
 <span class="fc" id="L67">        String queryString = &quot;UPDATE Player p SET p.guildId = 1 &quot; +</span>
                 &quot;WHERE p.guildId = ?&quot;;
@@ -74,7 +74,7 @@ import java.util.UUID;
 <span class="fc" id="L74">            preparedStatement.executeUpdate();</span>
 
 <span class="nc" id="L76">        } catch (SQLException e) {</span>
-<span class="nc" id="L77">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L77">            Events.logInfo(ERROR + &quot;removeAllPlayersFromGuild&quot;);</span>
 <span class="fc" id="L78">        }</span>
 <span class="fc" id="L79">    }</span>
 }

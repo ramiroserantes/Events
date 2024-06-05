@@ -8,7 +8,7 @@ import java.util.UUID;
 
 <span class="fc" id="L9">public class MissionJdbc extends AbstractMissionDao {</span>
 
-    private static final String ERROR = &quot;DB Error&quot;;
+    private static final String ERROR = &quot;DB Error on MissionJdbc &quot;;
     @Override
     public Long createMission(MissionData missionData, Connection connection) {
 
@@ -35,7 +35,7 @@ import java.util.UUID;
 <span class="fc" id="L35">            return execute(preparedStatement);</span>
 
 <span class="nc" id="L37">        } catch (SQLException e) {</span>
-<span class="nc" id="L38">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L38">            Events.logInfo(ERROR + &quot;createMission&quot;);</span>
 <span class="nc" id="L39">            return null;</span>
         }
 
@@ -75,7 +75,7 @@ import java.util.UUID;
 <span class="fc" id="L75">            return execute(preparedStatement);</span>
 
 <span class="nc" id="L77">        } catch (SQLException e) {</span>
-<span class="nc" id="L78">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L78">            Events.logInfo(ERROR + &quot;createMissionObjective&quot;);</span>
 <span class="nc" id="L79">            return null;</span>
         }
 
@@ -96,7 +96,7 @@ import java.util.UUID;
 
 <span class="fc" id="L97">            preparedStatement.executeUpdate();</span>
 <span class="nc" id="L98">        } catch (SQLException e) {</span>
-<span class="nc" id="L99">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L99">            Events.logInfo(ERROR + &quot;saveMissionStatus&quot;);</span>
 <span class="fc" id="L100">        }</span>
 <span class="fc" id="L101">    }</span>
 
@@ -113,7 +113,7 @@ import java.util.UUID;
 
 <span class="fc" id="L114">            preparedStatement.executeUpdate();</span>
 <span class="nc" id="L115">        } catch (SQLException e) {</span>
-<span class="nc" id="L116">            Events.logInfo(ERROR);</span>
+<span class="nc" id="L116">            Events.logInfo(ERROR + &quot;saveObjectiveProgress&quot;);</span>
 <span class="fc" id="L117">        }</span>
 <span class="fc" id="L118">    }</span>
 

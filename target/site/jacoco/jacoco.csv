@@ -13,9 +13,9 @@ Events,com.daarthy.events.api,AppContainer,0,69,0,0,0,14,0,5,0,5
 Events,com.daarthy.events.persistence.event_dao,Contribution,0,55,0,2,0,15,0,8,0,7
 Events,com.daarthy.events.persistence.event_dao,EventData,11,128,3,3,2,33,5,7,2,7
 Events,com.daarthy.events.persistence.event_dao,ScopeEnum,3,18,0,0,1,5,1,2,1,2
-Events,com.daarthy.events.persistence.event_dao,AbstractEventDao,9,161,1,7,5,43,1,7,0,4
+Events,com.daarthy.events.persistence.event_dao,AbstractEventDao,9,160,1,7,5,43,1,7,0,4
 Events,com.daarthy.events.persistence.event_dao,EventJdbc,6,86,0,0,4,23,0,3,0,3
-Events,com.daarthy.events,Events,14,17,0,0,7,6,5,2,5,2
+Events,com.daarthy.events,Events,10,21,0,0,6,7,4,3,4,3
 Events,com.daarthy.events.app.modules.missions,PlayerMissions,0,167,0,8,0,34,0,14,0,10
 Events,com.daarthy.events.app.modules.missions,Objective,0,80,1,9,0,22,1,15,0,11
 Events,com.daarthy.events.app.modules.guilds,Guild,0,62,0,2,0,15,0,10,0,9
@@ -34,7 +34,7 @@ Events,com.daarthy.events.persistence.mission_dao,MissionData,0,137,0,4,0,40,0,1
 Events,com.daarthy.events.app.modules.events,EventToken,12,47,1,3,1,7,1,3,0,2
 Events,com.daarthy.events.app.modules.events,EventImpl,0,81,0,6,0,22,0,10,0,7
 Events,com.daarthy.events.app.modules.missions.factory,MissionFactoryImpl,5,169,2,8,3,34,2,5,0,2
-Events,com.daarthy.events.persistence.guild_dao,GuildJdbc,5,60,0,0,3,11,0,2,0,2
+Events,com.daarthy.events.persistence.guild_dao,GuildJdbc,0,65,0,0,0,14,0,2,0,2
 Events,com.daarthy.events.persistence.guild_dao,AbstractGuildDao,21,226,1,3,13,50,1,7,0,6
 Events,com.daarthy.events.app.services,MissionFunctionalServiceImpl,106,726,19,49,28,150,15,42,0,22
 Events,com.daarthy.events.app.services,MissionInfoServiceImpl,6,60,0,0,4,16,0,4,0,4
