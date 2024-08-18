@@ -5,57 +5,343 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3ba1392-e47a-461c-84c9-0a6b923564aa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_6_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_20.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_daarthy_MiniLibrary_1_0_SNAPSHOT.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/PersistenceContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/PersistenceContextImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/player/dao/PlayerDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/player/dao/PlayerJdbc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/player/entities/EventsPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Events.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Events.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/guild_dao/AbstractGuildDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/guild_dao/AbstractGuildDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/DataServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/DataServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/EventServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/EventServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/event_dao/AbstractEventDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/event_dao/AbstractEventDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/event_dao/EventJdbc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/event_dao/EventJdbc.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/guild_dao/AbstractGuildDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/guild_dao/AbstractGuildDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/guild_dao/GuildDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/guild_dao/GuildDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/guild_dao/GuildJdbc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/guild_dao/GuildJdbc.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/mission_dao/MissionJdbc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/mission_dao/MissionJdbc.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/player_dao/AbstractPlayerDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/player_dao/AbstractPlayerDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/player_dao/PlayerDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/player_dao/PlayerDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/player_dao/PlayerJdbc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/player_dao/PlayerJdbc.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jacoco.exec" beforeDir="false" afterPath="$PROJECT_DIR$/target/jacoco.exec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.api.ApiGatewayTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.api.ApiGatewayTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.events.EventTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.events.EventTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.events.plans.PlanFactoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.events.plans.PlanFactoryTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.events.plans.PlanTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.events.plans.PlanTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.guilds.EventMedalsTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.guilds.EventMedalsTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.guilds.LevelTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.guilds.LevelTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.missions.MissionFactoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.missions.MissionFactoryTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.missions.PlayerMissionsTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.missions.PlayerMissionsTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.DataServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.DataServiceTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.EventServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.EventServiceTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.MissionFunctionalServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.MissionFunctionalServiceTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.MissionInfoServiceImplTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.MissionInfoServiceImplTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.event_dao.EventDaoTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.event_dao.EventDaoTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.guild_dao.GuildDaoTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.guild_dao.GuildDaoTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.mission_dao.MissionDaoTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.mission_dao.MissionDaoTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.player_dao.PlayerDaoTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.player_dao.PlayerDaoTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.api.ApiGatewayTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.api.ApiGatewayTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.events.EventTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.events.EventTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.events.plans.PlanFactoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.events.plans.PlanFactoryTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.events.plans.PlanTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.events.plans.PlanTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.guilds.EventMedalsTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.guilds.EventMedalsTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.guilds.LevelTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.guilds.LevelTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.missions.MissionFactoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.missions.MissionFactoryTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.missions.PlayerMissionsTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.missions.PlayerMissionsTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.DataServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.DataServiceTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.EventServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.EventServiceTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.MissionFunctionalServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.MissionFunctionalServiceTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.MissionInfoServiceImplTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.MissionInfoServiceImplTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.event_dao.EventDaoTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.event_dao.EventDaoTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.guild_dao.GuildDaoTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.guild_dao.GuildDaoTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.mission_dao.MissionDaoTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.mission_dao.MissionDaoTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.player_dao.PlayerDaoTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.player_dao.PlayerDaoTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/Events.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/Events.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/api/ApiGateway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/api/ApiGateway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/api/ApiGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/api/ApiGatewayImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/api/AppContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/api/AppContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/EventImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/EventImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/AbstractPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/AbstractPlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/GatheringEventPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/GatheringEventPlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/HuntingEventPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/HuntingEventPlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/MiningEventPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/MiningEventPlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/Plan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/Plan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/PlanFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/events/plans/PlanFactoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/guilds/Penalty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/guilds/Penalty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/missions/Objective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/missions/Objective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/missions/PlayerMissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/missions/PlayerMissions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/missions/factory/MissionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/factories/missions/MissionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/missions/factory/MissionFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/factories/missions/MissionFactoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/DataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/DataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/DataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/DataServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/EventService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/EventServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/EventServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/MissionFunctionalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/MissionFunctionalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/MissionFunctionalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/MissionFunctionalServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/MissionInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/MissionInfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/MissionInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/services/MissionInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/util/EventMessageReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/app/util/EventMessageReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/event_dao/AbstractEventDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/event/AbstractEventDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/event_dao/Contribution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/event/Contribution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/event_dao/EventDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/event/EventDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/event_dao/EventData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/event/EventData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/event_dao/EventJdbc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/event/EventJdbc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/event_dao/ScopeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/event/ScopeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/event_dao/eventDao.uml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/event/eventDao.uml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/guild_dao/AbstractGuildDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/guild/AbstractGuildDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/guild_dao/GuildDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/guild/GuildDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/guild_dao/GuildJdbc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/guild/GuildJdbc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/guild_dao/guildDao.uml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/guild/guildDao.uml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/mission_dao/AbstractMissionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/mission/AbstractMissionDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/mission_dao/ActionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/mission/ActionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/mission_dao/CompletionData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/mission/CompletionData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/mission_dao/Grade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/mission/Grade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/mission_dao/MissionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/mission/MissionDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/mission_dao/MissionData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/mission/MissionData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/mission_dao/MissionJdbc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/mission/MissionJdbc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/mission_dao/MissionStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/mission/MissionStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/mission_dao/ObjectiveData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/mission/ObjectiveData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/mission_dao/missionDao.uml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/daos/mission/missionDao.uml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/player_dao/AbstractPlayerDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/player_dao/PlayerDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/player_dao/PlayerData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/daarthy/events/persistence/player_dao/PlayerJdbc.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/sql/MySQLCreateTables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/sql/MySQLCreateTables.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/api/ApiGatewayTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/api/ApiGatewayTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/modules/events/EventTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/modules/events/EventTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/modules/events/plans/PlanTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/modules/events/plans/PlanTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/modules/missions/MissionFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/modules/missions/MissionFactoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/modules/missions/PlayerMissionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/modules/missions/PlayerMissionsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/services/DataServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/services/DataServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/services/EventServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/services/EventServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/services/MissionFunctionalServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/services/MissionFunctionalServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/services/MissionInfoServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/app/services/MissionInfoServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/persistence/event_dao/EventDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/persistence/daos/event_dao/EventDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/persistence/guild_dao/GuildDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/persistence/daos/guild_dao/GuildDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/persistence/mission_dao/MissionDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/persistence/daos/mission_dao/MissionDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/daarthy/events/persistence/player_dao/PlayerDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/daarthy/events/persistence/daos/player/dao/PlayerDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Events-1.0-SNAPSHOT-shaded.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Events-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/Events.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/api/ApiGateway.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/api/ApiGatewayImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/api/AppContainer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/events/Event.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/events/EventImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/events/EventToken.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/events/plans/AbstractBasicEvents.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/events/plans/AbstractPlan.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/events/plans/GatheringEventPlan.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/events/plans/HuntingEventPlan.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/events/plans/MiningEventPlan.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/events/plans/Plan.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/events/plans/PlanFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/events/plans/PlanFactoryImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/guilds/EventMedals.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/guilds/Guild.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/guilds/GuildModifiers.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/guilds/Level.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/guilds/Penalty.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/missions/Objective.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/missions/PlayerMissions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/missions/factory/MissionFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/modules/missions/factory/MissionFactoryImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/DataService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/DataServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/EventService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/EventServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/MissionFunctionalService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/MissionFunctionalServiceImpl$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/MissionFunctionalServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/MissionInfoService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/services/MissionInfoServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/util/DataSourceLocatorImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/util/EventMessageReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/util/InternalScheduler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/app/util/InternalSchedulerImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/event_dao/AbstractEventDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/event_dao/Contribution.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/event_dao/EventDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/event_dao/EventData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/event_dao/EventJdbc.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/event_dao/ScopeEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/guild_dao/AbstractGuildDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/guild_dao/GuildDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/guild_dao/GuildJdbc.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/mission_dao/AbstractMissionDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/mission_dao/ActionType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/mission_dao/CompletionData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/mission_dao/Grade.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/mission_dao/MissionDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/mission_dao/MissionData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/mission_dao/MissionJdbc.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/mission_dao/MissionStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/mission_dao/ObjectiveData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/player_dao/AbstractPlayerDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/player_dao/PlayerDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/player_dao/PlayerData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/daarthy/events/persistence/player_dao/PlayerJdbc.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/database.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/events.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/missions.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rewards.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/jacoco.exec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/original-Events-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.api/ApiGatewayImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.api/ApiGatewayImpl.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.api/AppContainer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.api/AppContainer.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.api/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.api/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/AbstractBasicEvents.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/AbstractBasicEvents.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/AbstractPlan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/AbstractPlan.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/GatheringEventPlan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/GatheringEventPlan.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/HuntingEventPlan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/HuntingEventPlan.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/MiningEventPlan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/MiningEventPlan.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/PlanFactoryImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/PlanFactoryImpl.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events.plans/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events/EventImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events/EventImpl.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events/EventToken.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events/EventToken.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.events/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/EventMedals.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/EventMedals.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/Guild.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/Guild.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/GuildModifiers.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/GuildModifiers.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/Level.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/Level.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/Penalty.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/Penalty.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.guilds/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.missions.factory/MissionFactoryImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.missions.factory/MissionFactoryImpl.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.missions.factory/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.missions.factory/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.missions/Objective.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.missions/Objective.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.missions/PlayerMissions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.missions/PlayerMissions.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.missions/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.modules.missions/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.services/DataServiceImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.services/DataServiceImpl.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.services/EventServiceImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.services/EventServiceImpl.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.services/MissionFunctionalServiceImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.services/MissionFunctionalServiceImpl.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.services/MissionInfoServiceImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.services/MissionInfoServiceImpl.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.services/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.services/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.util/DataSourceLocatorImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.util/DataSourceLocatorImpl.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.util/EventMessageReader.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.util/EventMessageReader.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.util/InternalSchedulerImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.util/InternalSchedulerImpl.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.util/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.app.util/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/AbstractEventDao.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/AbstractEventDao.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/Contribution.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/Contribution.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/EventData.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/EventData.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/EventJdbc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/EventJdbc.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/ScopeEnum.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/ScopeEnum.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.event_dao/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.guild_dao/AbstractGuildDao.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.guild_dao/AbstractGuildDao.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.guild_dao/GuildJdbc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.guild_dao/GuildJdbc.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.guild_dao/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.guild_dao/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/AbstractMissionDao.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/AbstractMissionDao.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/ActionType.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/ActionType.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/CompletionData.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/CompletionData.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/Grade.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/Grade.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/MissionData.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/MissionData.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/MissionJdbc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/MissionJdbc.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/MissionStatus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/MissionStatus.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/ObjectiveData.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/ObjectiveData.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.mission_dao/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.player_dao/AbstractPlayerDao.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.player_dao/AbstractPlayerDao.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.player_dao/PlayerData.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.player_dao/PlayerData.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.player_dao/PlayerJdbc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.player_dao/PlayerJdbc.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.player_dao/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events.persistence.player_dao/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events/Events.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events/Events.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.daarthy.events/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/branchfc.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/branchnc.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/branchpc.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/bundle.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/class.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/down.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/greenbar.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/group.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/method.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/package.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/prettify.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/prettify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/redbar.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/report.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/report.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/session.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/sort.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/sort.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/source.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/up.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-sessions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.api.ApiGatewayTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.events.EventTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.events.plans.PlanFactoryTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.events.plans.PlanTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.guilds.EventMedalsTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.guilds.LevelTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.missions.MissionFactoryTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.modules.missions.PlayerMissionsTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.DataServiceTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.EventServiceTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.MissionFunctionalServiceTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.app.services.MissionInfoServiceImplTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.event_dao.EventDaoTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.guild_dao.GuildDaoTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.mission_dao.MissionDaoTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.daarthy.events.persistence.player_dao.PlayerDaoTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.api.ApiGatewayTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.events.EventTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.events.plans.PlanFactoryTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.events.plans.PlanTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.guilds.EventMedalsTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.guilds.LevelTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.missions.MissionFactoryTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.modules.missions.PlayerMissionsTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.DataServiceTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.EventServiceTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.MissionFunctionalServiceTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.app.services.MissionInfoServiceImplTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.event_dao.EventDaoTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.guild_dao.GuildDaoTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.mission_dao.MissionDaoTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.daarthy.events.persistence.player_dao.PlayerDaoTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/api/ApiGatewayTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/app/modules/events/EventTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/app/modules/events/plans/PlanFactoryTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/app/modules/events/plans/PlanTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/app/modules/guilds/EventMedalsTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/app/modules/guilds/LevelTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/app/modules/missions/MissionFactoryTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/app/modules/missions/PlayerMissionsTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/app/services/DataServiceTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/app/services/EventServiceTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/app/services/MissionFunctionalServiceTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/app/services/MissionInfoServiceImplTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/persistence/SqlConnections.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/persistence/event_dao/EventDaoTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/persistence/guild_dao/GuildDaoTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/persistence/mission_dao/MissionDaoTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/daarthy/events/persistence/player_dao/PlayerDaoTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +349,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="5125" />
+    <option name="totalTimeSeconds" value="5232" />
     <option name="idleThresholdMs" value="12130000" />
     <option name="autoCountIdleSeconds" value="300" />
     <option name="gitIntegration" value="true" />
@@ -103,8 +389,11 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ACER/Desktop/TFM/Events&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ACER/Desktop/stuff/TFM/Events&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
@@ -117,6 +406,7 @@
       <recent name="C:\Users\ACER\Desktop\TFM\Events\src\main" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.daarthy.events.persistence.player.dao" />
       <recent name="com.daarthy.events.app.modules.missions" />
       <recent name="com.daarthy.events.app.modules.events" />
       <recent name="com.daarthy.events.app.modules" />
@@ -126,7 +416,7 @@
       <recent name="com.daarthy.events.app.util" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MissionFunctionalServiceTest.testMissionServiceByPlayerJoinMission">
+  <component name="RunManager" selected="JUnit.PlayerDaoTest.testingThings (1)">
     <configuration name="ApiGatewayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Events" />
       <extension name="coverage">
@@ -138,22 +428,6 @@
       <option name="PACKAGE_NAME" value="com.daarthy.events.api" />
       <option name="MAIN_CLASS_NAME" value="com.daarthy.events.api.ApiGatewayTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ApiGatewayTest.testApiByCompletions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Events" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.daarthy.events.api.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.daarthy.events.api" />
-      <option name="MAIN_CLASS_NAME" value="com.daarthy.events.api.ApiGatewayTest" />
-      <option name="METHOD_NAME" value="testApiByCompletions" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -174,22 +448,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ApiGatewayTest.testApiByPlayerCreateAndDeleteGuildRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Events" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.daarthy.events.api.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.daarthy.events.api" />
-      <option name="MAIN_CLASS_NAME" value="com.daarthy.events.api.ApiGatewayTest" />
-      <option name="METHOD_NAME" value="testApiByPlayerCreateAndDeleteGuildRequest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="MissionFunctionalServiceTest.testMissionServiceByPlayerJoinMission" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Events" />
       <extension name="coverage">
@@ -201,6 +459,38 @@
       <option name="PACKAGE_NAME" value="com.daarthy.events.app.services" />
       <option name="MAIN_CLASS_NAME" value="com.daarthy.events.app.services.MissionFunctionalServiceTest" />
       <option name="METHOD_NAME" value="testMissionServiceByPlayerJoinMission" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerDaoTest.testingThings (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Events" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.daarthy.events.persistence.daos.player.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.daarthy.events.persistence.daos.player.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.daarthy.events.persistence.daos.player.dao.PlayerDaoTest" />
+      <option name="METHOD_NAME" value="testingThings" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerDaoTest.testingThings" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Events" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.daarthy.events.persistence.player.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.daarthy.events.persistence.player.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.daarthy.events.persistence.player.dao.PlayerDaoTest" />
+      <option name="METHOD_NAME" value="testingThings" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -233,11 +523,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PlayerDaoTest.testingThings (1)" />
+        <item itemvalue="JUnit.PlayerDaoTest.testingThings" />
         <item itemvalue="JUnit.MissionFunctionalServiceTest.testMissionServiceByPlayerJoinMission" />
         <item itemvalue="JUnit.ApiGatewayTest.testApiByMissionGuildDash" />
         <item itemvalue="JUnit.ApiGatewayTest" />
-        <item itemvalue="JUnit.ApiGatewayTest.testApiByCompletions" />
-        <item itemvalue="JUnit.ApiGatewayTest.testApiByPlayerCreateAndDeleteGuildRequest" />
       </list>
     </recent_temporary>
   </component>
@@ -281,7 +571,13 @@
       <workItem from="1717153201645" duration="1469000" />
       <workItem from="1717359466085" duration="33000" />
       <workItem from="1717405166539" duration="1871000" />
-      <workItem from="1717604297587" duration="331000" />
+      <workItem from="1717604297587" duration="751000" />
+      <workItem from="1717606115931" duration="631000" />
+      <workItem from="1723887583165" duration="4112000" />
+      <workItem from="1723898188752" duration="3252000" />
+      <workItem from="1723908938479" duration="828000" />
+      <workItem from="1723921291265" duration="4752000" />
+      <workItem from="1723974278914" duration="4764000" />
     </task>
     <servers />
   </component>
@@ -304,28 +600,28 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/daarthy/events/app/services/EventServiceTest.java</url>
-          <line>162</line>
+          <line>141</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/daarthy/events/api/ApiGatewayTest.java</url>
-          <line>255</line>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/daarthy/events/api/ApiGatewayTest.java</url>
-          <line>197</line>
+          <line>179</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/daarthy/events/app/services/MissionFunctionalServiceTest.java</url>
-          <line>90</line>
+          <line>63</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/daarthy/events/app/modules/missions/factory/MissionFactoryImpl.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="51" />
+          <url>file://$PROJECT_DIR$/src/test/java/com/daarthy/events/persistence/daos/player/dao/PlayerDaoTest.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/daarthy/events/persistence/daos/player/dao/PlayerDaoTest.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

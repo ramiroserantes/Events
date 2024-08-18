@@ -1,13 +1,13 @@
 package com.daarthy.events.app.services;
 
 import com.daarthy.events.app.modules.guilds.Guild;
-import com.daarthy.events.persistence.player_dao.PlayerData;
+import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
 
 import java.util.UUID;
 
 public interface DataService {
 
-    PlayerData getPlayerData(UUID playerId);
+    EventsPlayer getPlayerData(UUID playerId);
 
     Guild getGuild(Long guildId);
 

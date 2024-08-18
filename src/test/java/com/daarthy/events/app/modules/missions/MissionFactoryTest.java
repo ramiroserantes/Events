@@ -1,10 +1,10 @@
 package com.daarthy.events.app.modules.missions;
 
-import com.daarthy.events.app.modules.missions.factory.MissionFactory;
-import com.daarthy.events.app.modules.missions.factory.MissionFactoryImpl;
-import com.daarthy.events.persistence.mission_dao.Grade;
-import com.daarthy.events.persistence.mission_dao.MissionData;
-import com.daarthy.events.persistence.mission_dao.ObjectiveData;
+import com.daarthy.events.persistence.factories.missions.MissionFactory;
+import com.daarthy.events.persistence.factories.missions.MissionFactoryImpl;
+import com.daarthy.events.persistence.daos.mission.Grade;
+import com.daarthy.events.persistence.daos.mission.MissionData;
+import com.daarthy.events.persistence.daos.mission.ObjectiveData;
 import org.junit.Test;
 
 import java.util.HashMap;

@@ -18,7 +18,7 @@ public class PlanFactoryImpl implements PlanFactory{
             plan = (Plan) Class.forName(result.toString()).getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException | InvocationTargetException | InstantiationException
                  | IllegalAccessException | NoSuchMethodException e) {
-            Events.logInfo("Plan creation Error.");
+           // Events.logInfo("Plan creation Error.");
         }
 
         return plan;

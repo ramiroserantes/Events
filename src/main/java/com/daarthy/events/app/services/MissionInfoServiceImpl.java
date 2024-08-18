@@ -1,10 +1,9 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.Events;
-import com.daarthy.events.persistence.mission_dao.CompletionData;
-import com.daarthy.events.persistence.mission_dao.MissionDao;
-import com.daarthy.events.persistence.mission_dao.MissionData;
-import com.daarthy.events.persistence.mission_dao.ObjectiveData;
+import com.daarthy.events.persistence.daos.mission.CompletionData;
+import com.daarthy.events.persistence.daos.mission.MissionDao;
+import com.daarthy.events.persistence.daos.mission.MissionData;
+import com.daarthy.events.persistence.daos.mission.ObjectiveData;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;
@@ -38,7 +37,7 @@ public class MissionInfoServiceImpl implements MissionInfoService {
             );
 
         } catch (SQLException e) {
-            Events.logInfo("Error on Guild Dashboard.");
+            //  Events.logInfo("Error on Guild Dashboard.");
         }
 
         return objec;
@@ -54,7 +53,7 @@ public class MissionInfoServiceImpl implements MissionInfoService {
             completions = missionDao.findPlayerCompletionsRate(playerId, connection);
 
         } catch (SQLException e) {
-            Events.logInfo("Rates not found");
+            //   Events.logInfo("Rates not found");
         }
         return completions;
     }

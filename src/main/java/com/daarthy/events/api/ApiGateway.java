@@ -3,8 +3,8 @@ package com.daarthy.events.api;
 import com.daarthy.events.app.modules.events.Event;
 import com.daarthy.events.app.modules.events.EventToken;
 import com.daarthy.events.app.modules.guilds.Guild;
-import com.daarthy.events.persistence.mission_dao.*;
-import com.daarthy.events.persistence.player_dao.PlayerData;
+import com.daarthy.events.persistence.daos.mission.*;
+import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,7 @@ public interface ApiGateway {
      * Data Related Request
      *
      * **/
-    PlayerData getPlayerDataRequest(UUID playerId);
+    EventsPlayer getPlayerDataRequest(UUID playerId);
 
     Guild getGuildDataRequest(UUID playerId);
 
@@ -62,7 +62,7 @@ public interface ApiGateway {
 
     Map<MissionData, List<ObjectiveData>> getGuildDashBoardRequest(UUID playerId);
 
-    Map<String,CompletionData> getPlayerRatesRequest(UUID playerId);
+    Map<String, CompletionData> getPlayerRatesRequest(UUID playerId);
 
     AppContainer getContainer();
 

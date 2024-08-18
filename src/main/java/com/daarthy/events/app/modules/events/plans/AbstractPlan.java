@@ -1,6 +1,6 @@
 package com.daarthy.events.app.modules.events.plans;
 
-import com.daarthy.events.persistence.mission_dao.ActionType;
+import com.daarthy.events.persistence.daos.mission.ActionType;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;

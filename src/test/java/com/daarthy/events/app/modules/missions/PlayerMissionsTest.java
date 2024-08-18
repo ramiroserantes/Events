@@ -1,9 +1,7 @@
 package com.daarthy.events.app.modules.missions;
 
 
-import com.daarthy.events.app.modules.missions.Objective;
-import com.daarthy.events.app.modules.missions.PlayerMissions;
-import com.daarthy.events.persistence.mission_dao.Grade;
+import com.daarthy.events.persistence.daos.mission.Grade;
 import org.junit.Test;
 
 import java.time.LocalDate;

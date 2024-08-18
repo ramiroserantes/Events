@@ -23,8 +23,8 @@ CREATE TABLE Guild (
 
 CREATE TABLE Player (
     playerId VARCHAR(36) PRIMARY KEY,
-    maxMissions INT NOT NULL DEFAULT 3,
-    ampBasicRewards DECIMAL(4, 2) NOT NULL DEFAULT 0.0,
+    maxMissions INT NULL DEFAULT 3,
+    ampBasicRewards DECIMAL(4, 2) NULL DEFAULT 0.0,
     guildId BIGINT NOT NULL,
     FOREIGN KEY (guildId) REFERENCES Guild(id)
 );

@@ -1,13 +1,12 @@
 package com.daarthy.events.app.modules.missions;
 
-import com.daarthy.events.persistence.mission_dao.Grade;
+import com.daarthy.events.persistence.daos.mission.Grade;
 
 import java.time.LocalDate;
 
 public class Objective {
 
     private final Long missionId;
-
     private LocalDate expirationDate;
 
     private final Grade grade;

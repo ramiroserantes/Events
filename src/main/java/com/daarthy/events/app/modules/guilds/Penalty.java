@@ -1,6 +1,6 @@
 package com.daarthy.events.app.modules.guilds;
 
-import com.daarthy.events.persistence.mission_dao.Grade;
+import com.daarthy.events.persistence.daos.mission.Grade;
 
 import java.util.ArrayList;
 import java.util.HashMap;

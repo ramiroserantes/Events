@@ -1,20 +1,8 @@
 package com.daarthy.events.api;
 
-import com.daarthy.events.Events;
-import com.daarthy.events.app.modules.events.Event;
-import com.daarthy.events.app.modules.events.EventToken;
-import com.daarthy.events.app.modules.guilds.Guild;
-import com.daarthy.events.persistence.mission_dao.*;
-import com.daarthy.events.persistence.player_dao.PlayerData;
-import com.zaxxer.hikari.HikariDataSource;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
-
-public class ApiGatewayImpl implements ApiGateway{
-
+public abstract class ApiGatewayImpl implements ApiGateway{
+/*
     private final AppContainer container;
 
     public ApiGatewayImpl(HikariDataSource dataSource) {
@@ -25,35 +13,35 @@ public class ApiGatewayImpl implements ApiGateway{
     public void logInRequest(UUID playerId) {
 
         container.getDataService().initPlayer(playerId);
-        PlayerData playerData = container.getDataService().getPlayerData(playerId);
-        Guild guild = container.getDataService().getGuild(playerData.getGuildId());
+        EventsPlayer eventsPlayer = container.getDataService().getPlayerData(playerId);
+        Guild guild = container.getDataService().getGuild(eventsPlayer.getGuildId());
 
-        container.getMissionFunctionalService().fillGuildDashBoard(playerData.getGuildId(), guild);
+        container.getMissionFunctionalService().fillGuildDashBoard(eventsPlayer.getGuildId(), guild);
         container.getMissionFunctionalService().initPlayer(playerId);
         container.getEventService().setUpEvents();
-        if(!Objects.equals(playerData.getGuildId(), Events.getBasicGuildId())) {
-            container.getEventService().initPlayer(playerId, playerData.getGuildId());
+        if(!Objects.equals(eventsPlayer.getGuildId(), Events.getBasicGuildId())) {
+            container.getEventService().initPlayer(playerId, eventsPlayer.getGuildId());
         }
     }
 
     @Override
     public void logOutRequest(UUID playerId) {
 
-        PlayerData playerData = container.getDataService().getPlayerData(playerId);
+        EventsPlayer eventsPlayer = container.getDataService().getPlayerData(playerId);
         container.getDataService().removePlayer(playerId);
-        container.getDataService().removeGuild(playerData.getGuildId());
+        container.getDataService().removeGuild(eventsPlayer.getGuildId());
 
         container.getMissionFunctionalService().removePlayer(playerId);
-        Guild guild = container.getDataService().getGuild(playerData.getGuildId());
+        Guild guild = container.getDataService().getGuild(eventsPlayer.getGuildId());
 
-        if(guild == null && !Objects.equals(playerData.getGuildId(), Events.getBasicGuildId())) {
-            container.getEventService().removeGuild(playerData.getGuildId());
+        if(guild == null && !Objects.equals(eventsPlayer.getGuildId(), Events.getBasicGuildId())) {
+            container.getEventService().removeGuild(eventsPlayer.getGuildId());
             container.getEventService().removePlayer(playerId);
         }
     }
 
     @Override
-    public PlayerData getPlayerDataRequest(UUID playerId) {
+    public EventsPlayer getPlayerDataRequest(UUID playerId) {
         return container.getDataService().getPlayerData(playerId);
     }
 
@@ -76,12 +64,12 @@ public class ApiGatewayImpl implements ApiGateway{
 
     @Override
     public void createGuildRequest(UUID playerId, Long guildId, String kName) {
-        container.getDataService().createGuild(playerId, guildId, kName);
+      /*  container.getDataService().createGuild(playerId, guildId, kName);
         Guild guild = container.getDataService().getGuild(guildId);
         container.getMissionFunctionalService().fillGuildDashBoard(guildId, guild);
         container.getEventService().removePlayer(playerId);
         container.getEventService().initPlayer(playerId, guildId);
-    }
+    *//*}
 
     @Override
     public void savePlayerRequest(UUID playerId) {
@@ -91,13 +79,13 @@ public class ApiGatewayImpl implements ApiGateway{
     @Override
     public List<EventToken> eventActivityRequest(UUID playerId, ActionType actionType) {
 
-        PlayerData playerData = container.getDataService().getPlayerData(playerId);
+        EventsPlayer eventsPlayer = container.getDataService().getPlayerData(playerId);
 
-        if(playerData.getGuildId().equals(Events.getBasicGuildId())) {
+        if(eventsPlayer.getGuildId().equals(Events.getBasicGuildId())) {
             return null;
         }
 
-        return container.getEventService().registerAction(playerId, playerData.getGuildId(), actionType);
+        return container.getEventService().registerAction(playerId, eventsPlayer.getGuildId(), actionType);
     }
 
     @Override
@@ -108,9 +96,9 @@ public class ApiGatewayImpl implements ApiGateway{
     @Override
     public StringBuilder getEventInfoRequest(UUID playerId, String eventName) {
 
-        PlayerData playerData = container.getDataService().getPlayerData(playerId);
+        EventsPlayer eventsPlayer = container.getDataService().getPlayerData(playerId);
 
-        if(Objects.equals(playerData.getGuildId(), Events.getBasicGuildId())) {
+        if(Objects.equals(eventsPlayer.getGuildId(), Events.getBasicGuildId())) {
             return new StringBuilder(">> You cant participate in this event when you are in the Server guild.");
         }
 
@@ -120,9 +108,9 @@ public class ApiGatewayImpl implements ApiGateway{
     @Override
     public int getGuildMedalsOnEventRequest(UUID playerId, Long eventId) {
 
-        PlayerData playerData = container.getDataService().getPlayerData(playerId);
+        EventsPlayer eventsPlayer = container.getDataService().getPlayerData(playerId);
 
-        return container.getEventService().getGuildMedals(playerData.getGuildId()).getEventMedals(eventId);
+        return container.getEventService().getGuildMedals(eventsPlayer.getGuildId()).getEventMedals(eventId);
     }
 
     @Override
@@ -134,10 +122,10 @@ public class ApiGatewayImpl implements ApiGateway{
     @Override
     public StringBuilder joinMissionRequest(UUID playerId, Long missionId) {
 
-        PlayerData playerData = container.getDataService().getPlayerData(playerId);
-        Guild guild = container.getDataService().getGuild(playerData.getGuildId());
+        EventsPlayer eventsPlayer = container.getDataService().getPlayerData(playerId);
+        Guild guild = container.getDataService().getGuild(eventsPlayer.getGuildId());
 
-        return container.getMissionFunctionalService().joinMission(playerId, playerData, guild, missionId);
+        return container.getMissionFunctionalService().joinMission(playerId, eventsPlayer, guild, missionId);
     }
 
     @Override
@@ -147,8 +135,8 @@ public class ApiGatewayImpl implements ApiGateway{
 
     @Override
     public Map<MissionData, List<ObjectiveData>> getGuildDashBoardRequest(UUID playerId) {
-        PlayerData playerData = container.getDataService().getPlayerData(playerId);
-        return container.getMissionInfoService().findGuildDashBoard(playerData.getGuildId());
+        EventsPlayer eventsPlayer = container.getDataService().getPlayerData(playerId);
+        return container.getMissionInfoService().findGuildDashBoard(eventsPlayer.getGuildId());
     }
 
     @Override
@@ -159,5 +147,5 @@ public class ApiGatewayImpl implements ApiGateway{
     @Override
     public AppContainer getContainer() {
         return container;
-    }
+    }*/
 }

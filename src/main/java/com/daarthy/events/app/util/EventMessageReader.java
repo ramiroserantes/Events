@@ -16,7 +16,7 @@ public class EventMessageReader {
             String messageTemplate = eventMessages.get(eventKey);
             return String.format(messageTemplate, args);
         } catch (Exception e) {
-            Events.logInfo("Error on retrieve the event description");
+            // Events.logInfo("Error on retrieve the event description");
             return null;
         }
     }

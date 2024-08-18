@@ -2,9 +2,9 @@ package com.daarthy.events.app.services;
 
 import com.daarthy.events.Events;
 import com.daarthy.events.app.modules.guilds.Guild;
-import com.daarthy.events.persistence.guild_dao.GuildDao;
-import com.daarthy.events.persistence.player_dao.PlayerDao;
-import com.daarthy.events.persistence.player_dao.PlayerData;
+import com.daarthy.events.persistence.daos.guild.GuildDao;
+import com.daarthy.events.persistence.daos.player.dao.PlayerDao;
+import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class DataServiceImpl implements DataService {
 
-    private HashMap<UUID, PlayerData> playersData = new HashMap<>();
+    private HashMap<UUID, EventsPlayer> playersData = new HashMap<>();
     private HashMap<Long, Guild> guildsData = new HashMap<>();
 
     private static final String ERROR = "DB Error on DataService ";
@@ -31,7 +31,7 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
-    public PlayerData getPlayerData(UUID playerId) {
+    public EventsPlayer getPlayerData(UUID playerId) {
         return playersData.getOrDefault(playerId, null);
     }
 
@@ -40,10 +40,10 @@ public class DataServiceImpl implements DataService {
 
         try (Connection connection = dataSource.getConnection()) {
 
-            PlayerData playerData = playersData.get(playerId);
-            guildsData.get(playerData.getGuildId()).modifyWatch(-1);
-            removeGuild(playerData.getGuildId());
-            playerData.setGuildId(guildId);
+            EventsPlayer eventsPlayer = playersData.get(playerId);
+            guildsData.get(eventsPlayer.getGuildId()).modifyWatch(-1);
+            removeGuild(eventsPlayer.getGuildId());
+            eventsPlayer.setGuildId(guildId);
 
             Guild guild = guildDao.createGuild(guildId, kName, connection);
             guildsData.put(guildId, guild);
@@ -51,7 +51,7 @@ public class DataServiceImpl implements DataService {
             savePlayer(playerId);
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR + "createGuild");
+            //Events.logInfo(ERROR + "createGuild");
         }
     }
 
@@ -72,7 +72,7 @@ public class DataServiceImpl implements DataService {
                 guild = guildDao.findGuildById(guildId, connection);
 
             } catch (SQLException e) {
-                Events.logInfo("Error on guild retrieve findDBGuild");
+                //Events.logInfo("Error on guild retrieve findDBGuild");
             }
         }
         return guild;
@@ -87,7 +87,7 @@ public class DataServiceImpl implements DataService {
                     .getLevel().getMaxJobLevel();
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR + "getJobMaxLevel");
+            // Events.logInfo(ERROR + "getJobMaxLevel");
         }
 
         return 15;
@@ -96,11 +96,11 @@ public class DataServiceImpl implements DataService {
     @Override
     public void savePlayer(UUID playerId) {
 
-        try (Connection connection = dataSource.getConnection()) {
+        /*try (Connection connection = dataSource.getConnection()) {
             playerDao.savePlayer(playerId, playersData.get(playerId), connection);
         } catch (SQLException e) {
             Events.logInfo(ERROR + "savePlayer");
-        }
+        }*/
     }
 
     @Override
@@ -113,7 +113,7 @@ public class DataServiceImpl implements DataService {
             guildDao.saveGuild(guildId, guild, connection);
 
         } catch (SQLException e) {
-            Events.logInfo(ERROR + "saveGuild");
+            // Events.logInfo(ERROR + "saveGuild");
         }
     }
 
@@ -137,7 +137,7 @@ public class DataServiceImpl implements DataService {
     @Override
     public void deleteGuild(Long guildId) {
 
-        guildsData.remove(guildId);
+       /* guildsData.remove(guildId);
         try (Connection connection = dataSource.getConnection()){
 
             removePlayersFromCacheGuild(guildId);
@@ -146,20 +146,20 @@ public class DataServiceImpl implements DataService {
 
         } catch (SQLException e) {
             Events.logInfo(ERROR + "deleteGuild");
-        }
+        }*/
     }
 
     @Override
     public void initPlayer(UUID playerId) {
-        try (Connection connection = dataSource.getConnection()) {
+       /* try (Connection connection = dataSource.getConnection()) {
 
-            PlayerData playerData = playerDao.findPlayerData(playerId, connection);
-            if (playerData == null) {
-                playerData = playerDao.createPlayer(playerId, connection);
+            EventsPlayer eventsPlayer = playerDao.findPlayerData(playerId, connection);
+            if (eventsPlayer == null) {
+                eventsPlayer = playerDao.createPlayer(playerId, connection);
             }
-            playersData.put(playerId, playerData);
+            playersData.put(playerId, eventsPlayer);
 
-            Long guildId = playerData.getGuildId();
+            Long guildId = eventsPlayer.getGuildId();
 
             Guild guild = guildsData.getOrDefault(guildId, null);
             if(guild == null) {
@@ -170,22 +170,22 @@ public class DataServiceImpl implements DataService {
 
         } catch (SQLException e) {
             Events.logInfo(ERROR + "initPlayer");
-        }
+        }*/
     }
 
     private void removePlayersFromCacheGuild(Long guildId) {
 
-        for (Map.Entry<UUID, PlayerData> entry : playersData.entrySet()) {
-            PlayerData playerData = entry.getValue();
+        for (Map.Entry<UUID, EventsPlayer> entry : playersData.entrySet()) {
+            EventsPlayer eventsPlayer = entry.getValue();
 
-            if (playerData.getGuildId().equals(guildId)) {
-                playerData.setGuildId(Events.getBasicGuildId());
+            if (eventsPlayer.getGuildId().equals(guildId)) {
+                eventsPlayer.setGuildId(Events.getBasicGuildId());
                 if(!guildsData.containsKey(Events.getBasicGuildId())) {
                     try (Connection connection = dataSource.getConnection()) {
                         guildsData.put(Events.getBasicGuildId(), guildDao.findGuildById(Events.getBasicGuildId(),
                                 connection));
                     } catch (SQLException e) {
-                        Events.logInfo("Error on retrieve of Basic Guild");
+                        //    Events.logInfo("Error on retrieve of Basic Guild");
                     }
                 }
             }

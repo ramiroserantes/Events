@@ -2,10 +2,10 @@ package com.daarthy.events.app.services;
 
 import com.daarthy.events.app.modules.guilds.Guild;
 import com.daarthy.events.app.modules.guilds.Penalty;
-import com.daarthy.events.persistence.mission_dao.Grade;
-import com.daarthy.events.persistence.mission_dao.MissionData;
-import com.daarthy.events.persistence.mission_dao.ObjectiveData;
-import com.daarthy.events.persistence.player_dao.PlayerData;
+import com.daarthy.events.persistence.daos.mission.Grade;
+import com.daarthy.events.persistence.daos.mission.MissionData;
+import com.daarthy.events.persistence.daos.mission.ObjectiveData;
+import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public interface MissionFunctionalService {
 
-    StringBuilder joinMission(UUID playerId, PlayerData playerData, Guild guild, Long missionId);
+    StringBuilder joinMission(UUID playerId, EventsPlayer eventsPlayer, Guild guild, Long missionId);
 
     void fillGuildDashBoard(Long guildId, Guild guild);
 

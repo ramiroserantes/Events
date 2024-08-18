@@ -5,10 +5,10 @@ import com.daarthy.events.app.modules.guilds.Guild;
 import com.daarthy.events.app.modules.guilds.Penalty;
 import com.daarthy.events.app.modules.missions.Objective;
 import com.daarthy.events.app.modules.missions.PlayerMissions;
-import com.daarthy.events.app.modules.missions.factory.MissionFactory;
-import com.daarthy.events.app.modules.missions.factory.MissionFactoryImpl;
-import com.daarthy.events.persistence.mission_dao.*;
-import com.daarthy.events.persistence.player_dao.PlayerData;
+import com.daarthy.events.persistence.factories.missions.MissionFactory;
+import com.daarthy.events.persistence.factories.missions.MissionFactoryImpl;
+import com.daarthy.events.persistence.daos.mission.*;
+import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.security.SecureRandom;
@@ -34,7 +34,7 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
     }
 
     @Override
-    public StringBuilder joinMission(UUID playerId, PlayerData playerData, Guild guild, Long missionId) {
+    public StringBuilder joinMission(UUID playerId, EventsPlayer eventsPlayer, Guild guild, Long missionId) {
 
         StringBuilder result = new StringBuilder();
 
@@ -50,7 +50,7 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
                 return result.append(">> You have already accepted this mission.");
             }
 
-            if (missionDao.findAcceptedMissions(playerId, connection) >= playerData.getMaxMissions()) {
+            if (missionDao.findAcceptedMissions(playerId, connection) >= eventsPlayer.getMaxMissions()) {
                 return result.append(">> Max missions reached today.");
             }
 
@@ -81,7 +81,7 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
             return result.append("Mission Accepted");
 
         } catch (SQLException e) {
-            Events.logInfo("Error in mission acceptance DB");
+            //    Events.logInfo("Error in mission acceptance DB");
             return null;
         }
     }
@@ -160,7 +160,7 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
 
                 }
             } catch (SQLException e) {
-                Events.logInfo("Error on creation of mission.");
+                //  Events.logInfo("Error on creation of mission.");
             }
         }
     }
@@ -180,7 +180,7 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
             });
 
         } catch (SQLException e) {
-            Events.logInfo("Error on add Progress");
+            //   Events.logInfo("Error on add Progress");
         }
 
         return result;
@@ -210,7 +210,7 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
             }
 
         } catch (SQLException e) {
-            Events.logInfo("Error on Player Dashboard.");
+            //   Events.logInfo("Error on Player Dashboard.");
         }
 
         return objec;
@@ -227,7 +227,7 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
             data.forEach((key, value) -> missionDao.saveObjectiveProgress(
                     playerId, key, value, connection));
         } catch (SQLException e) {
-            Events.logInfo("Error on SavePlayer");
+            //  Events.logInfo("Error on SavePlayer");
         }
     }
 
@@ -279,7 +279,7 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
             playersObjs.put(playerId, playerMissions);
 
         } catch (SQLException e) {
-            Events.logInfo("Error on player init");
+            //    Events.logInfo("Error on player init");
         }
         return failed;
     }
@@ -338,7 +338,7 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
 
 
         } catch (SQLException e) {
-            Events.logInfo("Error on Midnight update");
+            //   Events.logInfo("Error on Midnight update");
         }
 
 

@@ -9,17 +9,17 @@ import java.io.IOException;
 import java.util.logging.Logger;
 public final class Events extends JavaPlugin {
 
-    private static final Logger logger;
+    //private static final Logger logger;
     private static ApiGateway api;
     private static final Long BASIC_GUILD = 1L;
 
     static {
-        try {
-             api = new ApiGatewayImpl(DataSourceLocatorImpl.getInstance().getDataSource());
+       /* try {
+            // api = new ApiGatewayImpl(DataSourceLocatorImpl.getInstance().getDataSource());
         } catch (IOException e) {
             logInfo("Not a valid state");
         }
-        logger = Logger.getLogger(Events.class.getName());
+        logger = Logger.getLogger(Events.class.getName());*/
     }
     @Override
     public void onEnable() {}
@@ -27,7 +27,7 @@ public final class Events extends JavaPlugin {
     @Override
     public void onDisable() {}
 
-    public static void logInfo(String msg) {logger.info(msg);}
+    //public static void logInfo(String msg) {logger.info(msg);}
 
     public static Long getBasicGuildId() {return BASIC_GUILD;}
 

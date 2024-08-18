@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="18" failures="0" name="com.daarthy.events.app.modules.events.plans.PlanTest" time="10.922" errors="0" skipped="0">
+<testsuite tests="18" failures="0" name="com.daarthy.events.app.modules.events.plans.PlanTest" time="6.615" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2022.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="17.0.7+8-LTS-224"/>
     <property name="sun.boot.library.path" value="C:\Program Files\AdoptOpenJDK\jdk-17.0.7\bin"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\ACER\Desktop\TFM\Events"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\ACER\Desktop\stuff\TFM\Events"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\ACER\Desktop\TFM\Events"/>
+    <property name="user.dir" value="C:\Users\ACER\Desktop\stuff\TFM\Events"/>
     <property name="java.vm.compressedOopsMode" value="32-bit"/>
     <property name="java.runtime.version" value="17.0.7+8-LTS-224"/>
     <property name="os.arch" value="amd64"/>
@@ -37,7 +37,7 @@
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="10.0"/>
     <property name="user.home" value="C:\Users\ACER"/>
-    <property name="user.timezone" value="Asia/Tehran"/>
+    <property name="user.timezone" value="Europe/Madrid"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="17"/>
     <property name="user.name" value="ACER"/>
@@ -61,21 +61,21 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringLimitProbability" time="0"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningLimitProbability" time="0"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningLimitProbability" time="0.001"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringBeyondLimitProbability" time="0"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningMatch" time="0"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningStudy" time="6.652"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningBeyondLimitProbability" time="0.001"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningStudy" time="4.943"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningBeyondLimitProbability" time="0"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringBasicProbability" time="0"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningBasicProbability" time="0.001"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringMatch" time="0.002"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringStudy" time="3.846"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningBasicProbability" time="0"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringMatch" time="0"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringStudy" time="1.508"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByGatheringBeforeLimitProbability" time="0"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingBeyondLimitProbability" time="0"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingLimitProbability" time="0"/>
   <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingMatch" time="0"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingStudy" time="0.417"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningBeforeLimitProbability" time="0.001"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingBeforeLimitProbability" time="0.001"/>
-  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingBasicProbability" time="0.001"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingStudy" time="0.163"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByMiningBeforeLimitProbability" time="0"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingBeforeLimitProbability" time="0"/>
+  <testcase classname="com.daarthy.events.app.modules.events.plans.PlanTest" name="testPlanByHuntingBasicProbability" time="0"/>
 </testsuite>

@@ -1,16 +1,15 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.Events;
 import com.daarthy.events.app.modules.events.Event;
 import com.daarthy.events.app.modules.events.EventImpl;
 import com.daarthy.events.app.modules.events.EventToken;
 import com.daarthy.events.app.modules.guilds.EventMedals;
 import com.daarthy.events.app.util.EventMessageReader;
-import com.daarthy.events.persistence.event_dao.Contribution;
-import com.daarthy.events.persistence.event_dao.EventDao;
-import com.daarthy.events.persistence.event_dao.EventData;
-import com.daarthy.events.persistence.event_dao.ScopeEnum;
-import com.daarthy.events.persistence.mission_dao.ActionType;
+import com.daarthy.events.persistence.daos.event.Contribution;
+import com.daarthy.events.persistence.daos.event.EventDao;
+import com.daarthy.events.persistence.daos.event.EventData;
+import com.daarthy.events.persistence.daos.event.ScopeEnum;
+import com.daarthy.events.persistence.daos.mission.ActionType;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;
@@ -121,7 +120,7 @@ public class EventServiceImpl implements EventService {
             }
 
         } catch (SQLException e) {
-            Events.logInfo("setUpEvents error");
+            //Events.logInfo("setUpEvents error");
         }
     }
 
@@ -153,7 +152,7 @@ public class EventServiceImpl implements EventService {
 
 
         } catch (SQLException e) {
-            Events.logInfo("Error on Event init player");
+            // Events.logInfo("Error on Event init player");
         }
     }
 
@@ -172,7 +171,7 @@ public class EventServiceImpl implements EventService {
                     eventDao.saveGuildMedals(connection, guildId, eventId, medals)
             );
         } catch (SQLException e) {
-            Events.logInfo("Error on saveGuild");
+            // Events.logInfo("Error on saveGuild");
         }
     }
 
@@ -189,7 +188,7 @@ public class EventServiceImpl implements EventService {
             });
 
         } catch (SQLException e) {
-            Events.logInfo("Error on savePlayer");
+            //   Events.logInfo("Error on savePlayer");
         }
 
     }
