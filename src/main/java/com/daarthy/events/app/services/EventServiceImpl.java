@@ -9,7 +9,6 @@ import com.daarthy.events.persistence.daos.event.Contribution;
 import com.daarthy.events.persistence.daos.event.EventDao;
 import com.daarthy.events.persistence.daos.event.EventData;
 import com.daarthy.events.persistence.daos.event.ScopeEnum;
-import com.daarthy.events.persistence.daos.mission.ActionType;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;
@@ -20,7 +19,7 @@ import java.util.*;
 
 public class EventServiceImpl implements EventService {
 
-    private final List<Event> events = new ArrayList<>();
+   /* private final List<Event> events = new ArrayList<>();
     private final Map<Long, EventMedals> guildMedals = new HashMap<>();
 
     private final EventDao eventDao;
@@ -198,6 +197,6 @@ public class EventServiceImpl implements EventService {
     public void removePlayer(UUID playerId) {
         savePlayer(playerId);
         events.forEach(e -> e.removePlayer(playerId));
-    }
+    }*/
 
 }

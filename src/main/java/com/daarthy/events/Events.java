@@ -1,12 +1,8 @@
 package com.daarthy.events;
 
 import com.daarthy.events.api.ApiGateway;
-import com.daarthy.events.api.ApiGatewayImpl;
-import com.daarthy.events.app.util.DataSourceLocatorImpl;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
-import java.util.logging.Logger;
 public final class Events extends JavaPlugin {
 
     //private static final Logger logger;

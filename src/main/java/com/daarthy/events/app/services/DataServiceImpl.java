@@ -2,7 +2,7 @@ package com.daarthy.events.app.services;
 
 import com.daarthy.events.Events;
 import com.daarthy.events.app.modules.guilds.Guild;
-import com.daarthy.events.persistence.daos.guild.GuildDao;
+import com.daarthy.events.persistence.daos.guild.dao.GuildDao;
 import com.daarthy.events.persistence.daos.player.dao.PlayerDao;
 import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
 import com.zaxxer.hikari.HikariDataSource;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class DataServiceImpl implements DataService {
 
-    private HashMap<UUID, EventsPlayer> playersData = new HashMap<>();
+    /*private HashMap<UUID, EventsPlayer> playersData = new HashMap<>();
     private HashMap<Long, Guild> guildsData = new HashMap<>();
 
     private static final String ERROR = "DB Error on DataService ";
@@ -101,7 +101,7 @@ public class DataServiceImpl implements DataService {
         } catch (SQLException e) {
             Events.logInfo(ERROR + "savePlayer");
         }*/
-    }
+    /*}
 
     @Override
     public void saveGuild(Long guildId) {
@@ -147,7 +147,7 @@ public class DataServiceImpl implements DataService {
         } catch (SQLException e) {
             Events.logInfo(ERROR + "deleteGuild");
         }*/
-    }
+   /* }
 
     @Override
     public void initPlayer(UUID playerId) {
@@ -171,7 +171,7 @@ public class DataServiceImpl implements DataService {
         } catch (SQLException e) {
             Events.logInfo(ERROR + "initPlayer");
         }*/
-    }
+  /*  }
 
     private void removePlayersFromCacheGuild(Long guildId) {
 
@@ -192,6 +192,6 @@ public class DataServiceImpl implements DataService {
 
         }
     }
-
+*/
 
 }

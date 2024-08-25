@@ -24,7 +24,14 @@ public class EventsPlayer extends MiniEntity {
         this.maxMissions = builder.maxMissions;
         this.ampBasicRewards = builder.ampBasicRewards;
         this.guildId = builder.guildId;
-        this.isNew = builder.isNew;
+    }
+
+    public UUID getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(UUID playerId) {
+        this.playerId = playerId;
     }
 
     public int getMaxMissions() {
@@ -89,8 +96,6 @@ public class EventsPlayer extends MiniEntity {
         private Float ampBasicRewards;
         private Long guildId;
 
-        private boolean isNew;
-
         public Builder playerId(UUID playerId) {
             this.playerId = playerId;
             return this;
@@ -108,11 +113,6 @@ public class EventsPlayer extends MiniEntity {
 
         public Builder guildId(Long guildId) {
             this.guildId = guildId;
-            return this;
-        }
-
-        public Builder isNew(boolean isNew) {
-            this.isNew = isNew;
             return this;
         }
 

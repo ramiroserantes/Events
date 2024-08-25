@@ -1,4 +1,4 @@
-package com.daarthy.events.app.util;
+package com.daarthy.events.persistence;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

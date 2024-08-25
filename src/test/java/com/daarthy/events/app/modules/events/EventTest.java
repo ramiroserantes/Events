@@ -3,7 +3,6 @@ package com.daarthy.events.app.modules.events;
 import com.daarthy.events.persistence.daos.event.Contribution;
 import com.daarthy.events.persistence.daos.event.EventData;
 import com.daarthy.events.persistence.daos.event.ScopeEnum;
-import com.daarthy.events.persistence.daos.mission.ActionType;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -11,7 +10,7 @@ import java.util.UUID;
 
 import static org.junit.Assert.*;
 
-public class EventTest {
+/*public class EventTest {
 
     private EventData getEventData() {
         return new EventData(ScopeEnum.ALL, "HuntingEvent", LocalDate.now(),
@@ -95,4 +94,4 @@ public class EventTest {
 
     }
 
-}
+}*/

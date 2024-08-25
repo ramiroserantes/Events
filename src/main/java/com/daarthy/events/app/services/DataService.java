@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface DataService {
 
-    EventsPlayer getPlayerData(UUID playerId);
+    /*EventsPlayer getPlayerData(UUID playerId);
 
     Guild getGuild(Long guildId);
 
@@ -25,7 +25,7 @@ public interface DataService {
      *
      * **/
 
-    void initPlayer(UUID playerId);
+ /*   void initPlayer(UUID playerId);
 
     void savePlayer(UUID playerId);
 
@@ -35,6 +35,6 @@ public interface DataService {
 
     void removeGuild(Long guildId);
 
-
+*/
 
 }

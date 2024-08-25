@@ -5,9 +5,9 @@ import com.daarthy.events.app.modules.guilds.Guild;
 import com.daarthy.events.app.modules.guilds.Penalty;
 import com.daarthy.events.app.modules.missions.Objective;
 import com.daarthy.events.app.modules.missions.PlayerMissions;
+import com.daarthy.events.persistence.daos.mission.*;
 import com.daarthy.events.persistence.factories.missions.MissionFactory;
 import com.daarthy.events.persistence.factories.missions.MissionFactoryImpl;
-import com.daarthy.events.persistence.daos.mission.*;
 import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -18,8 +18,8 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class MissionFunctionalServiceImpl implements MissionFunctionalService {
-    
+public class MissionFunctionalServiceImpl {
+    /*
     private Map<Long, Objective> objectives = new HashMap<>();
     private Map<UUID, PlayerMissions> playersObjs = new HashMap<>();
 
@@ -351,5 +351,5 @@ public class MissionFunctionalServiceImpl implements MissionFunctionalService {
 
     public Map<UUID, PlayerMissions> getPlayersObjs() {
         return playersObjs;
-    }
+    }*/
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.daarthy.events.persistence.daos.player.dao.PlayerDaoTest" time="1.563" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="com.daarthy.events.persistence.daos.player.dao.PlayerDaoTest" time="0.084" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2022.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -44,7 +44,7 @@
     <property name="java.class.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.1\plugins\maven\lib\maven3\boot\plexus-classworlds-2.6.0.jar;C:\Program Files\JetBrains\IntelliJ IDEA 2021.1\plugins\maven\lib\maven3\boot\plexus-classworlds.license"/>
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2022.2 install"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2022.2 test"/>
     <property name="java.home" value="C:\Program Files\AdoptOpenJDK\jdk-17.0.7"/>
     <property name="user.language" value="es"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -60,5 +60,8 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.daarthy.events.persistence.daos.player.dao.PlayerDaoTest" name="testingThings" time="1.563"/>
+  <testcase classname="com.daarthy.events.persistence.daos.player.dao.PlayerDaoTest" name="testPlayerByRemoveAllFromGuild" time="0.032"/>
+  <testcase classname="com.daarthy.events.persistence.daos.player.dao.PlayerDaoTest" name="testPlayerBySaveAll" time="0.034"/>
+  <testcase classname="com.daarthy.events.persistence.daos.player.dao.PlayerDaoTest" name="testByCreateAndFindPlayer" time="0.006"/>
+  <testcase classname="com.daarthy.events.persistence.daos.player.dao.PlayerDaoTest" name="testByCreateAndUpdatePlayer" time="0.012"/>
 </testsuite>

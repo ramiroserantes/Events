@@ -1,6 +1,7 @@
 package com.daarthy.events.app.modules.guilds;
 
-import com.daarthy.events.persistence.daos.mission.Grade;
+
+import com.daarthy.mini.shared.enums.festivals.Grade;
 
 import java.util.ArrayList;
 import java.util.HashMap;

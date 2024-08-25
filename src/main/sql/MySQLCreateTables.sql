@@ -97,5 +97,17 @@ CREATE TABLE PlayerContribution (
     FOREIGN KEY (eventId) REFERENCES Events(id)
 );
 
+--------------------------------------------------------------------
+-- Triggers
+--------------------------------------------------------------------
+DROP TRIGGER IF EXISTS update_player_guild_id;
+
+CREATE TRIGGER update_player_guild_id
+    BEFORE DELETE ON Guild
+    FOR EACH ROW
+    UPDATE Player
+    SET guildId = 1
+    WHERE guildId = OLD.id;
+
 
 

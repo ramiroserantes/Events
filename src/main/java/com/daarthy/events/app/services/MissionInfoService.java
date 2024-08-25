@@ -10,8 +10,8 @@ import java.util.UUID;
 
 public interface MissionInfoService {
 
-    Map<MissionData, List<ObjectiveData>> findGuildDashBoard(Long guildId);
+   /* Map<MissionData, List<ObjectiveData>> findGuildDashBoard(Long guildId);
 
     Map<String, CompletionData> getPlayerRates(UUID playerId);
-
+*/
 }

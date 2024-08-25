@@ -3,15 +3,15 @@ package com.daarthy.events.api;
 import com.daarthy.events.app.services.*;
 import com.daarthy.events.persistence.daos.event.EventDao;
 import com.daarthy.events.persistence.daos.event.EventJdbc;
-import com.daarthy.events.persistence.daos.guild.GuildDao;
-import com.daarthy.events.persistence.daos.guild.GuildJdbc;
+import com.daarthy.events.persistence.daos.guild.dao.GuildDao;
+import com.daarthy.events.persistence.daos.guild.dao.GuildJdbc;
 import com.daarthy.events.persistence.daos.mission.MissionDao;
 import com.daarthy.events.persistence.daos.mission.MissionJdbc;
 import com.zaxxer.hikari.HikariDataSource;
 
 public class AppContainer {
 
-    private final EventDao eventDao = new EventJdbc();
+    /*private final EventDao eventDao = new EventJdbc();
     private final GuildDao guildDao = new GuildJdbc();
     private final MissionDao missionDao = new MissionJdbc();
    // private final PlayerDao playerDao = new PlayerJdbc();
@@ -19,20 +19,20 @@ public class AppContainer {
     //private final DataService dataService;
     private final EventService eventService;
     private final MissionInfoService missionInfoService;
-    private final MissionFunctionalService missionFunctionalService;
+   // private final MissionFunctionalService missionFunctionalService;
 
     public AppContainer(HikariDataSource dataSource) {
       //  dataService = new DataServiceImpl(dataSource, playerDao, guildDao);
         eventService = new EventServiceImpl(eventDao, dataSource);
         missionInfoService = new MissionInfoServiceImpl(missionDao, dataSource);
-        missionFunctionalService = new MissionFunctionalServiceImpl(dataSource, missionDao);
+       // missionFunctionalService = new MissionFunctionalServiceImpl(dataSource, missionDao);
     }
 
     /*public DataService getDataService() {
         return dataService;
     }*/
 
-    public EventService getEventService() {
+   /* public EventService getEventService() {
         return eventService;
     }
 
@@ -40,7 +40,7 @@ public class AppContainer {
         return missionInfoService;
     }
 
-    public MissionFunctionalService getMissionFunctionalService() {
+   /* public MissionFunctionalService getMissionFunctionalService() {
         return missionFunctionalService;
-    }
+    }*/
 }

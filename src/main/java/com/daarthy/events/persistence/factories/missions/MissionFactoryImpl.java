@@ -1,9 +1,8 @@
 package com.daarthy.events.persistence.factories.missions;
 
-import com.daarthy.events.persistence.daos.mission.Grade;
-import com.daarthy.events.persistence.daos.mission.ActionType;
 import com.daarthy.events.persistence.daos.mission.MissionData;
 import com.daarthy.events.persistence.daos.mission.ObjectiveData;
+import com.daarthy.mini.shared.enums.festivals.Grade;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
@@ -13,7 +12,7 @@ import java.util.*;
 
 public class MissionFactoryImpl implements MissionFactory {
 
-    private SecureRandom random = new SecureRandom();
+  /*  private SecureRandom random = new SecureRandom();
 
     public HashMap<MissionData, List<ObjectiveData>> getMission(Grade grade, boolean isDefaultGuild) {
         HashMap<MissionData, List<ObjectiveData>> mission = new HashMap<>();
@@ -68,5 +67,5 @@ public class MissionFactoryImpl implements MissionFactory {
 
         return mission;
     }
-
+*/
 }

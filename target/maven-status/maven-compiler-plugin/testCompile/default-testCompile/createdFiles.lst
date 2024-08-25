@@ -1,0 +1,16 @@
+com\daarthy\events\persistence\SqlConnections.class
+com\daarthy\events\app\modules\guilds\EventMedalsTest.class
+com\daarthy\events\app\modules\guilds\LevelTest.class
+com\daarthy\events\app\services\DataServiceTest.class
+com\daarthy\events\persistence\daos\event_dao\EventDaoTest.class
+com\daarthy\events\persistence\daos\guild\dao\GuildDaoTest.class
+com\daarthy\events\app\services\MissionInfoServiceImplTest.class
+com\daarthy\events\app\services\MissionFunctionalServiceTest.class
+com\daarthy\events\api\ApiGatewayTest.class
+com\daarthy\events\app\modules\events\plans\PlanFactoryTest.class
+com\daarthy\events\app\modules\events\plans\PlanTest.class
+com\daarthy\events\persistence\daos\DaoContext.class
+com\daarthy\events\persistence\daos\player\dao\PlayerDaoTest.class
+com\daarthy\events\app\services\EventServiceTest.class
+com\daarthy\events\app\modules\missions\MissionFactoryTest.class
+com\daarthy\events\app\modules\missions\PlayerMissionsTest.class

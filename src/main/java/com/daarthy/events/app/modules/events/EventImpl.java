@@ -4,7 +4,7 @@ import com.daarthy.events.app.modules.events.plans.Plan;
 import com.daarthy.events.app.modules.events.plans.PlanFactoryImpl;
 import com.daarthy.events.persistence.daos.event.Contribution;
 import com.daarthy.events.persistence.daos.event.EventData;
-import com.daarthy.events.persistence.daos.mission.ActionType;
+import com.daarthy.mini.shared.enums.festivals.ActionType;
 
 import java.util.HashMap;
 import java.util.Map;

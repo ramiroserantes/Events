@@ -2,7 +2,6 @@ package com.daarthy.events.app.services;
 
 import com.daarthy.events.app.modules.guilds.Guild;
 import com.daarthy.events.app.modules.guilds.Penalty;
-import com.daarthy.events.persistence.daos.mission.Grade;
 import com.daarthy.events.persistence.daos.mission.MissionData;
 import com.daarthy.events.persistence.daos.mission.ObjectiveData;
 import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
@@ -13,7 +12,7 @@ import java.util.UUID;
 
 public interface MissionFunctionalService {
 
-    StringBuilder joinMission(UUID playerId, EventsPlayer eventsPlayer, Guild guild, Long missionId);
+    /*StringBuilder joinMission(UUID playerId, EventsPlayer eventsPlayer, Guild guild, Long missionId);
 
     void fillGuildDashBoard(Long guildId, Guild guild);
 
@@ -29,13 +28,13 @@ public interface MissionFunctionalService {
      * Cache Ops.
      * **/
 
-    void savePlayer(UUID playerId);
+  /*  void savePlayer(UUID playerId);
 
     Penalty initPlayer(UUID playerId);
 
     void removePlayer(UUID playerId);
 
     void removeNonWatchedObjectives();
-
+*/
 
 }

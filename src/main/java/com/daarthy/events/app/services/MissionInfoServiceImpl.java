@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class MissionInfoServiceImpl implements MissionInfoService {
-
+/*
     private MissionDao missionDao;
     private HikariDataSource dataSource;
 
@@ -56,5 +56,5 @@ public class MissionInfoServiceImpl implements MissionInfoService {
             //   Events.logInfo("Rates not found");
         }
         return completions;
-    }
+    }*/
 }

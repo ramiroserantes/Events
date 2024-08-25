@@ -4,14 +4,13 @@ import com.daarthy.events.app.modules.events.Event;
 import com.daarthy.events.app.modules.events.EventToken;
 import com.daarthy.events.app.modules.guilds.EventMedals;
 import com.daarthy.events.persistence.daos.event.EventData;
-import com.daarthy.events.persistence.daos.mission.ActionType;
 
 import java.util.*;
 
 public interface EventService {
 
     // Default guild should not enter this service.
-    List<EventToken> registerAction(UUID playerId, Long guildId, ActionType actionType);
+   /* List<EventToken> registerAction(UUID playerId, Long guildId, ActionType actionType);
 
     List<Event> getActiveEvents();
 
@@ -34,6 +33,6 @@ public interface EventService {
 
     void savePlayer(UUID playerId);
 
-    void removePlayer(UUID playerId);
+    void removePlayer(UUID playerId);*/
 
 }
