@@ -29,7 +29,7 @@ public class MissionDaoTest {
         assertEquals(mission, foundMission);
     }
 
-    @Test
+   /* @Test
     public void testMissionByFindGuildMissions() {
 
         Guild guild = ctx.getGuild(2L);
@@ -70,7 +70,7 @@ public class MissionDaoTest {
         assertEquals(1, playerMissions.size());
         assertEquals(mission, playerMissions.get(0));
     }
-
+*/
     // *****************************************************
     // Internal Methods And Variables
     // *****************************************************

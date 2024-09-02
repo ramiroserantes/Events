@@ -2,8 +2,6 @@ package com.daarthy.events.app.services;
 
 import com.daarthy.events.app.modules.guilds.Guild;
 import com.daarthy.events.app.modules.guilds.Penalty;
-import com.daarthy.events.persistence.daos.mission.MissionData;
-import com.daarthy.events.persistence.daos.mission.ObjectiveData;
 import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
 
 import java.util.List;

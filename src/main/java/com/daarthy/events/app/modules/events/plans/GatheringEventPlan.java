@@ -1,6 +1,6 @@
 package com.daarthy.events.app.modules.events.plans;
 
-import com.daarthy.mini.shared.enums.festivals.ActionType;
+import com.daarthy.mini.shared.classes.enums.festivals.ActionType;
 
 import java.util.*;
 

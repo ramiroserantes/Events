@@ -5,7 +5,6 @@ import com.daarthy.events.app.modules.guilds.Guild;
 import com.daarthy.events.app.modules.guilds.Penalty;
 import com.daarthy.events.app.modules.missions.Objective;
 import com.daarthy.events.app.modules.missions.PlayerMissions;
-import com.daarthy.events.persistence.daos.mission.*;
 import com.daarthy.events.persistence.factories.missions.MissionFactory;
 import com.daarthy.events.persistence.factories.missions.MissionFactoryImpl;
 import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;

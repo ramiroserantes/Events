@@ -5,8 +5,6 @@ import com.daarthy.events.persistence.daos.event.EventDao;
 import com.daarthy.events.persistence.daos.event.EventJdbc;
 import com.daarthy.events.persistence.daos.guild.dao.GuildDao;
 import com.daarthy.events.persistence.daos.guild.dao.GuildJdbc;
-import com.daarthy.events.persistence.daos.mission.MissionDao;
-import com.daarthy.events.persistence.daos.mission.MissionJdbc;
 import com.zaxxer.hikari.HikariDataSource;
 
 public class AppContainer {

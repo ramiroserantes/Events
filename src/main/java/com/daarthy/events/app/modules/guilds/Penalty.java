@@ -1,7 +1,6 @@
 package com.daarthy.events.app.modules.guilds;
 
 
-import com.daarthy.mini.shared.enums.festivals.Grade;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +9,7 @@ import java.util.Map;
 
 public class Penalty {
 
-    private Map<Long, List<Grade>> penalties = new HashMap<>();
+   /* private Map<Long, List<Grade>> penalties = new HashMap<>();
 
     public void addPenalty(Long guildId, Grade grade) {
 
@@ -27,5 +26,5 @@ public class Penalty {
 
     public Map<Long, List<Grade>> getPenalties() {
         return penalties;
-    }
+    }*/
 }

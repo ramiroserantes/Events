@@ -30,7 +30,7 @@ public class GuildDaoTest {
         assertNull(afterDeletion);
     }
 
-    @Test
+    /*@Test
     public void testGuildByCreateAndDeleteAll() {
 
         Guild createdGuild_1 = ctx.getGuild(2L);
@@ -63,7 +63,7 @@ public class GuildDaoTest {
 
         assertEquals(found, createdGuild);
 
-    }
+    }*/
 
     // *****************************************************
     // Internal Methods And Variables

@@ -1,9 +1,8 @@
 package com.daarthy.events.persistence.daos.objective.entities;
 
-import com.daarthy.mini.annotations.MiniColumn;
 import com.daarthy.mini.annotations.MiniId;
 import com.daarthy.mini.hibernate.entities.MiniEntity;
-import com.daarthy.mini.shared.enums.festivals.ActionType;
+import com.daarthy.mini.shared.classes.enums.festivals.ActionType;
 
 import java.util.Objects;
 

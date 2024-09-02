@@ -1,6 +1,6 @@
 package com.daarthy.events.app.modules.missions;
 
-import com.daarthy.mini.shared.enums.festivals.Grade;
+import com.daarthy.mini.shared.classes.enums.festivals.Grade;
 
 import java.util.*;
 

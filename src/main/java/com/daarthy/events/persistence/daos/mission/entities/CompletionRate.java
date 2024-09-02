@@ -1,7 +1,8 @@
 package com.daarthy.events.persistence.daos.mission.entities;
 
-import com.daarthy.mini.hibernate.parser.MiniString;
-import com.daarthy.mini.shared.enums.festivals.Grade;
+
+import com.daarthy.mini.hibernate.entities.MiniString;
+import com.daarthy.mini.shared.classes.enums.festivals.Grade;
 
 import java.util.Objects;
 

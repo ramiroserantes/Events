@@ -5,7 +5,7 @@ import com.daarthy.mini.annotations.MiniExclusion;
 import com.daarthy.mini.annotations.MiniId;
 import com.daarthy.mini.annotations.MiniTable;
 import com.daarthy.mini.hibernate.entities.MiniEntity;
-import com.daarthy.mini.shared.enums.festivals.Grade;
+import com.daarthy.mini.shared.classes.enums.festivals.Grade;
 
 import java.time.LocalDate;
 import java.util.Objects;

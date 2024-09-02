@@ -21,9 +21,9 @@ import com.daarthy.events.persistence.daos.objective.entities.ObjectiveProgressK
 import com.daarthy.events.persistence.daos.player.dao.PlayerDao;
 import com.daarthy.events.persistence.daos.player.dao.PlayerJdbc;
 import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
-import com.daarthy.mini.shared.enums.festivals.ActionType;
-import com.daarthy.mini.shared.enums.festivals.Grade;
-import com.daarthy.mini.shared.enums.festivals.MissionStatus;
+import com.daarthy.mini.shared.classes.enums.festivals.ActionType;
+import com.daarthy.mini.shared.classes.enums.festivals.Grade;
+import com.daarthy.mini.shared.classes.enums.festivals.MissionStatus;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.io.IOException;

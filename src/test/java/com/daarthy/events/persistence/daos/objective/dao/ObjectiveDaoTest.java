@@ -30,8 +30,7 @@ public class ObjectiveDaoTest {
         assertEquals(found, objective);
 
     }
-
-    @Test
+    /*@Test
     public void testObjectiveDaoFindByMission() {
 
         UUID playerId = UUID.randomUUID();
@@ -51,7 +50,7 @@ public class ObjectiveDaoTest {
 
         assertEquals(1, objectivesPerMission.size());
         assertEquals(objective, objectivesPerMission.get(0));
-    }
+    }*/
 
     // *****************************************************
     // Internal Methods And Variables

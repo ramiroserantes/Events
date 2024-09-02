@@ -1,9 +1,5 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.persistence.daos.mission.CompletionData;
-import com.daarthy.events.persistence.daos.mission.MissionDao;
-import com.daarthy.events.persistence.daos.mission.MissionData;
-import com.daarthy.events.persistence.daos.mission.ObjectiveData;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;

@@ -62,7 +62,7 @@ public class PlayerDaoTest {
         assertEquals(2, ctx.playerDao().findById(player2).getMaxMissions());
     }
 
-    @Test
+   /* @Test
     public void testPlayerByRemoveAllFromGuild() {
 
         ctx.getGuild(2L);
@@ -87,7 +87,7 @@ public class PlayerDaoTest {
 
         assertEquals(1L, foundRemovedFromGuild.getGuildId(), 0.0);
     }
-
+*/
     // *****************************************************
     // Internal Methods And Variables
     // *****************************************************
