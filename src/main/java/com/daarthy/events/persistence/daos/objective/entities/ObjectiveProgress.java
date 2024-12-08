@@ -13,7 +13,7 @@ public class ObjectiveProgress extends MiniEntity {
 
     public ObjectiveProgress() {}
 
-    public ObjectiveProgress(Builder builder) {
+    private ObjectiveProgress(Builder builder) {
         this.key = builder.key;
         this.amount = builder().amount;
     }

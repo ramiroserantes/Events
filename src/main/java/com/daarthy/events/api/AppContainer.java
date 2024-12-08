@@ -1,12 +1,5 @@
 package com.daarthy.events.api;
 
-import com.daarthy.events.app.services.*;
-import com.daarthy.events.persistence.daos.event.EventDao;
-import com.daarthy.events.persistence.daos.event.EventJdbc;
-import com.daarthy.events.persistence.daos.guild.dao.GuildDao;
-import com.daarthy.events.persistence.daos.guild.dao.GuildJdbc;
-import com.zaxxer.hikari.HikariDataSource;
-
 public class AppContainer {
 
     /*private final EventDao eventDao = new EventJdbc();

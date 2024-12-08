@@ -1,15 +1,5 @@
 package com.daarthy.events.app.modules.events;
 
-import com.daarthy.events.persistence.daos.event.Contribution;
-import com.daarthy.events.persistence.daos.event.EventData;
-import com.daarthy.events.persistence.daos.event.ScopeEnum;
-import org.junit.Test;
-
-import java.time.LocalDate;
-import java.util.UUID;
-
-import static org.junit.Assert.*;
-
 /*public class EventTest {
 
     private EventData getEventData() {

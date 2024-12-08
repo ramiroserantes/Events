@@ -1,22 +1,5 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.app.modules.events.Event;
-import com.daarthy.events.app.modules.events.EventImpl;
-import com.daarthy.events.app.modules.events.EventToken;
-import com.daarthy.events.app.modules.guilds.EventMedals;
-import com.daarthy.events.app.util.EventMessageReader;
-import com.daarthy.events.persistence.daos.event.Contribution;
-import com.daarthy.events.persistence.daos.event.EventDao;
-import com.daarthy.events.persistence.daos.event.EventData;
-import com.daarthy.events.persistence.daos.event.ScopeEnum;
-import com.zaxxer.hikari.HikariDataSource;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.time.LocalDate;
-import java.util.*;
-
 public class EventServiceImpl implements EventService {
 
    /* private final List<Event> events = new ArrayList<>();

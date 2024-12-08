@@ -12,7 +12,7 @@ public class ObjectiveProgressKey extends MiniFragmentedKey {
 
     public ObjectiveProgressKey() {}
 
-    public ObjectiveProgressKey(Builder builder) {
+    private ObjectiveProgressKey(Builder builder) {
         this.playerId = builder.playerId;
         this.objectiveId = builder.objectiveId;
     }

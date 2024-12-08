@@ -19,7 +19,7 @@ public class EventsPlayer extends MiniEntity {
     public EventsPlayer() {
     }
 
-    public EventsPlayer(Builder builder) {
+    private EventsPlayer(Builder builder) {
         this.playerId = builder.playerId;
         this.maxMissions = builder.maxMissions;
         this.ampBasicRewards = builder.ampBasicRewards;

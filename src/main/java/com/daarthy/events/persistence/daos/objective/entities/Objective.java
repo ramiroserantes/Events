@@ -1,5 +1,6 @@
 package com.daarthy.events.persistence.daos.objective.entities;
 
+import com.daarthy.mini.annotations.MiniColumn;
 import com.daarthy.mini.annotations.MiniId;
 import com.daarthy.mini.hibernate.entities.MiniEntity;
 import com.daarthy.mini.shared.classes.enums.festivals.ActionType;
@@ -12,16 +13,18 @@ public class Objective extends MiniEntity {
     private Long id;
     private Long missionId;
     private ActionType actionType;
-    private int reqAmount;
+    @MiniColumn(column = "reqAmount")
+    private int requiredAmount;
     private String target;
     private Integer levels;
 
     public Objective () {}
+
     private Objective(Builder builder) {
         this.id = builder.id;
         this.missionId = builder.missionId;
         this.actionType = builder.actionType;
-        this.reqAmount = builder.reqAmount;
+        this.requiredAmount = builder.requiredAmount;
         this.target = builder.target;
         this.levels = builder.levels;
     }
@@ -50,12 +53,12 @@ public class Objective extends MiniEntity {
         this.actionType = actionType;
     }
 
-    public int getReqAmount() {
-        return reqAmount;
+    public int getRequiredAmount() {
+        return requiredAmount;
     }
 
-    public void setReqAmount(int reqAmount) {
-        this.reqAmount = reqAmount;
+    public void setRequiredAmount(int requiredAmount) {
+        this.requiredAmount = requiredAmount;
     }
 
     public String getTarget() {
@@ -85,14 +88,14 @@ public class Objective extends MiniEntity {
         return Objects.equals(id, other.id)
                 && Objects.equals(missionId, other.missionId)
                 && Objects.equals(actionType, other.actionType)
-                && reqAmount == other.reqAmount
+                && requiredAmount == other.requiredAmount
                 && Objects.equals(target, other.target)
                 && Objects.equals(levels, other.levels);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, missionId, actionType, reqAmount, target, levels);
+        return Objects.hash(id, missionId, actionType, requiredAmount, target, levels);
     }
 
     @Override
@@ -111,7 +114,7 @@ public class Objective extends MiniEntity {
         private Long id;
         private Long missionId;
         private ActionType actionType;
-        private int reqAmount;
+        private int requiredAmount;
         private String target;
         private Integer levels;
 
@@ -130,8 +133,8 @@ public class Objective extends MiniEntity {
             return this;
         }
 
-        public Builder reqAmount(int reqAmount) {
-            this.reqAmount = reqAmount;
+        public Builder requiredAmount(int requiredAmount) {
+            this.requiredAmount = requiredAmount;
             return this;
         }
 

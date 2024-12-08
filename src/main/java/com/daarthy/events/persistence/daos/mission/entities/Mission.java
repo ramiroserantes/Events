@@ -110,14 +110,13 @@ public class Mission extends MiniEntity {
                 && Objects.equals(title, other.title)
                 && Objects.equals(grade, other.grade)
                 && Objects.equals(expiration, other.expiration)
-                && Objects.equals(maxCompletions, other.maxCompletions)
-                && Objects.equals(currentPlayers, other.currentPlayers);
+                && Objects.equals(maxCompletions, other.maxCompletions);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, guildId, title, grade, expiration,
-                maxCompletions, currentPlayers, playerIncreaseLock);
+                maxCompletions);
     }
 
     @Override
@@ -139,7 +138,6 @@ public class Mission extends MiniEntity {
         private String title;
         private Grade grade;
         private LocalDate expiration;
-
         private Integer maxCompletions;
 
         public Builder id(Long id) {

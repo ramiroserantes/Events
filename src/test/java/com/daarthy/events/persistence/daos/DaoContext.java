@@ -42,6 +42,8 @@ public class DaoContext {
     private ObjectiveDao objectiveDao;
     private ObjectiveProgressDao objectiveProgressDao;
 
+    private SearchDao searchDao;
+
     private List<Long> createdGuildIds = new ArrayList<>();
 
     public DaoContext() {
@@ -56,6 +58,7 @@ public class DaoContext {
         this.missionAcceptanceDao = new MissionAcceptanceJdbc(dataSource);
         this.objectiveDao = new ObjectiveJdbc(dataSource);
         this.objectiveProgressDao = new ObjectiveProgressJdbc(dataSource);
+        this.searchDao = new SearchDaoJdbc(dataSource);
     }
 
     public PlayerDao playerDao() {
@@ -81,6 +84,8 @@ public class DaoContext {
     public ObjectiveProgressDao objectiveProgressDao() {
         return objectiveProgressDao;
     }
+
+    public SearchDao searchDao() {return searchDao;}
 
     public EventsPlayer getPlayer(UUID playerId, Long guildId) {
         EventsPlayer player = EventsPlayer.builder()
@@ -134,7 +139,7 @@ public class DaoContext {
         Objective objective = Objective.builder()
                 .missionId(missionId)
                 .actionType(ActionType.KILL)
-                .reqAmount(50)
+                .requiredAmount(50)
                 .target("ZOMBIE")
                 .levels(90)
                 .build();
@@ -153,7 +158,6 @@ public class DaoContext {
 
     public void cleanUp() {
         createdGuildIds.forEach(id -> guildDao.deleteById(id));
-
         createdGuildIds.clear();
     }
 

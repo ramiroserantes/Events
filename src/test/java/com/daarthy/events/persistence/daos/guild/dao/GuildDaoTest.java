@@ -30,22 +30,7 @@ public class GuildDaoTest {
         assertNull(afterDeletion);
     }
 
-    /*@Test
-    public void testGuildByCreateAndDeleteAll() {
-
-        Guild createdGuild_1 = ctx.getGuild(2L);
-        Guild createdGuild_2 = ctx.getGuild(3L);
-
-        ctx.guildDao().deleteAll(List.of(createdGuild_1, createdGuild_2));
-
-        Guild afterDeletion_1 = ctx.guildDao().findById(createdGuild_1.getId());
-        Guild afterDeletion_2 = ctx.guildDao().findById(createdGuild_2.getId());
-
-        assertNull(afterDeletion_1);
-        assertNull(afterDeletion_2);
-    }
-
-    @Test
+   /* @Test
     public void testGuildByFindByPlayer() {
 
         UUID playerId = UUID.randomUUID();

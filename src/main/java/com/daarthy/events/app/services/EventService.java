@@ -1,12 +1,5 @@
 package com.daarthy.events.app.services;
 
-import com.daarthy.events.app.modules.events.Event;
-import com.daarthy.events.app.modules.events.EventToken;
-import com.daarthy.events.app.modules.guilds.EventMedals;
-import com.daarthy.events.persistence.daos.event.EventData;
-
-import java.util.*;
-
 public interface EventService {
 
     // Default guild should not enter this service.

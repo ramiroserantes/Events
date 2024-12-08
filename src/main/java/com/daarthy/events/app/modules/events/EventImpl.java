@@ -1,18 +1,8 @@
 package com.daarthy.events.app.modules.events;
 
-import com.daarthy.events.app.modules.events.plans.Plan;
-import com.daarthy.events.app.modules.events.plans.PlanFactoryImpl;
-import com.daarthy.events.persistence.daos.event.Contribution;
-import com.daarthy.events.persistence.daos.event.EventData;
-import com.daarthy.mini.shared.classes.enums.festivals.ActionType;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 public class EventImpl implements Event {
 
-    private EventData eventData;
+    /*private EventData eventData;
     private Plan plan;
     private Map<UUID, Contribution> players = new HashMap<>();
 
@@ -64,5 +54,5 @@ public class EventImpl implements Event {
     @Override
     public EventData getData() {
         return eventData;
-    }
+    }*/
 }

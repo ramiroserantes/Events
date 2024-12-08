@@ -2,9 +2,6 @@ package com.daarthy.events.persistence.daos.player.dao;
 
 import com.daarthy.events.persistence.daos.DaoContext;
 import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
-import com.daarthy.mini.shared.criteria.FestivalSelector;
-import com.daarthy.mini.shared.criteria.MiniCriteria;
-import com.daarthy.mini.shared.criteria.MySQLCriteria;
 import org.junit.After;
 import org.junit.Test;
 
@@ -62,32 +59,20 @@ public class PlayerDaoTest {
         assertEquals(2, ctx.playerDao().findById(player2).getMaxMissions());
     }
 
-   /* @Test
-    public void testPlayerByRemoveAllFromGuild() {
+    @Test
+    public void testPlayerByRemoveFromGuild() {
 
+        UUID playerId = UUID.randomUUID();
         ctx.getGuild(2L);
-        ctx.getGuild(3L);
 
-        UUID player1 = UUID.randomUUID();
-        UUID player2 = UUID.randomUUID();
-        UUID player3 = UUID.randomUUID();
+        EventsPlayer player = ctx.getPlayer(playerId, 2L);
+        ctx.guildDao().deleteById(2L);
 
-        ctx.getPlayer(player1, 1L);
-        ctx.getPlayer(player2, 2L);
-        ctx.getPlayer(player3, 3L);
+        EventsPlayer foundPlayerOnTrigger = ctx.playerDao().findById(playerId);
 
-        MiniCriteria<Object> selector = MySQLCriteria.builder()
-                .selector(FestivalSelector.REMOVE_PLAYERS_FROM_GUILD)
-                .params(List.of(2L))
-                .build();
-
-        ctx.playerDao().querySelectorExecutor(selector);
-
-        EventsPlayer foundRemovedFromGuild = ctx.playerDao().findById(player2);
-
-        assertEquals(1L, foundRemovedFromGuild.getGuildId(), 0.0);
+        assertEquals(1L, foundPlayerOnTrigger.getGuildId(), 0.0);
     }
-*/
+
     // *****************************************************
     // Internal Methods And Variables
     // *****************************************************

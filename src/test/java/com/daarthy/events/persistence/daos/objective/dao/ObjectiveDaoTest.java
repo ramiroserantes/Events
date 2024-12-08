@@ -28,8 +28,8 @@ public class ObjectiveDaoTest {
         Objective found = ctx.objectiveDao().findById(objective.getId());
 
         assertEquals(found, objective);
-
     }
+
     /*@Test
     public void testObjectiveDaoFindByMission() {
 
