@@ -2,21 +2,16 @@ package com.daarthy.events.persistence.daos.mission.dao;
 
 import com.daarthy.events.persistence.daos.DaoContext;
 import com.daarthy.events.persistence.daos.guild.entities.Guild;
-import com.daarthy.events.persistence.daos.mission.entities.CompletionRate;
 import com.daarthy.events.persistence.daos.mission.entities.Mission;
 import com.daarthy.events.persistence.daos.mission.entities.MissionAcceptance;
 import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
-import com.daarthy.mini.shared.criteria.FestivalSelector;
-import com.daarthy.mini.shared.criteria.MySQLCriteria;
 import org.junit.After;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class MissionAcceptanceDaoTest {
 
@@ -104,7 +99,7 @@ public class MissionAcceptanceDaoTest {
     // Internal Methods And Variables
     // *****************************************************
 
-    private DaoContext ctx = new DaoContext();
+    private final DaoContext ctx = new DaoContext();
 
     @After
     public void cleanUp() {

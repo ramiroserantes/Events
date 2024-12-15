@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="-641.2035681160171" y="103.18399923366064">com.daarthy.events.app.modules.guilds.EventMedals</node>
+    <node x="-382.4905636317121" y="341.7384837429648">com.daarthy.events.app.modules.guilds.Guild</node>
+    <node x="184.92587355244666" y="277.89743388831823">com.daarthy.events.app.modules.guilds.Level</node>
+    <node x="-722.8987116487297" y="495.73848374296483">com.daarthy.events.app.modules.guilds.GuildModifiers</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.daarthy.events.app.modules.guilds.Guild" target="com.daarthy.events.app.modules.guilds.Level" relationship="TO_ONE">
+      <point x="154.35453971541904" y="-17.756420962695643" />
+      <point x="184.92587355244666" y="494.9820627802691" />
+      <point x="-122.0" y="0.0" />
+    </edge>
+    <edge source="com.daarthy.events.app.modules.guilds.Guild" target="com.daarthy.events.app.modules.guilds.GuildModifiers" relationship="TO_ONE">
+      <point x="-153.5943850694039" y="111.84298112997999" />
+      <point x="-248.59491778774293" y="624.5814648729447" />
+      <point x="-248.59491778774293" y="626.126284899706" />
+      <point x="-112.5" y="36.38780115674115" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.9641638225255973" showDependencies="true" x="-147.0" y="405.5" />
+  <SelectedNodes>
+    <node>com.daarthy.events.app.modules.guilds.EventMedals</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

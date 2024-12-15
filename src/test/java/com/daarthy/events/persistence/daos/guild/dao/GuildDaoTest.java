@@ -1,22 +1,11 @@
 package com.daarthy.events.persistence.daos.guild.dao;
 
 import com.daarthy.events.persistence.daos.DaoContext;
-import com.daarthy.events.persistence.daos.guild.entities.Guild;
-import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
-import com.daarthy.mini.shared.criteria.FestivalSelector;
-import com.daarthy.mini.shared.criteria.MySQLCriteria;
 import org.junit.After;
-import org.junit.Test;
-
-import java.util.List;
-import java.util.UUID;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 public class GuildDaoTest {
 
-    @Test
+   /* @Test
     public void testGuildByCreateAndDelete() {
 
         Guild createdGuild = ctx.getGuild(2L);

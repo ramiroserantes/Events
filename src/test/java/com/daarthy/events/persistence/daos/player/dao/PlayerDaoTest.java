@@ -65,7 +65,7 @@ public class PlayerDaoTest {
         UUID playerId = UUID.randomUUID();
         ctx.getGuild(2L);
 
-        EventsPlayer player = ctx.getPlayer(playerId, 2L);
+        ctx.getPlayer(playerId, 2L);
         ctx.guildDao().deleteById(2L);
 
         EventsPlayer foundPlayerOnTrigger = ctx.playerDao().findById(playerId);

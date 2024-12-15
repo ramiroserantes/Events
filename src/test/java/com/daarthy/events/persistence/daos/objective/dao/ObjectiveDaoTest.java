@@ -3,13 +3,10 @@ package com.daarthy.events.persistence.daos.objective.dao;
 import com.daarthy.events.persistence.daos.DaoContext;
 import com.daarthy.events.persistence.daos.mission.entities.Mission;
 import com.daarthy.events.persistence.daos.objective.entities.Objective;
-import com.daarthy.mini.shared.criteria.FestivalSelector;
-import com.daarthy.mini.shared.criteria.MySQLCriteria;
 import org.junit.After;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
@@ -29,7 +26,6 @@ public class ObjectiveDaoTest {
 
         assertEquals(found, objective);
     }
-
     /*@Test
     public void testObjectiveDaoFindByMission() {
 
@@ -56,7 +52,7 @@ public class ObjectiveDaoTest {
     // Internal Methods And Variables
     // *****************************************************
 
-    private DaoContext ctx = new DaoContext();
+    private final DaoContext ctx = new DaoContext();
 
     @After
     public void cleanUp() {

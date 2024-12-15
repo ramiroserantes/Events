@@ -3,16 +3,10 @@ package com.daarthy.events.persistence.daos.mission.dao;
 import com.daarthy.events.persistence.daos.DaoContext;
 import com.daarthy.events.persistence.daos.guild.entities.Guild;
 import com.daarthy.events.persistence.daos.mission.entities.Mission;
-import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
-import com.daarthy.mini.shared.criteria.FestivalSelector;
-import com.daarthy.mini.shared.criteria.MiniCriteria;
-import com.daarthy.mini.shared.criteria.MySQLCriteria;
 import org.junit.After;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,7 +15,7 @@ public class MissionDaoTest {
     @Test
     public void testMissionByCreation() {
 
-        Guild guild = ctx.getGuild(2L);
+        Guild guild = ctx.getGuild(3L);
         Mission mission = ctx.getMission(guild.getId(), LocalDate.now().plusDays(1));
 
         Mission foundMission = ctx.missionDao().findById(mission.getId());
@@ -81,11 +75,6 @@ public class MissionDaoTest {
     public void cleanUp() {
         ctx.cleanUp();
     }
-
-
-
-
-
 
 
 /*

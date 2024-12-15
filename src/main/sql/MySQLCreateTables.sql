@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS PlayerMedals;
 DROP TABLE IF EXISTS PlayerContribution;
 DROP TABLE IF EXISTS GuildMedals;
 DROP TABLE IF EXISTS Events;

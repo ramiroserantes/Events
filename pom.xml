@@ -9,52 +9,19 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Events</name>
-
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <dataSource.user>EAdm</dataSource.user>
-        <dataSource.password>2U4mbcGUdVRP</dataSource.password>
-        <testDataSource.user>${dataSource.user}</testDataSource.user>
-        <testDataSource.password>${dataSource.password}</testDataSource.password>
+        <!-- Liquibase version -->
+        <liquibase.version>4.30.0</liquibase.version>
 
-        <sqlPlugin.version>1.5</sqlPlugin.version>
-
-        <jdbcDriver.groupId>mysql</jdbcDriver.groupId>
-        <jdbcDriver.artifactId>mysql-connector-java</jdbcDriver.artifactId>
-        <jdbcDriver.version>8.0.28</jdbcDriver.version>
-        <jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
-
-        <dataSource.baseUrl>jdbc:mysql://localhost/events</dataSource.baseUrl>
-        <dataSource.url>${dataSource.baseUrl}?useSSL=false&amp;serverTimezone=Europe/Madrid&amp;allowPublicKeyRetrieval=true</dataSource.url>
-        <testDataSource.url>${dataSource.baseUrl}test?useSSL=false&amp;serverTimezone=Europe/Madrid&amp;allowPublicKeyRetrieval=true</testDataSource.url>
-        <dataSource.createTablesScript>MySQLCreateTables.sql</dataSource.createTablesScript>
-        <dataSource.addDataScript>MySQLCreateData.sql</dataSource.addDataScript>
+        <!-- JDBC Driver Configuration -->
+        <jdbcDriver.groupId>org.postgresql</jdbcDriver.groupId>
+        <jdbcDriver.artifactId>postgresql</jdbcDriver.artifactId>
+        <jdbcDriver.version>42.6.0</jdbcDriver.version>
+        <jdbcDriver.className>org.postgresql.Driver</jdbcDriver.className>
     </properties>
-
-    <profiles>
-        <profile>
-            <id>mysql</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-
-                <jdbcDriver.groupId>mysql</jdbcDriver.groupId>
-                <jdbcDriver.artifactId>mysql-connector-java</jdbcDriver.artifactId>
-                <jdbcDriver.version>8.0.33</jdbcDriver.version>
-                <jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
-
-                <dataSource.baseUrl>jdbc:mysql://localhost/events</dataSource.baseUrl>
-                <dataSource.url>${dataSource.baseUrl}?useSSL=false&amp;serverTimezone=Europe/Madrid&amp;allowPublicKeyRetrieval=true</dataSource.url>
-                <testDataSource.url>${dataSource.baseUrl}test?useSSL=false&amp;serverTimezone=Europe/Madrid&amp;allowPublicKeyRetrieval=true</testDataSource.url>
-                <dataSource.createTablesScript>MySQLCreateTables.sql</dataSource.createTablesScript>
-
-            </properties>
-        </profile>
-    </profiles>
 
     <dependencies>
         <dependency>
@@ -75,12 +42,6 @@
             <version>5.0.1</version>
         </dependency>
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>5.2.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>2.0.5</version>
@@ -91,137 +52,39 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>${jdbcDriver.groupId}</groupId>
-            <artifactId>${jdbcDriver.artifactId}</artifactId>
-            <version>${jdbcDriver.version}</version>
-            <scope>runtime</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>com.daarthy</groupId>
-                            <artifactId>MiniLibrary</artifactId>
-                            <version>1.0-SNAPSHOT</version>
-                        </path>
-                    </annotationProcessorPaths>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
+
+            <!-- Liquibase Maven Plugin -> Defaults Test -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <filters>
-                                <filter>
-                                    <artifact>*:*</artifact>
-                                    <excludes>
-                                        <exclude>META-INF/MANIFEST.MF</exclude>
-                                    </excludes>
-                                </filter>
-                            </filters>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>sql-maven-plugin</artifactId>
-                <version>${sqlPlugin.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>${jdbcDriver.groupId}</groupId>
-                        <artifactId>${jdbcDriver.artifactId}</artifactId>
-                        <version>${jdbcDriver.version}</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <driver>${jdbcDriver.className}</driver>
-                    <url>${dataSource.url}</url>
-                    <username>${dataSource.user}</username>
-                    <password>${dataSource.password}</password>
-                    <autocommit>true</autocommit>
-                    <onError>continue</onError>
-                    <orderFile>descending</orderFile>
-                    <fileset>
-                        <basedir>${basedir}</basedir>
-                        <includes>
-                            <include>
-                                src/main/sql/${dataSource.addDataScript}
-                            </include>
-                            <include>
-                                src/main/sql/${dataSource.createTablesScript}
-                            </include>
-                        </includes>
-                    </fileset>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>create-tables-for-testing</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>execute</goal>
-                        </goals>
-                        <configuration>
-                            <driver>${jdbcDriver.className}</driver>
-                            <url>${testDataSource.url}</url>
-                            <username>${testDataSource.user}</username>
-                            <password>${testDataSource.password}</password>
-                            <autocommit>true</autocommit>
-                            <onError>continue</onError>
-                            <fileset>
-                                <basedir>${basedir}</basedir>
-                                <includes>
-                                    <include>
-                                        src/main/sql/${dataSource.addDataScript}
-                                    </include>
-                                    <include>
-                                        src/main/sql/${dataSource.createTablesScript}
-                                    </include>
-                                </includes>
-                            </fileset>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.version}</version>
             </plugin>
         </plugins>
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -229,6 +92,30 @@
             </resource>
         </resources>
     </build>
+
+    <profiles>
+        <!-- Test Profile -->
+        <profile>
+            <id>test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <liquibase.propertyFile>src/main/resources/liquibase-test.properties</liquibase.propertyFile>
+            </properties>
+        </profile>
+
+        <!-- Prod Profile -->
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <liquibase.propertyFile>src/main/resources/liquibase-prod.properties</liquibase.propertyFile>
+            </properties>
+        </profile>
+    </profiles>
 
     <repositories>
         <repository>
@@ -240,6 +127,5 @@
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
     </repositories>
-
 
 </project>

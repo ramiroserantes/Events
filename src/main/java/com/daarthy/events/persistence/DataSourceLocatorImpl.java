@@ -5,8 +5,6 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class DataSourceLocatorImpl {
@@ -29,9 +27,9 @@ public class DataSourceLocatorImpl {
 
     private void initializeDataSource() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(properties.getProperty("database.url"));
-        config.setUsername(properties.getProperty("database.username"));
-        config.setPassword(properties.getProperty("database.password"));
+        config.setJdbcUrl(properties.getProperty("url"));
+        config.setUsername(properties.getProperty("username"));
+        config.setPassword(properties.getProperty("password"));
         config.addDataSourceProperty("serverTimezone", "UTC");
 
         config.setMaximumPoolSize(20);
@@ -43,13 +41,9 @@ public class DataSourceLocatorImpl {
         return dataSource;
     }
 
-    public Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
-    }
-
     private void loadDatabaseProperties() throws IOException {
         properties = new Properties();
-        InputStream input = getClass().getClassLoader().getResourceAsStream("database.properties");
+        InputStream input = getClass().getClassLoader().getResourceAsStream("liquibase-prod.properties");
 
         properties.load(input);
     }

@@ -30,9 +30,9 @@ public class SqlConnections {
 
     private void initializeDataSource() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(properties.getProperty("database.url.test"));
-        config.setUsername(properties.getProperty("database.username.test"));
-        config.setPassword(properties.getProperty("database.password.test"));
+        config.setJdbcUrl(properties.getProperty("url"));
+        config.setUsername(properties.getProperty("username"));
+        config.setPassword(properties.getProperty("password"));
         config.addDataSourceProperty("serverTimezone", "UTC");
 
         config.setMaximumPoolSize(10);
@@ -43,9 +43,6 @@ public class SqlConnections {
     public synchronized HikariDataSource getDataSource() {
         return dataSource;
     }
-    public synchronized Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
-    }
 
     public void close() {
 
@@ -55,16 +52,16 @@ public class SqlConnections {
                 connection.close();
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al cerrar la conexión", e);
+            throw new RuntimeException("Error on connection close", e);
         }
     }
 
     private void loadDatabaseProperties() throws IOException {
         properties = new Properties();
-        InputStream input = getClass().getClassLoader().getResourceAsStream("database.properties");
+        InputStream input = getClass().getClassLoader().getResourceAsStream("liquibase-test.properties");
 
         if (input == null) {
-            System.out.println("Sorry, unable to find databaseTest.properties");
+            System.out.println("Sorry, unable to find liquibase-test.properties");
             return;
         }
 
