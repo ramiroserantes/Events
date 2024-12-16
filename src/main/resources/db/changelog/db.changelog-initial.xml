@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog-initial" author="ramiro">
+
+        <!-- SQL for creating tables -->
+        <sql>
+            <![CDATA[
+                CREATE TABLE Guild (
+                    id BIGINT,
+                    lvl int NOT NULL,
+                    experience DECIMAL(11,2),
+                    maxLvl int DEFAULT 6,
+                    kName VARCHAR(20),
+                    ampMissions int DEFAULT 0,
+                    ampBasicRewards DECIMAL(4, 2),
+                    lastTimeUpdated DATE,
+                    levelUpMod DECIMAL(4, 2),
+                    CONSTRAINT guildPk PRIMARY KEY (id)
+                );
+
+                INSERT INTO Guild (id, maxLvl, kName, lastTimeUpdated)
+                    VALUES (1, 0, null, CURRENT_DATE - INTERVAL '1 day');
+
+                CREATE TABLE Player (
+                    playerId VARCHAR(36),
+                    maxMissions INT,
+                    ampBasicRewards DECIMAL(4, 2),
+                    guildId BIGINT NOT NULL DEFAULT 1,
+                    CONSTRAINT playerPk PRIMARY KEY (playerId),
+                    CONSTRAINT playerFkGuild FOREIGN KEY (guildId)
+                        REFERENCES Guild(id)
+                        ON UPDATE CASCADE ON DELETE SET DEFAULT
+                );
+
+                CREATE TABLE Missions (
+                    id BIGSERIAL PRIMARY KEY,
+                    guildId BIGINT,
+                    title VARCHAR(50),
+                    grade CHAR(1) NOT NULL,
+                    expiration DATE NOT NULL,
+                    maxCompletions INT,
+                    CONSTRAINT missionsPk PRIMARY KEY (id),
+                    CONSTRAINT missionsFkGuild FOREIGN KEY (guildId)
+                        REFERENCES Guild(id)
+                        ON UPDATE CASCADE ON DELETE SET NULL
+                );
+
+                CREATE TABLE Objective (
+                    id BIGSERIAL PRIMARY KEY,
+                    missionId BIGINT,
+                    actionType VARCHAR(10) NOT NULL,
+                    reqAmount INT,
+                    target VARCHAR(30),
+                    levels INT
+                    CONSTRAINT objectivePK PRIMARY KEY (id),
+                    CONSTRAINT objectiveFKMissions FOREIGN KEY (missionId)
+                        REFERENCES Missions(id)
+                        ON UPDATE CASCADE ON DELETE CASCADE
+                );
+
+                CREATE TABLE MissionAccept (
+                    playerId VARCHAR(36),
+                    missionId BIGINT,
+                    status VARCHAR(15),
+                    acceptDate DATE,
+                    CONSTRAINT missionAcceptPk PRIMARY KEY (playerId, missionId),
+                    CONSTRAINT missionAcceptFKPlayer
+                        FOREIGN KEY (playerId)
+                        REFERENCES Player(playerId)
+                        ON UPDATE CASCADE ON DELETE CASCADE,
+                    CONSTRAINT missionAcceptFKMissions
+                        FOREIGN KEY (missionId)
+                        REFERENCES Missions(id)
+                        ON UPDATE CASCADE ON DELETE CASCADE
+                );
+
+                CREATE TABLE ObjectiveProgress (
+                    playerId VARCHAR(36),
+                    objectiveId BIGINT,
+                    amount INT NOT NULL,
+                    CONSTRAINT objectiveProgressPk PRIMARY KEY (playerId, objectiveId),
+                    CONSTRAINT objectiveProgressFKPlayer
+                        FOREIGN KEY (playerId)
+                        REFERENCES Player(playerId)
+                        ON UPDATE CASCADE ON DELETE CASCADE,
+                    CONSTRAINT objectiveProgressFkObjective
+                        FOREIGN KEY (objectiveId)
+                        REFERENCES Objective(id)
+                        ON UPDATE CASCADE ON DELETE CASCADE
+                );
+
+                CREATE TABLE Events (
+                    id BIGSERIAL,
+                    worldScope VARCHAR(20) NOT NULL,
+                    name VARCHAR(20),
+                    startDate DATE NOT NULL,
+                    endDate DATE NOT NULL,
+                    maxMedals INT NOT NULL,
+                    CONSTRAINT eventsPk PRIMARY KEY (id)
+                );
+
+                CREATE TABLE GuildMedals (
+                    eventId BIGINT,
+                    guildId BIGINT,
+                    medals INT NOT NULL,
+                    CONSTRAINT guildMedalsPk PRIMARY KEY (eventId, guildId),
+                    CONSTRAINT guildMedalsFKEvents
+                        FOREIGN KEY (eventId)
+                        REFERENCES Events(id)
+                        ON UPDATE CASCADE ON DELETE CASCADE,
+                    CONSTRAINT guildMedalsFkGuild
+                        FOREIGN KEY (guildId)
+                        REFERENCES Guild(id)
+                        ON UPDATE CASCADE ON DELETE CASCADE
+                );
+
+                CREATE TABLE PlayerContribution (
+                    playerId VARCHAR(36),
+                    eventId BIGINT,
+                    quantity INT NOT NULL,
+                    medals INT NOT NULL,
+                    CONSTRAINT playerContributionPk PRIMARY KEY (playerId, eventId),
+                    CONSTRAINT playerContributionFkPlayer
+                        FOREIGN KEY (playerId)
+                        REFERENCES Player(playerId)
+                        ON UPDATE CASCADE ON DELETE CASCADE,
+                    CONSTRAINT playerContributionFkEvents
+                        FOREIGN KEY (eventId)
+                        REFERENCES Events(id)
+                        ON UPDATE CASCADE ON DELETE CASCADE
+                );
+
+            ]]>
+        </sql>
+
+        <rollback>
+            <![CDATA[
+
+                -- Drop the tables
+                DROP TABLE IF EXISTS PlayerMedals;
+                DROP TABLE IF EXISTS PlayerContribution;
+                DROP TABLE IF EXISTS GuildMedals;
+                DROP TABLE IF EXISTS Events;
+                DROP TABLE IF EXISTS ObjectiveProgress;
+                DROP TABLE IF EXISTS MissionAccept;
+                DROP TABLE IF EXISTS Objective;
+                DROP TABLE IF EXISTS Missions;
+                DROP TABLE IF EXISTS Player;
+                DROP TABLE IF EXISTS Guild;
+            ]]>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

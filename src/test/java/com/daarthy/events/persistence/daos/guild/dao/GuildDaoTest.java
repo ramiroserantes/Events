@@ -1,11 +1,16 @@
 package com.daarthy.events.persistence.daos.guild.dao;
 
-import com.daarthy.events.persistence.daos.DaoContext;
+import com.daarthy.events.persistence.PersistenceTestContext;
+import com.daarthy.events.persistence.daos.guild.entities.Guild;
 import org.junit.After;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class GuildDaoTest {
 
-   /* @Test
+    @Test
     public void testGuildByCreateAndDelete() {
 
         Guild createdGuild = ctx.getGuild(2L);
@@ -19,31 +24,11 @@ public class GuildDaoTest {
         assertNull(afterDeletion);
     }
 
-   /* @Test
-    public void testGuildByFindByPlayer() {
-
-        UUID playerId = UUID.randomUUID();
-
-        Guild createdGuild = ctx.getGuild(2L);
-        EventsPlayer player = ctx.getPlayer(playerId, createdGuild.getId());
-
-        MySQLCriteria<Guild> selector = MySQLCriteria.<Guild>builder()
-                .selector(FestivalSelector.FIND_GUILD_BY_PLAYER_ID)
-                .params(List.of(player.getPlayerId()))
-                .resultClass(Guild.class)
-                .build();
-
-        Guild found = ctx.guildDao().findOneByCriteria(selector);
-
-        assertEquals(found, createdGuild);
-
-    }*/
-
     // *****************************************************
     // Internal Methods And Variables
     // *****************************************************
 
-    private DaoContext ctx = new DaoContext();
+    private final PersistenceTestContext ctx = new PersistenceTestContext();
 
     @After
     public void cleanUp() {

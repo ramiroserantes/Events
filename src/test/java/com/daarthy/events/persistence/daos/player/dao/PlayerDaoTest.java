@@ -1,15 +1,18 @@
 package com.daarthy.events.persistence.daos.player.dao;
 
-import com.daarthy.events.persistence.daos.DaoContext;
+import com.daarthy.events.persistence.PersistenceTestContext;
+import com.daarthy.events.persistence.daos.guild.entities.Guild;
 import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
+import com.daarthy.mini.shared.criteria.FestivalSelector;
+import com.daarthy.mini.shared.criteria.MiniCriteria;
+import com.daarthy.mini.shared.criteria.PostgresCriteria;
 import org.junit.After;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 public class PlayerDaoTest {
 
@@ -74,10 +77,33 @@ public class PlayerDaoTest {
     }
 
     // *****************************************************
+    // Player Selectors
+    // *****************************************************
+    @Test
+    public void testPlayerSelectorByFindGuildByPlayer() {
+
+        UUID playerId = UUID.randomUUID();
+        ctx.getPlayer(playerId, DEFAULT_GUILD);
+
+        MiniCriteria<Guild> criteria = PostgresCriteria.<Guild>builder()
+                .selector(FestivalSelector.FIND_GUILD_BY_PLAYER_ID)
+                .params(List.of(playerId))
+                .resultClass(Guild.class)
+                .build();
+
+        Guild foundGuild = ctx.searchDao().findOneByCriteria(criteria);
+
+        assertNotNull(foundGuild);
+        assertEquals(1L, foundGuild.getId(), 0.0);
+    }
+
+    // *****************************************************
     // Internal Methods And Variables
     // *****************************************************
 
-    private DaoContext ctx = new DaoContext();
+    private static final Long DEFAULT_GUILD = 1L;
+    private PersistenceTestContext ctx = new PersistenceTestContext();
+
     @After
     public void cleanUp() {
         ctx.cleanUp();

@@ -1,6 +1,10 @@
-package com.daarthy.events.persistence.daos;
+package com.daarthy.events.persistence;
 
-import com.daarthy.events.persistence.SqlConnections;
+import com.daarthy.events.persistence.daos.SearchDao;
+import com.daarthy.events.persistence.daos.SearchDaoJdbc;
+import com.daarthy.events.persistence.daos.event.dao.EventDao;
+import com.daarthy.events.persistence.daos.event.dao.EventJdbc;
+import com.daarthy.events.persistence.daos.event.entities.EventData;
 import com.daarthy.events.persistence.daos.guild.dao.GuildDao;
 import com.daarthy.events.persistence.daos.guild.dao.GuildJdbc;
 import com.daarthy.events.persistence.daos.guild.entities.Guild;
@@ -24,6 +28,7 @@ import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
 import com.daarthy.mini.shared.classes.enums.festivals.ActionType;
 import com.daarthy.mini.shared.classes.enums.festivals.Grade;
 import com.daarthy.mini.shared.classes.enums.festivals.MissionStatus;
+import com.daarthy.mini.shared.classes.enums.festivals.Scope;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.io.IOException;
@@ -32,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class DaoContext {
+public class PersistenceTestContext {
 
     private HikariDataSource dataSource;
     private PlayerDao playerDao;
@@ -41,14 +46,15 @@ public class DaoContext {
     private MissionAcceptanceDao missionAcceptanceDao;
     private ObjectiveDao objectiveDao;
     private ObjectiveProgressDao objectiveProgressDao;
+    private EventDao eventDao;
 
     private SearchDao searchDao;
 
     private List<Long> createdGuildIds = new ArrayList<>();
 
-    public DaoContext() {
+    public PersistenceTestContext() {
         try {
-            this.dataSource = SqlConnections.getInstance().getDataSource();
+            this.dataSource = DataSourceLocatorTesting.getInstance().getDataSource();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -59,6 +65,7 @@ public class DaoContext {
         this.objectiveDao = new ObjectiveJdbc(dataSource);
         this.objectiveProgressDao = new ObjectiveProgressJdbc(dataSource);
         this.searchDao = new SearchDaoJdbc(dataSource);
+        this.eventDao = new EventJdbc(dataSource);
     }
 
     public PlayerDao playerDao() {
@@ -84,6 +91,8 @@ public class DaoContext {
     public ObjectiveProgressDao objectiveProgressDao() {
         return objectiveProgressDao;
     }
+
+    public EventDao eventDao() {return eventDao;}
 
     public SearchDao searchDao() {return searchDao;}
 
@@ -123,14 +132,14 @@ public class DaoContext {
         return missionDao.save(mission);
     }
 
-    public MissionAcceptance getMissionAcceptance(Long missionId, UUID playerId) {
+    public MissionAcceptance getMissionAcceptance(Long missionId, UUID playerId, LocalDate acceptedDate) {
         MissionAcceptance missionAcceptance = MissionAcceptance.builder()
                 .key(MissionAcceptKey.builder()
                         .missionId(missionId)
                         .playerId(playerId)
                         .build())
                 .status(MissionStatus.ACCEPTED)
-                .acceptDate(LocalDate.now().plusDays(1))
+                .acceptDate(acceptedDate)
                 .build();
         return missionAcceptanceDao.save(missionAcceptance);
     }
@@ -154,6 +163,16 @@ public class DaoContext {
                         .build())
                 .build();
         return objectiveProgressDao.save(objectiveProgress);
+    }
+
+    public EventData getEvent() {
+        EventData eventData = EventData.builder()
+                .name("TEST EVENT")
+                .scopeEnum(Scope.ALL)
+                .startDate(LocalDate.now())
+                .endDate(LocalDate.now().plusDays(10))
+                .build();
+        return eventDao.save(eventData);
     }
 
     public void cleanUp() {

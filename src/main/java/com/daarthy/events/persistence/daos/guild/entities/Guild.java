@@ -1,5 +1,6 @@
 package com.daarthy.events.persistence.daos.guild.entities;
 
+import com.daarthy.mini.annotations.MiniDefaults;
 import com.daarthy.mini.annotations.MiniId;
 import com.daarthy.mini.hibernate.entities.MiniEntity;
 
@@ -10,13 +11,17 @@ public class Guild extends MiniEntity {
 
     @MiniId
     private Long id;
+    @MiniDefaults(creationWith = "0")
     private int lvl;
+    @MiniDefaults(creationWith = "0.0")
     private Float experience;
     private int maxLvl;
     private String kName;
     private int ampMissions;
+    @MiniDefaults(creationWith = "0.0")
     private Float ampBasicRewards;
     private LocalDate lastTimeUpdated;
+    @MiniDefaults(creationWith = "0.0")
     private Float levelUpMod;
 
     public Guild() {

@@ -17,6 +17,7 @@ public class MissionAcceptance extends MiniEntity {
     private LocalDate acceptDate;
 
     public MissionAcceptance() {}
+
     private MissionAcceptance(Builder builder) {
         this.key = builder.key;
         this.status = builder.status;
@@ -25,10 +26,6 @@ public class MissionAcceptance extends MiniEntity {
 
     public MissionAcceptKey getKey() {
         return key;
-    }
-
-    public void setKey(MissionAcceptKey key) {
-        this.key = key;
     }
 
     public MissionStatus getStatus() {

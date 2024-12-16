@@ -1,5 +1,6 @@
 package com.daarthy.events.persistence.daos.event.entities;
 
+import com.daarthy.mini.annotations.MiniDefaults;
 import com.daarthy.mini.annotations.MiniId;
 import com.daarthy.mini.hibernate.entities.MiniEntity;
 
@@ -9,8 +10,10 @@ public class PlayerContribution extends MiniEntity {
 
     @MiniId
     private ContributionKey contributionKey;
-    private int items = 0;
-    private int medals = 0;
+    @MiniDefaults(creationWith = "0")
+    private int items;
+    @MiniDefaults(creationWith = "0")
+    private int medals;
 
     public PlayerContribution() {
     }

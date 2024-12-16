@@ -10,7 +10,6 @@ public class HuntingEventPlan extends AbstractBasicEvents {
         super(0.0011904,0.0042328);
     }
 
-
     @Override
     protected void setUpActivities(List<ActionType> activities) {
         activities.add(ActionType.KILL);

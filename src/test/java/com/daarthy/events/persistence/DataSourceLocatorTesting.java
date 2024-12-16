@@ -9,21 +9,21 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class SqlConnections {
+public class DataSourceLocatorTesting {
 
     private Properties properties;
     private static HikariDataSource dataSource;
 
-    private static SqlConnections instance;
+    private static DataSourceLocatorTesting instance;
 
-    private SqlConnections() throws IOException {
+    private DataSourceLocatorTesting() throws IOException {
         loadDatabaseProperties();
         initializeDataSource();
     }
 
-    public static synchronized SqlConnections getInstance() throws IOException {
+    public static synchronized DataSourceLocatorTesting getInstance() throws IOException {
         if (instance == null) {
-            instance = new SqlConnections();
+            instance = new DataSourceLocatorTesting();
         }
         return instance;
     }

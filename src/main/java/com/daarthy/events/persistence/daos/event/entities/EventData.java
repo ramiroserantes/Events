@@ -1,5 +1,6 @@
 package com.daarthy.events.persistence.daos.event.entities;
 
+import com.daarthy.mini.annotations.MiniDefaults;
 import com.daarthy.mini.annotations.MiniId;
 import com.daarthy.mini.annotations.MiniTable;
 import com.daarthy.mini.hibernate.entities.MiniEntity;
@@ -17,6 +18,7 @@ public class EventData extends MiniEntity {
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
+    @MiniDefaults(creationWith = "200")
     private Integer maxMedals;
 
     public EventData() {
@@ -87,7 +89,7 @@ public class EventData extends MiniEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventData other = (EventData) o;
-        return maxMedals == other.maxMedals
+        return Objects.equals(maxMedals, other.maxMedals)
                 && Objects.equals(eventId, other.eventId)
                 && worldScope == other.worldScope
                 && Objects.equals(name, other.name)
@@ -98,6 +100,11 @@ public class EventData extends MiniEntity {
     @Override
     public int hashCode() {
         return Objects.hash(eventId, worldScope, name, startDate, endDate, maxMedals);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString(this);
     }
 
     // *****************************************************

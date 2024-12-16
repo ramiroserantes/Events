@@ -1,5 +1,6 @@
 package com.daarthy.events.persistence.daos.player.entities;
 
+import com.daarthy.mini.annotations.MiniDefaults;
 import com.daarthy.mini.annotations.MiniId;
 import com.daarthy.mini.annotations.MiniTable;
 import com.daarthy.mini.hibernate.entities.MiniEntity;
@@ -12,7 +13,9 @@ public class EventsPlayer extends MiniEntity {
 
     @MiniId
     private UUID playerId;
+    @MiniDefaults(creationWith = "3")
     private int maxMissions;
+    @MiniDefaults(creationWith = "0.0")
     private Float ampBasicRewards;
     private Long guildId;
 

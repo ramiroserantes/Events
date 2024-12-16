@@ -1,5 +1,6 @@
 package com.daarthy.events.persistence.daos.event.entities;
 
+import com.daarthy.mini.annotations.MiniDefaults;
 import com.daarthy.mini.annotations.MiniId;
 import com.daarthy.mini.hibernate.entities.MiniEntity;
 
@@ -9,6 +10,7 @@ public class GuildMedals extends MiniEntity {
 
     @MiniId
     private GuildMedalsKey guildMedalsKey;
+    @MiniDefaults(creationWith = "0")
     private int medals;
 
     public GuildMedals() {}

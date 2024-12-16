@@ -1,13 +1,12 @@
 package com.daarthy.events.app.util;
 
-import com.daarthy.events.Events;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
 import java.util.Map;
 
 public class EventMessageReader {
-    private static final String FILE_PATH = "events.yml";
+    private static final String FILE_PATH = "configuration/events.yml";
 
     public static String getMessage(String eventKey, Object... args) {
         try (InputStream inputStream = EventMessageReader.class.getClassLoader().getResourceAsStream(FILE_PATH)) {

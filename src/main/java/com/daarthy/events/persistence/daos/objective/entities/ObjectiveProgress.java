@@ -1,5 +1,6 @@
 package com.daarthy.events.persistence.daos.objective.entities;
 
+import com.daarthy.mini.annotations.MiniDefaults;
 import com.daarthy.mini.annotations.MiniId;
 import com.daarthy.mini.hibernate.entities.MiniEntity;
 
@@ -9,6 +10,7 @@ public class ObjectiveProgress extends MiniEntity {
 
     @MiniId
     private ObjectiveProgressKey key;
+    @MiniDefaults(creationWith = "0")
     private int amount;
 
     public ObjectiveProgress() {}

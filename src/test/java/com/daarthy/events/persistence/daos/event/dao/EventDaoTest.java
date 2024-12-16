@@ -1,204 +1,51 @@
 package com.daarthy.events.persistence.daos.event.dao;
 
+import com.daarthy.events.persistence.PersistenceTestContext;
+import com.daarthy.events.persistence.daos.event.entities.EventData;
+import com.daarthy.mini.shared.classes.enums.festivals.Scope;
+import com.daarthy.mini.shared.criteria.FestivalSelector;
+import com.daarthy.mini.shared.criteria.MiniCriteria;
+import com.daarthy.mini.shared.criteria.PostgresCriteria;
+import org.junit.After;
+import org.junit.Test;
+
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 public class EventDaoTest {
-/*
-    private HikariDataSource dataSource = SqlConnections.getInstance().getDataSource();
-    private EventDao eventDao = new EventJdbc();
-    private PlayerDao playerDao = new PlayerJdbc();
-    private static final Long DEFAULT_ID = 1L;
 
-    private void setUpInvalidEventStart(Connection connection) {
-        String query = "INSERT INTO Events (worldScope, name, startDate, endDate) VALUES (?, ?, ?, ?)";
+    // *****************************************************
+    // EventDao Selectors
+    // *****************************************************
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+    @Test
+    public void testEventSelectorsByCurrentEvents() {
 
-            int i = 1;
-            preparedStatement.setString(i++, ScopeEnum.ALL.name());
-            preparedStatement.setString(i++,"HuntingEvent");
-            preparedStatement.setDate(i++, Date.valueOf(LocalDate.now().plusDays(1)));
-            preparedStatement.setDate(i, Date.valueOf(LocalDate.now().plusDays(10)));
+        EventData eventData = ctx.getEvent();
+        eventData.setMaxMedals(200);
 
-            preparedStatement.executeUpdate();
+        MiniCriteria<EventData> criteria = PostgresCriteria.<EventData>builder()
+                .selector(FestivalSelector.FIND_CURRENT_EVENTS)
+                .params(List.of(Scope.ALL))
+                .resultClass(EventData.class)
+                .build();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        List<EventData> foundEvents = ctx.searchDao().findByCriteria(criteria);
+
+        assertFalse(foundEvents.isEmpty());
+        assertEquals(eventData, foundEvents.get(0));
     }
 
-    private void setUpInvalidEventEnd(Connection connection) {
-        String query = "INSERT INTO Events (worldScope, name, startDate, endDate) VALUES (?, ?, ?, ?)";
+    // *****************************************************
+    // Internal Methods And Variables
+    // *****************************************************
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
-
-            int i = 1;
-            preparedStatement.setString(i++, ScopeEnum.ALL.name());
-            preparedStatement.setString(i++,"HuntingEvent");
-            preparedStatement.setDate(i++, Date.valueOf(LocalDate.now().minusDays(2)));
-            preparedStatement.setDate(i, Date.valueOf(LocalDate.now().minusDays(1)));
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public EventDaoTest() throws IOException {
-    }
+    private final PersistenceTestContext ctx = new PersistenceTestContext();
 
     @After
     public void cleanUp() {
-
-        String queryDeletePlayerContribution = "DELETE FROM PlayerContribution";
-        String queryDeleteMedals = "DELETE FROM GuildMedals";
-
-        try (Connection connection = dataSource.getConnection()) {
-
-            PreparedStatement preparedStatement2 = connection.prepareStatement(queryDeletePlayerContribution);
-            PreparedStatement preparedStatement3 = connection.prepareStatement(queryDeleteMedals);
-
-            preparedStatement3.executeUpdate();
-            preparedStatement2.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+        ctx.cleanUp();
     }
-    @Test
-    public void testEventDaoByFindEmptyButDefault() {
-
-        try (Connection connection = dataSource.getConnection()) {
-
-            List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
-
-            assertFalse(eventDataList.isEmpty());
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    public void testEventDaoByFindEmptyByInvalidStart() {
-
-        try (Connection connection = dataSource.getConnection()) {
-
-            setUpInvalidEventStart(connection);
-            List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
-
-            assertEquals(3, eventDataList.size());
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    public void testEventDaoByFindEmptyByInvalidEnd() {
-
-        try (Connection connection = dataSource.getConnection()) {
-
-            setUpInvalidEventEnd(connection);
-            List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
-
-            assertFalse(eventDataList.isEmpty());
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    public void testEventDaoByFind() {
-
-        try (Connection connection = dataSource.getConnection()) {
-
-            List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
-
-            assertEquals(3, eventDataList.size());
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    public void testEventDaoByFindMedalsNoAvailable() {
-
-        try (Connection connection = dataSource.getConnection()) {
-
-            List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
-            Long eventId = eventDataList.get(0).getEventId();
-
-            int medals = eventDao.findGuildMedals(connection, DEFAULT_ID, eventId);
-
-            assertEquals(0, medals);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    public void testEventDaoByFindMedalsAvailableAndSave() {
-
-        try (Connection connection = dataSource.getConnection()) {
-
-            List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
-            Long eventId = eventDataList.get(0).getEventId();
-
-            eventDao.saveGuildMedals(connection, DEFAULT_ID, eventId, 900);
-
-            int medals = eventDao.findGuildMedals(connection, DEFAULT_ID, eventId);
-
-            assertEquals(900, medals);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    public void testEventDaoByFindNullContributions() {
-
-        try (Connection connection = dataSource.getConnection()) {
-
-            UUID playerID = UUID.randomUUID();
-            playerDao.createPlayer(playerID, connection);
-
-            List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
-            Long eventId = eventDataList.get(0).getEventId();
-
-            Contribution contribution = eventDao.findPlayerContribution(connection, eventId, playerID);
-
-            assertNull(contribution);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    public void testEventDaoByFindContributions() {
-
-        try (Connection connection = dataSource.getConnection()) {
-
-            UUID playerID = UUID.randomUUID();
-            playerDao.createPlayer(playerID, connection);
-
-            List<EventData> eventDataList = eventDao.findCurrentEvents(connection, ScopeEnum.ALL);
-            EventData event = eventDataList.get(0);
-
-            eventDao.savePlayerContribution(connection, playerID, event.getEventId(), new Contribution(9, 9), event.getMaxMedals());
-
-            Contribution contribution = eventDao.findPlayerContribution(connection, event.getEventId(), playerID);
-
-            assertEquals(9, contribution.getItems());
-            assertEquals(9, contribution.getMedals());
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 }
