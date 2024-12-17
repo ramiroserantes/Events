@@ -14,7 +14,7 @@ public class EventsPlayer extends MiniEntity {
     @MiniId
     private UUID playerId;
     @MiniDefaults(creationWith = "3")
-    private int maxMissions;
+    private Integer maxMissions;
     @MiniDefaults(creationWith = "0.0")
     private Float ampBasicRewards;
     private Long guildId;
@@ -37,11 +37,11 @@ public class EventsPlayer extends MiniEntity {
         this.playerId = playerId;
     }
 
-    public int getMaxMissions() {
+    public Integer getMaxMissions() {
         return maxMissions;
     }
 
-    public void setMaxMissions(int maxMissions) {
+    public void setMaxMissions(Integer maxMissions) {
         this.maxMissions = maxMissions;
     }
 
@@ -69,8 +69,7 @@ public class EventsPlayer extends MiniEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventsPlayer other = (EventsPlayer) o;
-        return isNew == other.isNew &&
-                maxMissions == other.maxMissions
+        return Objects.equals(maxMissions, other.maxMissions)
                 && Objects.equals(playerId, other.playerId)
                 && Objects.equals(ampBasicRewards, other.ampBasicRewards)
                 && Objects.equals(guildId, other.guildId);
@@ -95,7 +94,7 @@ public class EventsPlayer extends MiniEntity {
 
     public static class Builder {
         private UUID playerId;
-        private int maxMissions;
+        private Integer maxMissions;
         private Float ampBasicRewards;
         private Long guildId;
 
@@ -104,7 +103,7 @@ public class EventsPlayer extends MiniEntity {
             return this;
         }
 
-        public Builder maxMissions(int maxMissions) {
+        public Builder maxMissions(Integer maxMissions) {
             this.maxMissions = maxMissions;
             return this;
         }

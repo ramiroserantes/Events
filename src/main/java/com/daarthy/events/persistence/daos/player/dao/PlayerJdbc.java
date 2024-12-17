@@ -7,6 +7,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import java.util.UUID;
 
 public class PlayerJdbc extends AbstractMiniSR<EventsPlayer, UUID> implements PlayerDao {
+
     public PlayerJdbc(HikariDataSource dataSource) {
         super(dataSource, EventsPlayer.class);
     }

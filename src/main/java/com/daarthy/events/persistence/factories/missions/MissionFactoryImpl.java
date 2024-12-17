@@ -1,68 +1,85 @@
 package com.daarthy.events.persistence.factories.missions;
 
-import org.yaml.snakeyaml.Yaml;
+import com.daarthy.events.persistence.daos.mission.entities.Mission;
+import com.daarthy.events.persistence.daos.objective.entities.Objective;
+import com.daarthy.mini.shared.classes.enums.festivals.Grade;
+import com.daarthy.mini.shared.classes.yaml.AbstractMiniYaml;
 
-import java.io.InputStream;
 import java.security.SecureRandom;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class MissionFactoryImpl implements MissionFactory {
+public class MissionFactoryImpl extends AbstractMiniYaml implements MissionFactory {
 
-  /*  private SecureRandom random = new SecureRandom();
+   private SecureRandom random = new SecureRandom();
 
-    public HashMap<MissionData, List<ObjectiveData>> getMission(Grade grade, boolean isDefaultGuild) {
-        HashMap<MissionData, List<ObjectiveData>> mission = new HashMap<>();
+   public MissionFactoryImpl() {
+       super("missions.yml");
+   }
 
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream("missions.yml")) {
-            Yaml yaml = new Yaml();
-            Map<String, List<Map<String, Object>>> yamlData = yaml.load(input);
+   /**
+    * Este metodo a partir de un Grade S, A, B, C, D, E, F busca en la configuración uno al azar y devuelve la missión
+    * , sin embargo es necesario no tener duplicados, con esto se le podría pasar una lista de strings y filtrar por ello
+    *
+    * */
+   public HashMap<Mission, List<Objective>> getMission(Grade grade, boolean isDefaultGuild, Set<String> usedMissions) {
+       HashMap<Mission, List<Objective>> mission = new HashMap<>();
 
-            if (yamlData.containsKey(grade.toString())) {
-                List<Map<String, Object>> missions = yamlData.get(grade.toString());
+       if (yamlFile.containsKey(grade.toString())) {
+           List<Map<String, Object>> missions = yamlData.get(grade.toString());
 
-                if (!missions.isEmpty()) {
-                    int randomMissionIndex = random.nextInt(missions.size());
-                    Map<String, Object> missionMap = missions.get(randomMissionIndex);
+           if (!missions.isEmpty()) {
+               // Filtrar misiones ya usadas
+               List<Map<String, Object>> availableMissions = new ArrayList<>();
+               for (Map<String, Object> missionMap : missions) {
+                   String missionTitle = (String) missionMap.get("title");
+                   if (!usedMissions.contains(missionTitle)) {
+                       availableMissions.add(missionMap);
+                   }
+               }
 
-                    MissionData missionData = new MissionData();
-                    missionData.setTitle((String) missionMap.get("title"));
-                    missionData.setExpiration(LocalDate.from(LocalDate.now().atStartOfDay().plusDays(grade.getPriority())));
-                    missionData.setGrade(grade.getGradeString());
+               // Si hay misiones disponibles, selecciona una aleatoria
+               if (!availableMissions.isEmpty()) {
+                   int randomMissionIndex = random.nextInt(availableMissions.size());
+                   Map<String, Object> missionMap = availableMissions.get(randomMissionIndex);
 
-                    if (!isDefaultGuild) {
-                        missionData.setMaxCompletions(grade.getCompletions());
-                    }
+                   // Procesar la misión seleccionada
+                   MissionData missionData = new MissionData();
+                   missionData.setTitle((String) missionMap.get("title"));
+                   missionData.setExpiration(LocalDate.from(LocalDate.now().atStartOfDay().plusDays(grade.getPriority())));
+                   missionData.setGrade(grade.getGradeString());
 
-                    List<ObjectiveData> objectives = new ArrayList<>();
-                    List<Map<String, Object>> objectivesList = (List<Map<String, Object>>) missionMap.get("objectives");
+                   if (!isDefaultGuild) {
+                       missionData.setMaxCompletions(grade.getCompletions());
+                   }
 
-                    for (Map<String, Object> objectiveMap : objectivesList) {
-                        ObjectiveData objectiveData = new ObjectiveData();
-                        objectiveData.setTarget((String) objectiveMap.get("target"));
-                        objectiveData.setActionType(ActionType.valueOf((String) objectiveMap.get("actionType")));
+                   List<ObjectiveData> objectives = new ArrayList<>();
+                   List<Map<String, Object>> objectivesList = (List<Map<String, Object>>) missionMap.get("objectives");
 
-                        int reqAmount = (int) objectiveMap.get("reqAmount");
-                        double deviation = random.nextDouble() * 0.2 - 0.1; // Deviation between -10% and 10%
-                        objectiveData.setReqAmount((int) Math.round(reqAmount + reqAmount * deviation));
+                   for (Map<String, Object> objectiveMap : objectivesList) {
+                       ObjectiveData objectiveData = new ObjectiveData();
+                       objectiveData.setTarget((String) objectiveMap.get("target"));
+                       objectiveData.setActionType(ActionType.valueOf((String) objectiveMap.get("actionType")));
 
-                        if (objectiveMap.containsKey("levels")) {
-                            objectiveData.setLevels((int) objectiveMap.get("levels"));
-                        }
+                       int reqAmount = (int) objectiveMap.get("reqAmount");
+                       double deviation = random.nextDouble() * 0.2 - 0.1; // Deviation between -10% and 10%
+                       objectiveData.setReqAmount((int) Math.round(reqAmount + reqAmount * deviation));
 
-                        objectives.add(objectiveData);
-                    }
+                       if (objectiveMap.containsKey("levels")) {
+                           objectiveData.setLevels((int) objectiveMap.get("levels"));
+                       }
 
-                    mission.put(missionData, objectives);
-                }
-            } else {
-               // Events.logInfo("There aren't any mission for the declared Grade.");
-            }
-        } catch (Exception e) {
-         //   Events.logInfo("Source file not Found");
-        }
+                       objectives.add(objectiveData);
+                   }
 
-        return mission;
-    }
-*/
+                   mission.put(missionData, objectives);
+                   usedMissions.add(missionData.getTitle());  // Añadir a la lista de misiones usadas
+               }
+           }
+       }
+
+       return mission;
+   }
+
 }

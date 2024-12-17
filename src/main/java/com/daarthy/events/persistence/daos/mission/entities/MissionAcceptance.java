@@ -44,6 +44,9 @@ public class MissionAcceptance extends MiniEntity {
         this.acceptDate = acceptDate;
     }
 
+    // *****************************************************
+    // Internal Methods
+    // *****************************************************
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,6 +67,9 @@ public class MissionAcceptance extends MiniEntity {
         return super.toString(this);
     }
 
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
     public static Builder builder() {
         return new Builder();
     }

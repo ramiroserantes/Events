@@ -11,9 +11,9 @@ public class PlayerContribution extends MiniEntity {
     @MiniId
     private ContributionKey contributionKey;
     @MiniDefaults(creationWith = "0")
-    private int items;
+    private Integer items;
     @MiniDefaults(creationWith = "0")
-    private int medals;
+    private Integer medals;
 
     public PlayerContribution() {
     }
@@ -32,19 +32,19 @@ public class PlayerContribution extends MiniEntity {
         this.contributionKey = contributionKey;
     }
 
-    public int getItems() {
+    public Integer getItems() {
         return items;
     }
 
-    public void setItems(int items) {
+    public void setItems(Integer items) {
         this.items = items;
     }
 
-    public int getMedals() {
+    public Integer getMedals() {
         return medals;
     }
 
-    public void setMedals(int medals) {
+    public void setMedals(Integer medals) {
         this.medals = medals;
     }
 
@@ -56,8 +56,8 @@ public class PlayerContribution extends MiniEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlayerContribution other = (PlayerContribution) o;
-        return items == other.items
-                && medals == other.medals
+        return Objects.equals(items, other.items)
+                && Objects.equals(medals, other.medals)
                 && Objects.equals(contributionKey, other.contributionKey);
     }
 
@@ -80,20 +80,20 @@ public class PlayerContribution extends MiniEntity {
 
     public static class Builder {
         private ContributionKey contributionKey;
-        private int items;
-        private int medals;
+        private Integer items;
+        private Integer medals;
 
         public Builder contributionKey(ContributionKey contributionKey) {
             this.contributionKey = contributionKey;
             return this;
         }
 
-        public Builder items(int items) {
+        public Builder items(Integer items) {
             this.items = items;
             return this;
         }
 
-        public Builder medals(int medals) {
+        public Builder medals(Integer medals) {
             this.medals = medals;
             return this;
         }

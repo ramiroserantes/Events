@@ -58,8 +58,8 @@ public class PlayerDaoTest {
 
         ctx.playerDao().saveAll(List.of(eventsPlayer1, eventsPlayer2));
 
-        assertEquals(7, ctx.playerDao().findById(player1).getMaxMissions());
-        assertEquals(2, ctx.playerDao().findById(player2).getMaxMissions());
+        assertEquals(7, ctx.playerDao().findById(player1).getMaxMissions(), 0.0);
+        assertEquals(2, ctx.playerDao().findById(player2).getMaxMissions(), 0.0);
     }
 
     @Test

@@ -12,12 +12,14 @@ public class Guild extends MiniEntity {
     @MiniId
     private Long id;
     @MiniDefaults(creationWith = "0")
-    private int lvl;
+    private Integer lvl;
     @MiniDefaults(creationWith = "0.0")
     private Float experience;
-    private int maxLvl;
+    @MiniDefaults(creationWith = "6")
+    private Integer maxLvl;
     private String kName;
-    private int ampMissions;
+    @MiniDefaults(creationWith = "0")
+    private Integer ampMissions;
     @MiniDefaults(creationWith = "0.0")
     private Float ampBasicRewards;
     private LocalDate lastTimeUpdated;
@@ -47,11 +49,11 @@ public class Guild extends MiniEntity {
         this.id = id;
     }
 
-    public int getLvl() {
+    public Integer getLvl() {
         return lvl;
     }
 
-    public void setLvl(int lvl) {
+    public void setLvl(Integer lvl) {
         this.lvl = lvl;
     }
 
@@ -63,11 +65,11 @@ public class Guild extends MiniEntity {
         this.experience = experience;
     }
 
-    public int getMaxLvl() {
+    public Integer getMaxLvl() {
         return maxLvl;
     }
 
-    public void setMaxLvl(int maxLvl) {
+    public void setMaxLvl(Integer maxLvl) {
         this.maxLvl = maxLvl;
     }
 
@@ -79,11 +81,11 @@ public class Guild extends MiniEntity {
         this.kName = kName;
     }
 
-    public int getAmpMissions() {
+    public Integer getAmpMissions() {
         return ampMissions;
     }
 
-    public void setAmpMissions(int ampMissions) {
+    public void setAmpMissions(Integer ampMissions) {
         this.ampMissions = ampMissions;
     }
 
@@ -119,13 +121,13 @@ public class Guild extends MiniEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Guild other = (Guild) o;
-        return isNew == other.isNew
+        return Objects.equals(isNew, other.isNew)
                 && Objects.equals(id, other.id)
-                && lvl == other.lvl
+                && Objects.equals(lvl, other.lvl)
                 && Objects.equals(experience, other.experience)
-                && maxLvl == other.maxLvl
+                && Objects.equals(maxLvl, other.maxLvl)
                 && Objects.equals(kName, other.kName)
-                && ampMissions == other.ampMissions
+                && Objects.equals(ampMissions, other.ampMissions)
                 && Objects.equals(ampBasicRewards, other.ampBasicRewards)
                 && Objects.equals(lastTimeUpdated, other.lastTimeUpdated)
                 && Objects.equals(levelUpMod, other.levelUpMod);
@@ -151,11 +153,11 @@ public class Guild extends MiniEntity {
 
     public static class Builder {
         private Long id;
-        private int lvl;
+        private Integer lvl;
         private Float experience;
-        private int maxLvl;
+        private Integer maxLvl;
         private String kName;
-        private int ampMissions;
+        private Integer ampMissions;
         private Float ampBasicRewards;
         private LocalDate lastTimeUpdated;
         private Float levelUpMod;
@@ -165,7 +167,7 @@ public class Guild extends MiniEntity {
             return this;
         }
 
-        public Builder lvl(int lvl) {
+        public Builder lvl(Integer lvl) {
             this.lvl = lvl;
             return this;
         }
@@ -175,7 +177,7 @@ public class Guild extends MiniEntity {
             return this;
         }
 
-        public Builder maxLvl(int maxLvl) {
+        public Builder maxLvl(Integer maxLvl) {
             this.maxLvl = maxLvl;
             return this;
         }
@@ -185,7 +187,7 @@ public class Guild extends MiniEntity {
             return this;
         }
 
-        public Builder ampMissions(int ampMissions) {
+        public Builder ampMissions(Integer ampMissions) {
             this.ampMissions = ampMissions;
             return this;
         }

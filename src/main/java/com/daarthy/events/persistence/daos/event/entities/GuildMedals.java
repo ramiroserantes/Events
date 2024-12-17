@@ -11,7 +11,7 @@ public class GuildMedals extends MiniEntity {
     @MiniId
     private GuildMedalsKey guildMedalsKey;
     @MiniDefaults(creationWith = "0")
-    private int medals;
+    private Integer medals;
 
     public GuildMedals() {}
 
@@ -28,11 +28,11 @@ public class GuildMedals extends MiniEntity {
         this.guildMedalsKey = guildMedalsKey;
     }
 
-    public int getMedals() {
+    public Integer getMedals() {
         return medals;
     }
 
-    public void setMedals(int medals) {
+    public void setMedals(Integer medals) {
         this.medals = medals;
     }
 
@@ -68,14 +68,14 @@ public class GuildMedals extends MiniEntity {
     public static class Builder {
 
         private GuildMedalsKey guildMedalsKey;
-        private int medals;
+        private Integer medals;
 
         public Builder guildMedalsKey(GuildMedalsKey guildMedalsKey) {
             this.guildMedalsKey = guildMedalsKey;
             return this;
         }
 
-        public Builder medals(int medals) {
+        public Builder medals(Integer medals) {
             this.medals = medals;
             return this;
         }

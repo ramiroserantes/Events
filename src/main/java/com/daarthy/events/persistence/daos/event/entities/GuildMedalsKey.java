@@ -43,10 +43,7 @@ public class GuildMedalsKey extends MiniFragmentedKey {
 
     @Override
     public String toString() {
-        return "GuildMedalsKey {" +
-                "eventId=" + eventId +
-                ", guildId=" + guildId +
-                '}';
+        return super.toString(this);
     }
 
     // *****************************************************

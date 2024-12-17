@@ -12,9 +12,9 @@
             <![CDATA[
                 CREATE TABLE Guild (
                     id BIGINT,
-                    lvl int NOT NULL,
+                    lvl int NOT NULL DEFAULT 0,
                     experience DECIMAL(11,2),
-                    maxLvl int DEFAULT 6,
+                    maxLvl int NOT NULL,
                     kName VARCHAR(20),
                     ampMissions int DEFAULT 0,
                     ampBasicRewards DECIMAL(4, 2),
@@ -23,8 +23,8 @@
                     CONSTRAINT guildPk PRIMARY KEY (id)
                 );
 
-                INSERT INTO Guild (id, maxLvl, kName, lastTimeUpdated)
-                    VALUES (1, 0, null, CURRENT_DATE - INTERVAL '1 day');
+                INSERT INTO Guild (id, lvl, maxLvl, kName, lastTimeUpdated)
+                    VALUES (1, 0, 0, null, CURRENT_DATE - INTERVAL '1 day');
 
                 CREATE TABLE Player (
                     playerId VARCHAR(36),
@@ -38,7 +38,7 @@
                 );
 
                 CREATE TABLE Missions (
-                    id BIGSERIAL PRIMARY KEY,
+                    id BIGSERIAL,
                     guildId BIGINT,
                     title VARCHAR(50),
                     grade CHAR(1) NOT NULL,
@@ -51,12 +51,12 @@
                 );
 
                 CREATE TABLE Objective (
-                    id BIGSERIAL PRIMARY KEY,
+                    id BIGSERIAL,
                     missionId BIGINT,
                     actionType VARCHAR(10) NOT NULL,
                     reqAmount INT,
                     target VARCHAR(30),
-                    levels INT
+                    levels INT,
                     CONSTRAINT objectivePK PRIMARY KEY (id),
                     CONSTRAINT objectiveFKMissions FOREIGN KEY (missionId)
                         REFERENCES Missions(id)
@@ -142,7 +142,6 @@
             <![CDATA[
 
                 -- Drop the tables
-                DROP TABLE IF EXISTS PlayerMedals;
                 DROP TABLE IF EXISTS PlayerContribution;
                 DROP TABLE IF EXISTS GuildMedals;
                 DROP TABLE IF EXISTS Events;

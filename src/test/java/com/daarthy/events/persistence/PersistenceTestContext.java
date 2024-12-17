@@ -1,7 +1,7 @@
 package com.daarthy.events.persistence;
 
 import com.daarthy.events.persistence.daos.SearchDao;
-import com.daarthy.events.persistence.daos.SearchDaoJdbc;
+import com.daarthy.events.persistence.daos.SearchJdbc;
 import com.daarthy.events.persistence.daos.event.dao.EventDao;
 import com.daarthy.events.persistence.daos.event.dao.EventJdbc;
 import com.daarthy.events.persistence.daos.event.entities.EventData;
@@ -64,7 +64,7 @@ public class PersistenceTestContext {
         this.missionAcceptanceDao = new MissionAcceptanceJdbc(dataSource);
         this.objectiveDao = new ObjectiveJdbc(dataSource);
         this.objectiveProgressDao = new ObjectiveProgressJdbc(dataSource);
-        this.searchDao = new SearchDaoJdbc(dataSource);
+        this.searchDao = new SearchJdbc(dataSource);
         this.eventDao = new EventJdbc(dataSource);
     }
 
@@ -109,13 +109,8 @@ public class PersistenceTestContext {
     public Guild getGuild(Long id) {
         Guild guild = Guild.builder()
                 .id(id)
-                .experience(0.0F)
-                .maxLvl(0)
                 .kName("kName")
-                .ampMissions(0)
-                .ampBasicRewards(0.0F)
                 .lastTimeUpdated(LocalDate.now())
-                .levelUpMod(0.0F)
                 .build();
         createdGuildIds.add(id);
         return guildDao.save(guild);

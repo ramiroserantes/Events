@@ -42,11 +42,6 @@
             <version>5.0.1</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.5</version>
-        </dependency>
-        <dependency>
             <groupId>com.daarthy</groupId>
             <artifactId>MiniLibrary</artifactId>
             <version>1.0-SNAPSHOT</version>
@@ -82,6 +77,46 @@
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>${liquibase.version}</version>
+                <executions>
+                    <execution>
+                        <id>update-database</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                        <configuration>
+                            <propertyFile>${liquibase.propertyFile}</propertyFile>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>rollback-database</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>rollback</goal>
+                        </goals>
+                        <configuration>
+                            <rollbackCount>100</rollbackCount>
+                            <propertyFile>${liquibase.propertyFile}</propertyFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Maven Surefire Plugin for Testing -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>run-tests</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 

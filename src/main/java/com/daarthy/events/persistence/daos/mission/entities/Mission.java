@@ -104,8 +104,7 @@ public class Mission extends MiniEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Mission other = (Mission) o;
-        return isNew == other.isNew
-                && Objects.equals(id, other.id)
+        return Objects.equals(id, other.id)
                 && Objects.equals(guildId, other.guildId)
                 && Objects.equals(title, other.title)
                 && Objects.equals(grade, other.grade)

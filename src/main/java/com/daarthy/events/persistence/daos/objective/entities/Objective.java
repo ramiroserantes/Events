@@ -14,7 +14,7 @@ public class Objective extends MiniEntity {
     private Long missionId;
     private ActionType actionType;
     @MiniColumn(column = "reqAmount")
-    private int requiredAmount;
+    private Integer requiredAmount;
     private String target;
     private Integer levels;
 
@@ -53,11 +53,11 @@ public class Objective extends MiniEntity {
         this.actionType = actionType;
     }
 
-    public int getRequiredAmount() {
+    public Integer getRequiredAmount() {
         return requiredAmount;
     }
 
-    public void setRequiredAmount(int requiredAmount) {
+    public void setRequiredAmount(Integer requiredAmount) {
         this.requiredAmount = requiredAmount;
     }
 
@@ -88,7 +88,7 @@ public class Objective extends MiniEntity {
         return Objects.equals(id, other.id)
                 && Objects.equals(missionId, other.missionId)
                 && Objects.equals(actionType, other.actionType)
-                && requiredAmount == other.requiredAmount
+                && Objects.equals(requiredAmount, other.requiredAmount)
                 && Objects.equals(target, other.target)
                 && Objects.equals(levels, other.levels);
     }
@@ -114,7 +114,7 @@ public class Objective extends MiniEntity {
         private Long id;
         private Long missionId;
         private ActionType actionType;
-        private int requiredAmount;
+        private Integer requiredAmount;
         private String target;
         private Integer levels;
 
@@ -133,7 +133,7 @@ public class Objective extends MiniEntity {
             return this;
         }
 
-        public Builder requiredAmount(int requiredAmount) {
+        public Builder requiredAmount(Integer requiredAmount) {
             this.requiredAmount = requiredAmount;
             return this;
         }

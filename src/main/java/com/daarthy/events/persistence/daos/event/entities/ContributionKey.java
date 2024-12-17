@@ -45,10 +45,7 @@ public class ContributionKey extends MiniFragmentedKey {
 
     @Override
     public String toString() {
-        return "ContributionKey {" +
-                "playerId=" + playerId +
-                ", eventId=" + eventId +
-                '}';
+        return super.toString(this);
     }
 
     // *****************************************************

@@ -11,7 +11,7 @@ public class ObjectiveProgress extends MiniEntity {
     @MiniId
     private ObjectiveProgressKey key;
     @MiniDefaults(creationWith = "0")
-    private int amount;
+    private Integer amount;
 
     public ObjectiveProgress() {}
 
@@ -24,11 +24,11 @@ public class ObjectiveProgress extends MiniEntity {
         return key;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
@@ -41,7 +41,7 @@ public class ObjectiveProgress extends MiniEntity {
         if (o == null || getClass() != o.getClass()) return false;
         ObjectiveProgress other = (ObjectiveProgress) o;
         return Objects.equals(key, other.key) &&
-                amount == other.amount;
+                Objects.equals(amount, other.amount);
     }
 
     @Override
@@ -63,14 +63,14 @@ public class ObjectiveProgress extends MiniEntity {
 
     public static class Builder {
         private ObjectiveProgressKey key;
-        private int amount;
+        private Integer amount;
 
         public Builder key(ObjectiveProgressKey key) {
             this.key = key;
             return this;
         }
 
-        public Builder amount(int amount) {
+        public Builder amount(Integer amount) {
             this.amount = amount;
             return this;
         }
