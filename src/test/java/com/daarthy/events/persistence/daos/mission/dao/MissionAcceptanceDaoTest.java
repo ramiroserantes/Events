@@ -23,6 +23,8 @@ import static org.junit.Assert.assertTrue;
 
 public class MissionAcceptanceDaoTest {
 
+    private final PersistenceTestContext ctx = new PersistenceTestContext();
+
     @Test
     public void testMissionByAccept() {
 
@@ -137,12 +139,6 @@ public class MissionAcceptanceDaoTest {
         assertEquals(1, missionsCompletedByPlayer.get(1).getTotalMissions(), 0.0);
         assertEquals(0, missionsCompletedByPlayer.get(1).getCompletedMissions(), 0.0);
     }
-
-    // *****************************************************
-    // Internal Methods And Variables
-    // *****************************************************
-
-    private final PersistenceTestContext ctx = new PersistenceTestContext();
 
     @After
     public void cleanUp() {

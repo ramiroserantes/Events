@@ -13,11 +13,19 @@ public class GuildMedals extends MiniEntity {
     @MiniDefaults(creationWith = "0")
     private Integer medals;
 
-    public GuildMedals() {}
+    public GuildMedals() {
+    }
 
     private GuildMedals(Builder builder) {
         this.guildMedalsKey = builder.guildMedalsKey;
         this.medals = builder.medals;
+    }
+
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
+    public static Builder builder() {
+        return new Builder();
     }
 
     public GuildMedalsKey getGuildMedalsKey() {
@@ -58,15 +66,7 @@ public class GuildMedals extends MiniEntity {
         return super.toString(this);
     }
 
-    // *****************************************************
-    // Builder Pattern
-    // *****************************************************
-    public static Builder builder() {
-        return new Builder();
-    }
-
     public static class Builder {
-
         private GuildMedalsKey guildMedalsKey;
         private Integer medals;
 

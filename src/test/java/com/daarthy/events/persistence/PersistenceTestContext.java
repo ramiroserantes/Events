@@ -39,22 +39,22 @@ import java.util.UUID;
 
 public class PersistenceTestContext {
 
-    private HikariDataSource dataSource;
-    private PlayerDao playerDao;
-    private GuildDao guildDao;
-    private MissionDao missionDao;
-    private MissionAcceptanceDao missionAcceptanceDao;
-    private ObjectiveDao objectiveDao;
-    private ObjectiveProgressDao objectiveProgressDao;
-    private EventDao eventDao;
+    private final PlayerDao playerDao;
+    private final GuildDao guildDao;
+    private final MissionDao missionDao;
+    private final MissionAcceptanceDao missionAcceptanceDao;
+    private final ObjectiveDao objectiveDao;
+    private final ObjectiveProgressDao objectiveProgressDao;
+    private final EventDao eventDao;
 
-    private SearchDao searchDao;
+    private final SearchDao searchDao;
 
-    private List<Long> createdGuildIds = new ArrayList<>();
+    private final List<Long> createdGuildIds = new ArrayList<>();
 
     public PersistenceTestContext() {
+        HikariDataSource dataSource;
         try {
-            this.dataSource = DataSourceLocatorTesting.getInstance().getDataSource();
+            dataSource = DataSourceLocatorTesting.getInstance().getDataSource();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -92,9 +92,13 @@ public class PersistenceTestContext {
         return objectiveProgressDao;
     }
 
-    public EventDao eventDao() {return eventDao;}
+    public EventDao eventDao() {
+        return eventDao;
+    }
 
-    public SearchDao searchDao() {return searchDao;}
+    public SearchDao searchDao() {
+        return searchDao;
+    }
 
     public EventsPlayer getPlayer(UUID playerId, Long guildId) {
         EventsPlayer player = EventsPlayer.builder()

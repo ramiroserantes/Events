@@ -16,6 +16,8 @@ import static org.junit.Assert.assertFalse;
 
 public class EventDaoTest {
 
+    private final PersistenceTestContext ctx = new PersistenceTestContext();
+
     // *****************************************************
     // EventDao Selectors
     // *****************************************************
@@ -37,12 +39,6 @@ public class EventDaoTest {
         assertFalse(foundEvents.isEmpty());
         assertEquals(eventData, foundEvents.get(0));
     }
-
-    // *****************************************************
-    // Internal Methods And Variables
-    // *****************************************************
-
-    private final PersistenceTestContext ctx = new PersistenceTestContext();
 
     @After
     public void cleanUp() {

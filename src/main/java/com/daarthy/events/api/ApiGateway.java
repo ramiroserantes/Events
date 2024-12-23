@@ -1,8 +1,8 @@
 package com.daarthy.events.api;
 
-import com.daarthy.events.app.modules.events.Event;
-import com.daarthy.events.app.modules.events.EventToken;
-import com.daarthy.events.app.modules.guilds.Guild;
+import com.daarthy.events.model.modules.events.Event;
+import com.daarthy.events.model.modules.events.EventToken;
+import com.daarthy.events.model.modules.guilds.Guild;
 import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
 import com.daarthy.mini.shared.classes.enums.festivals.ActionType;
 
@@ -16,10 +16,8 @@ public interface ApiGateway {
     void logOutRequest(UUID playerId);
 
     /**
-     *
      * Data Related Request
-     *
-     * **/
+     **/
     EventsPlayer getPlayerDataRequest(UUID playerId);
 
     Guild getGuildDataRequest(UUID playerId);
@@ -33,10 +31,8 @@ public interface ApiGateway {
     void savePlayerRequest(UUID playerId);
 
     /**
-     *
      * Event relatedRequest
-     *
-     * **/
+     **/
 
     List<EventToken> eventActivityRequest(UUID playerId, ActionType actionType);
 

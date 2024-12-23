@@ -14,9 +14,10 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
 
 public class MissionDaoTest {
+
+    private final PersistenceTestContext ctx = new PersistenceTestContext();
 
     @Test
     public void testMissionByCreation() {
@@ -73,11 +74,6 @@ public class MissionDaoTest {
         assertFalse(missionsAcceptedByPlayer.isEmpty());
         assertEquals(mission, missionsAcceptedByPlayer.get(0));
     }
-    // *****************************************************
-    // Internal Methods And Variables
-    // *****************************************************
-
-    private PersistenceTestContext ctx = new PersistenceTestContext();
 
     @After
     public void cleanUp() {

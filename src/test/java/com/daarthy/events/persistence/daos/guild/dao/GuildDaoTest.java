@@ -10,6 +10,8 @@ import static org.junit.Assert.assertNull;
 
 public class GuildDaoTest {
 
+    private final PersistenceTestContext ctx = new PersistenceTestContext();
+
     @Test
     public void testGuildByCreateAndDelete() {
 
@@ -23,12 +25,6 @@ public class GuildDaoTest {
 
         assertNull(afterDeletion);
     }
-
-    // *****************************************************
-    // Internal Methods And Variables
-    // *****************************************************
-
-    private final PersistenceTestContext ctx = new PersistenceTestContext();
 
     @After
     public void cleanUp() {

@@ -1,5 +1,5 @@
 D:
-  - title: "Crafting Challenge"
+  - title: "d_01123"
     objectives:
       - target: "CRAFTING_TABLE"
         actionType: "CRAFT"
@@ -12,7 +12,7 @@ D:
         reqAmount: 300
 
 E:
-  - title: "Mining Expedition"
+  - title: "e_01123"
     objectives:
       - target: "IRON_ORE"
         actionType: "BREAK"
@@ -21,7 +21,7 @@ E:
         actionType: "BREAK"
         reqAmount: 2000
 
-  - title: "Building Materials Collection"
+  - title: "e_01124"
     objectives:
       - target: "OAK_PLANKS"
         actionType: "BREAK"
@@ -31,19 +31,19 @@ E:
         reqAmount: 1200
 
 F:
-  - title: "Collect Resources"
+  - title: "f_01123"
     objectives:
       - target: "SAND"
         actionType: "BREAK"
         reqAmount: 500
 
-  - title: "Wood Harvesting"
+  - title: "f_01124"
     objectives:
       - target: "OAK_LOG"
         actionType: "BREAK"
         reqAmount: 500
 
-  - title: "Kill Enemies"
+  - title: "f_01125"
     objectives:
       - target: "ZOMBIE"
         actionType: "KILL"

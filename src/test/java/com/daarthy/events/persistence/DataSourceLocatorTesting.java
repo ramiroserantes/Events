@@ -11,10 +11,9 @@ import java.util.Properties;
 
 public class DataSourceLocatorTesting {
 
-    private Properties properties;
     private static HikariDataSource dataSource;
-
     private static DataSourceLocatorTesting instance;
+    private Properties properties;
 
     private DataSourceLocatorTesting() throws IOException {
         loadDatabaseProperties();
@@ -61,7 +60,6 @@ public class DataSourceLocatorTesting {
         InputStream input = getClass().getClassLoader().getResourceAsStream("liquibase-test.properties");
 
         if (input == null) {
-            System.out.println("Sorry, unable to find liquibase-test.properties");
             return;
         }
 

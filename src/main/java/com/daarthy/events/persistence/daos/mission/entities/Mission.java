@@ -29,7 +29,8 @@ public class Mission extends MiniEntity {
     @MiniExclusion(exclude = ExclusionType.TOTAL)
     private Lock playerIncreaseLock = new ReentrantLock();
 
-    public Mission() {}
+    public Mission() {
+    }
 
     private Mission(Builder builder) {
         this.id = builder.id;
@@ -38,6 +39,13 @@ public class Mission extends MiniEntity {
         this.grade = builder.grade;
         this.expiration = builder.expiration;
         this.maxCompletions = builder.maxCompletions;
+    }
+
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Long getId() {
@@ -123,15 +131,7 @@ public class Mission extends MiniEntity {
         return super.toString(this);
     }
 
-    // *****************************************************
-    // Builder Pattern
-    // *****************************************************
-    public static Builder builder() {
-        return new Builder();
-    }
-
     public static class Builder {
-
         private Long id;
         private Long guildId;
         private String title;

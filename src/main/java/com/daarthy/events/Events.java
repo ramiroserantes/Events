@@ -5,9 +5,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Events extends JavaPlugin {
 
+    public static final String MICRO_NAME = "[FESTIVALS_MICROSERVICE] ";
+    private static final Long BASIC_GUILD = 1L;
     //private static final Logger logger;
     private static ApiGateway api;
-    private static final Long BASIC_GUILD = 1L;
 
     static {
        /* try {
@@ -17,15 +18,22 @@ public final class Events extends JavaPlugin {
         }
         logger = Logger.getLogger(Events.class.getName());*/
     }
-    @Override
-    public void onEnable() {}
 
-    @Override
-    public void onDisable() {}
+    public static Long getBasicGuildId() {
+        return BASIC_GUILD;
+    }
+
+    public static ApiGateway getApi() {
+        return api;
+    }
 
     //public static void logInfo(String msg) {logger.info(msg);}
 
-    public static Long getBasicGuildId() {return BASIC_GUILD;}
+    @Override
+    public void onEnable() {
+    }
 
-    public static ApiGateway getApi() {return api;}
+    @Override
+    public void onDisable() {
+    }
 }

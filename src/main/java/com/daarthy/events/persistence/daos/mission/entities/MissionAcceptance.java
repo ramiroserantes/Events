@@ -16,12 +16,20 @@ public class MissionAcceptance extends MiniEntity {
     private MissionStatus status;
     private LocalDate acceptDate;
 
-    public MissionAcceptance() {}
+    public MissionAcceptance() {
+    }
 
     private MissionAcceptance(Builder builder) {
         this.key = builder.key;
         this.status = builder.status;
         this.acceptDate = builder.acceptDate;
+    }
+
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
+    public static Builder builder() {
+        return new Builder();
     }
 
     public MissionAcceptKey getKey() {
@@ -67,15 +75,7 @@ public class MissionAcceptance extends MiniEntity {
         return super.toString(this);
     }
 
-    // *****************************************************
-    // Builder Pattern
-    // *****************************************************
-    public static Builder builder() {
-        return new Builder();
-    }
-
     public static class Builder {
-
         private MissionAcceptKey key;
         private MissionStatus status;
         private LocalDate acceptDate;

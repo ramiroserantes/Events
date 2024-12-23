@@ -16,6 +16,8 @@ import static org.junit.Assert.assertEquals;
 
 public class ObjectiveDaoTest {
 
+    private final PersistenceTestContext ctx = new PersistenceTestContext();
+
     @Test
     public void testObjectiveDaoByCreation() {
 
@@ -30,6 +32,9 @@ public class ObjectiveDaoTest {
         assertEquals(found, objective);
     }
 
+    // *****************************************************
+    // ObjectiveDao Selectors
+    // *****************************************************
     @Test
     public void testObjectiveDaoFindByMissionCriteria() {
 
@@ -51,12 +56,6 @@ public class ObjectiveDaoTest {
         assertEquals(1, objectivesPerMission.size());
         assertEquals(objective, objectivesPerMission.get(0));
     }
-
-    // *****************************************************
-    // Internal Methods And Variables
-    // *****************************************************
-
-    private final PersistenceTestContext ctx = new PersistenceTestContext();
 
     @After
     public void cleanUp() {

@@ -1,85 +1,110 @@
 package com.daarthy.events.persistence.factories.missions;
 
+import com.daarthy.events.Events;
 import com.daarthy.events.persistence.daos.mission.entities.Mission;
 import com.daarthy.events.persistence.daos.objective.entities.Objective;
+import com.daarthy.mini.shared.classes.enums.festivals.ActionType;
 import com.daarthy.mini.shared.classes.enums.festivals.Grade;
 import com.daarthy.mini.shared.classes.yaml.AbstractMiniYaml;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.SecureRandom;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
 public class MissionFactoryImpl extends AbstractMiniYaml implements MissionFactory {
 
-   private SecureRandom random = new SecureRandom();
+    private static final Logger LOGGER = LoggerFactory.getLogger(MissionFactoryImpl.class);
+    private static final String FILE = "configuration/missions.yml";
+    private static final String TITLE_ATTRIBUTE = "title";
+    private static final String OBJECTIVE_ATTRIBUTE = "objectives";
+    private static final String TARGET_ATTRIBUTE = "target";
+    private static final String ACTION_TYPE_ATTRIBUTE = "actionType";
+    private static final String REQUIRED_AMOUNT_ATTRIBUTE = "reqAmount";
+    private static final String LEVEL_ATTRIBUTE = "levels";
+    private final SecureRandom random = new SecureRandom();
 
-   public MissionFactoryImpl() {
-       super("missions.yml");
-   }
+    public MissionFactoryImpl() {
+        super(FILE);
+    }
 
-   /**
-    * Este metodo a partir de un Grade S, A, B, C, D, E, F busca en la configuración uno al azar y devuelve la missión
-    * , sin embargo es necesario no tener duplicados, con esto se le podría pasar una lista de strings y filtrar por ello
-    *
-    * */
-   public HashMap<Mission, List<Objective>> getMission(Grade grade, boolean isDefaultGuild, Set<String> usedMissions) {
-       HashMap<Mission, List<Objective>> mission = new HashMap<>();
+    public Map<Mission, List<Objective>> getMission(Grade grade, boolean isDefaultGuild, Set<String> usedMissions) {
+        return processMission(grade, filterAvailableMissions(grade, usedMissions), isDefaultGuild, usedMissions);
+    }
 
-       if (yamlFile.containsKey(grade.toString())) {
-           List<Map<String, Object>> missions = yamlData.get(grade.toString());
+    // *****************************************************
+    // Internal Methods
+    // *****************************************************
+    private List<Map<String, Object>> filterAvailableMissions(Grade grade, Set<String> usedMissions) {
+        List<Map<String, Object>> availableMissions = new ArrayList<>();
+        List<Map<String, Object>> missionsRoot = getMissionsRoot(grade);
+        for (Map<String, Object> missionMap : missionsRoot) {
+            String missionTitle = (String) missionMap.get(TITLE_ATTRIBUTE);
+            if (!usedMissions.contains(missionTitle)) {
+                availableMissions.add(missionMap);
+            }
+        }
+        return availableMissions;
+    }
 
-           if (!missions.isEmpty()) {
-               // Filtrar misiones ya usadas
-               List<Map<String, Object>> availableMissions = new ArrayList<>();
-               for (Map<String, Object> missionMap : missions) {
-                   String missionTitle = (String) missionMap.get("title");
-                   if (!usedMissions.contains(missionTitle)) {
-                       availableMissions.add(missionMap);
-                   }
-               }
+    @SuppressWarnings("unchecked")
+    private List<Map<String, Object>> getMissionsRoot(Grade grade) {
+        if (yamlFile.containsKey(grade.toString())) {
+            return (List<Map<String, Object>>) yamlFile.get(grade.toString());
+        } else {
+            LOGGER.error(Events.MICRO_NAME + "- Error in retrieving the mission grade {}",
+                    grade.getValue());
+            return Collections.emptyList();
+        }
+    }
 
-               // Si hay misiones disponibles, selecciona una aleatoria
-               if (!availableMissions.isEmpty()) {
-                   int randomMissionIndex = random.nextInt(availableMissions.size());
-                   Map<String, Object> missionMap = availableMissions.get(randomMissionIndex);
+    @SuppressWarnings("unchecked")
+    private Map<Mission, List<Objective>> processMission(Grade grade, List<Map<String, Object>> availableMissions,
+                                                         boolean isDefaultGuild, Set<String> usedMissions) {
+        Map<Mission, List<Objective>> missionExtract = new HashMap<>();
 
-                   // Procesar la misión seleccionada
-                   MissionData missionData = new MissionData();
-                   missionData.setTitle((String) missionMap.get("title"));
-                   missionData.setExpiration(LocalDate.from(LocalDate.now().atStartOfDay().plusDays(grade.getPriority())));
-                   missionData.setGrade(grade.getGradeString());
+        if (!availableMissions.isEmpty()) {
+            int randomMissionIndex = random.nextInt(availableMissions.size());
+            Map<String, Object> missionMap = availableMissions.get(randomMissionIndex);
 
-                   if (!isDefaultGuild) {
-                       missionData.setMaxCompletions(grade.getCompletions());
-                   }
+            // @formatter:off
+            Mission mission = Mission.builder()
+                    .title((String) missionMap.get(TITLE_ATTRIBUTE))
+                    .expiration(LocalDate.from(LocalDate.now().atStartOfDay().plusDays(grade.getPriority())))
+                    .grade(grade)
+                    .maxCompletions(isDefaultGuild ? null : grade.getCompletions())
+                    .build();
+            // @formatter:on
 
-                   List<ObjectiveData> objectives = new ArrayList<>();
-                   List<Map<String, Object>> objectivesList = (List<Map<String, Object>>) missionMap.get("objectives");
+            List<Objective> objectives = new ArrayList<>();
+            List<Map<String, Object>> objectivesList = (List<Map<String, Object>>) missionMap.get(OBJECTIVE_ATTRIBUTE);
 
-                   for (Map<String, Object> objectiveMap : objectivesList) {
-                       ObjectiveData objectiveData = new ObjectiveData();
-                       objectiveData.setTarget((String) objectiveMap.get("target"));
-                       objectiveData.setActionType(ActionType.valueOf((String) objectiveMap.get("actionType")));
+            for (Map<String, Object> objectiveMap : objectivesList) {
 
-                       int reqAmount = (int) objectiveMap.get("reqAmount");
-                       double deviation = random.nextDouble() * 0.2 - 0.1; // Deviation between -10% and 10%
-                       objectiveData.setReqAmount((int) Math.round(reqAmount + reqAmount * deviation));
+                int reqAmount = (int) objectiveMap.get(REQUIRED_AMOUNT_ATTRIBUTE);
+                double deviation = random.nextDouble() * 0.2 - 0.1; // Deviation between -10% and 10%
 
-                       if (objectiveMap.containsKey("levels")) {
-                           objectiveData.setLevels((int) objectiveMap.get("levels"));
-                       }
+                // @formatter:off
+                objectives.add(Objective.builder()
+                        .target((String) objectiveMap.get(TARGET_ATTRIBUTE))
+                        .actionType(ActionType.valueOf((String) objectiveMap.get(ACTION_TYPE_ATTRIBUTE)))
+                        .requiredAmount((int) Math.round(reqAmount + reqAmount * deviation))
+                        .levels(objectiveMap.containsKey(LEVEL_ATTRIBUTE) ? (int) objectiveMap.get(LEVEL_ATTRIBUTE)
+                                : null)
+                        .build()
+                );
+                // @formatter:on
+            }
 
-                       objectives.add(objectiveData);
-                   }
+            missionExtract.put(mission, objectives);
+            usedMissions.add(mission.getTitle());
+        } else {
+            LOGGER.info(Events.MICRO_NAME + "- There are no missions available for this grade {} ",
+                    grade.getValue());
+        }
+        return missionExtract;
+    }
 
-                   mission.put(missionData, objectives);
-                   usedMissions.add(missionData.getTitle());  // Añadir a la lista de misiones usadas
-               }
-           }
-       }
-
-       return mission;
-   }
 
 }

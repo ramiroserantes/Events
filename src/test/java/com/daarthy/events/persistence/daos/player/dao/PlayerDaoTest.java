@@ -16,6 +16,9 @@ import static org.junit.Assert.*;
 
 public class PlayerDaoTest {
 
+    private static final Long DEFAULT_GUILD = 1L;
+    private final PersistenceTestContext ctx = new PersistenceTestContext();
+
     @Test
     public void testByCreateAndFindPlayer() {
 
@@ -96,13 +99,6 @@ public class PlayerDaoTest {
         assertNotNull(foundGuild);
         assertEquals(1L, foundGuild.getId(), 0.0);
     }
-
-    // *****************************************************
-    // Internal Methods And Variables
-    // *****************************************************
-
-    private static final Long DEFAULT_GUILD = 1L;
-    private PersistenceTestContext ctx = new PersistenceTestContext();
 
     @After
     public void cleanUp() {
