@@ -1,13 +1,19 @@
 package com.daarthy.events.persistence.daos.event.entities;
 
+import com.daarthy.mini.annotations.ExclusionType;
 import com.daarthy.mini.annotations.MiniDefaults;
+import com.daarthy.mini.annotations.MiniExclusion;
 import com.daarthy.mini.annotations.MiniId;
 import com.daarthy.mini.hibernate.entities.MiniEntity;
 
 import java.util.Objects;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class GuildMedals extends MiniEntity {
 
+    @MiniExclusion(exclude = ExclusionType.TOTAL)
+    private final Lock lock = new ReentrantLock();
     @MiniId
     private GuildMedalsKey guildMedalsKey;
     @MiniDefaults(creationWith = "0")
@@ -45,8 +51,14 @@ public class GuildMedals extends MiniEntity {
     }
 
     // *****************************************************
-    // Internal Methods
+    // Methods
     // *****************************************************
+    public void addMedals() {
+        lock.lock();
+        this.medals += 1;
+        lock.unlock();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

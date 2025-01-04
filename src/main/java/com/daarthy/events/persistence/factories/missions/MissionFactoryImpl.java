@@ -14,7 +14,6 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class MissionFactoryImpl extends AbstractMiniYaml implements MissionFactory {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(MissionFactoryImpl.class);
     private static final String FILE = "configuration/missions.yml";
     private static final String TITLE_ATTRIBUTE = "title";
@@ -29,6 +28,7 @@ public class MissionFactoryImpl extends AbstractMiniYaml implements MissionFacto
         super(FILE);
     }
 
+    @Override
     public Map<Mission, List<Objective>> getMission(Grade grade, boolean isDefaultGuild, Set<String> usedMissions) {
         return processMission(grade, filterAvailableMissions(grade, usedMissions), isDefaultGuild, usedMissions);
     }

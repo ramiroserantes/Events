@@ -1,10 +1,9 @@
 package com.daarthy.events.api;
 
-import com.daarthy.events.model.modules.events.Event;
-import com.daarthy.events.model.modules.events.EventToken;
-import com.daarthy.events.model.modules.guilds.Guild;
+import com.daarthy.events.model.facades.event.structure.ExtendedEvent;
 import com.daarthy.events.persistence.daos.player.entities.EventsPlayer;
 import com.daarthy.mini.shared.classes.enums.festivals.ActionType;
+import com.daarthy.mini.shared.classes.tokens.EventToken;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +19,7 @@ public interface ApiGateway {
      **/
     EventsPlayer getPlayerDataRequest(UUID playerId);
 
-    Guild getGuildDataRequest(UUID playerId);
+    //Guild getGuildDataRequest(UUID playerId);
 
     int getMaxJobLevelRequest(UUID playerId);
 
@@ -36,7 +35,7 @@ public interface ApiGateway {
 
     List<EventToken> eventActivityRequest(UUID playerId, ActionType actionType);
 
-    List<Event> getActiveEventsRequest();
+    List<ExtendedEvent> getActiveEventsRequest();
 
     StringBuilder getEventInfoRequest(UUID playerId, String eventName);
 

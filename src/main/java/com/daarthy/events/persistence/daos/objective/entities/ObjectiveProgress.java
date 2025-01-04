@@ -13,11 +13,19 @@ public class ObjectiveProgress extends MiniEntity {
     @MiniDefaults(creationWith = "0")
     private Integer amount;
 
-    public ObjectiveProgress() {}
+    public ObjectiveProgress() {
+    }
 
     private ObjectiveProgress(Builder builder) {
         this.key = builder.key;
         this.amount = builder().amount;
+    }
+
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
+    public static Builder builder() {
+        return new Builder();
     }
 
     public ObjectiveProgressKey getKey() {
@@ -33,7 +41,7 @@ public class ObjectiveProgress extends MiniEntity {
     }
 
     // *****************************************************
-    // Internal Methods
+    // Methods
     // *****************************************************
     @Override
     public boolean equals(Object o) {
@@ -52,13 +60,6 @@ public class ObjectiveProgress extends MiniEntity {
     @Override
     public String toString() {
         return super.toString(this);
-    }
-
-    // *****************************************************
-    // Builder Pattern
-    // *****************************************************
-    public static Builder builder() {
-        return new Builder();
     }
 
     public static class Builder {

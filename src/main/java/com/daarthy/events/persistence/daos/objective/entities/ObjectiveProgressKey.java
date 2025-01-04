@@ -10,11 +10,19 @@ public class ObjectiveProgressKey extends MiniFragmentedKey {
     private UUID playerId;
     private Long objectiveId;
 
-    public ObjectiveProgressKey() {}
+    public ObjectiveProgressKey() {
+    }
 
     private ObjectiveProgressKey(Builder builder) {
         this.playerId = builder.playerId;
         this.objectiveId = builder.objectiveId;
+    }
+
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
+    public static Builder builder() {
+        return new Builder();
     }
 
     public UUID getPlayerId() {
@@ -26,7 +34,7 @@ public class ObjectiveProgressKey extends MiniFragmentedKey {
     }
 
     // *****************************************************
-    // Internal Methods
+    // Methods
     // *****************************************************
     @Override
     public boolean equals(Object o) {
@@ -45,13 +53,6 @@ public class ObjectiveProgressKey extends MiniFragmentedKey {
     @Override
     public String toString() {
         return super.toString(this);
-    }
-
-    // *****************************************************
-    // Builder Pattern
-    // *****************************************************
-    public static Builder builder() {
-        return new Builder();
     }
 
     public static class Builder {

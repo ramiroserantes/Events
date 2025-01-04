@@ -15,14 +15,19 @@ import com.daarthy.events.persistence.daos.objective.dao.ObjectiveProgressDao;
 import com.daarthy.events.persistence.daos.objective.dao.ObjectiveProgressJdbc;
 import com.daarthy.events.persistence.daos.player.dao.PlayerDao;
 import com.daarthy.events.persistence.daos.player.dao.PlayerJdbc;
+import com.daarthy.events.persistence.factories.messages.MessagesAbstractFactory;
+import com.daarthy.events.persistence.factories.messages.MessagesAbstractFactoryImpl;
+import com.daarthy.events.persistence.factories.missions.MissionFactory;
+import com.daarthy.events.persistence.factories.missions.MissionFactoryImpl;
+import com.daarthy.events.persistence.factories.rewards.RewardsFactory;
+import com.daarthy.events.persistence.factories.rewards.RewardsFactoryImpl;
 import com.zaxxer.hikari.HikariDataSource;
 
-public class PersistenceContextImpl {
+public class PersistenceContextImpl implements PersistenceContext {
 
     // *****************************************************
     // Dao's Postgres
     // *****************************************************
-
     // Events Domain
     private final EventDao eventDao;
     private final GuildMedalsDao guildMedalsDao;
@@ -48,8 +53,12 @@ public class PersistenceContextImpl {
     // *****************************************************
     // Factories
     // *****************************************************
+    private final MessagesAbstractFactory messagesAbstractFactory;
+    private final RewardsFactory rewardsFactory;
+    private final MissionFactory missionFactory;
 
     public PersistenceContextImpl(HikariDataSource dataSource) {
+        // Dao's
         this.eventDao = new EventJdbc(dataSource);
         this.guildMedalsDao = new GuildMedalsJdbc(dataSource);
         this.playerContributionDao = new PlayerContributionJdbc(dataSource);
@@ -65,48 +74,81 @@ public class PersistenceContextImpl {
         this.guildDao = new GuildJdbc(dataSource);
 
         this.searchDao = new SearchJdbc(dataSource);
+
+        // Factories
+        this.messagesAbstractFactory = new MessagesAbstractFactoryImpl();
+        this.rewardsFactory = new RewardsFactoryImpl();
+        this.missionFactory = new MissionFactoryImpl();
     }
 
     // *****************************************************
     // Dao's Postgres
     // *****************************************************
+    @Override
     public EventDao eventDao() {
         return eventDao;
     }
 
+    @Override
     public GuildMedalsDao guildMedalsDao() {
         return guildMedalsDao;
     }
 
+    @Override
     public PlayerContributionDao playerContributionDao() {
         return playerContributionDao;
     }
 
+    @Override
     public MissionDao missionDao() {
         return missionDao;
     }
 
+    @Override
     public MissionAcceptanceDao missionAcceptanceDao() {
         return missionAcceptanceDao;
     }
 
+    @Override
     public ObjectiveDao objectiveDao() {
         return objectiveDao;
     }
 
+    @Override
     public ObjectiveProgressDao objectiveProgressDao() {
         return objectiveProgressDao;
     }
 
+    @Override
     public PlayerDao playerDao() {
         return playerDao;
     }
 
+    @Override
     public GuildDao guildDao() {
         return guildDao;
     }
 
+    @Override
     public SearchDao searchDao() {
         return searchDao;
+    }
+
+    // *****************************************************
+    // Factories
+    // *****************************************************
+    @Override
+    public MessagesAbstractFactory messagesAbstractFactory() {
+        return messagesAbstractFactory;
+    }
+
+    @Override
+    public RewardsFactory rewardsFactory() {
+        return rewardsFactory;
+    }
+
+    @Override
+    public MissionFactory missionFactory() {
+        return missionFactory;
     }
 }

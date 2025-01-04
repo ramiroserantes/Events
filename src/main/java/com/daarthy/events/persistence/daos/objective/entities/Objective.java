@@ -18,7 +18,8 @@ public class Objective extends MiniEntity {
     private String target;
     private Integer levels;
 
-    public Objective () {}
+    public Objective() {
+    }
 
     private Objective(Builder builder) {
         this.id = builder.id;
@@ -27,6 +28,13 @@ public class Objective extends MiniEntity {
         this.requiredAmount = builder.requiredAmount;
         this.target = builder.target;
         this.levels = builder.levels;
+    }
+
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Long getId() {
@@ -78,7 +86,7 @@ public class Objective extends MiniEntity {
     }
 
     // *****************************************************
-    // Internal Methods
+    // Methods
     // *****************************************************
     @Override
     public boolean equals(Object o) {
@@ -101,13 +109,6 @@ public class Objective extends MiniEntity {
     @Override
     public String toString() {
         return super.toString(this);
-    }
-
-    // *****************************************************
-    // Builder Pattern
-    // *****************************************************
-    public static Builder builder() {
-        return new Builder();
     }
 
     public static class Builder {

@@ -9,11 +9,19 @@ public class GuildMedalsKey extends MiniFragmentedKey {
     private Long eventId;
     private Long guildId;
 
-    public GuildMedalsKey() {}
+    public GuildMedalsKey() {
+    }
 
     private GuildMedalsKey(Builder builder) {
         this.eventId = builder.eventId;
         this.guildId = builder.guildId;
+    }
+
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Long getEventId() {
@@ -25,7 +33,7 @@ public class GuildMedalsKey extends MiniFragmentedKey {
     }
 
     // *****************************************************
-    // Internal Methods
+    // Methods
     // *****************************************************
     @Override
     public boolean equals(Object o) {
@@ -44,13 +52,6 @@ public class GuildMedalsKey extends MiniFragmentedKey {
     @Override
     public String toString() {
         return super.toString(this);
-    }
-
-    // *****************************************************
-    // Builder Pattern
-    // *****************************************************
-    public static Builder builder() {
-        return new Builder();
     }
 
     public static class Builder {

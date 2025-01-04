@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RewardsFactoryImpl extends AbstractMessage implements RewardsFactory {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(RewardsFactoryImpl.class);
     private static final String FILE = "configuration/rewards.yml";
     private static final String COINS_ATTRIBUTE = "coins";

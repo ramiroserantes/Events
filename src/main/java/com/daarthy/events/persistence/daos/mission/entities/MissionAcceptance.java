@@ -53,7 +53,7 @@ public class MissionAcceptance extends MiniEntity {
     }
 
     // *****************************************************
-    // Internal Methods
+    // Methods
     // *****************************************************
     @Override
     public boolean equals(Object o) {

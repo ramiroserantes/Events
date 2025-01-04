@@ -41,6 +41,13 @@ public class Guild extends MiniEntity {
         this.levelUpMod = builder.levelUpMod;
     }
 
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public Long getId() {
         return id;
     }
@@ -114,7 +121,7 @@ public class Guild extends MiniEntity {
     }
 
     // *****************************************************
-    // Internal Methods
+    // Methods
     // *****************************************************
     @Override
     public boolean equals(Object o) {
@@ -142,13 +149,6 @@ public class Guild extends MiniEntity {
     @Override
     public String toString() {
         return super.toString(this);
-    }
-
-    // *****************************************************
-    // Builder Pattern
-    // *****************************************************
-    public static Builder builder() {
-        return new Builder();
     }
 
     public static class Builder {

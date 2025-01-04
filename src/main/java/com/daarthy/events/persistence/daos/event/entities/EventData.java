@@ -12,8 +12,8 @@ import java.util.Objects;
 @MiniTable(table = "Events")
 public class EventData extends MiniEntity {
 
-    @MiniId
-    private Long eventId;
+    @MiniId(generated = true)
+    private Long id;
     private Scope worldScope;
     private String name;
     private LocalDate startDate;
@@ -25,7 +25,7 @@ public class EventData extends MiniEntity {
     }
 
     private EventData(Builder builder) {
-        this.eventId = builder.eventId;
+        this.id = builder.id;
         this.worldScope = builder.worldScope;
         this.name = builder.name;
         this.startDate = builder.startDate;
@@ -33,12 +33,19 @@ public class EventData extends MiniEntity {
         this.maxMedals = builder.maxMedals;
     }
 
-    public Long getEventId() {
-        return eventId;
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
+    public static Builder builder() {
+        return new Builder();
     }
 
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Scope getWorldScope() {
@@ -82,7 +89,7 @@ public class EventData extends MiniEntity {
     }
 
     // *****************************************************
-    // Internal Methods
+    // Methods
     // *****************************************************
     @Override
     public boolean equals(Object o) {
@@ -90,7 +97,7 @@ public class EventData extends MiniEntity {
         if (o == null || getClass() != o.getClass()) return false;
         EventData other = (EventData) o;
         return Objects.equals(maxMedals, other.maxMedals)
-                && Objects.equals(eventId, other.eventId)
+                && Objects.equals(id, other.id)
                 && worldScope == other.worldScope
                 && Objects.equals(name, other.name)
                 && Objects.equals(startDate, other.startDate)
@@ -99,7 +106,7 @@ public class EventData extends MiniEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, worldScope, name, startDate, endDate, maxMedals);
+        return Objects.hash(id, worldScope, name, startDate, endDate, maxMedals);
     }
 
     @Override
@@ -107,15 +114,8 @@ public class EventData extends MiniEntity {
         return super.toString(this);
     }
 
-    // *****************************************************
-    // Builder Pattern
-    // *****************************************************
-    public static Builder builder() {
-        return new Builder();
-    }
-
     public static class Builder {
-        private Long eventId;
+        private Long id;
         private Scope worldScope;
         private String name;
         private LocalDate startDate;
@@ -123,7 +123,7 @@ public class EventData extends MiniEntity {
         private Integer maxMedals;
 
         public Builder eventId(Long eventId) {
-            this.eventId = eventId;
+            this.id = eventId;
             return this;
         }
 

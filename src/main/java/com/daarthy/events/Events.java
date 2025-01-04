@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Events extends JavaPlugin {
 
     public static final String MICRO_NAME = "[FESTIVALS_MICROSERVICE] ";
-    private static final Long BASIC_GUILD = 1L;
+    public static final Long BASIC_GUILD = 1L;
     //private static final Logger logger;
     private static ApiGateway api;
 

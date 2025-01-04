@@ -9,6 +9,6 @@ public abstract class AbstractMessage extends AbstractMiniYaml {
     }
 
     protected String toMessage(String key) {
-        return (String) this.yamlFile.get(key);
+        return (String) yamlFile.get(key);
     }
 }

@@ -166,7 +166,7 @@ public class PersistenceTestContext {
 
     public EventData getEvent() {
         EventData eventData = EventData.builder()
-                .name("TEST EVENT")
+                .name("HuntingEvent")
                 .scopeEnum(Scope.ALL)
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusDays(10))
@@ -175,7 +175,7 @@ public class PersistenceTestContext {
     }
 
     public void cleanUp() {
-        createdGuildIds.forEach(id -> guildDao.deleteById(id));
+        createdGuildIds.forEach(guildDao::deleteById);
         createdGuildIds.clear();
     }
 

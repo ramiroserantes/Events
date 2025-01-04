@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
@@ -13,18 +13,18 @@
                 CREATE TABLE Guild (
                     id BIGINT,
                     lvl int NOT NULL DEFAULT 0,
-                    experience DECIMAL(11,2),
-                    maxLvl int NOT NULL,
+                    experience DECIMAL(11,2) DEFAULT 0.0,
+                    maxLvl int NOT NULL DEFAULT 6,
                     kName VARCHAR(20),
                     ampMissions int DEFAULT 0,
-                    ampBasicRewards DECIMAL(4, 2),
+                    ampBasicRewards DECIMAL(4, 2) DEFAULT 0.0,
                     lastTimeUpdated DATE,
-                    levelUpMod DECIMAL(4, 2),
+                    levelUpMod DECIMAL(4, 2) DEFAULT 0.0,
                     CONSTRAINT guildPk PRIMARY KEY (id)
                 );
 
-                INSERT INTO Guild (id, lvl, maxLvl, kName, lastTimeUpdated)
-                    VALUES (1, 0, 0, null, CURRENT_DATE - INTERVAL '1 day');
+                INSERT INTO Guild (id, lvl, experience, maxLvl, ampBasicRewards, lastTimeUpdated, levelUpMod)
+                    VALUES (1, 0, 0, 0, 0.0, CURRENT_DATE - INTERVAL '1 day', 0.0);
 
                 CREATE TABLE Player (
                     playerId VARCHAR(36),

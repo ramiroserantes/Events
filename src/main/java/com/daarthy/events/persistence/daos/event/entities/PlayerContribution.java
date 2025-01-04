@@ -1,5 +1,6 @@
 package com.daarthy.events.persistence.daos.event.entities;
 
+import com.daarthy.mini.annotations.MiniColumn;
 import com.daarthy.mini.annotations.MiniDefaults;
 import com.daarthy.mini.annotations.MiniId;
 import com.daarthy.mini.hibernate.entities.MiniEntity;
@@ -10,6 +11,7 @@ public class PlayerContribution extends MiniEntity {
 
     @MiniId
     private ContributionKey contributionKey;
+    @MiniColumn(column = "quantity")
     @MiniDefaults(creationWith = "0")
     private Integer items;
     @MiniDefaults(creationWith = "0")
@@ -22,6 +24,13 @@ public class PlayerContribution extends MiniEntity {
         this.contributionKey = builder.contributionKey;
         this.items = builder.items;
         this.medals = builder.medals;
+    }
+
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
+    public static Builder builder() {
+        return new Builder();
     }
 
     public ContributionKey getContributionKey() {
@@ -49,8 +58,18 @@ public class PlayerContribution extends MiniEntity {
     }
 
     // *****************************************************
-    // Internal Methods
+    // Methods
     // *****************************************************
+    public void increaseItems() {
+        this.medals += 1;
+    }
+
+    public void increaseMedals(int limit) {
+        if (this.medals < limit) {
+            this.medals += 1;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,13 +88,6 @@ public class PlayerContribution extends MiniEntity {
     @Override
     public String toString() {
         return super.toString(this);
-    }
-
-    // *****************************************************
-    // Builder Pattern
-    // *****************************************************
-    public static Builder builder() {
-        return new Builder();
     }
 
     public static class Builder {

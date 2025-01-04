@@ -105,7 +105,7 @@ public class Mission extends MiniEntity {
     }
 
     // *****************************************************
-    // Internal Methods
+    // Methods
     // *****************************************************
     @Override
     public boolean equals(Object o) {
@@ -129,6 +129,24 @@ public class Mission extends MiniEntity {
     @Override
     public String toString() {
         return super.toString(this);
+    }
+
+    // *****************************************************
+    // Clone Method (Prototype Pattern)
+    // *****************************************************
+    public Mission missionPrototype() {
+        // @formatter:off
+        Mission mission = new Builder()
+                .id(this.id)
+                .guildId(this.guildId)
+                .title(this.title)
+                .grade(this.grade)
+                .expiration(this.expiration)
+                .maxCompletions(this.maxCompletions)
+                .build();
+        // @formatter:on
+        mission.setCurrentPlayers(this.currentPlayers);
+        return mission;
     }
 
     public static class Builder {

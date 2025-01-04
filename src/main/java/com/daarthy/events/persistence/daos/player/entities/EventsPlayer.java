@@ -17,6 +17,7 @@ public class EventsPlayer extends MiniEntity {
     private Integer maxMissions;
     @MiniDefaults(creationWith = "0.0")
     private Float ampBasicRewards;
+    @MiniDefaults(creationWith = "1")
     private Long guildId;
 
     public EventsPlayer() {
@@ -27,6 +28,13 @@ public class EventsPlayer extends MiniEntity {
         this.maxMissions = builder.maxMissions;
         this.ampBasicRewards = builder.ampBasicRewards;
         this.guildId = builder.guildId;
+    }
+
+    // *****************************************************
+    // Builder Pattern
+    // *****************************************************
+    public static Builder builder() {
+        return new Builder();
     }
 
     public UUID getPlayerId() {
@@ -62,7 +70,7 @@ public class EventsPlayer extends MiniEntity {
     }
 
     // *****************************************************
-    // Internal Methods
+    // Methods
     // *****************************************************
     @Override
     public boolean equals(Object o) {
@@ -83,13 +91,6 @@ public class EventsPlayer extends MiniEntity {
     @Override
     public String toString() {
         return super.toString(this);
-    }
-
-    // *****************************************************
-    // Builder Pattern
-    // *****************************************************
-    public static Builder builder() {
-        return new Builder();
     }
 
     public static class Builder {
