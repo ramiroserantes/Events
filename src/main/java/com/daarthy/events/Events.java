@@ -3,10 +3,15 @@ package com.daarthy.events;
 import com.daarthy.events.api.ApiGateway;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.lang.annotation.Native;
+
 public final class Events extends JavaPlugin {
 
+    @Native
     public static final String MICRO_NAME = "[FESTIVALS_MICROSERVICE] ";
+    @Native
     public static final Long BASIC_GUILD = 1L;
+    
     //private static final Logger logger;
     private static ApiGateway api;
 

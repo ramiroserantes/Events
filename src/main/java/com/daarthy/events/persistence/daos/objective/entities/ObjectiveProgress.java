@@ -18,7 +18,7 @@ public class ObjectiveProgress extends MiniEntity {
 
     private ObjectiveProgress(Builder builder) {
         this.key = builder.key;
-        this.amount = builder().amount;
+        this.amount = builder.amount;
     }
 
     // *****************************************************
@@ -43,6 +43,12 @@ public class ObjectiveProgress extends MiniEntity {
     // *****************************************************
     // Methods
     // *****************************************************
+    public void increaseAmount(Integer limit) {
+        if (this.amount < limit) {
+            this.amount += 1;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

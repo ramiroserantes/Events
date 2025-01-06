@@ -15,7 +15,7 @@ public class MissionFunctionalServiceImpl {
         this.missionDao = missionDao;
     }
 
-    @Override
+    @Override // Ok
     public StringBuilder joinMission(UUID playerId, EventsPlayer eventsPlayer, Guild guild, Long missionId) {
 
         StringBuilder result = new StringBuilder();
@@ -148,7 +148,7 @@ public class MissionFunctionalServiceImpl {
         }
     }
 
-    @Override
+    @Override // Ok
     public List<Grade> addProgress(UUID playerId, String target, Integer level) {
 
         List<Grade> result = new ArrayList<>();
@@ -169,7 +169,7 @@ public class MissionFunctionalServiceImpl {
         return result;
     }
 
-    @Override
+    @Override // Ok
     public Map<MissionData, List<ObjectiveData>> findPlayerDashBoard(UUID playerId) {
 
         Map<MissionData, List<ObjectiveData>> objec = new HashMap<>();
@@ -201,7 +201,7 @@ public class MissionFunctionalServiceImpl {
 
 
 
-    @Override
+    @Override // Ok
     public void savePlayer(UUID playerId) {
 
         Map<Long, Integer> data = playersObjs.get(playerId).getProgress();
@@ -289,7 +289,7 @@ public class MissionFunctionalServiceImpl {
         }
     }
 
-    @Override
+    @Override // Not applicable
     public Penalty removeFailedMissions(UUID playerId) {
 
         Penalty penalty = new Penalty();
@@ -328,11 +328,11 @@ public class MissionFunctionalServiceImpl {
 
         return penalty;
     }
-
+ // no
     public Map<Long, Objective> getObjectives() {
         return objectives;
     }
-
+ // no
     public Map<UUID, PlayerMissions> getPlayersObjs() {
         return playersObjs;
     }*/

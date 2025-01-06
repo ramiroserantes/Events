@@ -10,7 +10,7 @@ public class MissionInfoServiceImpl implements MissionInfoService {
         this.dataSource = dataSource;
     }
 
-    @Override
+    @Override // Ok
     public Map<MissionData, List<ObjectiveData>> findGuildDashBoard(Long guildId) {
 
         Map<MissionData, List<ObjectiveData>> objec = new HashMap<>();

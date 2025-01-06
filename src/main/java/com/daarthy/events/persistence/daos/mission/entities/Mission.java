@@ -9,8 +9,6 @@ import com.daarthy.mini.shared.classes.enums.festivals.Grade;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 @MiniTable(table = "Missions")
 public class Mission extends MiniEntity {
@@ -25,9 +23,6 @@ public class Mission extends MiniEntity {
 
     @MiniExclusion(exclude = ExclusionType.PARTIAL)
     private Integer currentPlayers;
-
-    @MiniExclusion(exclude = ExclusionType.TOTAL)
-    private Lock playerIncreaseLock = new ReentrantLock();
 
     public Mission() {
     }
@@ -107,6 +102,10 @@ public class Mission extends MiniEntity {
     // *****************************************************
     // Methods
     // *****************************************************
+    public boolean availablePlayerAddition(Integer increasedMax) {
+        return currentPlayers < (this.maxCompletions + increasedMax);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

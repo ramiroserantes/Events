@@ -88,6 +88,11 @@ public class Objective extends MiniEntity {
     // *****************************************************
     // Methods
     // *****************************************************
+    public boolean matchTrack(String target, Integer level) {
+        return target.equalsIgnoreCase(this.target) &&
+                (this.levels == null || (level != null && level >= this.levels));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

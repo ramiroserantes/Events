@@ -1,8 +1,8 @@
 package com.daarthy.events.model.facades.event.components;
 
-import com.daarthy.events.model.exceptions.ExceptionKey;
 import com.daarthy.events.model.facades.event.memory.EventMemory;
 import com.daarthy.events.model.facades.event.structure.ExtendedEvent;
+import com.daarthy.events.model.result.ResultKey;
 import com.daarthy.events.persistence.PersistenceContext;
 import com.daarthy.events.persistence.daos.event.entities.EventData;
 import com.daarthy.events.persistence.daos.event.entities.PlayerContribution;
@@ -45,7 +45,7 @@ public class EventInfoCompImpl extends EventAbstractComp implements EventInfoCom
 
         if (result.toString().isEmpty()) {
             result.append(persistenceContext.messagesAbstractFactory().toI18Message(miniAuth,
-                    ExceptionKey.EVENT_NOT_AVAILABLE.name()));
+                    ResultKey.EVENT_NOT_AVAILABLE.name()));
         }
 
         return result;

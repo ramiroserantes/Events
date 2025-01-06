@@ -2,6 +2,15 @@
 #####                      Exceptions                              #####
 ########################################################################
 EVENT_NOT_AVAILABLE: "Este evento no está disponible."
+EXPIRED_MISSION: "Esta misión ha expirado."
+ALREADY_ACCEPTED_MISSION: "Ya has aceptado esta misión."
+MAX_MISSIONS_REACHED_TODAY: "Has alcanzado el máximo de misiones aceptadas para hoy."
+MAX_MISSIONS_CAPACITY: "Esta misión ya ha sido completada por el número máximo de jugadores permitido."
+
+########################################################################
+#####                      Messages                                #####
+########################################################################
+MISSION_ACCEPTED: "La misión ha sido aceptada."
 
 ########################################################################
 #####                      Events Info                             #####
